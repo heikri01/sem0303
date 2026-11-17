@@ -1,4 +1,3 @@
-/* Denne fil er lavet ud fra scss/quiz.scss. Ret i SCSS-filerne – Live Sass Compiler overskriver filen her, når du gemmer. */
 * {
   box-sizing: border-box;
 }
@@ -60,6 +59,10 @@ img {
   margin: 0 0 0.5rem;
 }
 
+.knap:focus-visible {
+  outline: 3px solid #A6192E;
+  outline-offset: 3px;
+}
 .knap {
   display: block;
   width: 100%;
@@ -72,17 +75,13 @@ img {
   font-weight: 700;
   cursor: pointer;
 }
-.knap:focus-visible {
-  outline: 3px solid #A6192E;
-  outline-offset: 3px;
-}
 .knap--primaer {
   background: #A6192E;
   color: #FFFFFF;
   margin-top: 1.5rem;
 }
 .knap--primaer:hover {
-  background: #831424;
+  background: rgb(130.5403141361, 19.6596858639, 36.1738219895);
 }
 .knap--valg {
   font-family: "Gill Sans", "Gill Sans MT", "Lato", sans-serif;
@@ -200,7 +199,8 @@ img {
 .dengang-billede img {
   width: 100%;
   aspect-ratio: 16/9;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border: 8px solid #FFFFFF;
   box-shadow: 0 1px 6px rgba(43, 42, 41, 0.15);
   filter: sepia(0.15);
@@ -291,6 +291,11 @@ img {
   margin: 1rem 0 0.25rem;
   font-weight: 700;
 }
+.tilmeld input[type=text]:focus-visible,
+.tilmeld input[type=email]:focus-visible {
+  outline: 3px solid #A6192E;
+  outline-offset: 3px;
+}
 .tilmeld input[type=text],
 .tilmeld input[type=email] {
   width: 100%;
@@ -301,11 +306,6 @@ img {
   font-size: 1.125rem;
   font-family: "Gill Sans", "Gill Sans MT", "Lato", sans-serif;
 }
-.tilmeld input[type=text]:focus-visible,
-.tilmeld input[type=email]:focus-visible {
-  outline: 3px solid #A6192E;
-  outline-offset: 3px;
-}
 .tilmeld .samtykke {
   display: flex;
   gap: 0.75rem;
@@ -313,16 +313,16 @@ img {
   font-weight: 400;
   cursor: pointer;
 }
+.tilmeld .samtykke input:focus-visible {
+  outline: 3px solid #A6192E;
+  outline-offset: 3px;
+}
 .tilmeld .samtykke input {
   flex-shrink: 0;
   width: 28px;
   height: 28px;
   margin: 0.1rem 0 0;
   accent-color: #A6192E;
-}
-.tilmeld .samtykke input:focus-visible {
-  outline: 3px solid #A6192E;
-  outline-offset: 3px;
 }
 
 .fejl {

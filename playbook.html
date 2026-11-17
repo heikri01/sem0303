@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Playbook · Søvnguiden – dengang og i dag · Ringsted Dun</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital@1&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <!-- playbook.css bliver lavet af Live Sass Compiler ud fra scss/playbook.scss. Ret i SCSS-filerne -->
+  <link rel="stylesheet" href="css/playbook.css">
+</head>
+<body>
+
+  <header class="top">
+    <p class="top__afsender">Ringsted Dun · AI Playbook</p>
+  </header>
+
+  <!-- SKELET 18/11: Felter med class="pladsholder" skal erstattes med det godkendte indhold fra FigJam (siden AI Playbook) -->
+
+  <div class="playbook">
+
+    <!-- Menuen: hvert link peger på et afsnits id. Tilføjer I et afsnit, så tilføj også et link her -->
+    <nav class="menu" aria-label="Indhold">
+      <p class="menu__titel">Indhold</p>
+      <ol>
+        <li><a href="#brug">Sådan bruger du playbooken</a></li>
+        <li><a href="#principper">Principper</a></li>
+        <li><a href="#arbejdsgang">Arbejdsgang pr. produktion</a></li>
+        <li><a href="#prompts">Kontekstfil og prompts</a></li>
+        <li><a href="#tjekliste">Tjekliste før publicering</a></li>
+        <li><a href="#cases">Cases</a></li>
+        <li><a href="#etik">Etik og ansvar</a></li>
+      </ol>
+    </nav>
+
+    <main>
+      <h1>AI Playbook · Søvnguiden – dengang og i dag</h1>
+      <p class="intro">Sådan bruger Ringsted Dun AI til at føre kampagnen ud i livet – uden at gå på kompromis med kvaliteten.</p>
+
+      <!-- 1 -->
+      <section class="afsnit" id="brug">
+        <h2>Sådan bruger du playbooken</h2>
+        <p class="pladsholder">[INDHOLD KOMMER: hvem playbooken er til, hvad den dækker, og hvordan man finder rundt.]</p>
+      </section>
+
+      <!-- 2 -->
+      <section class="afsnit" id="principper">
+        <h2>Principper</h2>
+        <div class="kort-gitter">
+          <article class="kort">
+            <h3>Kontekst og prompt holdes adskilt</h3>
+            <p>Kontekstfilen er fast og genbruges. Prompten skifter fra produktion til produktion.</p>
+          </article>
+          <article class="kort">
+            <h3>Template én gang – indhold med AI hver gang</h3>
+            <p>Det faste (design, sidefod, mærkning) bygges én gang af et menneske. AI udfylder kun indholdet.</p>
+          </article>
+          <article class="kort">
+            <h3>Mennesket godkender</h3>
+            <p>Alt AI-indhold tjekkes mod tjeklisten, før det bruges. Et menneske trykker »send« – aldrig AI.</p>
+          </article>
+        </div>
+        <p class="pladsholder">[INDHOLD KOMMER: uddybning af principperne og evt. flere.]</p>
+      </section>
+
+      <!-- 3 -->
+      <section class="afsnit" id="arbejdsgang">
+        <h2>Arbejdsgang pr. produktion</h2>
+        <p>Vælg en produktion for kun at se dens arbejdsgang.</p>
+
+        <!-- Filter: data-filter skal matche data-produktion på kortene nedenfor -->
+        <div class="filter" role="group" aria-label="Vælg produktion">
+          <button class="knap knap--sekundaer knap--aktiv" data-filter="alle" aria-pressed="true">Alle</button>
+          <button class="knap knap--sekundaer" data-filter="karrusel" aria-pressed="false">Karrusel</button>
+          <button class="knap knap--sekundaer" data-filter="mail" aria-pressed="false">Velkomstmail</button>
+          <button class="knap knap--sekundaer" data-filter="klip" aria-pressed="false">Korte klip</button>
+          <button class="knap knap--sekundaer" data-filter="mikro" aria-pressed="false">Mikroindhold</button>
+        </div>
+
+        <div class="kort-gitter">
+          <article class="kort" data-produktion="karrusel">
+            <h3>Karrusel</h3>
+            <ol>
+              <li>Upload kontekstfil, søvnguiden v6, karakterark og kapitlets billedpar</li>
+              <li>Kopiér prompten »Karrusel«, og ret kapitlet</li>
+              <li>Tjek output med tjeklisten</li>
+              <li>Sæt teksten ind i karrusel-skabelonen i Figma</li>
+            </ol>
+          </article>
+          <article class="kort" data-produktion="mail">
+            <h3>Velkomstmail</h3>
+            <ol>
+              <li>Upload kontekstfil, søvnguiden v6 og karakterark</li>
+              <li>Kopiér prompten »Velkomstmail«, og ret mailnummer og kapitel</li>
+              <li>Tjek output med tjeklisten</li>
+              <li>Sæt blokkene ind i mail-templaten</li>
+            </ol>
+          </article>
+          <article class="kort" data-produktion="klip">
+            <h3>Korte klip</h3>
+            <p class="pladsholder">[INDHOLD KOMMER]</p>
+          </article>
+          <article class="kort" data-produktion="mikro">
+            <h3>Mikroindhold</h3>
+            <p class="pladsholder">[INDHOLD KOMMER]</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 4 -->
+      <section class="afsnit" id="prompts">
+        <h2>Kontekstfil og prompts</h2>
+        <p>Upload altid kontekstfilen, søvnguiden v6 og karakterarket. Kopiér derefter én prompt, og ret det i [klammer].</p>
+        <p class="pladsholder">[INDHOLD KOMMER: kort om kontekstfilens lag og hvor filerne ligger. Kan kontekstfilen ikke uploades som .md, så brug PDF-pakken.]</p>
+
+        <!-- Hver prompt: id på <pre> skal matche data-kopier på knappen -->
+        <div class="prompt">
+          <div class="prompt__hoved">
+            <p class="prompt__titel">Karrusel</p>
+            <button class="knap knap--sekundaer" data-kopier="p-karrusel">Kopiér</button>
+          </div>
+          <pre id="p-karrusel">Læs de vedhæftede filer. Lav en karrusel ud fra kapitlet [22.30 Sengetid] efter formatet i afsnit 6. Lever alt fra afsnit 7, med to varianter af forsiden: én med nostalgi-krog og én med myte-krog. Lav ingen nye Grethe-replikker – brug dem, der står i v6. Brug kun de vedhæftede billeder; generér eller hent ingen billeder.</pre>
+        </div>
+
+        <div class="prompt">
+          <div class="prompt__hoved">
+            <p class="prompt__titel">Velkomstmail (til fast template)</p>
+            <button class="knap knap--sekundaer" data-kopier="p-mail">Kopiér</button>
+          </div>
+          <pre id="p-mail">Læs de vedhæftede filer. Skriv velkomstmail nr. [2] af 5 om kapitlet [07.00 Morgen] efter formatet i afsnit 6. Teksten skal sættes ind i en fast mail-template, så lever den opdelt i præcis disse blokke – og skriv ikke andet:
+1. EMNELINJE – 2 varianter, højst 45 tegn
+2. PREHEADER – højst 90 tegn
+3. HILSEN – "Kære [Fornavn]" + én indledende sætning
+4. DENGANG – Grethes erindring fra kapitlet, ordret fra v6
+5. I DAG – rådet i 2–4 sætninger, kun med v6's formuleringer
+6. PRØV DET – kapitlets "Prøv det", ordret fra v6
+7. MORMOR I DAG – Grethes replik fra kapitlet, ordret fra v6
+8. KNAP – knaptekst (højst 4 ord) + navnet på kapitlets anker i guiden
+9. ALT-TEKST – til billedparret (dengang og i dag)
+10. TVIVLSLISTE – og alle [FAKTA MANGLER]
+
+Skriv ikke logo, sidefod, afmelding, AI-mærkning eller "mail X af 5" – de ligger fast i templaten. Markér nye Grethe-replikker som NYE.</pre>
+        </div>
+
+        <div class="prompt">
+          <div class="prompt__hoved">
+            <p class="prompt__titel">Kort klip</p>
+            <button class="knap knap--sekundaer" data-kopier="p-klip">Kopiér</button>
+          </div>
+          <pre id="p-klip">Læs de vedhæftede filer og storyboardet. Tilpas scenen [07.00 Morgen] til et klip i 9:16 og 1:1 efter afsnit 6. Lever tidskode, billede, undertekst og opslagstekst (2 varianter).</pre>
+        </div>
+
+        <div class="prompt">
+          <div class="prompt__hoved">
+            <p class="prompt__titel">Mikroindhold</p>
+            <button class="knap knap--sekundaer" data-kopier="p-mikro">Kopiér</button>
+          </div>
+          <pre id="p-mikro">Læs de vedhæftede filer. Lav [3 Grethe-citater og 2 nostalgiopslag] ud fra kapitlerne [Døgnet rundt] efter afsnit 6. Brug kun replikker fra v6. Lever opslagstekst, billedreference og alt-tekst.</pre>
+        </div>
+
+        <p class="kopi-status" id="kopiStatus" aria-live="polite"></p>
+      </section>
+
+      <!-- 5 -->
+      <section class="afsnit" id="tjekliste">
+        <h2>Tjekliste før publicering</h2>
+        <p>Gå listen igennem for hver produktion. Alle punkter skal være krydset af, før noget bruges.</p>
+        <ul class="tjekliste">
+          <li><label><input type="checkbox"> <span>Alle fakta kan findes i søvnguiden v6's faktatjek</span></label></li>
+          <li><label><input type="checkbox"> <span>Ingen ord fra »undgå«-listen. Altid »du«</span></label></li>
+          <li><label><input type="checkbox"> <span>Grethe lyder som i karakterarket, og nye replikker er godkendt</span></label></li>
+          <li><label><input type="checkbox"> <span>AI-mærkning er med</span></label></li>
+          <li><label><input type="checkbox"> <span>Formatet passer til kanalen (mål, længde, undertekster)</span></label></li>
+          <li><label><input type="checkbox"> <span>Det leder det rigtige sted hen i kunderejsen</span></label></li>
+          <li><label><input type="checkbox"> <span>Prompt, værktøj og antal forsøg er noteret i AI-loggen</span></label></li>
+        </ul>
+        <p class="tjekliste-status" id="tjekStatus" aria-live="polite">0 af 7 punkter er tjekket</p>
+        <button class="knap knap--link" id="nulstil">Nulstil tjeklisten</button>
+      </section>
+
+      <!-- 6 -->
+      <section class="afsnit" id="cases">
+        <h2>Cases</h2>
+        <p class="pladsholder">[INDHOLD KOMMER: casen »Karrusel 22.30 i ChatGPT« – forsøg 1 og 2, rettelser og læring (FigJam → AI Playbook).]</p>
+      </section>
+
+      <!-- 7 -->
+      <section class="afsnit" id="etik">
+        <h2>Etik og ansvar</h2>
+        <p class="pladsholder">[INDHOLD KOMMER: AI-mærkning, Grethe som fiktiv AI-karakter, GDPR i nyhedsbrevet, løfter der skal godkendes, anbefalingen om et rigtigt menneske.]</p>
+      </section>
+    </main>
+  </div>
+
+  <footer class="bund">
+    <p>AI Playbook til kampagnen »Søvnguiden – dengang og i dag« · Ringsted Dun · MMD 3. semester, gruppe 22</p>
+  </footer>
+
+  <script src="js/playbook.js"></script>
+</body>
+</html>

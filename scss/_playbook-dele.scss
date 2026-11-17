@@ -1,0 +1,213 @@
+// ==========================================================
+// AI PLAYBOOK · layout, menu, kort, prompts og tjekliste
+// ==========================================================
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+// To kolonner: menu til venstre, indhold til højre – én kolonne på smalle skærme
+.playbook {
+  display: grid;
+  grid-template-columns: 16rem 1fr;
+  gap: 3rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 2rem $luft;
+
+  @media (max-width: 800px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.intro { font-size: 1.25rem; }
+
+// ---------- Menu ----------
+.menu {
+  // sticky: menuen bliver stående, mens man scroller i indholdet
+  position: sticky;
+  top: 1.5rem;
+  align-self: start;
+
+  &__titel {
+    @include spaerret(0.875rem);
+    color: $sepia;
+    margin: 0 0 0.75rem;
+  }
+
+  ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  a {
+    @include fokus;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    border-left: 3px solid transparent;
+    color: $blaek;
+    text-decoration: none;
+
+    &:hover { background: $linned; }
+
+    // .aktiv sættes af playbook.js på det afsnit, man er i
+    &.aktiv {
+      border-left-color: $roed;
+      font-weight: 700;
+    }
+  }
+
+  @media (max-width: 800px) { position: static; }
+}
+
+// ---------- Afsnit ----------
+.afsnit {
+  padding-bottom: 3rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid rgba($sepia, 0.2);
+  scroll-margin-top: 1.5rem; // luft over overskriften, når man hopper via menuen
+
+  h2 { font-size: 1.75rem; }
+}
+
+// Stiplet felt = indhold, der ikke er skrevet endnu. Skal være væk før aflevering
+.pladsholder {
+  padding: 1rem 1.25rem;
+  border: 2px dashed $sepia;
+  background: $linned;
+  color: $sepia;
+  font-style: italic;
+}
+
+// ---------- Kort ----------
+.kort-gitter {
+  display: grid;
+  // auto-fill: så mange kolonner, der er plads til, mindst 16rem brede
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 1rem;
+  margin-bottom: $luft;
+}
+
+.kort {
+  background: $hvid;
+  padding: 1.25rem 1.5rem;
+  border-top: 4px solid $roed;
+
+  h3 {
+    margin: 0 0 0.75rem;
+    font-size: 1.25rem;
+  }
+
+  ol { margin: 0; padding-left: 1.25rem; }
+
+  &[hidden] { display: none; }
+}
+
+// ---------- Filter ----------
+.filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: $luft;
+
+  .knap {
+    display: inline-block;
+    width: auto;
+    min-height: 48px;
+  }
+
+  // Den valgte produktion
+  .knap--aktiv {
+    background: $blaek;
+    color: $hvid;
+    border-color: $blaek;
+  }
+}
+
+// ---------- Prompts ----------
+.prompt {
+  background: $hvid;
+  border-left: 3px solid $roed;
+  margin-bottom: $luft;
+
+  &__hoved {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid rgba($sepia, 0.2);
+  }
+
+  &__titel {
+    margin: 0;
+    font-weight: 700;
+  }
+
+  // pre bevarer linjeskiftene i prompten. pre-wrap gør, at lange linjer stadig brydes
+  pre {
+    margin: 0;
+    padding: 1.25rem;
+    white-space: pre-wrap;
+    font-family: $sans;
+    font-size: $tekst-lille;
+    line-height: 1.5;
+  }
+
+  .knap {
+    width: auto;
+    min-height: 48px;
+    padding: 0.5rem 1rem;
+    font-size: $tekst-lille;
+  }
+}
+
+.kopi-status {
+  color: $sepia;
+  font-weight: 700;
+}
+
+// ---------- Tjekliste ----------
+.tjekliste {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+
+  li { margin-bottom: 0.75rem; }
+
+  label {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    cursor: pointer;
+  }
+
+  input {
+    @include fokus;
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    margin: 0;
+    accent-color: $roed;
+  }
+}
+
+.tjekliste-status {
+  font-weight: 700;
+  color: $sepia;
+}
+
+// ---------- Print / gem som PDF ----------
+// Ved udskrift skjules menu og knapper, og alle kort vises – også dem, filteret har skjult
+@media print {
+  .menu,
+  .filter,
+  .prompt .knap,
+  #nulstil { display: none; }
+
+  .playbook { display: block; }
+
+  .kort[hidden] { display: block; }
+
+  .afsnit { break-inside: avoid-page; }
+}
