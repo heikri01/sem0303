@@ -1,0 +1,21 @@
+// ==========================================================
+// MIXINS · små stykker design, der genbruges flere steder
+// ==========================================================
+@use 'tokens' as *;
+
+// Store bogstaver og spærret skrift – som overskrifterne i søvnguiden
+@mixin spaerret($stoerrelse: $tekst-lille) {
+  font-family: $sans;
+  font-size: $stoerrelse;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+// Tydelig fokusramme, så man kan se, hvor man er, når man bruger tastaturet
+@mixin fokus {
+  &:focus-visible {
+    outline: 3px solid $roed;
+    outline-offset: 3px;
+  }
+}

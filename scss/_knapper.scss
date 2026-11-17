@@ -1,0 +1,66 @@
+// ==========================================================
+// KNAPPER · alle knapper bygger på .knap og får en variant
+// ==========================================================
+@use 'sass:color';
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.knap {
+  @include fokus;
+  display: block;
+  width: 100%;
+  min-height: $klikflade;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  font-family: $sans;
+  font-size: $tekst;
+  font-weight: 700;
+  cursor: pointer;
+
+  // Hovedknappen (start, næste, send): den eneste fyldte røde knap på en skærm
+  &--primaer {
+    background: $roed;
+    color: $hvid;
+    margin-top: $luft;
+
+    // color.adjust gør den røde lidt mørkere ved hover (afløser den gamle darken())
+    &:hover { background: color.adjust($roed, $lightness: -8%); }
+  }
+
+  // MYTE og SANDHED: ens og neutrale, så farven ikke afslører svaret
+  &--valg {
+    @include spaerret($tekst);
+    background: $hvid;
+    color: $blaek;
+    border-color: $blaek;
+
+    &:hover:not(:disabled) { background: $linned; }
+
+    &:disabled { cursor: default; opacity: 0.55; }
+  }
+
+  // Den knap, man trykkede på, står stadig tydeligt frem, når knapperne er låst
+  &--valgt:disabled {
+    opacity: 1;
+    background: $blaek;
+    color: $hvid;
+  }
+
+  &--sekundaer {
+    background: transparent;
+    color: $blaek;
+    border-color: $blaek;
+
+    &:hover { background: $linned; }
+  }
+
+  // Ligner et link, men er en knap, fordi den gør noget på siden i stedet for at åbne en ny
+  &--link {
+    background: none;
+    color: $blaek;
+    text-decoration: underline;
+    font-weight: 400;
+    min-height: 48px;
+  }
+}

@@ -1,0 +1,26 @@
+// ==========================================================
+// FARVER, SKRIFT OG MÅL · palet C "To temperaturer"
+// Samme værdier som søvnguiden (designsystem v2, 11–13/11).
+// Ret her, så ændringen slår igennem i hele quizzen.
+// ==========================================================
+
+// Farver
+$papir:   #F7F3EC;  // fælles grund
+$linned:  #F4EDE0;  // dengang: varm baggrund
+$sepia:   #5B4632;  // dengang: tekst og streger
+$hvid:    #FFFFFF;  // i dag: baggrund
+$roed:    #A6192E;  // i dag: Ringsted-rød. Bruges sparsomt
+$blaek:   #2B2A29;  // brødtekst og overskrifter
+$graa:    #6B6661;  // små tekster (kontrast over 4,5:1 på papir)
+$groen:   #2F6B3A;  // "Du svarede rigtigt" (kun i facit-feltet)
+
+// Skrift
+$sans:  'Gill Sans', 'Gill Sans MT', 'Lato', sans-serif;  // overskrifter og brødtekst
+$serif: 'EB Garamond', Georgia, serif;                   // kun Grethes stemme
+
+// Mål. Læserne er ofte 70+, så tekst og klikflader er større end normalt
+$tekst:        1.125rem;  // 18 px brødtekst
+$tekst-lille:  1rem;      // 16 px – mindre end det går vi aldrig
+$klikflade:    56px;      // mindste højde på knapper
+$bredde:       40rem;     // maks. bredde på indholdet, så linjerne ikke bliver for lange
+$luft:         1.5rem;

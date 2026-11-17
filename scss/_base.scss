@@ -1,0 +1,52 @@
+// ==========================================================
+// GRUNDLAG · siden, tekst og sidehoved/sidefod
+// ==========================================================
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: $papir;
+  color: $blaek;
+  font-family: $sans;
+  font-size: $tekst;
+  line-height: 1.55;
+}
+
+h1, h2 {
+  line-height: 1.2;
+  margin: 0 0 1rem;
+  // Overskrifterne får fokus, når en ny skærm vises (se quiz.js). Rammen skjules,
+  // fordi fokus her kun er til skærmlæsere – man kan ikke klikke på en overskrift
+  &:focus { outline: none; }
+}
+
+h1 { font-size: 2.25rem; }
+h2 { font-size: 1.5rem; }
+
+img { max-width: 100%; display: block; }
+
+.top {
+  padding: 1rem $luft;
+  border-bottom: 1px solid rgba($sepia, 0.2);
+
+  &__afsender {
+    @include spaerret(0.875rem);
+    margin: 0;
+    color: $roed;
+    text-align: center;
+  }
+}
+
+.bund {
+  max-width: $bredde;
+  margin: 3rem auto 0;
+  padding: $luft;
+  border-top: 1px solid rgba($sepia, 0.2);
+  color: $graa;
+  font-size: $tekst-lille;
+
+  p { margin: 0 0 0.5rem; }
+}

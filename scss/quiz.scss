@@ -1,0 +1,10 @@
+// ==========================================================
+// QUIZ.SCSS · hovedfilen
+// Live Sass Compiler laver denne fil om til css/quiz.css.
+// Filer, der starter med _ (partials), bliver ikke til egne
+// CSS-filer, men samles her.
+// ==========================================================
+
+@use 'base';
+@use 'knapper';
+@use 'quiz';

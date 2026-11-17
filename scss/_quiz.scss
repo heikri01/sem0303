@@ -1,0 +1,234 @@
+// ==========================================================
+// QUIZZENS DELE · skærmen, spørgsmålet, svaret og resultatet
+// ==========================================================
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.quiz {
+  max-width: $bredde;
+  margin: 0 auto;
+  padding: 2rem $luft 0;
+
+  &:focus { outline: none; }
+}
+
+// Små overskrifter som "Det sagde man dengang" og "I dag"
+.etiket {
+  @include spaerret(0.875rem);
+  color: $sepia;
+  margin: 0 0 0.5rem;
+
+  &--roed { color: $roed; }
+}
+
+.intro { font-size: 1.25rem; }
+
+.lille {
+  font-size: $tekst-lille;
+  color: $graa;
+  text-align: center;
+}
+
+// ---------- Grethes citater (samme udtryk som i søvnguiden) ----------
+.grethe {
+  margin: $luft 0;
+  padding: 1.25rem 1.5rem;
+  background: $linned;
+  border-left: 3px solid $sepia;
+  color: $sepia;
+
+  p {
+    margin: 0;
+    font-family: $serif;
+    font-style: italic;
+    font-size: 1.375rem;
+    line-height: 1.4;
+  }
+
+  footer {
+    margin-top: 0.5rem;
+    font-size: $tekst-lille;
+  }
+}
+
+// ---------- Fremdrift ----------
+.fremdrift {
+  margin-bottom: $luft;
+
+  p {
+    margin: 0 0 0.5rem;
+    font-size: $tekst-lille;
+    color: $graa;
+  }
+
+  &__bar {
+    height: 6px;
+    background: rgba($sepia, 0.15);
+    border-radius: 3px;
+    overflow: hidden;
+
+    span {
+      display: block;
+      height: 100%;
+      background: $roed;
+      transition: width 0.4s ease;
+    }
+  }
+}
+
+// ---------- Spørgsmålet ----------
+.dengang-billede {
+  margin: 0 0 $luft;
+
+  img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    // Lys "fotokant" og et svagt varmt skær, ligesom dengang-billederne i guiden
+    border: 8px solid $hvid;
+    box-shadow: 0 1px 6px rgba($blaek, 0.15);
+    filter: sepia(0.15);
+  }
+
+  figcaption {
+    margin-top: 0.5rem;
+    font-family: $serif;
+    font-style: italic;
+    font-size: $tekst-lille;
+    color: $sepia;
+  }
+}
+
+.udsagn {
+  font-family: $serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 2rem;
+  color: $blaek;
+}
+
+// To knapper ved siden af hinanden – under hinanden på smalle skærme
+.valg {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: $luft;
+
+  @media (max-width: 360px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ---------- Svaret ----------
+.svar {
+  margin-top: 2rem;
+  scroll-margin-top: 1rem; // lidt luft over svaret, når siden ruller derned
+}
+
+.facit {
+  padding-left: 1rem;
+  border-left: 6px solid;
+  margin-bottom: $luft;
+
+  &__overskrift {
+    @include spaerret(1.75rem);
+    margin: 0;
+  }
+
+  &__respons { margin: 0.25rem 0 0; }
+
+  // Rigtigt/forkert vises både med farve og med ord, så det ikke kun afhænger af farvesyn
+  &--rigtigt { border-color: $groen; .facit__overskrift { color: $groen; } }
+  &--forkert { border-color: $sepia; .facit__overskrift { color: $sepia; } }
+}
+
+// "I dag"-feltet er hvidt med rød etiket, ligesom i søvnguiden
+.idag {
+  background: $hvid;
+  padding: 1.25rem 1.5rem;
+
+  p { margin: 0 0 0.75rem; }
+
+  .kilde {
+    margin: 0;
+    font-size: $tekst-lille;
+    color: $graa;
+  }
+}
+
+// ---------- Resultat og tilmelding ----------
+.tilmeld {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: $hvid;
+  border-top: 4px solid $roed;
+
+  label {
+    display: block;
+    margin: 1rem 0 0.25rem;
+    font-weight: 700;
+  }
+
+  input[type='text'],
+  input[type='email'] {
+    @include fokus;
+    width: 100%;
+    min-height: $klikflade;
+    padding: 0.5rem 0.75rem;
+    border: 2px solid $blaek;
+    border-radius: 6px;
+    font-size: $tekst;
+    font-family: $sans;
+  }
+
+  .samtykke {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    font-weight: 400;
+    cursor: pointer;
+
+    input {
+      @include fokus;
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      margin: 0.1rem 0 0;
+      accent-color: $roed;
+    }
+  }
+}
+
+.fejl {
+  color: $roed;
+  font-weight: 700;
+  margin: 1rem 0 0;
+
+  &:empty { display: none; }
+}
+
+.ekstra {
+  margin-top: 2rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.oversigt {
+  padding-left: 1.5rem;
+
+  li { margin-bottom: 1rem; }
+
+  &__udsagn {
+    display: block;
+    font-family: $serif;
+    font-style: italic;
+    font-size: 1.25rem;
+  }
+
+  &__facit {
+    font-size: $tekst-lille;
+    color: $graa;
+  }
+
+  .rigtigt .oversigt__facit { color: $groen; }
+}

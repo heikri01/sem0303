@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Myte eller sandhed? · Ringsted Dun</title>
+  <meta name="description" content="Seks ting, man sagde om søvn dengang. Gæt, om de holder i dag.">
+
+  <!-- Lato erstatter Gill Sans, hvis den ikke findes på computeren. EB Garamond bruges kun til Grethes stemme -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital@1&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- quiz.css bliver lavet af Live Sass Compiler ud fra scss/quiz.scss. Ret i SCSS-filerne, ikke her -->
+  <link rel="stylesheet" href="css/quiz.css">
+</head>
+<body>
+
+  <header class="top">
+    <p class="top__afsender">Ringsted Dun · siden 1947</p>
+  </header>
+
+  <!-- Hele quizzen vises inde i <main>. quiz.js skifter indholdet ud: start → spørgsmål → resultat -->
+  <main id="quiz" class="quiz" tabindex="-1">
+    <noscript>
+      <p>Quizzen kræver, at JavaScript er slået til i din browser.</p>
+    </noscript>
+  </main>
+
+  <footer class="bund">
+    <p>Mormor Grethe er en fiktiv person. Billeder og stemme er skabt med AI.</p>
+    <p>Rådene bygger på Sundhedsstyrelsen, sundhed.dk, Ældre Sagen og søvnforsker Birgitte Kornum. De er generelle og erstatter ikke rådgivning fra sundhedspersonale.</p>
+  </footer>
+
+  <!-- Spørgsmålene ligger i deres egen fil, så teksterne kan rettes uden at røre ved logikken.
+       Derfor skal spoergsmaal.js indlæses før quiz.js -->
+  <script src="js/spoergsmaal.js"></script>
+  <script src="js/quiz.js"></script>
+</body>
+</html>
