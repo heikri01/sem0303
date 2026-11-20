@@ -1,11 +1,741 @@
 <!DOCTYPE html>
 <html lang="da">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Søvnguiden · Ringsted Dun</title>
+  <meta name="description" content="Søvnguiden fra Ringsted Dun. Døgnet rundt, året rundt og dine nætter – med Mormor Grethe som fortæller.">
+
+  <!-- Skrifterne fra Figma: Lato (300, 400, 700) og EB Garamond kursiv -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital@1&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- guide.css bliver lavet af Live Sass Compiler ud fra scss/guide.scss. Ret i SCSS-filerne, ikke her -->
+  <link rel="stylesheet" href="css/guide.css">
 </head>
-<body>
-    
+<body class="guide">
+
+  <a class="spring-over" href="#naeste">Spring til knappen Næste side</a>
+
+  <main class="guide__scene" id="scene" aria-label="Søvnguiden som bog">
+    <h1 class="sr-only">Søvnguiden · Ringsted Dun</h1>
+
+    <!--
+      BOGEN
+      Bogen består af 13 blade. Hvert blad har en forside og en bagside, ligesom et rigtigt blad papir:
+      blad 1 = side 1 (forside) + side 2, blad 2 = side 3 + side 4 osv.
+      Når man bladrer, vender guide.js bladet 180 grader om ryggen.
+      Vil du rette i en side, så find den med id'et, fx id="side-05".
+    -->
+    <div class="bog" id="bog">
+
+      <!-- ========== BLAD 1 ========== -->
+      <div class="blad">
+
+        <!-- Side 1 · Forside -->
+        <section class="side side--forside" id="side-01" aria-label="Forside">
+          <div class="fotopar fotopar--helside">
+            <div class="fotopar__billeder">
+              <div class="fotopar__halv fotopar__halv--dengang">
+                <img class="fotopar__billede" src="img/guide/dengang-2000-aften.jpg" alt="Dengang: en stue om aftenen med en lampe med stofskærm og en gammel radio.">
+              </div>
+              <div class="fotopar__halv fotopar__halv--idag">
+                <img class="fotopar__billede" src="img/guide/idag-2000-aften.jpg" alt="I dag: samme stue med lyse gardiner og en lænestol i varmt lys.">
+              </div>
+            </div>
+            <div class="fotopar__traad"></div>
+          </div>
+          <p class="forside__ai">AI-genererede billeder</p>
+          <div class="titelboks">
+            <p class="titelboks__titel">Søvnguiden</p>
+            <p class="titelboks__spor">Døgnet rundt · Året rundt · Dine nætter</p>
+            <p class="titelboks__undertitel">Din søvn. Dine behov.</p>
+            <p class="titelboks__tekst">En god nat begynder længe før, du slukker lyset.</p>
+            <p class="titelboks__siden">Eksperter i god søvn siden 1947</p>
+            <img class="titelboks__logo" src="img/guide/RDU_logo.png" alt="Ringsted Dun, Established 1947">
+          </div>
+        </section>
+
+        <!-- Side 2 · Velkommen (venstre) -->
+        <section class="side side--moerk" id="side-02" aria-label="Side 2 · Velkommen">
+          <div class="side__indre">
+            <p class="sidehoved">Søvnguiden</p>
+            <h2 class="titel">Søvnen er mere end det, der sker om natten</h2>
+            <div class="broed broed--taet">
+              <p>En god nat begynder ikke først, når du lægger hovedet på puden. Den hænger sammen med dagens lys og bevægelse, med årstiderne og med dig og dine vaner. Ingen sover ens, og det, der virker for andre, virker ikke nødvendigvis for dig.</p>
+              <p>Søvnen er ikke et projekt, der skal optimeres. Vælg ét råd, der giver mening for dig, og begynd dér.</p>
+            </div>
+            <div class="luft"></div>
+            <blockquote class="dengang">
+              <p class="dengang__etiket"><span>Dengang</span> <em>· Mormor fortæller</em></p>
+              <p class="dengang__citat">»Vi talte ikke om søvn. Vi gik i seng, når det blev mørkt, og stod op, når hanen gol. Det var ikke klogt. Det var bare sådan.«</p>
+              <p class="dengang__afsender">– Mormor</p>
+            </blockquote>
+          </div>
+        </section>
+      </div>
+
+      <!-- ========== BLAD 2 ========== -->
+      <div class="blad">
+
+        <!-- Side 3 · Velkommen (højre): Mød Mormor + indhold -->
+        <section class="side side--papir" id="side-03" aria-label="Side 3 · Mød Mormor og indhold">
+          <div class="side__indre">
+            <p class="sidehoved sidehoved--lys"><span><b>Søvnguiden</b> · Velkommen</span><span>Ringsted Dun</span></p>
+            <h2 class="overskrift">Mød Mormor</h2>
+            <p class="broed">Mormor hedder Grethe. Hun er født i 1947 ligesom os og er gift med Henning, som børnebørnene kalder Morfar. Vi har fundet på hende, så hun findes ikke. Hendes nætter minder måske alligevel om nogle, du selv kan huske.</p>
+
+            <div class="tre-spor">
+              <div class="tre-spor__spor">
+                <p class="tre-spor__etiket">Erfaringen</p>
+                <p class="tre-spor__navn">Mormor</p>
+                <p class="tre-spor__tekst">Hendes erindringer og hverdag giver genkendelse og et glimt i øjet.</p>
+              </div>
+              <div class="tre-spor__spor">
+                <p class="tre-spor__etiket">Viden</p>
+                <p class="tre-spor__navn">Søvnforskningen</p>
+                <p class="tre-spor__tekst">Råd fra Sundhedsstyrelsen, sundhed.dk, Ældre Sagen og søvnforsker Birgitte Kornum.</p>
+              </div>
+              <div class="tre-spor__spor">
+                <p class="tre-spor__etiket">Håndværket</p>
+                <p class="tre-spor__navn">Ringsted Dun</p>
+                <p class="tre-spor__tekst">Dyner og puder siden 1947 og blik for den del af natten, der handler om komfort.</p>
+              </div>
+            </div>
+
+            <!-- Indholdsfortegnelse. Linkene bladrer hen til siden (data-side = sidetallet) -->
+            <nav class="indhold" aria-label="Indhold">
+              <p class="indhold__etiket">Indhold</p>
+              <div class="indhold__gruppe">
+                <p class="indhold__navn">Døgnet rundt</p>
+                <p class="indhold__beskriv">Små vaner fra morgenkaffen til klokken halv fem om natten.</p>
+                <p class="indhold__links">
+                  <a href="#side-04" data-side="4">07.00 Morgen</a> <span aria-hidden="true">·</span>
+                  <a href="#side-06" data-side="6">14.00 Eftermiddag</a> <span aria-hidden="true">·</span>
+                  <a href="#side-08" data-side="8">20.00 Aften</a> <span aria-hidden="true">·</span>
+                  <a href="#side-10" data-side="10">22.30 Sengetid</a> <span aria-hidden="true">·</span>
+                  <a href="#side-12" data-side="12">04.30 Natten</a>
+                </p>
+              </div>
+              <div class="indhold__gruppe">
+                <p class="indhold__navn">Året rundt</p>
+                <p class="indhold__beskriv">Søvnen gennem vinter, forår, sommer og efterår.</p>
+                <p class="indhold__links">
+                  <a href="#side-14" data-side="14">Vinter og forår</a> <span aria-hidden="true">·</span>
+                  <a href="#side-16" data-side="16">Sommer og efterår</a>
+                </p>
+              </div>
+              <div class="indhold__gruppe">
+                <p class="indhold__navn">Dine nætter</p>
+                <p class="indhold__links">
+                  <a href="#side-18" data-side="18">Din side af sengen</a> <span aria-hidden="true">·</span>
+                  <a href="#side-20" data-side="20">Når børnebørnene sover over</a> <span aria-hidden="true">·</span>
+                  <a href="#side-22" data-side="22">Mit søvnkort</a>
+                </p>
+              </div>
+            </nav>
+          </div>
+        </section>
+
+        <!-- Side 4 · 07.00 Morgen (venstre) -->
+        <section class="side side--moerk" id="side-04" aria-label="Side 4 · 07.00 Morgen">
+          <div class="side__indre">
+            <p class="sidehoved">Søvnguiden</p>
+            <figure class="fotopar">
+              <div class="fotopar__billeder">
+                <div class="fotopar__halv fotopar__halv--dengang"><img class="fotopar__billede" src="img/guide/dengang-0700-morgen.jpg" alt="Dengang: en kvinde trækker blomstrede gardiner fra i et soveværelse om morgenen."></div>
+                <div class="fotopar__halv fotopar__halv--idag"><img class="fotopar__billede" src="img/guide/idag-0700-morgen.jpg" alt="I dag: samme soveværelse med morgensol over en redt seng med hvid dyne."></div>
+              </div>
+              <figcaption class="fotopar__tekster">
+                <div><p class="fotopar__etiket">Dengang</p><p class="fotopar__tekst">Gardinerne trækkes fra.</p></div>
+                <div><p class="fotopar__etiket">I dag</p><p class="fotopar__tekst">Dagslys over den redte seng, 75 år senere.</p><p class="fotopar__ai">Begge billeder er AI-genererede.</p></div>
+              </figcaption>
+              <div class="fotopar__traad"></div>
+            </figure>
+            <h2 class="kapiteltitel">
+              <span class="kapiteltitel__nr">07.00</span>
+              <span class="kapiteltitel__navn">Morgen</span>
+              <span class="kapiteltitel__under">Lys ind, så vågner man</span>
+            </h2>
+            <div class="luft"></div>
+            <div class="mormor-i-dag">
+              <p class="mormor-i-dag__etiket">Mormor i dag</p>
+              <p class="mormor-i-dag__tekst">»Morfar siger, han er et B-menneske. Det har han sagt i 50 år, og han står op klokken seks.«</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ========== BLAD 3 ========== -->
+      <div class="blad">
+
+        <!-- Side 5 · 07.00 Morgen (højre) -->
+        <section class="side side--papir" id="side-05" aria-label="Side 5 · 07.00 Morgen">
+          <div class="side__indre">
+            <p class="sidehoved sidehoved--lys"><span><b>Døgnet rundt</b> · 07.00 Morgen</span><span>Ringsted Dun</span></p>
+            <blockquote class="dengang">
+              <p class="dengang__etiket"><span>Dengang</span> <em>· Mormor fortæller</em></p>
+              <p class="dengang__citat">»Far trak gardinerne fra, så snart han var oppe. ›Lys ind, så vågner man,‹ sagde han.«</p>
+            </blockquote>
+            <div class="idag">
+              <p class="idag__etiket">I dag</p>
+              <h3 class="idag__overskrift">En god nat begynder om morgenen</h3>
+              <p><strong>Lys er med til at styre kroppens døgnrytme.</strong> Kraftigt lys om morgenen fremskynder den, så du lettere bliver træt om aftenen.</p>
+              <p>Stå op på samme tid hver dag, også efter en dårlig nat. En fast rytme hjælper søvnen.</p>
+              <p>Og ryst dynen, så den kan lufte, mens du drikker kaffen.</p>
+            </div>
+            <div class="proev-det">
+              <p class="proev-det__etiket">Prøv det</p>
+              <p class="proev-det__tekst">Tag den første kop kaffe et sted med dagslys, ved vinduet eller ude på terrassen.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Side 6 · 14.00 Eftermiddag (venstre) -->
+        <section class="side side--moerk" id="side-06" aria-label="Side 6 · 14.00 Eftermiddag">
+          <div class="side__indre">
+            <p class="sidehoved">Søvnguiden</p>
+            <!-- fotopar--midte: begge billeder er beskåret ens om midten (som i Figma) -->
+            <figure class="fotopar fotopar--midte">
+              <div class="fotopar__billeder">
+                <div class="fotopar__halv fotopar__halv--dengang"><img class="fotopar__billede" src="img/guide/dengang-1400-eftermiddag.jpg" alt="Dengang: et par cykler ad en landevej om sommeren, set bagfra."></div>
+                <div class="fotopar__halv fotopar__halv--idag"><img class="fotopar__billede" src="img/guide/idag-1400-eftermiddag.jpg" alt="I dag: et par med cykelhjelme cykler ad samme landevej, set bagfra."></div>
+              </div>
+              <figcaption class="fotopar__tekster">
+                <div><p class="fotopar__etiket">Dengang</p><p class="fotopar__tekst">Cykelturen ad landevejen.</p></div>
+                <div><p class="fotopar__etiket">I dag</p><p class="fotopar__tekst">Samme tur i dag – nu med hjelm.</p><p class="fotopar__ai">Begge billeder er AI-genererede.</p></div>
+              </figcaption>
+              <div class="fotopar__traad"></div>
+            </figure>
+            <h2 class="kapiteltitel">
+              <span class="kapiteltitel__nr">14.00</span>
+              <span class="kapiteltitel__navn">Eftermiddag</span>
+              <span class="kapiteltitel__under">Træt på den gode måde</span>
+            </h2>
+            <div class="luft"></div>
+            <div class="mormor-i-dag">
+              <p class="mormor-i-dag__etiket">Mormor i dag</p>
+              <p class="mormor-i-dag__tekst">»En kop kaffe siger jeg aldrig nej til. Men den sidste behøver ikke at blive drukket klokken fire.«</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ========== BLAD 4 ========== -->
+      <div class="blad">
+
+        <!-- Side 7 · 14.00 Eftermiddag (højre) -->
+        <section class="side side--papir" id="side-07" aria-label="Side 7 · 14.00 Eftermiddag">
+          <div class="side__indre">
+            <p class="sidehoved sidehoved--lys"><span><b>Døgnet rundt</b> · 14.00 Eftermiddag</span><span>Ringsted Dun</span></p>
+            <blockquote class="dengang">
+              <p class="dengang__etiket"><span>Dengang</span> <em>· Mormor fortæller</em></p>
+              <p class="dengang__citat">»Vi cyklede overalt. Om aftenen var man træt på den gode måde.«</p>
+            </blockquote>
+            <div class="idag">
+              <p class="idag__etiket">I dag</p>
+              <h3 class="idag__overskrift">Brug kroppen på din egen måde</h3>
+              <p><strong>Vær fysisk aktiv hver dag</strong>, fx med en gåtur, havearbejde eller en tur på cyklen. Det giver en naturlig træthed. Nogle sover dog dårligere, hvis de træner tæt på sengetid.</p>
+              <p>Kaffe og te sidst på dagen kan gøre det sværere at falde i søvn. Alkohol kan gøre det lettere at falde i søvn, men giver ofte mere uroligt og afbrudt søvn.</p>
+              <p>Og middagsluren? Har du svært ved at sove om natten, så spring den over. Sover du godt om natten, kan en lur sagtens være med, men den tæller med i døgnets timer. Ifølge søvnforsker Birgitte Kornum er en kort lur på cirka 10 minutter nok til at tage toppen af trætheden. En lang lur bør vare cirka 90 minutter, så du når en hel søvncyklus.</p>
+            </div>
+            <div class="proev-det">
+              <p class="proev-det__etiket">Prøv det</p>
+              <p class="proev-det__tekst">Prøv en uge med middagslur og en uge uden. Hvornår sover du bedst om natten?</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Side 8 · 20.00 Aften (venstre) -->
+        <section class="side side--moerk" id="side-08" aria-label="Side 8 · 20.00 Aften">
+          <div class="side__indre">
+            <p class="sidehoved">Søvnguiden</p>
+            <figure class="fotopar">
+              <div class="fotopar__billeder">
+                <div class="fotopar__halv fotopar__halv--dengang"><img class="fotopar__billede" src="img/guide/dengang-2000-aften.jpg" alt="Dengang: stue om aftenen med radio, bordlampe og strikketøj i en lænestol."></div>
+                <div class="fotopar__halv fotopar__halv--idag"><img class="fotopar__billede" src="img/guide/idag-2000-aften.jpg" alt="I dag: samme stue med højttaler, bordlampe og strikketøj i en lys lænestol."></div>
+              </div>
+              <figcaption class="fotopar__tekster">
+                <div><p class="fotopar__etiket">Dengang</p><p class="fotopar__tekst">Radioen og strikketøjet ved lampens skær.</p></div>
+                <div><p class="fotopar__etiket">I dag</p><p class="fotopar__tekst">Samme stue i dag. Strikketøjet ligger der stadig.</p><p class="fotopar__ai">Begge billeder er AI-genererede.</p></div>
+              </figcaption>
+              <div class="fotopar__traad"></div>
+            </figure>
+            <h2 class="kapiteltitel">
+              <span class="kapiteltitel__nr">20.00</span>
+              <span class="kapiteltitel__navn">Aften</span>
+              <span class="kapiteltitel__under">Skru ned for lyset</span>
+            </h2>
+            <div class="luft"></div>
+            <div class="mormor-i-dag">
+              <p class="mormor-i-dag__etiket">Mormor i dag</p>
+              <p class="mormor-i-dag__tekst">»Morfar vil lige se vejrudsigten. Og så kommer der altid en udsendelse mere.«</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ========== BLAD 5 ========== -->
+      <div class="blad">
+
+        <!-- Side 9 · 20.00 Aften (højre) -->
+        <section class="side side--papir" id="side-09" aria-label="Side 9 · 20.00 Aften">
+          <div class="side__indre">
+            <p class="sidehoved sidehoved--lys"><span><b>Døgnet rundt</b> · 20.00 Aften</span><span>Ringsted Dun</span></p>
+            <blockquote class="dengang">
+              <p class="dengang__etiket"><span>Dengang</span> <em>· Mormor fortæller</em></p>
+              <p class="dengang__citat">»Om aftenen lyttede vi til radioen ved lampens skær. Så var det sengetid.«</p>
+            </blockquote>
+            <div class="idag">
+              <p class="idag__etiket">I dag</p>
+              <h3 class="idag__overskrift">Lad dagen falde til ro</h3>
+              <p><strong>Kraftigt lys om aftenen forsinker døgnrytmen</strong>, så du falder senere i søvn. Dæmp lyset, og læg skærmene væk, både tv, tablet og telefon, gerne et par timer før sengetid.</p>
+              <p>Spis ikke et stort, fedt måltid lige før sengetid, men gå heller ikke sulten i seng.</p>
+              <p>Læg arbejde og mails væk de sidste timer før sengetid. Et varmt bad eller en bog af papir kan hjælpe dig til at falde til ro. Og undgå at falde i søvn foran fjernsynet.</p>
+            </div>
+            <div class="proev-det">
+              <p class="proev-det__etiket">Prøv det</p>
+              <p class="proev-det__tekst">Sluk fjernsynet lidt tidligere i aften, og tænd en lampe i stedet for loftslyset.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Side 10 · 22.30 Sengetid (venstre) -->
+        <section class="side side--moerk" id="side-10" aria-label="Side 10 · 22.30 Sengetid">
+          <div class="side__indre">
+            <p class="sidehoved">Søvnguiden</p>
+            <figure class="fotopar">
+              <div class="fotopar__billeder">
+                <div class="fotopar__halv fotopar__halv--dengang"><img class="fotopar__billede" src="img/guide/dengang-sengetid.jpg" alt="Dengang: soveværelse ved sengetid med tændt lampe og vinduet på klem."></div>
+                <div class="fotopar__halv fotopar__halv--idag"><img class="fotopar__billede" src="img/guide/idag-sengetid.jpg" alt="I dag: samme soveværelse med tændt lampe, en bog og vinduet på klem."></div>
+              </div>
+              <figcaption class="fotopar__tekster">
+                <div><p class="fotopar__etiket">Dengang</p><p class="fotopar__tekst">Natlampen tændt, vinduet på klem.</p></div>
+                <div><p class="fotopar__etiket">I dag</p><p class="fotopar__tekst">Samme soveværelse i dag. Samme ro.</p><p class="fotopar__ai">Begge billeder er AI-genererede.</p></div>
+              </figcaption>
+              <div class="fotopar__traad"></div>
+            </figure>
+            <h2 class="kapiteltitel">
+              <span class="kapiteltitel__nr">22.30</span>
+              <span class="kapiteltitel__navn">Sengetid</span>
+              <span class="kapiteltitel__under">Køligt, mørkt og stille</span>
+            </h2>
+            <div class="luft"></div>
+            <div class="mormor-i-dag">
+              <p class="mormor-i-dag__etiket">Mormor i dag</p>
+              <p class="mormor-i-dag__tekst">»Telefonen sover i køkkenet nu. Morfar siger, den savner ham.«</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ========== BLAD 6 ========== -->
+      <div class="blad">
+
+        <!-- Side 11 · 22.30 Sengetid (højre) -->
+        <section class="side side--papir" id="side-11" aria-label="Side 11 · 22.30 Sengetid">
+          <div class="side__indre">
+            <p class="sidehoved sidehoved--lys"><span><b>Døgnet rundt</b> · 22.30 Sengetid</span><span>Ringsted Dun</span></p>
+            <blockquote class="dengang">
+              <p class="dengang__etiket"><span>Dengang</span> <em>· Mormor fortæller</em></p>
+              <p class="dengang__citat">»Soveværelset var det koldeste rum i huset. Men under dynen var der lunt.«</p>
+            </blockquote>
+            <div class="idag">
+              <p class="idag__etiket">I dag</p>
+              <h3 class="idag__overskrift">Skab de gode rammer for natten</h3>
+              <p><strong>For de fleste er 18–21 grader det bedste.</strong> Luft ud, og hold lys og støj ude, fx med mørklægningsgardiner.</p>
+              <p>Lad telefonen blive udenfor, og brug sengen til at sove i.</p>
+              <p>Dyne og pude er også en del af helheden. Dynen skal passe til dig og til årstiden og kunne ånde, så du hverken fryser eller får det for varmt.</p>
+            </div>
+            <div class="proev-det">
+              <p class="proev-det__etiket">Prøv det</p>
+              <p class="proev-det__tekst">Mål temperaturen i soveværelset i aften. Hvad viser termometeret?</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Side 12 · 04.30 Natten (venstre) -->
+        <section class="side side--moerk" id="side-12" aria-label="Side 12 · 04.30 Natten">
+          <div class="side__indre">
+            <p class="sidehoved">Søvnguiden</p>
+            <figure class="fotopar">
+              <div class="fotopar__billeder">
+                <div class="fotopar__halv fotopar__halv--dengang"><img class="fotopar__billede" src="img/guide/dengang-0430-klokken-fem.jpg" alt="Dengang: køkken i den tidlige morgen med kaffekande og kopper."></div>
+                <div class="fotopar__halv fotopar__halv--idag"><img class="fotopar__billede" src="img/guide/idag-0430-klokken-fem.jpg" alt="I dag: samme køkken med kopper og en lille radio i vindueskarmen."></div>
+              </div>
+              <figcaption class="fotopar__tekster">
+                <div><p class="fotopar__etiket">Dengang</p><p class="fotopar__tekst">Kaffekanden i køkkenet, før de andre vågner.</p></div>
+                <div><p class="fotopar__etiket">I dag</p><p class="fotopar__tekst">Samme køkken i dag. Radioen står der stadig.</p><p class="fotopar__ai">Begge billeder er AI-genererede.</p></div>
+              </figcaption>
+              <div class="fotopar__traad"></div>
+            </figure>
+            <h2 class="kapiteltitel">
+              <span class="kapiteltitel__nr">04.30</span>
+              <span class="kapiteltitel__navn">Natten</span>
+              <span class="kapiteltitel__under">Søvnen er ikke et stopur</span>
+            </h2>
+            <div class="luft"></div>
+            <div class="mormor-i-dag">
+              <p class="mormor-i-dag__etiket">Mormor i dag</p>
+              <p class="mormor-i-dag__tekst">»Jeg vågner tidligere end før. Så hører jeg morgenradioen og nyder, at huset sover.«</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ========== BLAD 7 ========== -->
+      <div class="blad">
+
+        <!-- Side 13 · 04.30 Natten (højre) -->
+        <section class="side side--papir" id="side-13" aria-label="Side 13 · 04.30 Natten">
+          <div class="side__indre">
+            <p class="sidehoved sidehoved--lys"><span><b>Døgnet rundt</b> · 04.30 Natten</span><span>Ringsted Dun</span></p>
+            <blockquote class="dengang">
+              <p class="dengang__etiket"><span>Dengang</span> <em>· Mormor fortæller</em></p>
+              <p class="dengang__citat">»Mor stod altid op før solen. ›Man skal ikke ligge og tælle timer,‹ sagde hun.«</p>
+            </blockquote>
+            <div class="idag">
+              <p class="idag__etiket">I dag</p>
+              <h3 class="idag__overskrift">Når søvnen forandrer sig</h3>
+              <p><strong>Søvnen forandrer sig gennem livet.</strong> Sundhedsstyrelsen anbefaler 7–8 timer i døgnet for voksne over 65, men for nogle kan både 5–6 og 9 timer være passende.</p>
+              <p>Det er normalt at vågne om natten, og med alderen sker det oftere. Ifølge Birgitte Kornum er det ikke så vigtigt, om du vågner, bare du samlet får nok timer. Kan du ikke sove efter en halv times tid, så stå op, gør noget roligt, og gå i seng igen, når du bliver søvnig.</p>
+              <p>Bliver søvnbesværet ved, så tal med din læge.</p>
+            </div>
+            <div class="proev-det">
+              <p class="proev-det__etiket">Prøv det</p>
+              <p class="proev-det__tekst">Læg en god bog klar ved sengen i aften, til hvis natten bliver lang.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Side 14 · Vinter og forår (venstre) -->
+        <section class="side side--moerk" id="side-14" aria-label="Side 14 · Året rundt: Vinter og forår">
+          <div class="side__indre">
+            <p class="sidehoved">Søvnguiden</p>
+            <figure class="fotopar">
+              <div class="fotopar__billeder">
+                <div class="fotopar__halv fotopar__halv--dengang"><img class="fotopar__billede" src="img/guide/dengang-vinter.jpg" alt="Dengang: isblomster på en gammel vinduesrude med sne udenfor."></div>
+                <div class="fotopar__halv fotopar__halv--idag"><img class="fotopar__billede" src="img/guide/idag-vinter.jpg" alt="I dag: klart vindue mod et snedækket landskab."></div>
+              </div>
+              <figcaption class="fotopar__tekster">
+                <div><p class="fotopar__etiket">Dengang</p><p class="fotopar__tekst">Isblomster på ruden.</p></div>
+                <div><p class="fotopar__etiket">I dag</p><p class="fotopar__tekst">Klart glas i dag – samme udsigt.</p><p class="fotopar__ai">Begge billeder er AI-genererede.</p></div>
+              </figcaption>
+              <div class="fotopar__traad"></div>
+            </figure>
+            <h2 class="kapiteltitel">
+              <span class="kapiteltitel__nr">Året rundt</span>
+              <span class="kapiteltitel__navn kapiteltitel__navn--lang">Vinter og forår</span>
+              <span class="kapiteltitel__under">Søvnen gennem de mørke og de lyse måneder</span>
+            </h2>
+          </div>
+        </section>
+      </div>
+
+      <!-- ========== BLAD 8 ========== -->
+      <div class="blad">
+
+        <!-- Side 15 · Vinter og forår (højre) -->
+        <section class="side side--papir" id="side-15" aria-label="Side 15 · Vinter og forår">
+          <div class="side__indre">
+            <p class="sidehoved sidehoved--lys"><span><b>Året rundt</b> · Vinter og forår</span><span>Ringsted Dun</span></p>
+            <div class="aarstid">
+              <h3 class="aarstid__overskrift"><span class="aarstid__navn">Vinter</span> <span class="aarstid__under">Lune nætter i de mørke måneder</span></h3>
+              <blockquote class="dengang dengang--lille">
+                <p class="dengang__etiket"><span>Dengang</span></p>
+                <p class="dengang__citat">»Om vinteren var der rimfrost på indersiden af ruden. Så krøb man helt ned under dynen.«</p>
+              </blockquote>
+              <div class="idag idag--lille">
+                <p class="idag__etiket">I dag</p>
+                <p>Selv når det er koldt udenfor, sover de fleste bedst ved 18–21 grader. Lad hellere dynen holde på varmen end radiatoren.</p>
+                <p>Få dagslys, når det er der. Lys om morgenen hjælper døgnrytmen.</p>
+              </div>
+              <div class="proev-det proev-det--linje">
+                <p class="proev-det__etiket">Prøv det</p>
+                <p class="proev-det__tekst">Gå en tur i dagslyset før middag i morgen.</p>
+              </div>
+            </div>
+            <div class="aarstid">
+              <h3 class="aarstid__overskrift"><span class="aarstid__navn">Forår</span> <span class="aarstid__under">Når morgenerne bliver lyse</span></h3>
+              <blockquote class="dengang dengang--lille">
+                <p class="dengang__etiket"><span>Dengang</span></p>
+                <p class="dengang__citat">»Om foråret blev dynerne båret ud og banket. Så var vinteren ovre.«</p>
+              </blockquote>
+              <div class="idag idag--lille">
+                <p class="idag__etiket">I dag</p>
+                <p>Lyse morgener kan vække dig tidligere, end du ønsker. Mørklægningsgardiner kan holde lyset ude.</p>
+                <p>Og overvej en lettere dyne, når nætterne bliver lunere.</p>
+              </div>
+              <div class="proev-det proev-det--linje">
+                <p class="proev-det__etiket">Prøv det</p>
+                <p class="proev-det__tekst">Tjek i aften, om dit soveværelse er mørkt nok.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Side 16 · Sommer og efterår (venstre) -->
+        <section class="side side--moerk" id="side-16" aria-label="Side 16 · Året rundt: Sommer og efterår">
+          <div class="side__indre">
+            <p class="sidehoved">Søvnguiden</p>
+            <figure class="fotopar">
+              <div class="fotopar__billeder">
+                <div class="fotopar__halv fotopar__halv--dengang"><img class="fotopar__billede" src="img/guide/dengang-dyner-luftes.jpg" alt="Dengang: hvide dyner til luftning på et stakit ved et rødt sommerhus."></div>
+                <div class="fotopar__halv fotopar__halv--idag"><img class="fotopar__billede" src="img/guide/idag-dyner-luftes.jpg" alt="I dag: samme sommerhus med hvide dyner til luftning over et hvidt rækværk."></div>
+              </div>
+              <figcaption class="fotopar__tekster">
+                <div><p class="fotopar__etiket">Dengang</p><p class="fotopar__tekst">Dyner over stakittet.</p></div>
+                <div><p class="fotopar__etiket">I dag</p><p class="fotopar__tekst">Samme sommerhus i dag. Dynerne hænger der stadig.</p><p class="fotopar__ai">Begge billeder er AI-genererede.</p></div>
+              </figcaption>
+              <div class="fotopar__traad"></div>
+            </figure>
+            <h2 class="kapiteltitel">
+              <span class="kapiteltitel__nr">Året rundt</span>
+              <span class="kapiteltitel__navn kapiteltitel__navn--lang">Sommer og efterår</span>
+              <span class="kapiteltitel__under">Lyse nætter, sommerhuset og den store dynevask</span>
+            </h2>
+          </div>
+        </section>
+      </div>
+
+      <!-- ========== BLAD 9 ========== -->
+      <div class="blad">
+
+        <!-- Side 17 · Sommer og efterår (højre) -->
+        <section class="side side--papir" id="side-17" aria-label="Side 17 · Sommer og efterår">
+          <div class="side__indre">
+            <p class="sidehoved sidehoved--lys"><span><b>Året rundt</b> · Sommer og efterår</span><span>Ringsted Dun</span></p>
+            <div class="aarstid">
+              <h3 class="aarstid__overskrift"><span class="aarstid__navn">Sommer</span> <span class="aarstid__under">Lyse nætter og sommerhuset</span></h3>
+              <blockquote class="dengang dengang--lille">
+                <p class="dengang__etiket"><span>Dengang</span></p>
+                <p class="dengang__citat">»I sommerhuset lugtede dynerne af hav og trætte unger. Ingen sov længe, men alle sov godt.«</p>
+              </blockquote>
+              <div class="idag idag--lille">
+                <p class="idag__etiket">I dag</p>
+                <p>Sover du dårligere i sommerhuset end derhjemme? Spørg dig selv: Er her for varmt? Er madrassen god? Passer dynen til årstiden? Er puden for høj eller for lav?</p>
+                <p>En sval dyne og mørklægning kan gøre de lyse nætter lettere.</p>
+              </div>
+              <div class="proev-det proev-det--linje">
+                <p class="proev-det__etiket">Prøv det</p>
+                <p class="proev-det__tekst">Læg dig i sommerhussengen i fem minutter, før sæsonen starter.</p>
+              </div>
+            </div>
+            <div class="aarstid">
+              <h3 class="aarstid__overskrift"><span class="aarstid__navn">Efterår</span> <span class="aarstid__under">Den store dynevask</span></h3>
+              <blockquote class="dengang dengang--lille">
+                <p class="dengang__etiket"><span>Dengang</span></p>
+                <p class="dengang__citat">»Når bladene faldt, var det tid til den store vask.«</p>
+              </blockquote>
+              <div class="idag idag--lille">
+                <p class="idag__etiket">I dag</p>
+                <p>Følg vaskeanvisningen. Som hovedregel kan dyne og pude vaskes ved 60 grader med enzymfrit vaskepulver, og det dræber husstøvmider. Tør dem grundigt i mindst 4 timer, så dun og fjer ikke klumper.</p>
+                <p>Og når aftenerne bliver mørke tidligere: Få dagslys om dagen, og dæmp lyset om aftenen.</p>
+              </div>
+              <div class="proev-det proev-det--linje">
+                <p class="proev-det__etiket">Prøv det</p>
+                <p class="proev-det__tekst">Find vaskeanvisningen på din dyne. Hvornår blev den sidst vasket?</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Side 18 · Din side af sengen (venstre) -->
+        <section class="side side--moerk" id="side-18" aria-label="Side 18 · Dine nætter: Din side af sengen">
+          <div class="side__indre">
+            <p class="sidehoved">Søvnguiden</p>
+            <figure class="fotopar">
+              <div class="fotopar__billeder">
+                <div class="fotopar__halv fotopar__halv--dengang"><img class="fotopar__billede" src="img/guide/dengang-for-to.jpg" alt="Dengang: seng med et strikketæppe lagt ekstra over den ene side."></div>
+                <div class="fotopar__halv fotopar__halv--idag"><img class="fotopar__billede" src="img/guide/idag-for-to.jpg" alt="I dag: samme soveværelse med hvide dyner i forskellig tykkelse."></div>
+              </div>
+              <figcaption class="fotopar__tekster">
+                <div><p class="fotopar__etiket">Dengang</p><p class="fotopar__tekst">Ét tæppe på den ene side.</p></div>
+                <div><p class="fotopar__etiket">I dag</p><p class="fotopar__tekst">Hver sin dyne i sin egen varmegrad.</p><p class="fotopar__ai">Begge billeder er AI-genererede.</p></div>
+              </figcaption>
+              <div class="fotopar__traad"></div>
+            </figure>
+            <h2 class="kapiteltitel">
+              <span class="kapiteltitel__nr">Dine nætter</span>
+              <span class="kapiteltitel__navn kapiteltitel__navn--lang">Din side af sengen</span>
+              <span class="kapiteltitel__under">Din krop har sin egen temperatur</span>
+            </h2>
+            <div class="luft"></div>
+            <div class="mormor-i-dag">
+              <p class="mormor-i-dag__etiket">Mormor i dag</p>
+              <p class="mormor-i-dag__tekst">»Vi har to dyner nu. Morfar kalder det moderne. Jeg kalder det fred.«</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ========== BLAD 10 ========== -->
+      <div class="blad">
+
+        <!-- Side 19 · Din side af sengen (højre) -->
+        <section class="side side--papir" id="side-19" aria-label="Side 19 · Din side af sengen">
+          <div class="side__indre">
+            <p class="sidehoved sidehoved--lys"><span><b>Dine nætter</b> · Din side af sengen</span><span>Ringsted Dun</span></p>
+            <blockquote class="dengang">
+              <p class="dengang__etiket"><span>Dengang</span> <em>· Mormor fortæller</em></p>
+              <p class="dengang__citat">»Far ville have vinduet på klem. Mor frøs. Så hun lagde sit strikketæppe ovenpå, hver eneste nat.«</p>
+            </blockquote>
+            <div class="idag">
+              <p class="idag__etiket">I dag</p>
+              <p><strong>Ingen sover ens.</strong> Nogle fryser hele natten, andre smider dynen af. Nogle bevæger sig meget i søvne, mens andre vågner i samme stilling, som de faldt i søvn i. Din krop har sin egen temperatur og sin egen rytme, og den er værd at lytte til.</p>
+              <p>Fryser du eller får det for varmt, er løsningen ikke altid et tæppe ekstra. Det kan være en dyne i en anden varmegrad, fra ekstra sval til ekstra varm, som passer til dig. Deler du seng med nogen, gælder det samme for dem.</p>
+            </div>
+            <div class="proev-det">
+              <p class="proev-det__etiket">Prøv det</p>
+              <p class="proev-det__tekst">Mærk efter i nat: Fryser du, eller får du det for varmt?</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Side 20 · Når børnebørnene sover over (venstre) -->
+        <section class="side side--moerk" id="side-20" aria-label="Side 20 · Dine nætter: Når børnebørnene sover over">
+          <div class="side__indre">
+            <p class="sidehoved">Søvnguiden</p>
+            <figure class="fotopar">
+              <div class="fotopar__billeder">
+                <div class="fotopar__halv fotopar__halv--dengang"><img class="fotopar__billede" src="img/guide/dengang-boerneboern.jpg" alt="Dengang: gæsteseng med broderet sengetøj og en bamse på puden."></div>
+                <div class="fotopar__halv fotopar__halv--idag"><img class="fotopar__billede" src="img/guide/idag-boerneboern.jpg" alt="I dag: samme gæsteseng med hvid dyne og en bamse på puden."></div>
+              </div>
+              <figcaption class="fotopar__tekster">
+                <div><p class="fotopar__etiket">Dengang</p><p class="fotopar__tekst">Bamsen på gæstepuden.</p></div>
+                <div><p class="fotopar__etiket">I dag</p><p class="fotopar__tekst">Bamsen på puden i dag.</p><p class="fotopar__ai">Begge billeder er AI-genererede.</p></div>
+              </figcaption>
+              <div class="fotopar__traad"></div>
+            </figure>
+            <h2 class="kapiteltitel">
+              <span class="kapiteltitel__nr">Dine nætter</span>
+              <span class="kapiteltitel__navn kapiteltitel__navn--lang">Når børnebørnene sover over</span>
+              <span class="kapiteltitel__under">Gæstesengen er klar</span>
+            </h2>
+            <div class="luft"></div>
+            <div class="mormor-i-dag">
+              <p class="mormor-i-dag__etiket">Mormor i dag</p>
+              <p class="mormor-i-dag__tekst">»Barnebarnet siger, at min gæsteseng er den bedste i verden. Jeg tror, det er, fordi hun må læse længe.«</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ========== BLAD 11 ========== -->
+      <div class="blad">
+
+        <!-- Side 21 · Børnebørnene (højre) -->
+        <section class="side side--papir" id="side-21" aria-label="Side 21 · Børnebørnene">
+          <div class="side__indre">
+            <p class="sidehoved sidehoved--lys"><span><b>Dine nætter</b> · Børnebørnene</span><span>Ringsted Dun</span></p>
+            <blockquote class="dengang">
+              <p class="dengang__etiket"><span>Dengang</span> <em>· Mormor fortæller</em></p>
+              <p class="dengang__citat">»Når børnebørnene kom, blev gæstesengen redt med det pæneste sengetøj. Det var en lille fest.«</p>
+            </blockquote>
+            <div class="idag">
+              <p class="idag__etiket">I dag</p>
+              <p><strong>Børn har brug for endnu mere søvn end voksne</strong>, og de sover anderledes. Derfor kan hele familien sjældent nøjes med samme slags dyne og pude.</p>
+              <p>Giv gæstesengen en dyne, der passer til den, der skal sove i den, og til årstiden. Og hold gerne fast i barnets egne godnatvaner, også hos mormor.</p>
+            </div>
+            <div class="proev-det">
+              <p class="proev-det__etiket">Prøv det</p>
+              <p class="proev-det__tekst">Læg dig i gæstesengen i aften. Hvordan ville du selv sove her?</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Side 22 · Mit søvnkort (venstre) -->
+        <section class="side side--papir" id="side-22" aria-label="Side 22 · Mit søvnkort">
+          <div class="side__indre">
+            <p class="sidehoved sidehoved--lys"><span><b>Dine nætter</b> · Mit søvnkort</span><span>Ringsted Dun</span></p>
+            <h2 class="titel titel--stor">Mit søvnkort</h2>
+            <p class="broed">Læs de syv udsagn, og vælg én ting, du vil prøve i den kommende uge. Der er ingen rigtige eller forkerte svar.</p>
+            <ol class="soevnkort">
+              <li>Jeg får dagslys om morgenen.</li>
+              <li>Jeg bevæger mig i løbet af dagen.</li>
+              <li>Jeg holder øje med kaffe og alkohol sidst på dagen.</li>
+              <li>Jeg dæmper lys og skærme om aftenen.</li>
+              <li>Soveværelset er køligt, mørkt og stille.</li>
+              <li>Jeg sover uden at fryse eller få det for varmt.</li>
+              <li>Min dyne og pude passer til mig.</li>
+            </ol>
+            <div class="luft"></div>
+            <div class="mormor-i-dag mormor-i-dag--lys">
+              <p class="mormor-i-dag__etiket">Mormor i dag</p>
+              <p class="mormor-i-dag__tekst">»Jeg prøvede det hele på én gang. Det holdt til onsdag. Én ting ad gangen virker bedre.«</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ========== BLAD 12 ========== -->
+      <div class="blad">
+
+        <!-- Side 23 · Foto (højre) -->
+        <section class="side side--papir side--foto" id="side-23" aria-label="Side 23 · Foto">
+          <figure class="helfoto">
+            <img class="helfoto__billede" src="img/guide/rd-ved-vinduet.jpg" alt="En kvinde med langt lyst hår, set bagfra, sidder svøbt i en hvid dyne i en seng ved en åben altandør med udsigt til grønne træer.">
+            <figcaption class="helfoto__kreditering">Foto: Ringsted Dun</figcaption>
+          </figure>
+        </section>
+
+        <!-- Side 24 · Afslutning (venstre) -->
+        <section class="side side--moerk" id="side-24" aria-label="Side 24 · Afslutning">
+          <div class="side__indre side__indre--midt">
+            <p class="sidehoved sidehoved--fast">Søvnguiden</p>
+            <p class="afslutning__citat">Meget har ændret sig siden 1947.<br>Vores nysgerrighed på god søvn<br>har ikke.</p>
+            <img class="afslutning__logo" src="img/guide/RDU_logo_hvid.png" alt="Ringsted Dun, Established 1947">
+            <p class="afslutning__etiket">Eksperter i god søvn</p>
+          </div>
+        </section>
+      </div>
+
+      <!-- ========== BLAD 13 ========== -->
+      <div class="blad">
+
+        <!-- Side 25 · Til sidst og kilder (højre) -->
+        <section class="side side--papir" id="side-25" aria-label="Side 25 · Til sidst og kilder">
+          <div class="side__indre side__indre--foto">
+            <div class="side__tekst">
+              <p class="sidehoved sidehoved--lys"><span><b>Ringsted Dun</b> · siden 1947</span><span>Til sidst</span></p>
+              <p class="broed">Vi har lavet dyner og puder i Danmark i over 75 år. Undervejs har vi lært, at gode nætter handler om helheden: dine vaner, dine omgivelser og den komfort, du finder i sengen. Vil du vide, hvordan dyne og pude kan passe til dine nætter, så spørg din Ringsted Dun-forhandler, eller prøv dynevælgeren på ringsted-dun.dk.</p>
+              <div class="kilder">
+                <p class="kilder__etiket">Kilder</p>
+                <p>Sundhedsstyrelsen: Anbefalinger for søvnlængde (2024) · sundhed.dk: Gode råd, hvis du har svært ved at sove (pjece, 2025), Gode råd til en bedre søvn og Søvnløshed blandt ældre (Patienthåndbogen, 2025) · Ældre Sagen: 5 gode råd til bedre søvn om natten · Søvnforsker Birgitte Kornum · Ringsted Duns soveguide og plejevejledning.</p>
+                <p>Mormor er en fiktiv fortæller. Billedparrene af dengang og i dag er AI-genererede. Øvrige fotos er Ringsted Duns egne. Rådene er generelle og erstatter ikke rådgivning fra sundhedspersonale.</p>
+              </div>
+            </div>
+            <figure class="helfoto">
+              <img class="helfoto__billede" src="img/guide/rd-morgen-sovevaerelse.jpg" alt="Et lyst soveværelse med en redt seng med hvide dyner ved et stort vindue.">
+              <figcaption class="helfoto__kreditering">Foto: Ringsted Dun</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <!-- Side 26 · Bagside -->
+        <section class="side side--moerk side--bagside" id="side-26" aria-label="Bagside">
+          <img class="bagside__logo" src="img/guide/RDU_logo_hvid.png" alt="Ringsted Dun, Established 1947">
+          <p class="bagside__web">ringsted-dun.dk</p>
+        </section>
+      </div>
+
+    </div><!-- /bog -->
+
+    <!-- Knapper og sidetæller -->
+    <button class="bladre bladre--forrige" id="forrige" type="button" aria-label="Forrige side">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
+    </button>
+    <button class="bladre bladre--naeste" id="naeste" type="button" aria-label="Næste side">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+    </button>
+    <p class="taeller" id="taeller" aria-live="polite"></p>
+
+    <noscript>
+      <p class="guide__noscript">Bladre-funktionen kræver JavaScript. Siderne vises herunder som en almindelig side.</p>
+    </noscript>
+  </main>
+
+  <script src="js/guide.js"></script>
 </body>
 </html>
