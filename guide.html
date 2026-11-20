@@ -14,9 +14,9 @@
   <!-- guide.css bliver lavet af Live Sass Compiler ud fra scss/guide.scss. Ret i SCSS-filerne, ikke her -->
   <link rel="stylesheet" href="css/guide.css">
 </head>
-<body class="guide">
+<body class="guide guide--laes">
 
-  <a class="spring-over" href="#naeste">Spring til knappen Næste side</a>
+  <a class="spring-over" href="#aabn">Spring til knappen Åbn bogen</a>
 
   <main class="guide__scene" id="scene" aria-label="Søvnguiden som bog">
     <h1 class="sr-only">Søvnguiden · Ringsted Dun</h1>
@@ -28,7 +28,14 @@
       Når man bladrer, vender guide.js bladet 180 grader om ryggen.
       Vil du rette i en side, så find den med id'et, fx id="side-05".
     -->
+    <!-- bog-ramme placerer bogen på skærmen. Selve bogen gøres større eller mindre med zoom (se guide.js) -->
+    <div class="bog-ramme" id="bog-ramme">
     <div class="bog" id="bog">
+
+      <!-- Papirkanterne på hver side af bogen: de sider, der ligger nedenunder.
+           guide.js gør dem tykkere eller tyndere, alt efter hvor langt man er i bogen -->
+      <div class="bog__kant bog__kant--venstre" aria-hidden="true"></div>
+      <div class="bog__kant bog__kant--hoejre" aria-hidden="true"></div>
 
       <!-- ========== BLAD 1 ========== -->
       <div class="blad">
@@ -43,22 +50,26 @@
               <div class="fotopar__halv fotopar__halv--idag">
                 <img class="fotopar__billede" src="img/guide/idag-2000-aften.jpg" alt="I dag: samme stue med lyse gardiner og en lænestol i varmt lys.">
               </div>
+              <div class="fotopar__traad"></div>
             </div>
-            <div class="fotopar__traad"></div>
           </div>
           <p class="forside__ai">AI-genererede billeder</p>
           <div class="titelboks">
             <p class="titelboks__titel">Søvnguiden</p>
-            <p class="titelboks__spor">Døgnet rundt · Året rundt · Dine nætter</p>
+            <p class="titelboks__spor">Døgnet rundt · Året rundt<span class="kun-bog"> ·</span><br class="kun-laes"> Dine nætter</p>
             <p class="titelboks__undertitel">Din søvn. Dine behov.</p>
-            <p class="titelboks__tekst">En god nat begynder længe før, du slukker lyset.</p>
+            <p class="titelboks__tekst">En god nat begynder længe før, du slukker lyset.<span class="kun-laes"> Læs guiden her, eller hent den som pdf, så du kan printe den og have den ved sengen.</span></p>
+            <p class="hent kun-laes">
+              <a class="hent__knap" href="pdf/soevnguiden.pdf" download>Hent guiden som pdf<span class="sr-only"> (pdf, 9 MB)</span></a>
+              <span class="hent__note">Gratis · klar til print</span>
+            </p>
             <p class="titelboks__siden">Eksperter i god søvn siden 1947</p>
             <img class="titelboks__logo" src="img/guide/RDU_logo.png" alt="Ringsted Dun, Established 1947">
           </div>
         </section>
 
         <!-- Side 2 · Velkommen (venstre) -->
-        <section class="side side--moerk" id="side-02" aria-label="Side 2 · Velkommen">
+        <section class="side side--moerk side--intro" id="side-02" aria-label="Side 2 · Velkommen">
           <div class="side__indre">
             <p class="sidehoved">Søvnguiden</p>
             <h2 class="titel">Søvnen er mere end det, der sker om natten</h2>
@@ -80,9 +91,9 @@
       <div class="blad">
 
         <!-- Side 3 · Velkommen (højre): Mød Mormor + indhold -->
-        <section class="side side--papir" id="side-03" aria-label="Side 3 · Mød Mormor og indhold">
+        <section class="side side--papir side--velkommen" id="side-03" aria-label="Side 3 · Mød Mormor og indhold">
           <div class="side__indre">
-            <p class="sidehoved sidehoved--lys"><span><b>Søvnguiden</b> · Velkommen</span><span>Ringsted Dun</span></p>
+            <p class="sidehoved sidehoved--lys"><span><b>Søvnguiden</b> · Velkommen</span><span class="sidehoved__hoejre">Ringsted Dun</span></p>
             <h2 class="overskrift">Mød Mormor</h2>
             <p class="broed">Mormor hedder Grethe. Hun er født i 1947 ligesom os og er gift med Henning, som børnebørnene kalder Morfar. Vi har fundet på hende, så hun findes ikke. Hendes nætter minder måske alligevel om nogle, du selv kan huske.</p>
 
@@ -136,6 +147,11 @@
               </div>
             </nav>
           </div>
+          <!-- Kun i mobil- og tekstvisningen (Figma: Søvnguide - Mobil) -->
+          <figure class="helfoto helfoto--bund kun-laes">
+            <img class="helfoto__billede" src="img/guide/rd-dyne-detalje.jpg" alt="Nærbillede af en hvid dyne fra Ringsted Dun.">
+            <figcaption class="helfoto__kreditering">Foto: Ringsted Dun</figcaption>
+          </figure>
         </section>
 
         <!-- Side 4 · 07.00 Morgen (venstre) -->
@@ -146,12 +162,12 @@
               <div class="fotopar__billeder">
                 <div class="fotopar__halv fotopar__halv--dengang"><img class="fotopar__billede" src="img/guide/dengang-0700-morgen.jpg" alt="Dengang: en kvinde trækker blomstrede gardiner fra i et soveværelse om morgenen."></div>
                 <div class="fotopar__halv fotopar__halv--idag"><img class="fotopar__billede" src="img/guide/idag-0700-morgen.jpg" alt="I dag: samme soveværelse med morgensol over en redt seng med hvid dyne."></div>
+                <div class="fotopar__traad"></div>
               </div>
               <figcaption class="fotopar__tekster">
                 <div><p class="fotopar__etiket">Dengang</p><p class="fotopar__tekst">Gardinerne trækkes fra.</p></div>
                 <div><p class="fotopar__etiket">I dag</p><p class="fotopar__tekst">Dagslys over den redte seng, 75 år senere.</p><p class="fotopar__ai">Begge billeder er AI-genererede.</p></div>
               </figcaption>
-              <div class="fotopar__traad"></div>
             </figure>
             <h2 class="kapiteltitel">
               <span class="kapiteltitel__nr">07.00</span>
@@ -173,7 +189,7 @@
         <!-- Side 5 · 07.00 Morgen (højre) -->
         <section class="side side--papir" id="side-05" aria-label="Side 5 · 07.00 Morgen">
           <div class="side__indre">
-            <p class="sidehoved sidehoved--lys"><span><b>Døgnet rundt</b> · 07.00 Morgen</span><span>Ringsted Dun</span></p>
+            <p class="sidehoved sidehoved--lys"><span><b>Døgnet rundt</b> · 07.00 Morgen</span><span class="sidehoved__hoejre">Ringsted Dun</span></p>
             <blockquote class="dengang">
               <p class="dengang__etiket"><span>Dengang</span> <em>· Mormor fortæller</em></p>
               <p class="dengang__citat">»Far trak gardinerne fra, så snart han var oppe. ›Lys ind, så vågner man,‹ sagde han.«</p>
@@ -201,12 +217,12 @@
               <div class="fotopar__billeder">
                 <div class="fotopar__halv fotopar__halv--dengang"><img class="fotopar__billede" src="img/guide/dengang-1400-eftermiddag.jpg" alt="Dengang: et par cykler ad en landevej om sommeren, set bagfra."></div>
                 <div class="fotopar__halv fotopar__halv--idag"><img class="fotopar__billede" src="img/guide/idag-1400-eftermiddag.jpg" alt="I dag: et par med cykelhjelme cykler ad samme landevej, set bagfra."></div>
+                <div class="fotopar__traad"></div>
               </div>
               <figcaption class="fotopar__tekster">
                 <div><p class="fotopar__etiket">Dengang</p><p class="fotopar__tekst">Cykelturen ad landevejen.</p></div>
                 <div><p class="fotopar__etiket">I dag</p><p class="fotopar__tekst">Samme tur i dag – nu med hjelm.</p><p class="fotopar__ai">Begge billeder er AI-genererede.</p></div>
               </figcaption>
-              <div class="fotopar__traad"></div>
             </figure>
             <h2 class="kapiteltitel">
               <span class="kapiteltitel__nr">14.00</span>
@@ -228,7 +244,7 @@
         <!-- Side 7 · 14.00 Eftermiddag (højre) -->
         <section class="side side--papir" id="side-07" aria-label="Side 7 · 14.00 Eftermiddag">
           <div class="side__indre">
-            <p class="sidehoved sidehoved--lys"><span><b>Døgnet rundt</b> · 14.00 Eftermiddag</span><span>Ringsted Dun</span></p>
+            <p class="sidehoved sidehoved--lys"><span><b>Døgnet rundt</b> · 14.00 Eftermiddag</span><span class="sidehoved__hoejre">Ringsted Dun</span></p>
             <blockquote class="dengang">
               <p class="dengang__etiket"><span>Dengang</span> <em>· Mormor fortæller</em></p>
               <p class="dengang__citat">»Vi cyklede overalt. Om aftenen var man træt på den gode måde.«</p>
@@ -255,12 +271,12 @@
               <div class="fotopar__billeder">
                 <div class="fotopar__halv fotopar__halv--dengang"><img class="fotopar__billede" src="img/guide/dengang-2000-aften.jpg" alt="Dengang: stue om aftenen med radio, bordlampe og strikketøj i en lænestol."></div>
                 <div class="fotopar__halv fotopar__halv--idag"><img class="fotopar__billede" src="img/guide/idag-2000-aften.jpg" alt="I dag: samme stue med højttaler, bordlampe og strikketøj i en lys lænestol."></div>
+                <div class="fotopar__traad"></div>
               </div>
               <figcaption class="fotopar__tekster">
                 <div><p class="fotopar__etiket">Dengang</p><p class="fotopar__tekst">Radioen og strikketøjet ved lampens skær.</p></div>
                 <div><p class="fotopar__etiket">I dag</p><p class="fotopar__tekst">Samme stue i dag. Strikketøjet ligger der stadig.</p><p class="fotopar__ai">Begge billeder er AI-genererede.</p></div>
               </figcaption>
-              <div class="fotopar__traad"></div>
             </figure>
             <h2 class="kapiteltitel">
               <span class="kapiteltitel__nr">20.00</span>
@@ -282,7 +298,7 @@
         <!-- Side 9 · 20.00 Aften (højre) -->
         <section class="side side--papir" id="side-09" aria-label="Side 9 · 20.00 Aften">
           <div class="side__indre">
-            <p class="sidehoved sidehoved--lys"><span><b>Døgnet rundt</b> · 20.00 Aften</span><span>Ringsted Dun</span></p>
+            <p class="sidehoved sidehoved--lys"><span><b>Døgnet rundt</b> · 20.00 Aften</span><span class="sidehoved__hoejre">Ringsted Dun</span></p>
             <blockquote class="dengang">
               <p class="dengang__etiket"><span>Dengang</span> <em>· Mormor fortæller</em></p>
               <p class="dengang__citat">»Om aftenen lyttede vi til radioen ved lampens skær. Så var det sengetid.«</p>
@@ -309,12 +325,12 @@
               <div class="fotopar__billeder">
                 <div class="fotopar__halv fotopar__halv--dengang"><img class="fotopar__billede" src="img/guide/dengang-sengetid.jpg" alt="Dengang: soveværelse ved sengetid med tændt lampe og vinduet på klem."></div>
                 <div class="fotopar__halv fotopar__halv--idag"><img class="fotopar__billede" src="img/guide/idag-sengetid.jpg" alt="I dag: samme soveværelse med tændt lampe, en bog og vinduet på klem."></div>
+                <div class="fotopar__traad"></div>
               </div>
               <figcaption class="fotopar__tekster">
                 <div><p class="fotopar__etiket">Dengang</p><p class="fotopar__tekst">Natlampen tændt, vinduet på klem.</p></div>
                 <div><p class="fotopar__etiket">I dag</p><p class="fotopar__tekst">Samme soveværelse i dag. Samme ro.</p><p class="fotopar__ai">Begge billeder er AI-genererede.</p></div>
               </figcaption>
-              <div class="fotopar__traad"></div>
             </figure>
             <h2 class="kapiteltitel">
               <span class="kapiteltitel__nr">22.30</span>
@@ -336,7 +352,7 @@
         <!-- Side 11 · 22.30 Sengetid (højre) -->
         <section class="side side--papir" id="side-11" aria-label="Side 11 · 22.30 Sengetid">
           <div class="side__indre">
-            <p class="sidehoved sidehoved--lys"><span><b>Døgnet rundt</b> · 22.30 Sengetid</span><span>Ringsted Dun</span></p>
+            <p class="sidehoved sidehoved--lys"><span><b>Døgnet rundt</b> · 22.30 Sengetid</span><span class="sidehoved__hoejre">Ringsted Dun</span></p>
             <blockquote class="dengang">
               <p class="dengang__etiket"><span>Dengang</span> <em>· Mormor fortæller</em></p>
               <p class="dengang__citat">»Soveværelset var det koldeste rum i huset. Men under dynen var der lunt.«</p>
@@ -363,12 +379,12 @@
               <div class="fotopar__billeder">
                 <div class="fotopar__halv fotopar__halv--dengang"><img class="fotopar__billede" src="img/guide/dengang-0430-klokken-fem.jpg" alt="Dengang: køkken i den tidlige morgen med kaffekande og kopper."></div>
                 <div class="fotopar__halv fotopar__halv--idag"><img class="fotopar__billede" src="img/guide/idag-0430-klokken-fem.jpg" alt="I dag: samme køkken med kopper og en lille radio i vindueskarmen."></div>
+                <div class="fotopar__traad"></div>
               </div>
               <figcaption class="fotopar__tekster">
                 <div><p class="fotopar__etiket">Dengang</p><p class="fotopar__tekst">Kaffekanden i køkkenet, før de andre vågner.</p></div>
                 <div><p class="fotopar__etiket">I dag</p><p class="fotopar__tekst">Samme køkken i dag. Radioen står der stadig.</p><p class="fotopar__ai">Begge billeder er AI-genererede.</p></div>
               </figcaption>
-              <div class="fotopar__traad"></div>
             </figure>
             <h2 class="kapiteltitel">
               <span class="kapiteltitel__nr">04.30</span>
@@ -390,7 +406,7 @@
         <!-- Side 13 · 04.30 Natten (højre) -->
         <section class="side side--papir" id="side-13" aria-label="Side 13 · 04.30 Natten">
           <div class="side__indre">
-            <p class="sidehoved sidehoved--lys"><span><b>Døgnet rundt</b> · 04.30 Natten</span><span>Ringsted Dun</span></p>
+            <p class="sidehoved sidehoved--lys"><span><b>Døgnet rundt</b> · 04.30 Natten</span><span class="sidehoved__hoejre">Ringsted Dun</span></p>
             <blockquote class="dengang">
               <p class="dengang__etiket"><span>Dengang</span> <em>· Mormor fortæller</em></p>
               <p class="dengang__citat">»Mor stod altid op før solen. ›Man skal ikke ligge og tælle timer,‹ sagde hun.«</p>
@@ -417,12 +433,12 @@
               <div class="fotopar__billeder">
                 <div class="fotopar__halv fotopar__halv--dengang"><img class="fotopar__billede" src="img/guide/dengang-vinter.jpg" alt="Dengang: isblomster på en gammel vinduesrude med sne udenfor."></div>
                 <div class="fotopar__halv fotopar__halv--idag"><img class="fotopar__billede" src="img/guide/idag-vinter.jpg" alt="I dag: klart vindue mod et snedækket landskab."></div>
+                <div class="fotopar__traad"></div>
               </div>
               <figcaption class="fotopar__tekster">
                 <div><p class="fotopar__etiket">Dengang</p><p class="fotopar__tekst">Isblomster på ruden.</p></div>
                 <div><p class="fotopar__etiket">I dag</p><p class="fotopar__tekst">Klart glas i dag – samme udsigt.</p><p class="fotopar__ai">Begge billeder er AI-genererede.</p></div>
               </figcaption>
-              <div class="fotopar__traad"></div>
             </figure>
             <h2 class="kapiteltitel">
               <span class="kapiteltitel__nr">Året rundt</span>
@@ -437,9 +453,9 @@
       <div class="blad">
 
         <!-- Side 15 · Vinter og forår (højre) -->
-        <section class="side side--papir" id="side-15" aria-label="Side 15 · Vinter og forår">
+        <section class="side side--papir side--aarstider" id="side-15" aria-label="Side 15 · Vinter og forår">
           <div class="side__indre">
-            <p class="sidehoved sidehoved--lys"><span><b>Året rundt</b> · Vinter og forår</span><span>Ringsted Dun</span></p>
+            <p class="sidehoved sidehoved--lys"><span><b>Året rundt</b> · Vinter og forår</span><span class="sidehoved__hoejre">Ringsted Dun</span></p>
             <div class="aarstid">
               <h3 class="aarstid__overskrift"><span class="aarstid__navn">Vinter</span> <span class="aarstid__under">Lune nætter i de mørke måneder</span></h3>
               <blockquote class="dengang dengang--lille">
@@ -483,12 +499,12 @@
               <div class="fotopar__billeder">
                 <div class="fotopar__halv fotopar__halv--dengang"><img class="fotopar__billede" src="img/guide/dengang-dyner-luftes.jpg" alt="Dengang: hvide dyner til luftning på et stakit ved et rødt sommerhus."></div>
                 <div class="fotopar__halv fotopar__halv--idag"><img class="fotopar__billede" src="img/guide/idag-dyner-luftes.jpg" alt="I dag: samme sommerhus med hvide dyner til luftning over et hvidt rækværk."></div>
+                <div class="fotopar__traad"></div>
               </div>
               <figcaption class="fotopar__tekster">
                 <div><p class="fotopar__etiket">Dengang</p><p class="fotopar__tekst">Dyner over stakittet.</p></div>
                 <div><p class="fotopar__etiket">I dag</p><p class="fotopar__tekst">Samme sommerhus i dag. Dynerne hænger der stadig.</p><p class="fotopar__ai">Begge billeder er AI-genererede.</p></div>
               </figcaption>
-              <div class="fotopar__traad"></div>
             </figure>
             <h2 class="kapiteltitel">
               <span class="kapiteltitel__nr">Året rundt</span>
@@ -503,9 +519,9 @@
       <div class="blad">
 
         <!-- Side 17 · Sommer og efterår (højre) -->
-        <section class="side side--papir" id="side-17" aria-label="Side 17 · Sommer og efterår">
+        <section class="side side--papir side--aarstider" id="side-17" aria-label="Side 17 · Sommer og efterår">
           <div class="side__indre">
-            <p class="sidehoved sidehoved--lys"><span><b>Året rundt</b> · Sommer og efterår</span><span>Ringsted Dun</span></p>
+            <p class="sidehoved sidehoved--lys"><span><b>Året rundt</b> · Sommer og efterår</span><span class="sidehoved__hoejre">Ringsted Dun</span></p>
             <div class="aarstid">
               <h3 class="aarstid__overskrift"><span class="aarstid__navn">Sommer</span> <span class="aarstid__under">Lyse nætter og sommerhuset</span></h3>
               <blockquote class="dengang dengang--lille">
@@ -549,12 +565,12 @@
               <div class="fotopar__billeder">
                 <div class="fotopar__halv fotopar__halv--dengang"><img class="fotopar__billede" src="img/guide/dengang-for-to.jpg" alt="Dengang: seng med et strikketæppe lagt ekstra over den ene side."></div>
                 <div class="fotopar__halv fotopar__halv--idag"><img class="fotopar__billede" src="img/guide/idag-for-to.jpg" alt="I dag: samme soveværelse med hvide dyner i forskellig tykkelse."></div>
+                <div class="fotopar__traad"></div>
               </div>
               <figcaption class="fotopar__tekster">
                 <div><p class="fotopar__etiket">Dengang</p><p class="fotopar__tekst">Ét tæppe på den ene side.</p></div>
                 <div><p class="fotopar__etiket">I dag</p><p class="fotopar__tekst">Hver sin dyne i sin egen varmegrad.</p><p class="fotopar__ai">Begge billeder er AI-genererede.</p></div>
               </figcaption>
-              <div class="fotopar__traad"></div>
             </figure>
             <h2 class="kapiteltitel">
               <span class="kapiteltitel__nr">Dine nætter</span>
@@ -576,7 +592,7 @@
         <!-- Side 19 · Din side af sengen (højre) -->
         <section class="side side--papir" id="side-19" aria-label="Side 19 · Din side af sengen">
           <div class="side__indre">
-            <p class="sidehoved sidehoved--lys"><span><b>Dine nætter</b> · Din side af sengen</span><span>Ringsted Dun</span></p>
+            <p class="sidehoved sidehoved--lys"><span><b>Dine nætter</b> · Din side af sengen</span><span class="sidehoved__hoejre">Ringsted Dun</span></p>
             <blockquote class="dengang">
               <p class="dengang__etiket"><span>Dengang</span> <em>· Mormor fortæller</em></p>
               <p class="dengang__citat">»Far ville have vinduet på klem. Mor frøs. Så hun lagde sit strikketæppe ovenpå, hver eneste nat.«</p>
@@ -601,12 +617,12 @@
               <div class="fotopar__billeder">
                 <div class="fotopar__halv fotopar__halv--dengang"><img class="fotopar__billede" src="img/guide/dengang-boerneboern.jpg" alt="Dengang: gæsteseng med broderet sengetøj og en bamse på puden."></div>
                 <div class="fotopar__halv fotopar__halv--idag"><img class="fotopar__billede" src="img/guide/idag-boerneboern.jpg" alt="I dag: samme gæsteseng med hvid dyne og en bamse på puden."></div>
+                <div class="fotopar__traad"></div>
               </div>
               <figcaption class="fotopar__tekster">
                 <div><p class="fotopar__etiket">Dengang</p><p class="fotopar__tekst">Bamsen på gæstepuden.</p></div>
                 <div><p class="fotopar__etiket">I dag</p><p class="fotopar__tekst">Bamsen på puden i dag.</p><p class="fotopar__ai">Begge billeder er AI-genererede.</p></div>
               </figcaption>
-              <div class="fotopar__traad"></div>
             </figure>
             <h2 class="kapiteltitel">
               <span class="kapiteltitel__nr">Dine nætter</span>
@@ -628,7 +644,7 @@
         <!-- Side 21 · Børnebørnene (højre) -->
         <section class="side side--papir" id="side-21" aria-label="Side 21 · Børnebørnene">
           <div class="side__indre">
-            <p class="sidehoved sidehoved--lys"><span><b>Dine nætter</b> · Børnebørnene</span><span>Ringsted Dun</span></p>
+            <p class="sidehoved sidehoved--lys"><span><b>Dine nætter</b> · Børnebørnene</span><span class="sidehoved__hoejre">Ringsted Dun</span></p>
             <blockquote class="dengang">
               <p class="dengang__etiket"><span>Dengang</span> <em>· Mormor fortæller</em></p>
               <p class="dengang__citat">»Når børnebørnene kom, blev gæstesengen redt med det pæneste sengetøj. Det var en lille fest.«</p>
@@ -646,9 +662,9 @@
         </section>
 
         <!-- Side 22 · Mit søvnkort (venstre) -->
-        <section class="side side--papir" id="side-22" aria-label="Side 22 · Mit søvnkort">
+        <section class="side side--papir side--soevnkort" id="side-22" aria-label="Side 22 · Mit søvnkort">
           <div class="side__indre">
-            <p class="sidehoved sidehoved--lys"><span><b>Dine nætter</b> · Mit søvnkort</span><span>Ringsted Dun</span></p>
+            <p class="sidehoved sidehoved--lys"><span><b>Dine nætter</b> · Mit søvnkort</span><span class="sidehoved__hoejre">Ringsted Dun</span></p>
             <h2 class="titel titel--stor">Mit søvnkort</h2>
             <p class="broed">Læs de syv udsagn, og vælg én ting, du vil prøve i den kommende uge. Der er ingen rigtige eller forkerte svar.</p>
             <ol class="soevnkort">
@@ -681,7 +697,7 @@
         </section>
 
         <!-- Side 24 · Afslutning (venstre) -->
-        <section class="side side--moerk" id="side-24" aria-label="Side 24 · Afslutning">
+        <section class="side side--moerk side--slut" id="side-24" aria-label="Side 24 · Afslutning">
           <div class="side__indre side__indre--midt">
             <p class="sidehoved sidehoved--fast">Søvnguiden</p>
             <p class="afslutning__citat">Meget har ændret sig siden 1947.<br>Vores nysgerrighed på god søvn<br>har ikke.</p>
@@ -695,11 +711,15 @@
       <div class="blad">
 
         <!-- Side 25 · Til sidst og kilder (højre) -->
-        <section class="side side--papir" id="side-25" aria-label="Side 25 · Til sidst og kilder">
+        <section class="side side--papir side--kilder" id="side-25" aria-label="Side 25 · Til sidst og kilder">
           <div class="side__indre side__indre--foto">
             <div class="side__tekst">
-              <p class="sidehoved sidehoved--lys"><span><b>Ringsted Dun</b> · siden 1947</span><span>Til sidst</span></p>
+              <p class="sidehoved sidehoved--lys"><span><b>Ringsted Dun</b> · siden 1947</span><span class="sidehoved__hoejre">Til sidst</span></p>
               <p class="broed">Vi har lavet dyner og puder i Danmark i over 75 år. Undervejs har vi lært, at gode nætter handler om helheden: dine vaner, dine omgivelser og den komfort, du finder i sengen. Vil du vide, hvordan dyne og pude kan passe til dine nætter, så spørg din Ringsted Dun-forhandler, eller prøv dynevælgeren på ringsted-dun.dk.</p>
+              <p class="hent kun-laes">
+                <a class="hent__knap" href="pdf/soevnguiden.pdf" download>Hent guiden som pdf<span class="sr-only"> (pdf, 9 MB)</span></a>
+                <span class="hent__note">Print den, og læg den i skuffen ved sengen.</span>
+              </p>
               <div class="kilder">
                 <p class="kilder__etiket">Kilder</p>
                 <p>Sundhedsstyrelsen: Anbefalinger for søvnlængde (2024) · sundhed.dk: Gode råd, hvis du har svært ved at sove (pjece, 2025), Gode råd til en bedre søvn og Søvnløshed blandt ældre (Patienthåndbogen, 2025) · Ældre Sagen: 5 gode råd til bedre søvn om natten · Søvnforsker Birgitte Kornum · Ringsted Duns soveguide og plejevejledning.</p>
@@ -714,15 +734,26 @@
         </section>
 
         <!-- Side 26 · Bagside -->
-        <section class="side side--moerk side--bagside" id="side-26" aria-label="Bagside">
+        <section class="side side--moerk side--bagside kun-bog" id="side-26" aria-label="Bagside">
           <img class="bagside__logo" src="img/guide/RDU_logo_hvid.png" alt="Ringsted Dun, Established 1947">
           <p class="bagside__web">ringsted-dun.dk</p>
         </section>
       </div>
 
     </div><!-- /bog -->
+    </div><!-- /bog-ramme -->
 
-    <!-- Knapper og sidetæller -->
+    <!-- Forsiden: vælg mellem bogen og tekstvisningen (som i Marcus' bladrebog) -->
+    <div class="valg" id="valg">
+      <button class="valg__knap" id="aabn" type="button">Åbn bogen</button>
+      <button class="valg__knap valg__knap--sekundaer" id="tekst-fra-start" type="button">Læs som tekst</button>
+    </div>
+
+    <!-- Knapper, når bogen er åben -->
+    <button class="vaerktoej vaerktoej--venstre" id="tekst-fra-bog" type="button">Læs som tekst</button>
+    <button class="vaerktoej vaerktoej--hoejre" id="luk" type="button" aria-label="Luk bogen">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
     <button class="bladre bladre--forrige" id="forrige" type="button" aria-label="Forrige side">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
     </button>
@@ -732,9 +763,24 @@
     <p class="taeller" id="taeller" aria-live="polite"></p>
 
     <noscript>
-      <p class="guide__noscript">Bladre-funktionen kræver JavaScript. Siderne vises herunder som en almindelig side.</p>
+      <p class="guide__noscript">Bladre-funktionen kræver JavaScript. Guiden vises derfor som almindelig tekst.</p>
     </noscript>
   </main>
+
+  <!--
+    TEKSTVERSION ("Læs som tekst")
+    Teksten bliver hentet fra bogens sider af guide.js (funktionen bygTekst),
+    så den altid passer med bogen. Ret derfor teksten i bogens sider, ikke her.
+  -->
+  <div class="tekstpanel" id="tekstpanel" role="region" aria-labelledby="tekst-overskrift" hidden>
+    <div class="tekstpanel__indre">
+      <div class="tekstpanel__top">
+        <button class="tekstpanel__luk" id="luk-tekst" type="button">Tilbage</button>
+      </div>
+      <h1 class="tekstpanel__titel" id="tekst-overskrift" tabindex="-1">Søvnguiden som tekst</h1>
+      <div id="tekstindhold"></div>
+    </div>
+  </div>
 
   <script src="js/guide.js"></script>
 </body>

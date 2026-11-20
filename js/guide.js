@@ -1,19 +1,29 @@
 // ==========================================================
-// GUIDE.JS · bladre-funktionen i søvnguiden
+// GUIDE.JS · søvnguidens tre visninger og bladre-funktionen
 //
-// Sådan virker det:
+// Visningerne (klassen på <body>):
+//   guide--start  Forsiden med knapperne "Åbn bogen" og "Læs som tekst"
+//   guide--bog    Bladremagasinet
+//   guide--laes   Én lang side (mobildesignet). Bruges altid på telefon
+//
+// Knappen "Læs som tekst" åbner et tekstpanel med guiden som ren tekst
+// (som i Marcus' bladrebog). Teksten hentes fra bogens sider, så den altid passer.
+//
+// Bogen:
 // - Bogen har 13 blade. Hvert blad har to sider (forside + bagside).
 // - "vendt" er antallet af blade, der er vendt over på venstre side.
 //   vendt = 0 → bogen er lukket (man ser forsiden)
 //   vendt = 13 → bogen er færdiglæst (man ser bagsiden)
-// - På store skærme ser man et opslag (to sider). På smalle skærme
-//   og telefoner ser man én side ad gangen, og bogen skubbes, så den
-//   side, man læser, står i midten.
+// - Bogen gøres større eller mindre med CSS-egenskaben zoom. Så tegner
+//   browseren teksten i den rigtige størrelse, og den bliver skarp.
 // ==========================================================
 
 const SIDE_B = 561.5;   // en sides bredde i px (som i Figma)
 const SIDE_H = 794;     // en sides højde i px
+const SMAL = 760;       // under denne bredde vises altid mobilvisningen (samme tal som $smal i SCSS)
 
+const krop = document.body;
+const ramme = document.getElementById('bog-ramme');
 const bog = document.getElementById('bog');
 const blade = Array.from(bog.querySelectorAll('.blad'));
 const sider = Array.from(bog.querySelectorAll('.side'));
@@ -24,28 +34,70 @@ const taeller = document.getElementById('taeller');
 const ANTAL_BLADE = blade.length;   // 13
 const ANTAL_SIDER = sider.length;   // 26
 
-let vendt = 0;        // antal vendte blade
-let aktivSide = 1;    // bruges kun i én-side-visning (1–26)
-let enkelt = false;   // true = én side ad gangen
+const tekstpanel = document.getElementById('tekstpanel');
+
+let visning = 'start';   // 'start', 'bog' eller 'laes'
+let vendt = 0;           // antal vendte blade
+let tekstKnap = null;    // den knap, der åbnede tekstpanelet (fokus går tilbage hertil)
 
 
-// ---------- Hjælpere ----------
+// ==========================================================
+// SKIFT VISNING
+// ==========================================================
 
-// Skal vi vise én side ad gangen? (smal skærm eller telefon på højkant)
-function brugEnkeltSide() {
-  return window.innerWidth < 760 || window.innerWidth < window.innerHeight * 0.95;
+function erSmal() {
+  return window.innerWidth < SMAL;
 }
 
-// Hvilke sidetal kan man se lige nu?
-function synligeSider() {
-  if (enkelt) return [aktivSide];
-  const venstre = vendt > 0 ? vendt * 2 : null;                       // bagsiden af det sidst vendte blad
-  const hoejre = vendt < ANTAL_BLADE ? vendt * 2 + 1 : null;          // forsiden af det næste blad
-  return [venstre, hoejre].filter(Boolean);
+function visVisning(ny) {
+  // På telefon er der kun mobilvisningen
+  if (erSmal()) ny = 'laes';
+
+  const forrigeVisning = visning;
+  visning = ny;
+  krop.classList.remove('guide--start', 'guide--bog', 'guide--laes');
+  krop.classList.add('guide--' + ny);
+
+  if (ny === 'laes') {
+    flytMormor(true);
+    ryd();
+  } else {
+    if (forrigeVisning === 'laes') flytMormor(false);
+    if (ny === 'start') vendt = 0;
+    tegn();
+  }
+}
+
+// I mobilvisningen står "Mormor i dag" nederst på papirsiden (som i Figma).
+// I bogen står den nederst på den mørke kapitelside. Her flyttes den frem og tilbage.
+const mormorFlyt = Array.from(bog.querySelectorAll('.side--moerk .mormor-i-dag')).map((boks) => {
+  const kapitelside = boks.closest('.side');
+  const nummer = Number(kapitelside.id.replace('side-', ''));
+  const papirside = document.getElementById('side-' + String(nummer + 1).padStart(2, '0'));
+  return { boks, hjem: boks.parentElement, ude: papirside.querySelector('.side__indre') };
+});
+
+function flytMormor(tilPapir) {
+  mormorFlyt.forEach(({ boks, hjem, ude }) => {
+    (tilPapir ? ude : hjem).appendChild(boks);
+  });
+}
+
+// I mobilvisningen fjernes alt det, bogen har sat på elementerne
+function ryd() {
+  bog.style.zoom = '';
+  ramme.style.left = '';
+  ramme.style.top = '';
+  sider.forEach((side) => {
+    side.inert = false;
+    side.removeAttribute('aria-hidden');
+  });
 }
 
 
-// ---------- Tegn bogen ----------
+// ==========================================================
+// TEGN BOGEN
+// ==========================================================
 
 function tegn() {
   // 1. Vend bladene og læg dem i den rigtige rækkefølge (z-index)
@@ -67,23 +119,30 @@ function tegn() {
     }
   });
 
-  // 2. Skalér bogen, så den passer til skærmen, og skub den på plads
-  const pladsB = window.innerWidth - (enkelt ? 24 : 2 * 100);
-  const pladsH = window.innerHeight - (enkelt ? 90 : 80);
-  const bredde = enkelt ? SIDE_B : SIDE_B * 2;
-  const skala = Math.min(pladsB / bredde, pladsH / SIDE_H, 1.25);
+  // Papirkanterne: hvor mange blade ligger der på hver side?
+  bog.style.setProperty('--blade-venstre', vendt);
+  bog.style.setProperty('--blade-hoejre', ANTAL_BLADE - vendt);
+  // Skyggen under bogen ligger kun under den halvdel, der er papir på
+  bog.style.setProperty('--skygge-venstre', vendt === 0 ? '52%' : '2%');
+  bog.style.setProperty('--skygge-hoejre', vendt === ANTAL_BLADE ? '52%' : '2%');
 
-  // Står vi på en højreside, skubbes bogen til venstre (og omvendt), så siden er i midten.
-  // I opslag gælder det kun forsiden og bagsiden, som står alene
+  // 2. Find plads til bogen. Forsiden skal have plads til knapperne under bogen,
+  //    den åbne bog til knapperne foroven og sidetælleren forneden
+  const top = visning === 'start' ? 24 : 76;
+  const bund = visning === 'start' ? 108 : 44;
+  const pladsB = window.innerWidth - 2 * 100;
+  const pladsH = window.innerHeight - top - bund;
+  const skala = Math.min(pladsB / (SIDE_B * 2), pladsH / SIDE_H, 1.3);
+
+  // Forsiden og bagsiden står alene, så bogen skubbes, så de står i midten
   let skub = 0;
-  if (enkelt) {
-    skub = aktivSide % 2 === 1 ? -SIDE_B / 2 : SIDE_B / 2;
-  } else if (vendt === 0) {
-    skub = -SIDE_B / 2;
-  } else if (vendt === ANTAL_BLADE) {
-    skub = SIDE_B / 2;
-  }
-  bog.style.transform = `translate(-50%, -50%) translateX(${skub * skala}px) scale(${skala})`;
+  if (vendt === 0) skub = -SIDE_B / 2;
+  if (vendt === ANTAL_BLADE) skub = SIDE_B / 2;
+
+  // Hele pixels, så teksten ikke bliver sløret
+  bog.style.zoom = skala;
+  ramme.style.left = Math.round((window.innerWidth - SIDE_B * 2 * skala) / 2 + skub * skala) + 'px';
+  ramme.style.top = Math.round(top + (pladsH - SIDE_H * skala) / 2) + 'px';
 
   // 3. Sider, man ikke kan se, skal hverken kunne nås med tastatur eller læses op
   const synlige = synligeSider();
@@ -94,11 +153,16 @@ function tegn() {
   });
 
   // 4. Knapper og sidetæller
-  const foerste = enkelt ? aktivSide === 1 : vendt === 0;
-  const sidste = enkelt ? aktivSide === ANTAL_SIDER : vendt === ANTAL_BLADE;
-  forrigeKnap.disabled = foerste;
-  naesteKnap.disabled = sidste;
+  forrigeKnap.disabled = vendt === 0;
+  naesteKnap.disabled = vendt === ANTAL_BLADE;
   taeller.textContent = tekstTilTaeller(synlige);
+}
+
+// Hvilke sidetal kan man se lige nu?
+function synligeSider() {
+  const venstre = vendt > 0 ? vendt * 2 : null;                // bagsiden af det sidst vendte blad
+  const hoejre = vendt < ANTAL_BLADE ? vendt * 2 + 1 : null;   // forsiden af det næste blad
+  return [venstre, hoejre].filter(Boolean);
 }
 
 function tekstTilTaeller(synlige) {
@@ -108,57 +172,160 @@ function tekstTilTaeller(synlige) {
 }
 
 
-// ---------- Bladre ----------
+// ==========================================================
+// BLADRE
+// ==========================================================
 
 function naeste() {
-  if (enkelt) {
-    if (aktivSide >= ANTAL_SIDER) return;
-    if (aktivSide % 2 === 1) vendt++;   // fra en højreside skal bladet vendes
-    aktivSide++;
-  } else {
-    if (vendt >= ANTAL_BLADE) return;
-    vendt++;
-  }
+  if (visning === 'start') { aabnBog(); return; }
+  if (vendt >= ANTAL_BLADE) return;
+  vendt++;
   tegn();
 }
 
 function forrige() {
-  if (enkelt) {
-    if (aktivSide <= 1) return;
-    if (aktivSide % 2 === 0) vendt--;   // fra en venstreside skal bladet vendes tilbage
-    aktivSide--;
-  } else {
-    if (vendt <= 0) return;
-    vendt--;
-  }
+  if (visning !== 'bog' || vendt <= 0) return;
+  vendt--;
   tegn();
 }
 
 // Gå direkte til et sidetal (bruges af indholdsfortegnelsen og af #side-08 i adressen)
 function gaaTil(sidetal) {
   sidetal = Math.max(1, Math.min(ANTAL_SIDER, sidetal));
-  aktivSide = sidetal;
   vendt = Math.floor(sidetal / 2);
-  tegn();
+  if (visning !== 'bog') visVisning('bog'); else tegn();
+}
+
+function aabnBog() {
+  vendt = 1;               // slå op på side 2–3
+  visVisning('bog');
+  naesteKnap.focus();
+}
+
+function lukBog() {
+  visVisning('start');
+  document.getElementById('aabn').focus();
 }
 
 
-// ---------- Knapper, tastatur, klik og swipe ----------
 
+// ==========================================================
+// TEKSTPANEL ("Læs som tekst")
+// ==========================================================
+
+// Byg tekstversionen ud fra bogens sider. Det sker første gang, panelet åbnes
+let tekstErBygget = false;
+
+function bygTekst() {
+  const indhold = document.getElementById('tekstindhold');
+
+  sider.forEach((side) => {
+    const afsnit = document.createElement('section');
+    afsnit.className = 'tekst__side';
+    afsnit.id = 'tekst-' + side.id;   // fx tekst-side-05
+
+    const sidetal = document.createElement('h2');
+    sidetal.className = 'tekst__sidetal';
+    sidetal.textContent = side.getAttribute('aria-label');
+    afsnit.appendChild(sidetal);
+
+    // Gå siden igennem i rækkefølge og tag overskrifter, tekst, punkter og billeder med
+    side.querySelectorAll('h2, h3, p, li, img, .helfoto__kreditering').forEach((el) => {
+      if (el.closest('.kun-laes')) return;        // kun i mobilvisningen (fx pdf-knappen)
+      if (el.closest('.sidehoved')) return;       // "Søvnguiden · Ringsted Dun" gentages på hver side
+      if (el.closest('h2, h3') !== el && el.closest('h2, h3')) return;
+
+      let ny;
+      if (el.tagName === 'IMG') {
+        ny = lavAfsnit('p', 'tekst__afsnit tekst__billede', 'Billede: ' + el.alt);
+      } else if (el.tagName === 'H2' || el.tagName === 'H3') {
+        // Kapiteltitler består af flere dele (fx 07.00 · Morgen · Lys ind, så vågner man)
+        const dele = el.children.length
+          ? Array.from(el.children).map(tekstFra)
+          : [tekstFra(el)];
+        ny = lavAfsnit('h3', 'tekst__overskrift', dele.join(' · '));
+      } else if (el.tagName === 'LI') {
+        const nr = Array.from(el.parentElement.children).indexOf(el) + 1;
+        ny = lavAfsnit('p', 'tekst__afsnit', nr + '. ' + tekstFra(el));
+      } else if (/__etiket|__siden/.test(el.className)) {
+        ny = lavAfsnit('p', 'tekst__etiket', tekstFra(el));
+      } else {
+        ny = lavAfsnit('p', 'tekst__afsnit', tekstFra(el));
+      }
+      afsnit.appendChild(ny);
+    });
+
+    indhold.appendChild(afsnit);
+  });
+
+  tekstErBygget = true;
+}
+
+// Teksten i et element – uden det, der kun hører til mobilvisningen, og med mellemrum, hvor der er linjeskift
+function tekstFra(el) {
+  const kopi = el.cloneNode(true);
+  kopi.querySelectorAll('.kun-laes, .sr-only').forEach((x) => x.remove());
+  kopi.querySelectorAll('br').forEach((br) => br.replaceWith(' '));
+  return kopi.textContent.replace(/\s+/g, ' ').trim();
+}
+
+function lavAfsnit(tag, klasse, tekst) {
+  const el = document.createElement(tag);
+  el.className = klasse;
+  el.textContent = tekst;
+  return el;
+}
+
+// Åbn panelet. Er bogen åben, hopper teksten til den side, man er nået til
+function aabnTekst(e) {
+  if (!tekstErBygget) bygTekst();
+  tekstKnap = e ? e.currentTarget : null;
+  tekstpanel.hidden = false;
+
+  const sidetal = visning === 'bog' ? synligeSider()[0] : 1;
+  const maal = document.getElementById('tekst-side-' + String(sidetal).padStart(2, '0'));
+  if (sidetal > 1 && maal) maal.scrollIntoView();
+  else tekstpanel.scrollTop = 0;
+
+  document.getElementById('tekst-overskrift').focus({ preventScroll: true });
+}
+
+function lukTekst() {
+  tekstpanel.hidden = true;
+  if (tekstKnap) tekstKnap.focus();
+}
+
+// ==========================================================
+// KNAPPER, TASTATUR, KLIK OG SWIPE
+// ==========================================================
+
+document.getElementById('aabn').addEventListener('click', aabnBog);
+document.getElementById('tekst-fra-start').addEventListener('click', aabnTekst);
+document.getElementById('tekst-fra-bog').addEventListener('click', aabnTekst);
+document.getElementById('luk-tekst').addEventListener('click', lukTekst);
+document.getElementById('luk').addEventListener('click', lukBog);
 naesteKnap.addEventListener('click', naeste);
 forrigeKnap.addEventListener('click', forrige);
 
 document.addEventListener('keydown', (e) => {
+  // I tekstpanelet virker tasterne som normalt. Escape lukker panelet
+  if (!tekstpanel.hidden) {
+    if (e.key === 'Escape') lukTekst();
+    return;
+  }
+  if (visning === 'laes') return;   // i mobilvisningen virker tasterne som normalt
   if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); naeste(); }
   if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); forrige(); }
-  if (e.key === 'Home') { e.preventDefault(); gaaTil(1); }
-  if (e.key === 'End') { e.preventDefault(); gaaTil(ANTAL_SIDER); }
+  if (e.key === 'Home' && visning === 'bog') { e.preventDefault(); gaaTil(1); }
+  if (e.key === 'End' && visning === 'bog') { e.preventDefault(); gaaTil(ANTAL_SIDER); }
+  if (e.key === 'Escape' && visning === 'bog') lukBog();
 });
 
-// Links i indholdsfortegnelsen bladrer hen til siden i stedet for at hoppe
+// Links i indholdsfortegnelsen: i bogen bladres der hen til siden.
+// I tekstvisningen hopper linket ned til kapitlet som et almindeligt link
 bog.addEventListener('click', (e) => {
   const link = e.target.closest('a[data-side]');
-  if (!link) return;
+  if (!link || visning !== 'bog') return;
   e.preventDefault();
   gaaTil(Number(link.dataset.side));
   history.replaceState(null, '', link.getAttribute('href'));
@@ -174,13 +341,19 @@ bog.addEventListener('pointerdown', (e) => {
 });
 
 bog.addEventListener('pointerup', (e) => {
-  if (startX === null) return;
+  if (startX === null || visning === 'laes') return;
   const dx = e.clientX - startX;
   const dy = e.clientY - startY;
   startX = null;
 
   // Klik på et link eller en knap skal ikke bladre
   if (e.target.closest('a, button')) return;
+
+  // Forsiden: et klik åbner bogen
+  if (visning === 'start') {
+    if (Math.abs(dx) < 6 && Math.abs(dy) < 6) aabnBog();
+    return;
+  }
 
   // Swipe: vandret træk på mindst 40 px
   if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
@@ -191,35 +364,36 @@ bog.addEventListener('pointerup', (e) => {
   // Klik (ingen bevægelse, og ingen tekst er markeret)
   if (Math.abs(dx) < 6 && Math.abs(dy) < 6 && !String(window.getSelection())) {
     const boks = bog.getBoundingClientRect();
-    const midte = enkelt ? window.innerWidth / 2 : boks.left + boks.width / 2;
-    if (e.clientX >= midte) naeste(); else forrige();
+    if (e.clientX >= boks.left + boks.width / 2) naeste(); else forrige();
   }
 });
 
-// Når vinduet ændrer størrelse, kan visningen skifte mellem opslag og én side
+// Når vinduet ændrer størrelse: tegn bogen igen, og skift til/fra mobilvisningen
 let ventTimer;
 window.addEventListener('resize', () => {
   clearTimeout(ventTimer);
   ventTimer = setTimeout(() => {
-    const nyEnkelt = brugEnkeltSide();
-    if (nyEnkelt !== enkelt) {
-      // Fra opslag til én side: vis venstresiden i opslaget (eller forsiden)
-      if (nyEnkelt) aktivSide = vendt === 0 ? 1 : vendt * 2;
-      enkelt = nyEnkelt;
-    }
-    tegn();
+    if (erSmal() && visning !== 'laes') visVisning('laes');
+    else if (!erSmal() && visning === 'laes') visVisning('start');
+    else if (visning !== 'laes') tegn();
   }, 120);
 });
 
 
-// ---------- Start ----------
+// ==========================================================
+// START
+// ==========================================================
 
-enkelt = brugEnkeltSide();
+// Siderne kan få fokus, når man hopper til dem (så skærmlæsere starter det rigtige sted)
+sider.forEach((side) => { side.tabIndex = -1; });
 
-// Står der fx #side-08 i adressen, åbnes bogen på den side
+// Står der fx #side-08 i adressen, åbnes bogen på den side (eller man hopper dertil på telefon)
 const fraAdresse = location.hash.match(/^#side-(\d+)$/);
-if (fraAdresse) {
+if (erSmal()) {
+  visVisning('laes');
+  if (fraAdresse) document.getElementById(location.hash.slice(1))?.scrollIntoView();
+} else if (fraAdresse) {
   gaaTil(Number(fraAdresse[1]));
 } else {
-  tegn();
+  visVisning('start');
 }
