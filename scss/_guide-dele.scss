@@ -1,0 +1,1349 @@
+// ==========================================================
+// GUIDE-DELE · søvnguiden
+//
+// Søvnguiden kan vises på tre måder. guide.js sætter en klasse på <body>:
+//   .guide--start  Forsiden med knapperne "Åbn bogen" og "Læs som tekst"
+//   .guide--bog    Bladremagasinet (Figma: "Søvnguide - Desktop/bog")
+//   .guide--laes   Én lang side (Figma: "Søvnguide - Mobil"). Bruges på telefon
+// Knappen "Læs som tekst" åbner et tekstpanel oven på bogen (afsnit 8).
+//
+// Filen er delt i tre: bogen (afsnit 1–6), mobilvisningen (afsnit 7) og tekstpanelet (afsnit 8).
+// Alle mål i bogen er de samme som i Figma (en side er 561,5 × 794 px, A5).
+// ==========================================================
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+// ---------- Farver, der kun bruges i søvnguiden (fra Figma) ----------
+// $linned i _tokens.scss er quizzens. Søvnguiden fik ny linned-farve 19/11 (Marcus)
+$g-linned:      #E7D8BE;  // dengang-felter
+$g-nat-tekst:   #F3EDE4;  // tekst på mørke sider
+$g-nat-daempet: #C9BFB2;  // dæmpet tekst på mørke sider
+$g-moerkegraa:  #4F4E4D;  // sidehoveder og små tekster
+$g-papirstreg:  #D8D1C6;  // tynde streger på papirsider
+$g-bord:        #E7E1D6;  // "bordet", bogen ligger på
+$g-roed-moerk:  #8A1426;  // rød knap, når musen er over den
+
+// ---------- Skrift (som i Figma) ----------
+$g-sans:  'Lato', sans-serif;
+$g-serif: 'EB Garamond', Georgia, serif;
+
+// ---------- Mål ----------
+$side-b:  561.5px;  // en sides bredde i bogen
+$side-h:  794px;    // en sides højde i bogen
+$tid:     0.9s;     // hvor lang tid en side er om at vende
+$smal:    760px;    // under denne bredde vises mobilvisningen
+
+// Små genbrugte stykker
+@mixin etiket($farve: $blaek, $stoerrelse: 13px, $spaerring: 1.82px) {
+  margin: 0;
+  font-family: $g-sans;
+  font-size: $stoerrelse;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: $spaerring;
+  text-transform: uppercase;
+  color: $farve;
+}
+
+@mixin kursiv($stoerrelse: 16px, $linje: 1.4) {
+  margin: 0;
+  font-family: $g-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: $stoerrelse;
+  line-height: $linje;
+}
+
+// Skjult for øjet, men læses af skærmlæsere
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.spring-over {
+  position: absolute;
+  left: 8px;
+  top: -100px;
+  z-index: 100;
+  padding: 12px 18px;
+  background: $blaek;
+  color: $hvid;
+  font-family: $g-sans;
+  font-weight: 700;
+  text-decoration: none;
+
+  &:focus { top: 8px; }
+}
+
+// Indhold, der kun hører til den ene visning
+.guide:not(.guide--laes) .kun-laes { display: none; }
+.guide--laes .kun-bog { display: none; }
+
+
+// ==========================================================
+// 1. SCENEN OG BOGEN
+// ==========================================================
+.guide {
+  background: $g-bord;
+  overflow: hidden;
+}
+
+.guide__scene {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  touch-action: pan-y pinch-zoom;  // zoom er tilladt (vigtigt for ældre læsere), vandret swipe bladrer
+}
+
+// bog-ramme placeres af guide.js (left og top i hele pixels, så teksten bliver skarp)
+.bog-ramme {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: left 0.6s ease;
+}
+
+// Bogen: to sider ved siden af hinanden. Bladene ligger på højre side og vendes om ryggen.
+// guide.js gør bogen større eller mindre med zoom. Zoom tegner teksten i den nye størrelse,
+// så den bliver skarp (transform: scale() strækker et billede af teksten, og så bliver den sløret)
+.bog {
+  position: relative;
+  width: $side-b * 2;
+  height: $side-h;
+  perspective: 2800px;
+}
+
+// Blød skygge under hele bladet, så det ligger på bordet
+// Når bogen er lukket, ligger kun den ene halvdel på bordet. guide.js sætter --skygge-venstre/-hoejre
+.bog::before {
+  content: '';
+  position: absolute;
+  left: var(--skygge-venstre, 2%);
+  right: var(--skygge-hoejre, 2%);
+  bottom: -6px;
+  height: 30px;
+  background: rgba($blaek, 0.35);
+  filter: blur(14px);
+  pointer-events: none;
+}
+
+.blad {
+  position: absolute;
+  top: 0;
+  left: $side-b;  // bladet starter på højre side af ryggen
+  width: $side-b;
+  height: $side-h;
+  transform-origin: left center;  // bladet vender om ryggen
+  transform-style: preserve-3d;
+  transition: transform $tid cubic-bezier(0.4, 0.1, 0.2, 1);
+
+  &--vendt { transform: rotateY(-180deg); }
+}
+
+// ---------- Papirkanter: får bladet til at se tykt ud ----------
+// --blade-venstre og --blade-hoejre er antallet af blade på hver side. guide.js sætter dem.
+// Bladet øverst ses som en side, så kanten viser kun bladene under det (antal - 1).
+// Hvert blad er $blad-tykkelse tykt
+$blad-tykkelse: 1.1px;
+
+.bog__kant {
+  position: absolute;
+  top: 2px;
+  bottom: -2px;  // stakken ligger en anelse lavere, så den ses i bunden
+  // Tynde lodrette streger = kanten af hvert stykke papir
+  background: repeating-linear-gradient(to right, $papir 0, $papir 1.5px, $g-papirstreg 1.5px, $g-papirstreg 2.2px);
+  box-shadow: 0 1px 2px rgba($blaek, 0.2), 0 3px 8px rgba($blaek, 0.12);
+  transition: width $tid ease;
+
+  &--hoejre {
+    left: 100%;
+    width: calc(max(var(--blade-hoejre, 13) - 1, 0) * #{$blad-tykkelse});
+    border-radius: 0 2px 2px 0;
+  }
+
+  &--venstre {
+    right: 100%;
+    width: calc(max(var(--blade-venstre, 0) - 1, 0) * #{$blad-tykkelse});
+    border-radius: 2px 0 0 2px;
+  }
+}
+
+// På forsiden kan man klikke på bogen for at åbne den
+.guide--start .bog { cursor: pointer; }
+
+
+// ==========================================================
+// 2. SIDEN · fælles for alle sider i bogen
+// ==========================================================
+.side {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  font-family: $g-sans;
+  color: $blaek;
+  // Stram skygge, så den følger de skarpe hjørner (en bred, sløret skygge får runde hjørner)
+  box-shadow: 0 1px 2px rgba($blaek, 0.2), 0 3px 8px rgba($blaek, 0.12);
+
+  // Sider, man ikke kan se, har ingen skygge. Ellers lægger skyggerne sig oven på hinanden
+  &[aria-hidden='true'] { box-shadow: none; }
+
+  p, h2, h3, figure, blockquote, ol { margin: 0; }
+
+  // Bagsiden af et blad er drejet, så den vender rigtigt, når bladet er vendt
+  &:nth-child(2) { transform: rotateY(180deg); }
+
+  // Skygge ind mod ryggen, så det ligner et opslag i et magasin
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    pointer-events: none;
+  }
+  // Mørkt helt inde ved ryggen, så et lille lysskær, hvor papiret buer op, og så fader det ud
+  &:nth-child(1)::after {
+    left: 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.08) 14px, rgba(255, 255, 255, 0.07) 24px, transparent 60px);
+  }
+  &:nth-child(2)::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.08) 14px, rgba(255, 255, 255, 0.07) 24px, transparent 60px);
+  }
+
+  &--papir { background: $papir; }
+  &--moerk { background: $blaek; color: $g-nat-tekst; }
+
+  &__indre {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    height: 100%;
+    padding: 42px 44px 38px;
+  }
+
+  &--moerk &__indre { gap: 21px; }
+
+  // Afslutningssiden (24): alt står i midten
+  &__indre--midt {
+    position: relative;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // Side 25: tekst øverst, foto i bunden helt ud til kanten
+  &__indre--foto {
+    gap: 21px;
+    padding: 42px 0 0;
+  }
+
+  &__tekst {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    padding: 0 44px;
+  }
+}
+
+// Luft, der skubber det sidste element (fx Mormor i dag) ned i bunden
+.luft { flex: 1 0 0; min-height: 0; }
+
+// ---------- Sidehoved ----------
+.sidehoved {
+  padding-bottom: 9px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 1.56px;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  // På papirsider: kapitel til venstre, Ringsted Dun til højre
+  &--lys {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 19px;
+    font-weight: 400;
+    color: $g-moerkegraa;
+
+    b { font-weight: 700; color: $blaek; }
+  }
+
+  &--fast {
+    position: absolute;
+    top: 42px;
+    left: 44px;
+  }
+}
+
+// ---------- Overskrifter og brødtekst ----------
+.titel {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: 1.44px;
+  text-transform: uppercase;
+
+  &--stor { font-size: 26px; letter-spacing: 1.56px; }
+}
+
+.overskrift {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: 1.08px;
+  text-transform: uppercase;
+}
+
+.broed {
+  font-size: 16px;
+  line-height: 1.6;
+
+  &--taet {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+}
+
+
+// ==========================================================
+// 3. FOTOPAR · dengang og i dag delt af den røde tråd
+// ==========================================================
+.fotopar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &__billeder {
+    position: relative;
+    height: 310px;
+  }
+
+  // Hver halvdel viser sin halvdel af sit billede, så de to billeder mødes ved tråden
+  &__halv {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+
+    &--dengang { left: 0;   right: 50%; }
+    &--idag    { left: 50%; right: 0; }
+  }
+
+  &__billede {
+    position: absolute;
+    width: 200%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+  }
+
+  &__halv--dengang &__billede { left: 0; }
+  &__halv--idag &__billede    { left: -100%; }
+
+  // Side 6: begge billeder er beskåret ens om midten (som i Figma)
+  &--midte &__billede {
+    left: -50.46%;
+    width: 232.78%;
+  }
+  &--midte &__halv--idag &__billede { left: -50.46%; }
+
+  // Tråden går 26 px ned i billedteksten
+  &__traad {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: calc(100% + 26px);
+    transform: translateX(-50%);
+    background: $roed;
+  }
+
+  &__tekster {
+    display: flex;
+    gap: 16px;
+
+    > div {
+      flex: 1 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+  }
+
+  &__etiket { @include etiket($g-nat-tekst); }
+  &__tekst  { @include kursiv(15px); color: $g-nat-daempet; }
+  &__ai     { @include kursiv(13px); color: $g-nat-daempet; }
+
+  // Forsiden: fotoparret fylder hele siden
+  &--helside {
+    position: absolute;
+    inset: 0;
+  }
+  &--helside &__billeder { height: 100%; }
+  &--helside &__traad { height: 100%; }
+  &--helside &__billede { width: 502.78%; }
+  &--helside &__halv--dengang &__billede { left: -151.39%; }
+  &--helside &__halv--idag &__billede    { left: -251.39%; }
+}
+
+// ---------- Kapiteltitel (fx 07.00 MORGEN) ----------
+.kapiteltitel {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 17px;
+  text-align: center;
+  font-weight: 400;
+
+  &__nr    { @include kursiv(24px, 1.1); color: $g-nat-tekst; }
+  &__under { @include kursiv(17px, 1.3); color: $g-nat-daempet; }
+
+  &__navn {
+    font-family: $g-sans;
+    font-size: 43px;
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: 4.3px;
+    text-transform: uppercase;
+    color: $g-nat-tekst;
+
+    &--lang { font-size: 32px; letter-spacing: 2.56px; }
+  }
+}
+
+// ---------- Mormor i dag ----------
+.mormor-i-dag {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-top: 10px;
+  border-top: 1px solid $g-nat-daempet;
+
+  &__etiket { @include etiket($g-nat-daempet); }
+  &__tekst  { @include kursiv(16px); color: $g-nat-tekst; }
+
+  // På papirsider (søvnkortet)
+  &--lys { border-top-color: $g-papirstreg; }
+  &--lys &__etiket,
+  &--lys &__tekst { color: $sepia; }
+}
+
+
+// ==========================================================
+// 4. DENGANG og I DAG · de to felter på højresiderne
+// ==========================================================
+.dengang {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 15px 14px;
+  background: $g-linned;
+  color: $sepia;
+
+  &__etiket {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 6px;
+    align-items: baseline;
+    white-space: nowrap;
+
+    span { @include etiket($sepia); }
+    em   { @include kursiv(15px); }
+  }
+
+  &__citat    { @include kursiv(17px, 1.38); }
+  &__afsender { @include kursiv(15px); }
+
+  &--lille { padding: 10px 13px 11px; }
+}
+
+.idag {
+  flex: 1 0 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 15px 14px;
+  background: $hvid;
+
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  // Første sætning i fed, spærret skrift
+  strong {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+  }
+
+  &__etiket { @include etiket($roed); }
+
+  &__overskrift {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: 1.08px;
+    text-transform: uppercase;
+  }
+
+  &--lille {
+    flex: none;
+    gap: 6px;
+    padding: 10px 13px 11px;
+  }
+}
+
+.proev-det {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-height: 52px;
+  padding-top: 9px;
+  border-top: 2px solid $roed;
+
+  &__etiket { @include etiket($roed); }
+  &__tekst  { @include kursiv(16px); color: $blaek; }
+
+  // Årstidssiderne: Prøv det på én linje uden streg
+  &--linje {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
+    min-height: 0;
+    padding-top: 0;
+    border-top: 0;
+
+    .proev-det__etiket { white-space: nowrap; }
+  }
+}
+
+// ---------- Årstider (side 15 og 17) ----------
+.aarstid {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  & + & {
+    padding-top: 14px;
+    border-top: 1px solid $g-papirstreg;
+  }
+
+  &__overskrift {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  &__navn {
+    font-size: 18px;
+    line-height: 1.25;
+    letter-spacing: 1.08px;
+    text-transform: uppercase;
+  }
+
+  &__under { @include kursiv(16px); color: $g-moerkegraa; }
+}
+
+
+// ==========================================================
+// 5. ENKELTE SIDER
+// ==========================================================
+
+// ---------- Side 1 · Forside ----------
+.forside__ai {
+  position: absolute;
+  right: 16px;
+  bottom: 10px;
+  @include kursiv(13px);
+  color: $hvid;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.titelboks {
+  position: absolute;
+  left: 42px;
+  bottom: 42px;
+  width: 477.5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 27px 32px 24px;
+  background: $papir;
+
+  &__titel {
+    font-size: 38px;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: 4.56px;
+    text-transform: uppercase;
+  }
+
+  &__spor {
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 1.08px;
+    text-transform: uppercase;
+    color: $sepia;
+  }
+
+  &__undertitel { @include kursiv(21px, 1.3); color: $roed; }
+  &__tekst      { font-size: 16px; line-height: 1.6; }
+  &__siden      { @include etiket($g-moerkegraa); }
+
+  &__logo {
+    width: 74px;
+    height: 90px;
+    object-fit: contain;
+  }
+}
+
+// ---------- "Hent guiden som pdf" (kun mobil- og tekstvisning) ----------
+.hent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+
+  &__knap {
+    @include fokus;
+    display: inline-flex;
+    align-items: center;
+    min-height: 56px;
+    padding: 0 25px;
+    background: $roed;
+    color: $hvid;
+    font-family: $g-sans;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.68px;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    &:hover { background: $g-roed-moerk; }
+  }
+
+  &__note { @include kursiv(17px); color: $g-moerkegraa; }
+}
+
+// ---------- Side 3 · Mød Mormor og indhold ----------
+.tre-spor {
+  display: flex;
+  gap: 16px;
+  padding: 12px 0;
+  border-top: 1px solid $g-papirstreg;
+  border-bottom: 1px solid $g-papirstreg;
+
+  &__spor {
+    flex: 1 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  &__etiket { @include etiket($g-moerkegraa, 12px, 1.68px); }
+  &__navn   { @include kursiv(17px, 1.3); }
+  &__tekst  { font-size: 13px; line-height: 1.45; }
+}
+
+.indhold {
+  padding-top: 6px;
+
+  &__etiket { @include etiket($g-moerkegraa); }
+
+  &__gruppe {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 8px 0;
+    border-bottom: 1px solid $g-papirstreg;
+
+    &:first-of-type {
+      padding-top: 9px;
+      border-top: 1px solid $g-papirstreg;
+    }
+  }
+
+  &__navn {
+    font-size: 16px;
+    line-height: 1.25;
+    letter-spacing: 0.96px;
+    text-transform: uppercase;
+  }
+
+  &__beskriv { @include kursiv(14px); color: $g-moerkegraa; }
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 6px;
+    font-size: 13px;
+    line-height: 1.45;
+    color: $g-moerkegraa;
+
+    a {
+      @include fokus;
+      padding-bottom: 1px;
+      color: $blaek;
+      text-decoration: none;
+      border-bottom: 1px solid $roed;
+      white-space: nowrap;
+
+      &:hover { color: $roed; }
+    }
+  }
+}
+
+// ---------- Side 22 · Mit søvnkort ----------
+.soevnkort {
+  padding: 0;
+  list-style: none;
+  counter-reset: udsagn;
+  border-top: 1px solid $g-papirstreg;
+  border-bottom: 1px solid $g-papirstreg;
+
+  li {
+    display: flex;
+    gap: 13px;
+    align-items: baseline;
+    padding: 8px 0;
+    counter-increment: udsagn;
+    @include kursiv(17px, 1.38);
+
+    & + li { border-top: 1px solid $g-papirstreg; }
+
+    &::before {
+      content: counter(udsagn);
+      font-family: $g-sans;
+      font-style: normal;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+  }
+}
+
+// ---------- Helsides foto (side 23 og 25) ----------
+.helfoto {
+  position: relative;
+  flex: 1 0 0;
+  min-height: 0;
+  height: 100%;
+
+  &__billede {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__kreditering {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 3px 10px;
+    background: $papir;
+    @include kursiv(15px);
+    color: $g-moerkegraa;
+  }
+}
+
+// ---------- Side 24 og 25 ----------
+.afslutning {
+  &__citat {
+    @include kursiv(27px, 1.3);
+    text-align: center;
+    color: $g-nat-tekst;
+  }
+
+  &__logo {
+    width: 88px;
+    height: 99px;
+    margin-top: 18px;
+    object-fit: contain;
+  }
+
+  &__etiket { @include etiket($g-nat-daempet); text-align: center; }
+}
+
+.kilder {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-top: 12px;
+  border-top: 1px solid $g-papirstreg;
+  font-size: 13px;
+  line-height: 1.45;
+  color: $g-moerkegraa;
+
+  &__etiket { @include etiket($g-moerkegraa); }
+}
+
+// ---------- Side 26 · Bagside ----------
+.side--bagside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.bagside {
+  &__logo { width: 104px; height: 117px; object-fit: contain; }
+  &__web  { font-size: 13px; line-height: 1.45; color: $g-nat-tekst; }
+}
+
+
+// ==========================================================
+// 6. KNAPPER OG TÆLLER
+// Hvilke knapper der vises, afhænger af visningen (klassen på <body>)
+// ==========================================================
+.valg,
+.bladre,
+.taeller,
+.vaerktoej { display: none; }
+
+.guide--start .valg { display: flex; }
+.guide--bog .bladre,
+.guide--bog .vaerktoej--venstre,
+.guide--bog .vaerktoej--hoejre { display: flex; }
+.guide--bog .taeller { display: block; }
+
+// ---------- Forsiden: Åbn bogen / Læs som tekst ----------
+.valg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 28px;
+  z-index: 50;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+
+  &__knap {
+    @include fokus;
+    min-height: 56px;
+    padding: 0 28px;
+    border: 0;
+    background: $roed;
+    color: $hvid;
+    font-family: $g-sans;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &:hover { background: $g-roed-moerk; }
+
+    &--sekundaer {
+      background: transparent;
+      color: $blaek;
+      box-shadow: inset 0 0 0 2px $blaek;
+
+      &:hover { background: rgba($blaek, 0.08); }
+    }
+  }
+}
+
+// ---------- Små knapper (Læs som tekst, Luk) ----------
+.vaerktoej {
+  @include fokus;
+  position: absolute;
+  top: 16px;
+  z-index: 50;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 24px;
+  background: rgba($blaek, 0.08);
+  color: $blaek;
+  font-family: $g-sans;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  &:hover { background: rgba($blaek, 0.16); }
+
+  &--venstre { left: 24px; }
+
+  &--hoejre {
+    right: 24px;
+    width: 48px;
+    padding: 0;
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+}
+
+// ---------- Bladre-pile og sidetæller ----------
+.bladre {
+  @include fokus;
+  position: absolute;
+  top: 50%;
+  z-index: 50;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin-top: -32px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba($blaek, 0.08);
+  color: $blaek;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+
+  &:hover:not(:disabled) { background: rgba($blaek, 0.16); }
+  &:disabled { opacity: 0.25; cursor: default; }
+
+  svg {
+    width: 28px;
+    height: 28px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  &--forrige { left: 24px; }
+  &--naeste  { right: 24px; }
+}
+
+.taeller {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  margin: 0;
+  font-family: $g-sans;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-transform: uppercase;
+  color: $g-moerkegraa;
+  pointer-events: none;
+}
+
+.guide__noscript {
+  margin: 0;
+  padding: 12px 16px;
+  background: $hvid;
+  font-family: $g-sans;
+}
+
+// Folk, der har bedt om mindre bevægelse, får ingen vende-animation
+@media (prefers-reduced-motion: reduce) {
+  .bog-ramme, .blad { transition: none; }
+}
+
+
+// ==========================================================
+// 7. MOBILVISNING (.guide--laes)
+// Figma: "Søvnguide - Mobil". Siderne står under hinanden som én lang side.
+// Venstre- og højresiden i et opslag bliver til ét kapitel: den mørke kapitelside
+// øverst og papirsiden nedenunder. guide.js flytter "Mormor i dag" ned i bunden
+// af papirsiden, som i Figma.
+// ==========================================================
+.guide--laes {
+  overflow: auto;
+
+  .guide__scene {
+    width: auto;
+    height: auto;
+    overflow: visible;
+  }
+
+  // Bogen bliver til en almindelig kolonne
+  .bog-ramme {
+    position: static;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 6px 24px rgba($blaek, 0.14);
+  }
+
+  .bog {
+    width: auto;
+    height: auto;
+    perspective: none;
+  }
+
+  .blad {
+    position: static;
+    width: auto;
+    height: auto;
+    transform: none;
+    transition: none;
+  }
+
+  .bog__kant,
+  .bog::before { display: none; }
+
+  .side {
+    position: relative;
+    inset: auto;
+    height: auto;
+    overflow: visible;
+    transform: none;
+    box-shadow: none;
+    backface-visibility: visible;
+    -webkit-backface-visibility: visible;
+
+    &::after { display: none; }
+  }
+
+  .side__indre {
+    height: auto;
+    gap: 13px;
+    padding: 27px 16px 46px;
+  }
+
+  .side--moerk .side__indre { gap: 25px; }
+
+  .luft { display: none; }
+
+  // ---------- Sidehoved ----------
+  .sidehoved {
+    padding-bottom: 0;
+    font-size: 16px;
+    letter-spacing: 1.92px;
+    white-space: normal;
+  }
+  .sidehoved__hoejre { display: none; }
+
+  // ---------- Overskrifter og tekst ----------
+  .titel { font-size: 28px; letter-spacing: 1.68px; }
+  .overskrift { font-size: 22px; letter-spacing: 1.32px; }
+  .broed { font-size: 18px; }
+  .broed--taet { gap: 11px; }
+
+  // ---------- Fotopar ----------
+  .fotopar { gap: 10px; }
+  .fotopar__billeder { height: auto; aspect-ratio: 358 / 268; }
+  .fotopar__tekster { gap: 19px; }
+  .fotopar__etiket { font-size: 16px; letter-spacing: 2.24px; }
+  .fotopar__tekst { font-size: 17px; }
+  .fotopar__ai { font-size: 16px; }
+
+  // ---------- Kapiteltitel ----------
+  .kapiteltitel { gap: 5px; padding-top: 2px; }
+  .kapiteltitel__nr { font-size: 28px; }
+  .kapiteltitel__navn { font-size: 36px; letter-spacing: 3.6px; }
+  .kapiteltitel__navn--lang { font-size: 28px; line-height: 1.15; letter-spacing: 2.24px; }
+  .kapiteltitel__under { font-size: 20px; }
+
+  // ---------- Dengang, I dag, Prøv det, Mormor i dag ----------
+  .dengang { gap: 5px; padding: 15px 19px 17px; }
+  .dengang--lille { padding: 12px 17px 13px; }
+  .dengang__etiket span { font-size: 16px; letter-spacing: 2.24px; }
+  .dengang__etiket em,
+  .dengang__afsender { font-size: 17px; }
+  .dengang__citat { font-size: 21px; }
+
+  .idag {
+    flex: none;
+    gap: 11px;
+    padding: 15px 19px 17px;
+
+    p { font-size: 18px; }
+    strong { font-size: 16px; letter-spacing: 1.6px; }
+  }
+  .idag--lille { padding: 12px 17px 13px; }
+  .idag__etiket { font-size: 16px; letter-spacing: 2.24px; }
+  .idag__overskrift { font-size: 22px; letter-spacing: 1.32px; }
+
+  .proev-det {
+    gap: 5px;
+    min-height: 0;
+    padding: 14px 21px 15px;
+    border-top-width: 3px;
+    background: $g-linned;
+    text-align: center;
+  }
+  .proev-det__etiket { font-size: 16px; letter-spacing: 2.24px; }
+  .proev-det__tekst { font-size: 20px; }
+
+  .proev-det--linje {
+    flex-direction: column;
+    gap: 3px;
+    padding: 0;
+    border-top: 0;
+    background: none;
+    text-align: left;
+  }
+
+  // Mormor i dag står nederst på papirsiden
+  .mormor-i-dag {
+    gap: 4px;
+    padding-top: 13px;
+    border-top-color: $g-papirstreg;
+  }
+  .mormor-i-dag__etiket {
+    font-size: 16px;
+    letter-spacing: 2.24px;
+    color: $sepia;
+  }
+  .mormor-i-dag__tekst {
+    font-size: 20px;
+    color: $sepia;
+  }
+
+  // ---------- Årstider ----------
+  .side--aarstider .side__indre { gap: 21px; }
+  .aarstid { gap: 10px; }
+  .aarstid + .aarstid { padding-top: 19px; }
+  .aarstid__overskrift {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    white-space: normal;
+  }
+  .aarstid__navn { font-size: 22px; letter-spacing: 1.32px; }
+  .aarstid__under { font-size: 20px; }
+
+  // ---------- Forside ----------
+  .side--forside {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+    background: $blaek;
+  }
+  .fotopar--helside { position: relative; inset: auto; }
+  .fotopar--helside .fotopar__billeder { aspect-ratio: 390 / 293; }
+  .fotopar--helside .fotopar__billede { width: 200%; }
+  .fotopar--helside .fotopar__halv--dengang .fotopar__billede { left: 0; }
+  .fotopar--helside .fotopar__halv--idag .fotopar__billede { left: -100%; }
+
+  .titelboks {
+    position: static;
+    width: auto;
+    gap: 12px;
+    padding: 30px 23px 27px;
+  }
+  .titelboks__titel { font-size: 36px; letter-spacing: 4.32px; }
+  .titelboks__spor { font-size: 16px; letter-spacing: 1.28px; }
+  .titelboks__undertitel { font-size: 25px; }
+  .titelboks__tekst { font-size: 18px; }
+  .titelboks__siden { display: none; }
+  .titelboks__logo { width: 87px; height: 105px; }
+
+  .forside__ai {
+    position: static;
+    order: 3;
+    padding: 12px 16px 0;
+    font-size: 16px;
+    text-align: center;
+    color: $g-nat-daempet;
+    text-shadow: none;
+  }
+
+  // ---------- Side 2 og 3 · Velkommen ----------
+  .side--intro .side__indre { gap: 20px; }
+
+  .side--velkommen .side__indre { padding-bottom: 0; }
+
+  .tre-spor {
+    flex-direction: column;
+    gap: 19px;
+    padding: 15px 0;
+  }
+  .tre-spor__etiket { font-size: 16px; letter-spacing: 2.24px; }
+  .tre-spor__navn { font-size: 22px; }
+  .tre-spor__tekst { font-size: 16px; }
+
+  .indhold {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 8px;
+  }
+  .indhold__etiket { font-size: 16px; letter-spacing: 2.24px; }
+  .indhold__gruppe { gap: 4px; padding: 10px 0; }
+  .indhold__navn { font-size: 19px; letter-spacing: 1.14px; }
+  .indhold__beskriv { font-size: 17px; }
+  .indhold__links { gap: 10px 7px; font-size: 16px; }
+  .indhold__links a { padding-bottom: 2px; font-size: 17px; }
+
+  // Fotos i bunden af en side: 260 px høje, helt ud til kanten
+  .helfoto {
+    flex: none;
+    height: 260px;
+  }
+  .helfoto--bund { margin-top: 34px; }
+  .helfoto__kreditering { padding: 4px 13px; font-size: 16px; }
+
+  // ---------- Side 22 og 23 · Mit søvnkort ----------
+  .side--soevnkort .side__indre { padding-bottom: 34px; }
+
+  .soevnkort li {
+    gap: 15px;
+    padding: 10px 0;
+    font-size: 21px;
+
+    &::before { font-size: 18px; }
+  }
+
+  .side--foto { height: 260px; }
+
+  // ---------- Side 24 og 25 · Afslutning ----------
+  .side--slut .side__indre {
+    gap: 22px;
+    padding: 27px 16px 46px;
+  }
+  .sidehoved--fast {
+    position: static;
+    align-self: stretch;
+  }
+  .afslutning__citat { font-size: 30px; }
+  .afslutning__logo { width: 104px; height: 117px; margin-top: 0; }
+  .afslutning__etiket { font-size: 16px; letter-spacing: 2.24px; }
+
+  .side__indre--foto {
+    gap: 34px;
+    padding: 27px 0 0;
+  }
+  .side__tekst { gap: 15px; padding: 0 16px; }
+  .kilder {
+    gap: 6px;
+    padding-top: 15px;
+    font-size: 16px;
+  }
+  .kilder__etiket { font-size: 16px; letter-spacing: 2.24px; }
+}
+
+// Telefon: guiden fylder hele bredden
+@media (max-width: $smal) {
+  .guide--laes .bog-ramme {
+    max-width: none;
+    box-shadow: none;
+  }
+}
+
+
+// ==========================================================
+// 8. TEKSTPANEL ("Læs som tekst")
+// Ren tekst uden opsætning, som i Marcus' bladrebog. Panelet lægger sig oven på bogen.
+// Teksten er stor og linjerne korte, så den er let at læse (også for ældre læsere)
+// ==========================================================
+.tekstpanel {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  overflow: auto;
+  padding: 0 max(16px, 5vw) 64px;
+  background: $papir;
+  color: $blaek;
+  font-family: $g-sans;
+
+  &[hidden] { display: none; }
+
+  &__indre {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  // Bjælken med Tilbage-knappen bliver stående øverst, mens man scroller
+  &__top {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: 16px 0;
+    background: $papir;
+    border-bottom: 1px solid $g-papirstreg;
+  }
+
+  &__luk {
+    @include fokus;
+    min-height: 56px;
+    padding: 0 24px;
+    border: 0;
+    background: $roed;
+    color: $hvid;
+    font-family: $g-sans;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &:hover { background: $g-roed-moerk; }
+  }
+
+  &__titel {
+    margin: 24px 0 8px;
+    font-size: 30px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+}
+
+// Indholdet, som guide.js bygger
+.tekst {
+  // Én bogside
+  &__side {
+    margin-top: 36px;
+    padding-top: 20px;
+    border-top: 1px solid $g-papirstreg;
+    scroll-margin-top: 100px;  // så overskriften ikke gemmer sig under bjælken
+  }
+
+  &__sidetal {
+    @include etiket($roed, 14px, 2px);
+    margin-bottom: 12px;
+  }
+
+  // Overskrifter fra siderne (fx "Mød Mormor")
+  &__overskrift {
+    margin: 20px 0 8px;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.3;
+  }
+
+  // Almindelige afsnit
+  &__afsnit { margin: 0 0 12px; font-size: 18px; line-height: 1.6; }
+
+  // Små overskrifter som "Dengang" og "Prøv det"
+  &__etiket {
+    @include etiket($g-moerkegraa, 14px, 1.8px);
+    margin: 20px 0 4px;
+  }
+
+  // Billeder beskrives med deres alt-tekst
+  &__billede { color: $g-moerkegraa; font-style: italic; }
+}
