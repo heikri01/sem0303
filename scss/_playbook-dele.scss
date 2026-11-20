@@ -197,6 +197,53 @@
   color: $sepia;
 }
 
+// ---------- Underoverskrifter, tabeller og læring (20/11) ----------
+.afsnit > h3 {
+  font-size: 1.25rem;
+  margin: 2rem 0 0.75rem;
+}
+
+// Rammen gør, at brede tabeller kan scrolles sidelæns på mobil i stedet for at sprænge layoutet
+.tabel-ramme {
+  overflow-x: auto;
+  margin-bottom: $luft;
+}
+
+.tabel {
+  width: 100%;
+  border-collapse: collapse; // én streg mellem cellerne i stedet for to
+  background: $hvid;
+  font-size: $tekst-lille;
+
+  th,
+  td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba($sepia, 0.2);
+  }
+
+  th {
+    @include spaerret(0.875rem);
+    color: $sepia;
+    background: $linned;
+  }
+}
+
+.kort ul { margin: 0 0 0.75rem; padding-left: 1.25rem; }
+
+// Læringen i casen: tallene står i Ringsted-rød
+.laering li::marker {
+  color: $roed;
+  font-weight: 700;
+}
+
+code {
+  font-size: 0.9em;
+  background: $linned;
+  padding: 0.1rem 0.3rem;
+}
+
 // ---------- Print / gem som PDF ----------
 // Ved udskrift skjules menu og knapper, og alle kort vises – også dem, filteret har skjult
 @media print {

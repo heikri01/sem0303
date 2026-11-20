@@ -16,7 +16,7 @@
     <p class="top__afsender">Ringsted Dun · AI Playbook</p>
   </header>
 
-  <!-- SKELET 18/11: Felter med class="pladsholder" skal erstattes med det godkendte indhold fra FigJam (siden AI Playbook) -->
+  <!-- 20/11: Indholdet er sat ind. Tjek før aflevering, at der ingen stiplede pladsholder-felter er tilbage -->
 
   <div class="playbook">
 
@@ -41,7 +41,48 @@
       <!-- 1 -->
       <section class="afsnit" id="brug">
         <h2>Sådan bruger du playbooken</h2>
-        <p class="pladsholder">[INDHOLD KOMMER: hvem playbooken er til, hvad den dækker, og hvordan man finder rundt.]</p>
+        <div class="kort-gitter">
+          <article class="kort">
+            <h3>Til hvem</h3>
+            <p>Dig hos Ringsted Dun, der skal lave indhold til kampagnen – i de fire uger op til Mors Dag og bagefter, når nyhedsbrevet fortsætter med én mail pr. årstid.</p>
+          </article>
+          <article class="kort">
+            <h3>Hvad den dækker</h3>
+            <p>Hvordan du bruger AI til at lave afledt indhold ud fra søvnguiden: karruseller, velkomstmails, korte klip og mikroindhold. Den dækker ikke Ringsted Duns øvrige brug af AI.</p>
+          </article>
+          <article class="kort">
+            <h3>Hvad den ikke ændrer</h3>
+            <p>Søvnguiden v6 er stadig den eneste kilde til fakta, og Grethe er stadig den samme. AI hjælper med at versionere og tilpasse – ikke med at finde på.</p>
+          </article>
+        </div>
+
+        <h3>Sådan finder du rundt</h3>
+        <div class="tabel-ramme">
+          <table class="tabel">
+            <thead><tr><th scope="col">Du skal …</th><th scope="col">Gå til</th></tr></thead>
+            <tbody>
+              <tr><td>i gang for første gang</td><td><a href="#principper">Principper</a> og <a href="#etik">Etik og ansvar</a> (ca. 10 minutter)</td></tr>
+              <tr><td>lave en produktion</td><td><a href="#arbejdsgang">Arbejdsgang</a> → vælg produktion → <a href="#prompts">Kontekstfil og prompts</a> → kopiér prompten</td></tr>
+              <tr><td>tjekke, om noget må bruges</td><td><a href="#tjekliste">Tjekliste før publicering</a></td></tr>
+              <tr><td>se, hvordan det går i praksis</td><td><a href="#cases">Cases</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Værktøjer, vi har brugt</h3>
+        <div class="tabel-ramme">
+          <table class="tabel">
+            <thead><tr><th scope="col">Opgave</th><th scope="col">Værktøj</th></tr></thead>
+            <tbody>
+              <tr><td>Tekst (karrusel, mails, opslag)</td><td>Claude eller ChatGPT – playbooken virker med begge</td></tr>
+              <tr><td>Billeder og videoklip af Grethe</td><td>Google Flow (Veo) med masterbilledet som karakter</td></tr>
+              <tr><td>Grethes stemme</td><td>CapCut eller ElevenLabs – én gemt stemme</td></tr>
+              <tr><td>Klip og undertekster</td><td>CapCut</td></tr>
+              <tr><td>Layout</td><td>Figma (skabeloner til karrusel, citat og mail)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Værktøjerne kan skiftes ud. Kontekstfilen, prompterne og tjeklisten er det, der holder kvaliteten.</p>
       </section>
 
       <!-- 2 -->
@@ -50,18 +91,29 @@
         <div class="kort-gitter">
           <article class="kort">
             <h3>Kontekst og prompt holdes adskilt</h3>
-            <p>Kontekstfilen er fast og genbruges. Prompten skifter fra produktion til produktion.</p>
+            <p>Alt det, der aldrig ændrer sig – afsender, målgruppe, tone, fakta og visuel stil – står i kontekstfilen. Prompten siger kun, hvad der skal laves i dag. Så skal du ikke huske reglerne hver gang, og alle produktioner bygger på det samme.</p>
           </article>
           <article class="kort">
             <h3>Template én gang – indhold med AI hver gang</h3>
-            <p>Det faste (design, sidefod, mærkning) bygges én gang af et menneske. AI udfylder kun indholdet.</p>
+            <p>Logo, sidefod, afmelding og AI-mærkning ligger fast i skabelonerne og bygges én gang af et menneske. AI udfylder kun indholdet – og kan derfor ikke glemme mærkningen eller lave designet om.</p>
           </article>
           <article class="kort">
             <h3>Mennesket godkender</h3>
-            <p>Alt AI-indhold tjekkes mod tjeklisten, før det bruges. Et menneske trykker »send« – aldrig AI.</p>
+            <p>AI laver udkast. Et menneske tjekker dem mod tjeklisten og trykker »send«. AI publicerer aldrig selv og svarer aldrig på kommentarer som Grethe.</p>
+          </article>
+          <article class="kort">
+            <h3>Én kilde til fakta</h3>
+            <p>Alle søvnråd kommer fra søvnguiden v6, som er faktatjekket mod Sundhedsstyrelsen, sundhed.dk, Ældre Sagen og søvnforsker Birgitte Kornum. Mangler AI en fakta, skriver den [FAKTA MANGLER] – den finder aldrig selv på.</p>
+          </article>
+          <article class="kort">
+            <h3>Ret konteksten – ikke kun outputtet</h3>
+            <p>Laver AI den samme fejl to gange, er der et hul i kontekstfilen. Ret filen, så fejlen ikke kommer igen i næste produktion (se <a href="#cases">casen</a>).</p>
+          </article>
+          <article class="kort">
+            <h3>AI skal kunne ses</h3>
+            <p>Grethe er fiktiv, og det siger vi højt. Mærkningen er både et lovkrav og en del af brandets oprigtighed.</p>
           </article>
         </div>
-        <p class="pladsholder">[INDHOLD KOMMER: uddybning af principperne og evt. flere.]</p>
       </section>
 
       <!-- 3 -->
@@ -99,11 +151,24 @@
           </article>
           <article class="kort" data-produktion="klip">
             <h3>Korte klip</h3>
-            <p class="pladsholder">[INDHOLD KOMMER]</p>
+            <ol>
+              <li>Upload kontekstfil, søvnguiden v6, karakterark og storyboardet. Kopiér prompten »Kort klip«, og ret scenen</li>
+              <li>Lav Grethe-klippene i Google Flow med masterbilledet som karakter: Veo 3.1 Lite · 16:9 · 8 sek. · 1 version ad gangen</li>
+              <li>Tjek hvert klip: samme ansigt, hår og tøj · lukket mund · normale hænder · ingen nye personer eller tekst. Kassér hellere end at bruge et klip, der næsten passer</li>
+              <li>Klip i CapCut: slå Flows lyd fra, og læg den gemte Grethe-stemme på som voiceover</li>
+              <li>Lav 9:16 og 1:1 (ca. 25 sek.) med indbrændte undertekster. Hold teksten væk fra øverste og nederste femtedel, og slut med det faste slutkort med AI-mærkning</li>
+              <li>Tjek med tjeklisten, og notér antal forsøg i AI-loggen</li>
+            </ol>
           </article>
           <article class="kort" data-produktion="mikro">
             <h3>Mikroindhold</h3>
-            <p class="pladsholder">[INDHOLD KOMMER]</p>
+            <ol>
+              <li>Upload kontekstfil, søvnguiden v6, karakterark og kapitlets billedpar</li>
+              <li>Kopiér prompten »Mikroindhold«, og vælg typer: Facebook-opslag, nostalgiopslag, Grethe-citat eller annonceklip</li>
+              <li>Tjek: Står det vigtigste i de første ca. 125 tegn? Er replikkerne ordret fra v6? Slutter nostalgiopslaget med et spørgsmål?</li>
+              <li>Sæt Grethe-citater i 1:1-skabelonen (EB Garamond kursiv på linned). Annonceklip (6–15 sek.) klippes fra de korte klip med krogen i de første 3 sek.</li>
+              <li>Tjek med tjeklisten</li>
+            </ol>
           </article>
         </div>
       </section>
@@ -112,7 +177,28 @@
       <section class="afsnit" id="prompts">
         <h2>Kontekstfil og prompts</h2>
         <p>Upload altid kontekstfilen, søvnguiden v6 og karakterarket. Kopiér derefter én prompt, og ret det i [klammer].</p>
-        <p class="pladsholder">[INDHOLD KOMMER: kort om kontekstfilens lag og hvor filerne ligger. Kan kontekstfilen ikke uploades som .md, så brug PDF-pakken.]</p>
+        <p>Kontekstfilen er kampagnens hukommelse. Den er bygget i lag, så AI læser baggrunden, før den får opgaven:</p>
+        <div class="tabel-ramme">
+          <table class="tabel">
+            <thead><tr><th scope="col">Lag</th><th scope="col">Indhold</th><th scope="col">Ændres</th></tr></thead>
+            <tbody>
+              <tr><td>0</td><td>Sådan bruges filen</td><td>Sjældent</td></tr>
+              <tr><td>1–5</td><td>Afsender og koncept · målgruppe · tone og sprog · fakta og kilder · visuel identitet</td><td>Kun når kampagnen ændres</td></tr>
+              <tr><td>6</td><td>Formater pr. produktion (mål, længde, slide-rækkefølge)</td><td>Når en ny produktion kommer til</td></tr>
+              <tr><td>7</td><td>Hvad AI skal levere – og hvad den ikke må</td><td>Sjældent</td></tr>
+              <tr><td>Prompten</td><td>Selve opgaven: hvilket kapitel og hvilken produktion</td><td>Hver gang</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Filerne ligger her</h3>
+        <ul>
+          <li>Kontekstfilen: <code>Content-kit/kampagne_kontekst_til_AI.md</code></li>
+          <li>Søvnguiden v6: <code>Content-kit/soevnguide_tekst_v6.md</code></li>
+          <li>Karakterark: <code>Content-kit/mormor_grethe_karakterark.md</code></li>
+          <li>Billedpar: <code>Mediefiler/img/dengang/</code> og <code>Mediefiler/img/idag/</code></li>
+        </ul>
+        <p><strong>Kan værktøjet ikke tage .md-filer</strong> eller kun få uploads, så brug PDF-pakken <code>Content-kit/AI-pakke_soevnguiden.pdf</code>. Den samler kontekst, karakterark og søvnguiden v6 i én fil. Upload billedparret ved siden af.</p>
 
         <!-- Hver prompt: id på <pre> skal matche data-kopier på knappen -->
         <div class="prompt">
@@ -182,13 +268,107 @@ Skriv ikke logo, sidefod, afmelding, AI-mærkning eller "mail X af 5" – de lig
       <!-- 6 -->
       <section class="afsnit" id="cases">
         <h2>Cases</h2>
-        <p class="pladsholder">[INDHOLD KOMMER: casen »Karrusel 22.30 i ChatGPT« – forsøg 1 og 2, rettelser og læring (FigJam → AI Playbook).]</p>
+        <h3>Karrusel »22.30 Sengetid« i ChatGPT</h3>
+        <p><strong>Opgaven:</strong> en karrusel til Facebook og Instagram ud fra kapitlet 22.30 Sengetid, lavet med prompten »Karrusel« og kontekstfilen.</p>
+
+        <div class="kort-gitter">
+          <article class="kort">
+            <h3>Forsøg 1 – hvad gik galt</h3>
+            <ul>
+              <li>ChatGPT hentede eksempelbilleder fra nettet til alle slides – fra billedbanker, en ukrainsk nyhedsside og en taiwansk gardinbutik. Ophavsretten er uklar, og motiverne passede ikke</li>
+              <li>Billedet til Grethe-sliden lignede slet ikke hende</li>
+              <li>Den skrev nye billedprompts, selvom kapitlet har et færdigt billedpar</li>
+              <li>Citaterne var signeret »– Mormor« i stedet for »– Grethe«</li>
+            </ul>
+            <p><strong>Det virkede:</strong> strukturen fra kontekstfilen, ingen nye Grethe-replikker, al fakta fra v6, A/B-forsider og én fælles opslagstekst.</p>
+          </article>
+          <article class="kort">
+            <h3>Forsøg 2 – med billedparret uploadet</h3>
+            <ul>
+              <li>Billederne var nu de rigtige, og ingen blev hentet fra nettet</li>
+              <li>Men en slide sagde »et godt sovemiljø handler om mere end en varm dyne«. Det gør dynen mindre vigtig, og v6's linje om dynen manglede</li>
+              <li>Opslagsteksten var forskellig i de to varianter, så A/B-testen ville teste to ting på én gang</li>
+              <li>Den sidste slide afslørede svaret (18–21 grader) i quizspørgsmålet</li>
+            </ul>
+          </article>
+          <article class="kort">
+            <h3>Det rettede vi i kontekstfilen</h3>
+            <ul>
+              <li>»Søg aldrig efter billeder på nettet.« Brug billedparret, eller skriv [BILLEDE: filnavn]</li>
+              <li>Grethes citater signeres altid »– Grethe«</li>
+              <li>v6's linje om dynen skal med i 22.30 Sengetid</li>
+              <li>Kun forsiden varieres i A/B-testen</li>
+              <li>Myte-krogen bygger på quiz-udsagnet, og afslutningen afslører ikke svaret</li>
+            </ul>
+          </article>
+        </div>
+
+        <h3>Læring</h3>
+        <ol class="laering">
+          <li><strong>AI følger det, der står – og udfylder hullerne selv.</strong> Hullerne lukkes i kontekstfilen, ikke kun i den enkelte karrusel.</li>
+          <li><strong>Upload altid billederne.</strong> Uden dem gætter AI, og så går det galt med både ophavsret og genkendelighed.</li>
+          <li><strong>Læs det hele, også det, der ser rigtigt ud.</strong> Fejlen i forsøg 2 var én lille sætning, der ændrede budskabet.</li>
+          <li><strong>To forsøg var nok,</strong> fordi rettelserne kom ind i kontekstfilen. Næste kapitel starter med de nye regler.</li>
+        </ol>
       </section>
 
       <!-- 7 -->
       <section class="afsnit" id="etik">
         <h2>Etik og ansvar</h2>
-        <p class="pladsholder">[INDHOLD KOMMER: AI-mærkning, Grethe som fiktiv AI-karakter, GDPR i nyhedsbrevet, løfter der skal godkendes, anbefalingen om et rigtigt menneske.]</p>
+        <h3>AI-mærkning – altid</h3>
+        <p>EU's AI-forordning (artikel 50) har siden 2. august 2026 krævet, at AI-skabte billeder, video og lyd, der ligner virkeligheden, mærkes. Det gælder også en fiktiv person, der ser ægte ud – altså Grethe.</p>
+        <div class="tabel-ramme">
+          <table class="tabel">
+            <thead><tr><th scope="col">Hvor</th><th scope="col">Mærkning</th></tr></thead>
+            <tbody>
+              <tr><td>Video (slutkort) og videobeskrivelse</td><td>»Mormor Grethe er en fiktiv person. Hendes billede og stemme er skabt med AI.«</td></tr>
+              <tr><td>Billeder i guiden og karruseller</td><td>»AI-genereret billede«</td></tr>
+              <tr><td>Mails og opslagstekst</td><td>»Mormor Grethe er en fiktiv person. Billeder og stemme er skabt med AI.«</td></tr>
+              <tr><td>YouTube</td><td>Markér som ændret/syntetisk indhold ved upload</td></tr>
+              <tr><td>Facebook og Instagram</td><td>Metas AI-mærkning (»AI-info«)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Mærkningen ligger fast i skabelonerne, så den ikke kan glemmes.</p>
+
+        <div class="kort-gitter">
+          <article class="kort">
+            <h3>Grethe er fortæller</h3>
+            <p>Hun fortæller om sine egne minder. Rådene kommer fra kilderne. Hun giver aldrig sundhedsråd og anbefaler aldrig et produkt – en fiktiv person, der roser dynen, ville ligne en falsk anmeldelse. Nye replikker godkendes, før de bruges.</p>
+          </article>
+          <article class="kort">
+            <h3>Fakta og løfter</h3>
+            <p>Ingen sundhedsløfter som »garanteret bedre søvn« eller »kurerer«. Al fakta skal kunne findes i v6's faktatjek. Nye påstande om produkter, certificeringer eller håndværk godkendes af Ringsted Dun, før de bruges.</p>
+          </article>
+          <article class="kort">
+            <h3>Ophavsret og billeder</h3>
+            <p>Brug kun kampagnens billedpar, Ringsted Duns egne fotos eller AI-billeder lavet til kampagnen – aldrig billeder fundet på nettet. Tjek, at værktøjet må bruges kommercielt, og skriv ikke »i stil med« en navngiven kunstner eller et andet brand.</p>
+          </article>
+          <article class="kort">
+            <h3>Persondata (GDPR)</h3>
+            <p>Tilmeldingen efter quizzen er frivillig og kræver samtykke. Læg aldrig navne, mailadresser eller quizsvar i et AI-værktøj. »[Fornavn]« flettes ind af mailsystemet, ikke af AI. Brug en virksomhedskonto, hvor data ikke bruges til at træne modellen.</p>
+          </article>
+          <article class="kort">
+            <h3>Bias</h3>
+            <p>AI's standardbillede af en kvinde på 79 er ofte skrøbelig – med stok, i plejemiljø. Det passer ikke til målgruppen. Derfor har karakterarket en »aldrig«-liste, og »ældre« og »seniorer« står på listen over ord, vi undgår.</p>
+          </article>
+          <article class="kort">
+            <h3>Forbrug af ressourcer</h3>
+            <p>Video koster mest – både credits og strøm. Lav én version ad gangen, sæt et loft over antal forsøg, og genbrug kontekstfilen frem for at starte forfra.</p>
+          </article>
+        </div>
+
+        <h3>Det bruger vi ikke AI til</h3>
+        <ul>
+          <li>At publicere eller sende noget</li>
+          <li>At svare på kommentarer eller beskeder som Grethe</li>
+          <li>At finde på fakta, tal eller kilder</li>
+          <li>At behandle persondata</li>
+          <li>At skrive nye Grethe-replikker uden godkendelse</li>
+        </ul>
+
+        <h3>Vores anbefaling: et rigtigt menneske på sigt</h3>
+        <p>AI-Grethe gør det muligt at teste fortælleren hurtigt og billigt. Viser målingerne, at hun virker, anbefaler vi, at Ringsted Dun laver de faste videoer med et rigtigt menneske – fx en skuespiller, en mangeårig kunde eller en medarbejders mor eller mormor. Det koster mere (casting, optagelser og rettighedsaftaler), men giver ægte autenticitet og passer til oprigtigheden i tone of voice og historien om 75 års håndværk.</p>
       </section>
     </main>
   </div>

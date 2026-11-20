@@ -310,6 +310,55 @@ img {
   color: #5B4632;
 }
 
+.afsnit > h3 {
+  font-size: 1.25rem;
+  margin: 2rem 0 0.75rem;
+}
+
+.tabel-ramme {
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+.tabel {
+  width: 100%;
+  border-collapse: collapse;
+  background: #FFFFFF;
+  font-size: 1rem;
+}
+.tabel th,
+.tabel td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(91, 70, 50, 0.2);
+}
+.tabel th {
+  font-family: "Gill Sans", "Gill Sans MT", "Lato", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #5B4632;
+  background: #F4EDE0;
+}
+
+.kort ul {
+  margin: 0 0 0.75rem;
+  padding-left: 1.25rem;
+}
+
+.laering li::marker {
+  color: #A6192E;
+  font-weight: 700;
+}
+
+code {
+  font-size: 0.9em;
+  background: #F4EDE0;
+  padding: 0.1rem 0.3rem;
+}
+
 @media print {
   .menu,
   .filter,
