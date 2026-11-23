@@ -55,7 +55,7 @@ body {
 
 /* På skærmen vises siderne som ark, så man kan se, hvordan PDF'en bliver */
 @media screen {
-  body { background: #E7E1D6; padding: 2rem 0; }
+  body { background: #D8D1C6; padding: 2rem 0; }
   .ark, .kapitel { width: 210mm; margin: 0 auto 2rem; background: #F7F3EC; box-shadow: 0 4px 20px rgba(43, 42, 41, 0.15); }
   .kapitel { padding: 20mm 18mm; }
   .skaerm-note {

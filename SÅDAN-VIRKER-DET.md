@@ -1,6 +1,6 @@
 # Sådan virker det · webmappen til afleveringen
 
-*Opdateret 20/11 (Heidi + Claude). Opdatér filen, når noget flyttes, tilføjes eller fjernes.*
+*Opdateret 23/11 (Heidi + Claude): hele sitet følger nu designguide v2. Opdatér filen, når noget flyttes, tilføjes eller fjernes.*
 
 ## Overblik
 
@@ -14,7 +14,8 @@ web/
 │   ├── quiz.scss        Hovedfil til quizzen
 │   ├── playbook.scss    Hovedfil til AI Playbook
 │   ├── guide.scss       Hovedfil til søvnguiden
-│   ├── _tokens.scss     Farver (palet C), skrift og mål
+│   ├── _tokens.scss     Farver (palet C), skrift og mål – ét sted for hele sitet
+│   ├── _skrift.scss     Hjælpeklasser: .lato-thin … .lato-black-italic og .eb-garamond-italic
 │   ├── _mixins.scss     Genbrugte stykker: spærret skrift og fokusramme
 │   ├── _base.scss       Siden, overskrifter, sidehoved og sidefod
 │   ├── _knapper.scss    Alle knapper
@@ -97,7 +98,7 @@ web/
 
 ## AI Playbook (playbook.html) – opdateret 23/11
 
-Playbooken er sat op som en lille hjemmeside, inspireret af ringsted-dun.dk: logo, søgefelt og »Hent som PDF« øverst, en menu med syv sider og brede bånd. Al tekst ligger i `playbook.html`. **Designet følger Marcus' designguide v2** (Lato, linned `#E7D8BE`, skillelinjer `#D8D1C6`, den røde tråd som lige linje). Farverne står øverst i `scss/_playbook-dele.scss` som `$p-…`, fordi `$linned` i `_tokens.scss` stadig er quizzens gamle farve.
+Playbooken er sat op som en lille hjemmeside, inspireret af ringsted-dun.dk: logo, søgefelt og »Hent som PDF« øverst, en menu med syv sider og brede bånd. Al tekst ligger i `playbook.html`. **Designet følger Marcus' designguide v2** (Lato, linned `#E7D8BE`, skillelinjer `#D8D1C6`, den røde tråd som lige linje). Farverne kommer fra `scss/_tokens.scss` ligesom resten af sitet.
 
 **Sproget** er hverdagsdansk. Fagord som prompt, baggrundsfil og AI-mærkning er forklaret i ordlisten på forsiden. Prompterne til AI er ikke skrevet om – de skal passe til baggrundsfilen.
 
@@ -165,7 +166,7 @@ Indhold, der kun hører til én visning, har klassen `kun-bog` (fx bagsiden) ell
 |---|---|
 | Rette en tekst på en side | `guide.html` – find siden med `id="side-07"` (sidetallet) |
 | Skifte et billede | `guide.html` – ret `src` i `<img>` og læg billedet i `img/guide/` |
-| Rette bogens design | `scss/_guide-dele.scss`, afsnit 1–6. Søvnguidens egne farver står øverst (`$g-linned` osv.) |
+| Rette bogens design | `scss/_guide-dele.scss`, afsnit 1–6. Farverne kommer fra `scss/_tokens.scss` |
 | Rette mobilvisningen | `scss/_guide-dele.scss`, afsnit 7 (alt under `.guide--laes`) |
 | Rette tekstpanelets udseende | `scss/_guide-dele.scss`, afsnit 8 (`.tekstpanel` og `.tekst`) |
 | Rette hvordan der bladres eller skiftes visning | `js/guide.js` |
@@ -186,7 +187,6 @@ Indhold, der kun hører til én visning, har klassen `kun-bog` (fx bagsiden) ell
 > Sider, man ikke kan se i bogen, får attributten `inert`. Så kan man ikke tabbe ind i dem, og skærmlæsere springer dem over.
 
 **Bemærk:**
-- `$linned` i `_tokens.scss` er stadig quizzens gamle farve (#F4EDE0). Søvnguiden bruger den nye farve fra 19/11 (#E7D8BE) via `$g-linned`. Det rettes, når designet opdateres samlet.
 - Skrifterne (Lato og EB Garamond) hentes stadig fra Google Fonts. De lægges lokalt, når designet opdateres samlet.
 - `pdf/soevnguiden.pdf` er Marcus' `Soevnguiden_bog.pdf` fra 19/11 (9 MB).
 

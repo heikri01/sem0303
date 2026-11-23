@@ -1,0 +1,38 @@
+// ==========================================================
+// SKRIFT · hjælpeklasser til Lato og EB Garamond
+// Sæt en klasse på et element, hvis det skal have en anden vægt
+// end den, det arver. Fx <p class="lato-bold">.
+// Lato bruges til alt. EB Garamond kursiv kun til Grethes stemme.
+// ==========================================================
+@use 'tokens' as *;
+
+// Lato i alle vægte. @each laver én klasse pr. vægt, så vi slipper for at skrive dem i hånden
+$lato-vaegte: (
+  'thin':    100,
+  'light':   300,
+  'regular': 400,
+  'bold':    700,
+  'black':   900,
+);
+
+@each $navn, $vaegt in $lato-vaegte {
+  .lato-#{$navn} {
+    font-family: $sans;
+    font-weight: $vaegt;
+    font-style: normal;
+  }
+
+  .lato-#{$navn}-italic {
+    font-family: $sans;
+    font-weight: $vaegt;
+    font-style: italic;
+  }
+}
+
+// EB Garamond kursiv – kun til Grethes citater
+.eb-garamond-italic {
+  font-family: $serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: italic;
+}

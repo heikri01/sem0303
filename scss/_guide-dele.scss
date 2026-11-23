@@ -13,19 +13,8 @@
 @use 'tokens' as *;
 @use 'mixins' as *;
 
-// ---------- Farver, der kun bruges i søvnguiden (fra Figma) ----------
-// $linned i _tokens.scss er quizzens. Søvnguiden fik ny linned-farve 19/11 (Marcus)
-$g-linned:      #E7D8BE;  // dengang-felter
-$g-nat-tekst:   #F3EDE4;  // tekst på mørke sider
-$g-nat-daempet: #C9BFB2;  // dæmpet tekst på mørke sider
-$g-moerkegraa:  #4F4E4D;  // sidehoveder og små tekster
-$g-papirstreg:  #D8D1C6;  // tynde streger på papirsider
-$g-bord:        #E7E1D6;  // "bordet", bogen ligger på
-$g-roed-moerk:  #8A1426;  // rød knap, når musen er over den
-
-// ---------- Skrift (som i Figma) ----------
-$g-sans:  'Lato', sans-serif;
-$g-serif: 'EB Garamond', Georgia, serif;
+// Alle farver og skrifter ligger i _tokens.scss (palet C fra designguide v2).
+// "Bordet", bogen ligger på, er papirstreg. Røde knapper bliver blæk ved hover
 
 // ---------- Mål ----------
 $side-b:  561.5px;  // en sides bredde i bogen
@@ -34,9 +23,10 @@ $tid:     0.9s;     // hvor lang tid en side er om at vende
 $smal:    760px;    // under denne bredde vises mobilvisningen
 
 // Små genbrugte stykker
-@mixin etiket($farve: $blaek, $stoerrelse: 13px, $spaerring: 1.82px) {
+// Etiket: Lato Bold versaler, 16 px, 12 % luft (designguiden)
+@mixin etiket($farve: $blaek, $stoerrelse: $etiket, $spaerring: 0.12em) {
   margin: 0;
-  font-family: $g-sans;
+  font-family: $sans;
   font-size: $stoerrelse;
   font-weight: 700;
   line-height: 1.2;
@@ -47,7 +37,7 @@ $smal:    760px;    // under denne bredde vises mobilvisningen
 
 @mixin kursiv($stoerrelse: 16px, $linje: 1.4) {
   margin: 0;
-  font-family: $g-serif;
+  font-family: $serif;
   font-style: italic;
   font-weight: 400;
   font-size: $stoerrelse;
@@ -75,7 +65,7 @@ $smal:    760px;    // under denne bredde vises mobilvisningen
   padding: 12px 18px;
   background: $blaek;
   color: $hvid;
-  font-family: $g-sans;
+  font-family: $sans;
   font-weight: 700;
   text-decoration: none;
 
@@ -91,7 +81,7 @@ $smal:    760px;    // under denne bredde vises mobilvisningen
 // 1. SCENEN OG BOGEN
 // ==========================================================
 .guide {
-  background: $g-bord;
+  background: $papirstreg;
   overflow: hidden;
 }
 
@@ -160,7 +150,7 @@ $blad-tykkelse: 1.1px;
   top: 2px;
   bottom: -2px;  // stakken ligger en anelse lavere, så den ses i bunden
   // Tynde lodrette streger = kanten af hvert stykke papir
-  background: repeating-linear-gradient(to right, $papir 0, $papir 1.5px, $g-papirstreg 1.5px, $g-papirstreg 2.2px);
+  background: repeating-linear-gradient(to right, $papir 0, $papir 1.5px, $papirstreg 1.5px, $papirstreg 2.2px);
   box-shadow: 0 1px 2px rgba($blaek, 0.2), 0 3px 8px rgba($blaek, 0.12);
   transition: width $tid ease;
 
@@ -190,7 +180,7 @@ $blad-tykkelse: 1.1px;
   overflow: hidden;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  font-family: $g-sans;
+  font-family: $sans;
   color: $blaek;
   // Stram skygge, så den følger de skarpe hjørner (en bred, sløret skygge får runde hjørner)
   box-shadow: 0 1px 2px rgba($blaek, 0.2), 0 3px 8px rgba($blaek, 0.12);
@@ -223,7 +213,7 @@ $blad-tykkelse: 1.1px;
   }
 
   &--papir { background: $papir; }
-  &--moerk { background: $blaek; color: $g-nat-tekst; }
+  &--moerk { background: $blaek; color: $nat-tekst; }
 
   &__indre {
     display: flex;
@@ -262,7 +252,7 @@ $blad-tykkelse: 1.1px;
 // ---------- Sidehoved ----------
 .sidehoved {
   padding-bottom: 9px;
-  font-size: 13px;
+  font-size: $tekst-lille;  // ingen tekst under 16 px
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: 1.56px;
@@ -275,7 +265,7 @@ $blad-tykkelse: 1.1px;
     justify-content: space-between;
     padding-bottom: 19px;
     font-weight: 400;
-    color: $g-moerkegraa;
+    color: $moerkegraa;
 
     b { font-weight: 700; color: $blaek; }
   }
@@ -384,9 +374,10 @@ $blad-tykkelse: 1.1px;
     }
   }
 
-  &__etiket { @include etiket($g-nat-tekst); }
-  &__tekst  { @include kursiv(15px); color: $g-nat-daempet; }
-  &__ai     { @include kursiv(13px); color: $g-nat-daempet; }
+  &__etiket { @include etiket($nat-tekst); }
+  &__tekst  { @include kursiv(16px); color: $nat-daempet; }
+  // AI-mærkning: lille tekst i Lato Regular, 16 px
+  &__ai     { margin: 0; font-family: $sans; font-size: $tekst-lille; line-height: 1.4; color: $nat-daempet; }
 
   // Forsiden: fotoparret fylder hele siden
   &--helside {
@@ -409,17 +400,17 @@ $blad-tykkelse: 1.1px;
   text-align: center;
   font-weight: 400;
 
-  &__nr    { @include kursiv(24px, 1.1); color: $g-nat-tekst; }
-  &__under { @include kursiv(17px, 1.3); color: $g-nat-daempet; }
+  &__nr    { @include kursiv(24px, 1.1); color: $nat-tekst; }
+  &__under { @include kursiv(17px, 1.3); color: $nat-daempet; }
 
   &__navn {
-    font-family: $g-sans;
+    font-family: $sans;
     font-size: 43px;
     font-weight: 300;
     line-height: 1.1;
     letter-spacing: 4.3px;
     text-transform: uppercase;
-    color: $g-nat-tekst;
+    color: $nat-tekst;
 
     &--lang { font-size: 32px; letter-spacing: 2.56px; }
   }
@@ -431,13 +422,13 @@ $blad-tykkelse: 1.1px;
   flex-direction: column;
   gap: 3px;
   padding-top: 10px;
-  border-top: 1px solid $g-nat-daempet;
+  border-top: 1px solid $nat-daempet;
 
-  &__etiket { @include etiket($g-nat-daempet); }
-  &__tekst  { @include kursiv(16px); color: $g-nat-tekst; }
+  &__etiket { @include etiket($nat-daempet); }
+  &__tekst  { @include kursiv(16px); color: $nat-tekst; }
 
   // På papirsider (søvnkortet)
-  &--lys { border-top-color: $g-papirstreg; }
+  &--lys { border-top-color: $papirstreg; }
   &--lys &__etiket,
   &--lys &__tekst { color: $sepia; }
 }
@@ -451,7 +442,7 @@ $blad-tykkelse: 1.1px;
   flex-direction: column;
   gap: 4px;
   padding: 12px 15px 14px;
-  background: $g-linned;
+  background: $linned;
   color: $sepia;
 
   &__etiket {
@@ -462,11 +453,11 @@ $blad-tykkelse: 1.1px;
     white-space: nowrap;
 
     span { @include etiket($sepia); }
-    em   { @include kursiv(15px); }
+    em   { @include kursiv(16px); }
   }
 
   &__citat    { @include kursiv(17px, 1.38); }
-  &__afsender { @include kursiv(15px); }
+  &__afsender { @include kursiv(16px); }
 
   &--lille { padding: 10px 13px 11px; }
 }
@@ -487,9 +478,9 @@ $blad-tykkelse: 1.1px;
 
   // Første sætning i fed, spærret skrift
   strong {
-    font-size: 14px;
+    font-size: $tekst-lille;
     font-weight: 700;
-    letter-spacing: 1.4px;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
   }
 
@@ -542,7 +533,7 @@ $blad-tykkelse: 1.1px;
 
   & + & {
     padding-top: 14px;
-    border-top: 1px solid $g-papirstreg;
+    border-top: 1px solid $papirstreg;
   }
 
   &__overskrift {
@@ -560,7 +551,7 @@ $blad-tykkelse: 1.1px;
     text-transform: uppercase;
   }
 
-  &__under { @include kursiv(16px); color: $g-moerkegraa; }
+  &__under { @include kursiv(16px); color: $moerkegraa; }
 }
 
 
@@ -568,12 +559,23 @@ $blad-tykkelse: 1.1px;
 // 5. ENKELTE SIDER
 // ==========================================================
 
+// ---------- Side 15 og 17 · Årstider i bogen ----------
+// Med 16 px som mindste skrift bliver siden lidt fuld. Luften strammes en anelse,
+// så "Prøv det" stadig kan være på siden (kun i bogen – mobilvisningen har sine egne mål)
+.guide:not(.guide--laes) .side--aarstider {
+  .side__indre { gap: 8px; }
+  .aarstid { gap: 3px; }
+  .aarstid + .aarstid { padding-top: 8px; }
+}
+
 // ---------- Side 1 · Forside ----------
 .forside__ai {
   position: absolute;
   right: 16px;
   bottom: 10px;
-  @include kursiv(13px);
+  margin: 0;
+  font-family: $sans;  // AI-mærkning: Lato Regular, 16 px
+  font-size: $tekst-lille;
   color: $hvid;
   text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 }
@@ -598,7 +600,7 @@ $blad-tykkelse: 1.1px;
   }
 
   &__spor {
-    font-size: 12px;
+    font-size: $tekst-lille;
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: 1.08px;
@@ -608,7 +610,7 @@ $blad-tykkelse: 1.1px;
 
   &__undertitel { @include kursiv(21px, 1.3); color: $roed; }
   &__tekst      { font-size: 16px; line-height: 1.6; }
-  &__siden      { @include etiket($g-moerkegraa); }
+  &__siden      { @include etiket($moerkegraa); }
 
   &__logo {
     width: 74px;
@@ -632,18 +634,18 @@ $blad-tykkelse: 1.1px;
     padding: 0 25px;
     background: $roed;
     color: $hvid;
-    font-family: $g-sans;
-    font-size: 17px;
+    font-family: $sans;
+    font-size: $knap;
     font-weight: 700;
     line-height: 1.2;
-    letter-spacing: 0.68px;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     text-decoration: none;
 
-    &:hover { background: $g-roed-moerk; }
+    &:hover { background: $blaek; }
   }
 
-  &__note { @include kursiv(17px); color: $g-moerkegraa; }
+  &__note { @include kursiv(17px); color: $moerkegraa; }
 }
 
 // ---------- Side 3 · Mød Mormor og indhold ----------
@@ -651,8 +653,8 @@ $blad-tykkelse: 1.1px;
   display: flex;
   gap: 16px;
   padding: 12px 0;
-  border-top: 1px solid $g-papirstreg;
-  border-bottom: 1px solid $g-papirstreg;
+  border-top: 1px solid $papirstreg;
+  border-bottom: 1px solid $papirstreg;
 
   &__spor {
     flex: 1 0 0;
@@ -661,26 +663,26 @@ $blad-tykkelse: 1.1px;
     gap: 3px;
   }
 
-  &__etiket { @include etiket($g-moerkegraa, 12px, 1.68px); }
+  &__etiket { @include etiket($moerkegraa); }
   &__navn   { @include kursiv(17px, 1.3); }
-  &__tekst  { font-size: 13px; line-height: 1.45; }
+  &__tekst  { font-size: $tekst-lille; line-height: 1.45; }
 }
 
 .indhold {
   padding-top: 6px;
 
-  &__etiket { @include etiket($g-moerkegraa); }
+  &__etiket { @include etiket($moerkegraa); }
 
   &__gruppe {
     display: flex;
     flex-direction: column;
     gap: 3px;
     padding: 8px 0;
-    border-bottom: 1px solid $g-papirstreg;
+    border-bottom: 1px solid $papirstreg;
 
     &:first-of-type {
       padding-top: 9px;
-      border-top: 1px solid $g-papirstreg;
+      border-top: 1px solid $papirstreg;
     }
   }
 
@@ -691,15 +693,15 @@ $blad-tykkelse: 1.1px;
     text-transform: uppercase;
   }
 
-  &__beskriv { @include kursiv(14px); color: $g-moerkegraa; }
+  &__beskriv { @include kursiv(16px); color: $moerkegraa; }
 
   &__links {
     display: flex;
     flex-wrap: wrap;
     gap: 4px 6px;
-    font-size: 13px;
+    font-size: $tekst-lille;
     line-height: 1.45;
-    color: $g-moerkegraa;
+    color: $moerkegraa;
 
     a {
       @include fokus;
@@ -719,8 +721,8 @@ $blad-tykkelse: 1.1px;
   padding: 0;
   list-style: none;
   counter-reset: udsagn;
-  border-top: 1px solid $g-papirstreg;
-  border-bottom: 1px solid $g-papirstreg;
+  border-top: 1px solid $papirstreg;
+  border-bottom: 1px solid $papirstreg;
 
   li {
     display: flex;
@@ -730,13 +732,13 @@ $blad-tykkelse: 1.1px;
     counter-increment: udsagn;
     @include kursiv(17px, 1.38);
 
-    & + li { border-top: 1px solid $g-papirstreg; }
+    & + li { border-top: 1px solid $papirstreg; }
 
     &::before {
       content: counter(udsagn);
-      font-family: $g-sans;
+      font-family: $sans;
       font-style: normal;
-      font-size: 15px;
+      font-size: $tekst-lille;
       font-weight: 700;
       line-height: 1.2;
     }
@@ -764,8 +766,8 @@ $blad-tykkelse: 1.1px;
     bottom: 0;
     padding: 3px 10px;
     background: $papir;
-    @include kursiv(15px);
-    color: $g-moerkegraa;
+    @include kursiv(16px);
+    color: $moerkegraa;
   }
 }
 
@@ -774,7 +776,7 @@ $blad-tykkelse: 1.1px;
   &__citat {
     @include kursiv(27px, 1.3);
     text-align: center;
-    color: $g-nat-tekst;
+    color: $nat-tekst;
   }
 
   &__logo {
@@ -784,7 +786,7 @@ $blad-tykkelse: 1.1px;
     object-fit: contain;
   }
 
-  &__etiket { @include etiket($g-nat-daempet); text-align: center; }
+  &__etiket { @include etiket($nat-daempet); text-align: center; }
 }
 
 .kilder {
@@ -792,12 +794,12 @@ $blad-tykkelse: 1.1px;
   flex-direction: column;
   gap: 5px;
   padding-top: 12px;
-  border-top: 1px solid $g-papirstreg;
-  font-size: 13px;
+  border-top: 1px solid $papirstreg;
+  font-size: $tekst-lille;
   line-height: 1.45;
-  color: $g-moerkegraa;
+  color: $moerkegraa;
 
-  &__etiket { @include etiket($g-moerkegraa); }
+  &__etiket { @include etiket($moerkegraa); }
 }
 
 // ---------- Side 26 · Bagside ----------
@@ -811,7 +813,7 @@ $blad-tykkelse: 1.1px;
 
 .bagside {
   &__logo { width: 104px; height: 117px; object-fit: contain; }
-  &__web  { font-size: 13px; line-height: 1.45; color: $g-nat-tekst; }
+  &__web  { font-size: $tekst-lille; line-height: 1.45; color: $nat-tekst; }
 }
 
 
@@ -848,14 +850,14 @@ $blad-tykkelse: 1.1px;
     border: 0;
     background: $roed;
     color: $hvid;
-    font-family: $g-sans;
-    font-size: 15px;
+    font-family: $sans;
+    font-size: $knap;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     cursor: pointer;
 
-    &:hover { background: $g-roed-moerk; }
+    &:hover { background: $blaek; }
 
     &--sekundaer {
       background: transparent;
@@ -881,8 +883,8 @@ $blad-tykkelse: 1.1px;
   border-radius: 24px;
   background: rgba($blaek, 0.08);
   color: $blaek;
-  font-family: $g-sans;
-  font-size: 14px;
+  font-family: $sans;
+  font-size: $tekst-lille;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -950,12 +952,12 @@ $blad-tykkelse: 1.1px;
   right: 0;
   bottom: 14px;
   margin: 0;
-  font-family: $g-sans;
-  font-size: 14px;
+  font-family: $sans;
+  font-size: $tekst-lille;
   letter-spacing: 0.12em;
   text-align: center;
   text-transform: uppercase;
-  color: $g-moerkegraa;
+  color: $moerkegraa;
   pointer-events: none;
 }
 
@@ -963,7 +965,7 @@ $blad-tykkelse: 1.1px;
   margin: 0;
   padding: 12px 16px;
   background: $hvid;
-  font-family: $g-sans;
+  font-family: $sans;
 }
 
 // Folk, der har bedt om mindre bevægelse, får ingen vende-animation
@@ -1091,7 +1093,7 @@ $blad-tykkelse: 1.1px;
     min-height: 0;
     padding: 14px 21px 15px;
     border-top-width: 3px;
-    background: $g-linned;
+    background: $linned;
     text-align: center;
   }
   .proev-det__etiket { font-size: 16px; letter-spacing: 2.24px; }
@@ -1110,7 +1112,7 @@ $blad-tykkelse: 1.1px;
   .mormor-i-dag {
     gap: 4px;
     padding-top: 13px;
-    border-top-color: $g-papirstreg;
+    border-top-color: $papirstreg;
   }
   .mormor-i-dag__etiket {
     font-size: 16px;
@@ -1167,7 +1169,7 @@ $blad-tykkelse: 1.1px;
     padding: 12px 16px 0;
     font-size: 16px;
     text-align: center;
-    color: $g-nat-daempet;
+    color: $nat-daempet;
     text-shadow: none;
   }
 
@@ -1267,7 +1269,7 @@ $blad-tykkelse: 1.1px;
   padding: 0 max(16px, 5vw) 64px;
   background: $papir;
   color: $blaek;
-  font-family: $g-sans;
+  font-family: $sans;
 
   &[hidden] { display: none; }
 
@@ -1283,7 +1285,7 @@ $blad-tykkelse: 1.1px;
     z-index: 1;
     padding: 16px 0;
     background: $papir;
-    border-bottom: 1px solid $g-papirstreg;
+    border-bottom: 1px solid $papirstreg;
   }
 
   &__luk {
@@ -1293,14 +1295,14 @@ $blad-tykkelse: 1.1px;
     border: 0;
     background: $roed;
     color: $hvid;
-    font-family: $g-sans;
-    font-size: 15px;
+    font-family: $sans;
+    font-size: $knap;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     cursor: pointer;
 
-    &:hover { background: $g-roed-moerk; }
+    &:hover { background: $blaek; }
   }
 
   &__titel {
@@ -1318,20 +1320,20 @@ $blad-tykkelse: 1.1px;
   &__side {
     margin-top: 36px;
     padding-top: 20px;
-    border-top: 1px solid $g-papirstreg;
+    border-top: 1px solid $papirstreg;
     scroll-margin-top: 100px;  // så overskriften ikke gemmer sig under bjælken
   }
 
   &__sidetal {
-    @include etiket($roed, 14px, 2px);
+    @include etiket($roed);
     margin-bottom: 12px;
   }
 
   // Overskrifter fra siderne (fx "Mød Mormor")
   &__overskrift {
     margin: 20px 0 8px;
-    font-size: 22px;
-    font-weight: 400;
+    font-size: 28px;   // overskrift: Lato Light, 28–36 px
+    font-weight: 300;
     line-height: 1.3;
   }
 
@@ -1340,10 +1342,10 @@ $blad-tykkelse: 1.1px;
 
   // Små overskrifter som "Dengang" og "Prøv det"
   &__etiket {
-    @include etiket($g-moerkegraa, 14px, 1.8px);
+    @include etiket($moerkegraa);
     margin: 20px 0 4px;
   }
 
   // Billeder beskrives med deres alt-tekst
-  &__billede { color: $g-moerkegraa; font-style: italic; }
+  &__billede { color: $moerkegraa; font-style: italic; }
 }

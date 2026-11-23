@@ -3,6 +3,7 @@
 // ==========================================================
 @use 'tokens' as *;
 @use 'mixins' as *;
+@use 'skrift';
 
 * { box-sizing: border-box; }
 
@@ -12,10 +13,14 @@ body {
   color: $blaek;
   font-family: $sans;
   font-size: $tekst;
+  font-weight: 400;
   line-height: 1.55;
 }
 
-h1, h2 {
+// Overskrifter: Lato Light, 28–36 px
+h1, h2, h3 {
+  font-family: $sans;
+  font-weight: 300;
   line-height: 1.2;
   margin: 0 0 1rem;
   // Overskrifterne får fokus, når en ny skærm vises (se quiz.js). Rammen skjules,
@@ -23,17 +28,17 @@ h1, h2 {
   &:focus { outline: none; }
 }
 
-h1 { font-size: 2.25rem; }
-h2 { font-size: 1.5rem; }
+h1 { font-size: $overskrift; }
+h2 { font-size: $overskrift-2; }
 
 img { max-width: 100%; display: block; }
 
 .top {
   padding: 1rem $luft;
-  border-bottom: 1px solid rgba($sepia, 0.2);
+  border-bottom: 1px solid $papirstreg;
 
   &__afsender {
-    @include spaerret(0.875rem);
+    @include spaerret;
     margin: 0;
     color: $roed;
     text-align: center;
@@ -44,8 +49,8 @@ img { max-width: 100%; display: block; }
   max-width: $bredde;
   margin: 3rem auto 0;
   padding: $luft;
-  border-top: 1px solid rgba($sepia, 0.2);
-  color: $graa;
+  border-top: 1px solid $papirstreg;
+  color: $moerkegraa;
   font-size: $tekst-lille;
 
   p { margin: 0 0 0.5rem; }

@@ -3,8 +3,8 @@
 // ==========================================================
 @use 'tokens' as *;
 
-// Store bogstaver og spærret skrift – som overskrifterne i søvnguiden
-@mixin spaerret($stoerrelse: $tekst-lille) {
+// Etiket: Lato Bold i versaler med 12 % luft – som i designguiden
+@mixin spaerret($stoerrelse: $etiket) {
   font-family: $sans;
   font-size: $stoerrelse;
   font-weight: 700;

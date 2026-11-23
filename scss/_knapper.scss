@@ -1,7 +1,7 @@
 // ==========================================================
 // KNAPPER · alle knapper bygger på .knap og får en variant
+// Designguiden: Lato Bold i versaler, 19 px. Mindst 56 px høje
 // ==========================================================
-@use 'sass:color';
 @use 'tokens' as *;
 @use 'mixins' as *;
 
@@ -14,8 +14,10 @@
   border: 2px solid transparent;
   border-radius: 6px;
   font-family: $sans;
-  font-size: $tekst;
+  font-size: $knap;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   cursor: pointer;
 
   // Hovedknappen (start, næste, send): den eneste fyldte røde knap på en skærm
@@ -24,13 +26,13 @@
     color: $hvid;
     margin-top: $luft;
 
-    // color.adjust gør den røde lidt mørkere ved hover (afløser den gamle darken())
-    &:hover { background: color.adjust($roed, $lightness: -8%); }
+    // Ved hover bliver knappen blæk – så holder vi os til paletten
+    &:hover { background: $blaek; }
   }
 
   // MYTE og SANDHED: ens og neutrale, så farven ikke afslører svaret
   &--valg {
-    @include spaerret($tekst);
+    @include spaerret($knap);
     background: $hvid;
     color: $blaek;
     border-color: $blaek;
@@ -60,6 +62,9 @@
     background: none;
     color: $blaek;
     text-decoration: underline;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: $tekst;
     font-weight: 400;
     min-height: 48px;
   }

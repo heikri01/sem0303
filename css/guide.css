@@ -1,3 +1,70 @@
+.lato-thin {
+  font-family: "Lato", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.lato-thin-italic {
+  font-family: "Lato", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.lato-light {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.lato-light-italic {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.lato-regular {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.lato-regular-italic {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.lato-bold {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.lato-bold-italic {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.lato-black {
+  font-family: "Lato", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.lato-black-italic {
+  font-family: "Lato", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+.eb-garamond-italic {
+  font-family: "EB Garamond", Georgia, serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: italic;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -6,16 +73,19 @@ body {
   margin: 0;
   background: #F7F3EC;
   color: #2B2A29;
-  font-family: "Gill Sans", "Gill Sans MT", "Lato", sans-serif;
+  font-family: "Lato", sans-serif;
   font-size: 1.125rem;
+  font-weight: 400;
   line-height: 1.55;
 }
 
-h1, h2 {
+h1, h2, h3 {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
   line-height: 1.2;
   margin: 0 0 1rem;
 }
-h1:focus, h2:focus {
+h1:focus, h2:focus, h3:focus {
   outline: none;
 }
 
@@ -24,7 +94,7 @@ h1 {
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
 }
 
 img {
@@ -34,11 +104,11 @@ img {
 
 .top {
   padding: 1rem 1.5rem;
-  border-bottom: 1px solid rgba(91, 70, 50, 0.2);
+  border-bottom: 1px solid #D8D1C6;
 }
 .top__afsender {
-  font-family: "Gill Sans", "Gill Sans MT", "Lato", sans-serif;
-  font-size: 0.875rem;
+  font-family: "Lato", sans-serif;
+  font-size: 1rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -51,8 +121,8 @@ img {
   max-width: 40rem;
   margin: 3rem auto 0;
   padding: 1.5rem;
-  border-top: 1px solid rgba(91, 70, 50, 0.2);
-  color: #6B6661;
+  border-top: 1px solid #D8D1C6;
+  color: #4F4E4D;
   font-size: 1rem;
 }
 .bund p {
@@ -96,7 +166,7 @@ img {
 }
 
 .guide {
-  background: #E7E1D6;
+  background: #D8D1C6;
   overflow: hidden;
 }
 
@@ -247,7 +317,7 @@ img {
 
 .sidehoved {
   padding-bottom: 9px;
-  font-size: 13px;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: 1.56px;
@@ -368,10 +438,10 @@ img {
 .fotopar__etiket {
   margin: 0;
   font-family: "Lato", sans-serif;
-  font-size: 13px;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.2;
-  letter-spacing: 1.82px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #F3EDE4;
 }
@@ -380,16 +450,14 @@ img {
   font-family: "EB Garamond", Georgia, serif;
   font-style: italic;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.4;
   color: #C9BFB2;
 }
 .fotopar__ai {
   margin: 0;
-  font-family: "EB Garamond", Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: 13px;
+  font-family: "Lato", sans-serif;
+  font-size: 1rem;
   line-height: 1.4;
   color: #C9BFB2;
 }
@@ -463,10 +531,10 @@ img {
 .mormor-i-dag__etiket {
   margin: 0;
   font-family: "Lato", sans-serif;
-  font-size: 13px;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.2;
-  letter-spacing: 1.82px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #C9BFB2;
 }
@@ -504,10 +572,10 @@ img {
 .dengang__etiket span {
   margin: 0;
   font-family: "Lato", sans-serif;
-  font-size: 13px;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.2;
-  letter-spacing: 1.82px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #5B4632;
 }
@@ -516,7 +584,7 @@ img {
   font-family: "EB Garamond", Georgia, serif;
   font-style: italic;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.4;
 }
 .dengang__citat {
@@ -532,7 +600,7 @@ img {
   font-family: "EB Garamond", Georgia, serif;
   font-style: italic;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.4;
 }
 .dengang--lille {
@@ -553,18 +621,18 @@ img {
   line-height: 1.6;
 }
 .idag strong {
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 700;
-  letter-spacing: 1.4px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 .idag__etiket {
   margin: 0;
   font-family: "Lato", sans-serif;
-  font-size: 13px;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.2;
-  letter-spacing: 1.82px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #A6192E;
 }
@@ -592,10 +660,10 @@ img {
 .proev-det__etiket {
   margin: 0;
   font-family: "Lato", sans-serif;
-  font-size: 13px;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.2;
-  letter-spacing: 1.82px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #A6192E;
 }
@@ -652,16 +720,23 @@ img {
   color: #4F4E4D;
 }
 
+.guide:not(.guide--laes) .side--aarstider .side__indre {
+  gap: 8px;
+}
+.guide:not(.guide--laes) .side--aarstider .aarstid {
+  gap: 3px;
+}
+.guide:not(.guide--laes) .side--aarstider .aarstid + .aarstid {
+  padding-top: 8px;
+}
+
 .forside__ai {
   position: absolute;
   right: 16px;
   bottom: 10px;
   margin: 0;
-  font-family: "EB Garamond", Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 1.4;
+  font-family: "Lato", sans-serif;
+  font-size: 1rem;
   color: #FFFFFF;
   text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 }
@@ -685,7 +760,7 @@ img {
   text-transform: uppercase;
 }
 .titelboks__spor {
-  font-size: 12px;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: 1.08px;
@@ -708,10 +783,10 @@ img {
 .titelboks__siden {
   margin: 0;
   font-family: "Lato", sans-serif;
-  font-size: 13px;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.2;
-  letter-spacing: 1.82px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #4F4E4D;
 }
@@ -740,15 +815,15 @@ img {
   background: #A6192E;
   color: #FFFFFF;
   font-family: "Lato", sans-serif;
-  font-size: 17px;
+  font-size: 1.1875rem;
   font-weight: 700;
   line-height: 1.2;
-  letter-spacing: 0.68px;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   text-decoration: none;
 }
 .hent__knap:hover {
-  background: #8A1426;
+  background: #2B2A29;
 }
 .hent__note {
   margin: 0;
@@ -776,10 +851,10 @@ img {
 .tre-spor__etiket {
   margin: 0;
   font-family: "Lato", sans-serif;
-  font-size: 12px;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.2;
-  letter-spacing: 1.68px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #4F4E4D;
 }
@@ -792,7 +867,7 @@ img {
   line-height: 1.3;
 }
 .tre-spor__tekst {
-  font-size: 13px;
+  font-size: 1rem;
   line-height: 1.45;
 }
 
@@ -802,10 +877,10 @@ img {
 .indhold__etiket {
   margin: 0;
   font-family: "Lato", sans-serif;
-  font-size: 13px;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.2;
-  letter-spacing: 1.82px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #4F4E4D;
 }
@@ -831,7 +906,7 @@ img {
   font-family: "EB Garamond", Georgia, serif;
   font-style: italic;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4;
   color: #4F4E4D;
 }
@@ -839,7 +914,7 @@ img {
   display: flex;
   flex-wrap: wrap;
   gap: 4px 6px;
-  font-size: 13px;
+  font-size: 1rem;
   line-height: 1.45;
   color: #4F4E4D;
 }
@@ -885,7 +960,7 @@ img {
   content: counter(udsagn);
   font-family: "Lato", sans-serif;
   font-style: normal;
-  font-size: 15px;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.2;
 }
@@ -914,7 +989,7 @@ img {
   font-family: "EB Garamond", Georgia, serif;
   font-style: italic;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.4;
   color: #4F4E4D;
 }
@@ -939,10 +1014,10 @@ img {
 .afslutning__etiket {
   margin: 0;
   font-family: "Lato", sans-serif;
-  font-size: 13px;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.2;
-  letter-spacing: 1.82px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #C9BFB2;
   text-align: center;
@@ -954,17 +1029,17 @@ img {
   gap: 5px;
   padding-top: 12px;
   border-top: 1px solid #D8D1C6;
-  font-size: 13px;
+  font-size: 1rem;
   line-height: 1.45;
   color: #4F4E4D;
 }
 .kilder__etiket {
   margin: 0;
   font-family: "Lato", sans-serif;
-  font-size: 13px;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.2;
-  letter-spacing: 1.82px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #4F4E4D;
 }
@@ -984,7 +1059,7 @@ img {
      object-fit: contain;
 }
 .bagside__web {
-  font-size: 13px;
+  font-size: 1rem;
   line-height: 1.45;
   color: #F3EDE4;
 }
@@ -1031,14 +1106,14 @@ img {
   background: #A6192E;
   color: #FFFFFF;
   font-family: "Lato", sans-serif;
-  font-size: 15px;
+  font-size: 1.1875rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   cursor: pointer;
 }
 .valg__knap:hover {
-  background: #8A1426;
+  background: #2B2A29;
 }
 .valg__knap--sekundaer {
   background: transparent;
@@ -1066,7 +1141,7 @@ img {
   background: rgba(43, 42, 41, 0.08);
   color: #2B2A29;
   font-family: "Lato", sans-serif;
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1143,7 +1218,7 @@ img {
   bottom: 14px;
   margin: 0;
   font-family: "Lato", sans-serif;
-  font-size: 14px;
+  font-size: 1rem;
   letter-spacing: 0.12em;
   text-align: center;
   text-transform: uppercase;
@@ -1592,14 +1667,14 @@ img {
   background: #A6192E;
   color: #FFFFFF;
   font-family: "Lato", sans-serif;
-  font-size: 15px;
+  font-size: 1.1875rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   cursor: pointer;
 }
 .tekstpanel__luk:hover {
-  background: #8A1426;
+  background: #2B2A29;
 }
 .tekstpanel__titel {
   margin: 24px 0 8px;
@@ -1618,18 +1693,18 @@ img {
 .tekst__sidetal {
   margin: 0;
   font-family: "Lato", sans-serif;
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.2;
-  letter-spacing: 2px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #A6192E;
   margin-bottom: 12px;
 }
 .tekst__overskrift {
   margin: 20px 0 8px;
-  font-size: 22px;
-  font-weight: 400;
+  font-size: 28px;
+  font-weight: 300;
   line-height: 1.3;
 }
 .tekst__afsnit {
@@ -1640,10 +1715,10 @@ img {
 .tekst__etiket {
   margin: 0;
   font-family: "Lato", sans-serif;
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.2;
-  letter-spacing: 1.8px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #4F4E4D;
   margin: 20px 0 4px;

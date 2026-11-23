@@ -1,26 +1,38 @@
 // ==========================================================
-// FARVER, SKRIFT OG MÅL · palet C "To temperaturer"
-// Samme værdier som søvnguiden (designsystem v2, 11–13/11).
-// Ret her, så ændringen slår igennem i hele quizzen.
+// TOKENS · farver, skrift og mål for hele sitet
+// Følger designguide v2 (Marcus, 19/11) – palet C "To temperaturer".
+// Navnene er de samme som Figma-variablerne. Ret her, så ændringen
+// slår igennem i quizzen, søvnguiden og AI Playbook på én gang.
 // ==========================================================
 
-// Farver
-$papir:   #F7F3EC;  // fælles grund
-$linned:  #F4EDE0;  // dengang: varm baggrund
-$sepia:   #5B4632;  // dengang: tekst og streger
-$hvid:    #FFFFFF;  // i dag: baggrund
-$roed:    #A6192E;  // i dag: Ringsted-rød. Bruges sparsomt
-$blaek:   #2B2A29;  // brødtekst og overskrifter
-$graa:    #6B6661;  // små tekster (kontrast over 4,5:1 på papir)
-$groen:   #2F6B3A;  // "Du svarede rigtigt" (kun i facit-feltet)
+// Farver (palet C). Brug kun disse – ingen andre farver i sitet
+$papir:        #F7F3EC;  // fælles baggrund
+$linned:       #E7D8BE;  // dengang-felter, Prøv det, Mormor
+$hvid:         #FFFFFF;  // i dag-felter
+$blaek:        #2B2A29;  // brødtekst, overskrifter, mørke flader
+$sepia:        #5B4632;  // tekst på linned (dengang, Grethe)
+$roed:         #A6192E;  // etiketter, knapper, den røde tråd. Sparsomt
+$moerkegraa:   #4F4E4D;  // lille tekst, billedtekster
+$nat-tekst:    #F3EDE4;  // tekst på blæk
+$nat-daempet:  #C9BFB2;  // små etiketter på blæk
+$papirstreg:   #D8D1C6;  // kun skillelinjer, aldrig tekst
+// Rød på blæk er aldrig tekst, kun linjer. Al tekst skal have mindst 4,5:1 i kontrast
 
-// Skrift
-$sans:  'Gill Sans', 'Gill Sans MT', 'Lato', sans-serif;  // overskrifter og brødtekst
-$serif: 'EB Garamond', Georgia, serif;                   // kun Grethes stemme
+// Skrift: Lato til alt, EB Garamond kursiv kun til Grethes stemme
+$sans:  'Lato', sans-serif;
+$serif: 'EB Garamond', Georgia, serif;
 
-// Mål. Læserne er ofte 70+, så tekst og klikflader er større end normalt
-$tekst:        1.125rem;  // 18 px brødtekst
-$tekst-lille:  1rem;      // 16 px – mindre end det går vi aldrig
+// Skriftstørrelser fra designguiden (mail/web). Læserne er ofte 70+
+$overskrift:   2.25rem;    // 36 px – Lato Light (overskrifter er 28–36 px)
+$overskrift-2: 1.75rem;    // 28 px – Lato Light
+$tekst:        1.125rem;   // 18 px brødtekst
+$tekst-lille:  1rem;       // 16 px – mindre end det går vi aldrig
+$etiket:       1rem;       // 16 px – Lato Bold versaler, 12 % luft
+$knap:         1.1875rem;  // 19 px – Lato Bold versaler
+$citat:        1.375rem;   // 22 px – Grethes citat i EB Garamond kursiv
+
+// Mål
 $klikflade:    56px;      // mindste højde på knapper
+$roed-traad:   2px;       // den røde tråd er altid en lige linje på 2 px
 $bredde:       40rem;     // maks. bredde på indholdet, så linjerne ikke bliver for lange
 $luft:         1.5rem;
