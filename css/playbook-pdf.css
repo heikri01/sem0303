@@ -1,0 +1,282 @@
+/* ==========================================================
+   AI PLAYBOOK · PDF-UDGAVEN (playbook-pdf.html)
+
+   Et A4-dokument, der er designet til at blive gemt som PDF.
+   Følger Marcus' designguide v2: Lato, papir #F7F3EC, linned #E7D8BE,
+   blæk #2B2A29, Ringsted-rød #A6192E, den røde tråd som lige linje.
+
+   Almindelig CSS (ikke SCSS), fordi siden kun bruges til PDF'en.
+   Sådan laver du PDF'en igen: se SÅDAN-VIRKER-DET.md
+   ========================================================== */
+
+/* ---------- Siden: A4 med sidetal og sidefod ---------- */
+@page {
+  size: A4;
+  margin: 20mm 18mm 22mm;
+  background: #F7F3EC;  /* papir – også i margenen */
+
+  @bottom-left {
+    content: "AI Playbook · Ringsted Dun";
+    font-family: "Lato", sans-serif;
+    font-size: 8.5pt;
+    color: #4F4E4D;
+  }
+  @bottom-right {
+    content: counter(page);
+    font-family: "Lato", sans-serif;
+    font-size: 8.5pt;
+    color: #4F4E4D;
+  }
+}
+
+/* Forside og bagside går helt ud til kanten og har ingen sidefod */
+@page omslag {
+  margin: 0;
+  @bottom-left { content: none; }
+  @bottom-right { content: none; }
+}
+
+* { box-sizing: border-box; }
+
+html {
+  /* Farver og baggrunde kommer med, også uden "Baggrundsgrafik" */
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+body {
+  margin: 0;
+  background: #F7F3EC;
+  color: #2B2A29;
+  font-family: "Lato", sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.5;
+}
+
+/* På skærmen vises siderne som ark, så man kan se, hvordan PDF'en bliver */
+@media screen {
+  body { background: #E7E1D6; padding: 2rem 0; }
+  .ark, .kapitel { width: 210mm; margin: 0 auto 2rem; background: #F7F3EC; box-shadow: 0 4px 20px rgba(43, 42, 41, 0.15); }
+  .kapitel { padding: 20mm 18mm; }
+  .skaerm-note {
+    width: 210mm;
+    margin: 0 auto 1.5rem;
+    padding: 1rem 1.25rem;
+    background: #FFFFFF;
+    border-left: 6px solid #A6192E;
+  }
+}
+@media print { .skaerm-note { display: none; } }
+
+h1, h2, h3, h4 { font-weight: 300; line-height: 1.2; }
+h3 { font-size: 14pt; margin: 18pt 0 6pt; break-after: avoid; }
+h4 { font-size: 12pt; margin: 0 0 3pt; }
+p { margin: 0 0 6pt; }
+ul, ol { margin: 0 0 6pt; padding-left: 14pt; }
+li { margin-bottom: 3pt; }
+a { color: inherit; text-decoration: none; }
+code { font-size: 9pt; background: #E7D8BE; padding: 0 2pt; overflow-wrap: anywhere; }
+strong { font-weight: 700; }
+
+/* Etiket: Lato Bold versaler med luft */
+.etiket,
+.kapitel__nr,
+.kort h3,
+.tabel th,
+.ordliste dt,
+.fakta dt,
+.note h3,
+.prompt__titel,
+.maaned__navn,
+.trin > li > h3::before {
+  font-family: "Lato", sans-serif;
+  font-size: 8.5pt;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+
+/* ---------- Forside ---------- */
+.omslag {
+  page: omslag;
+  height: 297mm;
+  display: flex;
+  flex-direction: column;
+  background: #2B2A29;
+  color: #F3EDE4;
+  break-after: page;
+}
+.omslag__top { padding: 22mm 20mm 0; flex: 1; }
+.omslag__logo { height: 34mm; width: auto; }
+.omslag__etiket { margin-top: 18mm; color: #C9BFB2; }
+.omslag h1 { margin: 4mm 0 6mm; font-size: 54pt; }
+.omslag__tekst { max-width: 125mm; font-size: 13pt; }
+
+/* Dengang og i dag, delt af den røde tråd */
+.omslag__billeder {
+  display: grid;
+  grid-template-columns: 1fr 6px 1fr;
+  height: 112mm;
+  border-top: 6px solid #A6192E;
+}
+.omslag__billeder figure { position: relative; margin: 0; overflow: hidden; }
+.omslag__billeder img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.omslag__billeder .traad { background: #A6192E; }
+.omslag__billeder figcaption {
+  position: absolute;
+  left: 4mm;
+  bottom: 4mm;
+  padding: 1mm 2.5mm;
+  background: rgba(43, 42, 41, 0.8);
+  color: #F3EDE4;
+  font-size: 8.5pt;
+}
+.omslag__billeder .mrk { position: absolute; top: 4mm; left: 4mm; color: #F3EDE4; }
+
+/* Bagsiden */
+.bagside {
+  page: omslag;
+  height: 297mm;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8mm;
+  background: #2B2A29;
+  color: #F3EDE4;
+  text-align: center;
+  break-before: page;
+  border-bottom: 6px solid #A6192E;
+}
+.bagside img { height: 40mm; }
+.bagside p { color: #C9BFB2; margin: 0; }
+
+
+/* ---------- Indholdsfortegnelse ---------- */
+.indholdsliste { list-style: none; padding: 0; margin: 10pt 0 0; counter-reset: kap; }
+.indholdsliste li {
+  counter-increment: kap;
+  display: grid;
+  grid-template-columns: 16mm 1fr;
+  padding: 7pt 0;
+  border-bottom: 1px solid #D8D1C6;
+}
+.indholdsliste li::before {
+  content: counter(kap, decimal-leading-zero);
+  font-size: 20pt;
+  font-weight: 300;
+  color: #A6192E;
+  line-height: 1;
+}
+.indholdsliste strong { display: block; font-size: 12pt; }
+.indholdsliste span { color: #4F4E4D; }
+
+
+/* ---------- Kapitler ---------- */
+.kapitel { break-before: page; }
+.kapitel__top {
+  margin-bottom: 12pt;
+  padding-bottom: 10pt;
+  border-bottom: 2px solid #A6192E;  /* den røde tråd */
+}
+.kapitel__nr { margin: 0; color: #A6192E; }
+.kapitel__top h2 { margin: 2pt 0 4pt; font-size: 28pt; }
+.kapitel__top p:last-child { font-size: 12pt; margin: 0; max-width: 150mm; }
+
+/* Kort = designguidens "I dag-felt": hvidt med rød etiket */
+.kort-gitter { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; margin: 8pt 0 10pt; }
+.kort-gitter--to { grid-template-columns: repeat(2, 1fr); }
+.kort { background: #FFFFFF; padding: 4mm; break-inside: avoid; }
+.kort h3 { margin: 0 0 4pt; color: #A6192E; }
+.kort ul { margin: 0; }
+
+.to-spalter { display: grid; grid-template-columns: 1fr 1fr; gap: 0 7mm; }
+
+.tabel { width: 100%; border-collapse: collapse; background: #FFFFFF; font-size: 9.5pt; margin-bottom: 8pt; }
+.tabel th, .tabel td { text-align: left; vertical-align: top; padding: 4pt 6pt; border-bottom: 1px solid #D8D1C6; }
+.tabel th { background: #E7D8BE; color: #5B4632; }
+.tabel tr { break-inside: avoid; }
+.tabel--tal td + td { text-align: center; }
+.tabel--tal small { display: block; color: #4F4E4D; font-size: 8pt; }
+
+.ordliste, .fakta { margin: 0; padding: 1mm 4mm; background: #FFFFFF; }
+.ordliste dt, .fakta dt { color: #A6192E; padding-top: 5pt; }
+.ordliste dd, .fakta dd { margin: 1pt 0 0; padding-bottom: 5pt; border-bottom: 1px solid #D8D1C6; }
+.ordliste dd:last-child, .fakta dd:last-child { border-bottom: 0; }
+.ordliste div, .fakta div { break-inside: avoid; }
+
+/* Note og prompt = designguidens "Prøv det": linned med rød kant */
+.note, .prompt {
+  margin: 8pt 0;
+  padding: 4mm 5mm;
+  background: #E7D8BE;
+  border-left: 6px solid #A6192E;
+  break-inside: avoid;
+}
+.note h3 { margin: 0 0 3pt; color: #5B4632; }
+.note p:last-child { margin: 0; }
+.prompt__titel { margin: 0 0 4pt; color: #5B4632; }
+.prompt pre { margin: 0; white-space: pre-wrap; font-family: "Lato", sans-serif; font-size: 9.5pt; line-height: 1.45; }
+
+.laering li::marker { color: #A6192E; font-weight: 700; }
+
+
+/* ---------- Lav en produktion ---------- */
+.produktion { break-before: page; }
+.produktion:first-of-type { break-before: auto; }
+.produktion__navn { font-size: 20pt; margin: 6pt 0 6pt; }
+.produktion__navn::before { content: "Produktion · "; color: #A6192E; }
+
+.trin { list-style: none; margin: 0; padding: 0; counter-reset: trin; }
+.trin > li { counter-increment: trin; padding: 0 0 8pt 5mm; border-left: 2px solid #D8D1C6; }
+.trin > li > h3 { margin: 0 0 3pt; font-size: 13pt; }
+.trin > li > h3::before { content: "Trin " counter(trin); display: block; color: #A6192E; }
+
+.produktion__fakta { margin: 6pt 0 10pt; }
+.produktion__fakta .fakta { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 6mm; }
+
+/* Eksemplet på karrusellen: et opslag med to slides */
+.eksempel { display: grid; grid-template-columns: 62mm 1fr; gap: 6mm; align-items: start; margin: 6pt 0; }
+.opslag { background: #FFFFFF; border: 1px solid #D8D1C6; border-radius: 6px; overflow: hidden; break-inside: avoid; }
+.opslag__hoved { display: flex; gap: 2.5mm; align-items: center; padding: 2.5mm 3mm; }
+.opslag__logo { width: 9mm; height: 9mm; padding: 1mm; object-fit: contain; border: 1px solid #D8D1C6; border-radius: 50%; background: #F7F3EC; }
+.opslag__navn { margin: 0; font-weight: 700; font-size: 9pt; }
+.opslag__tid { margin: 0; color: #4F4E4D; font-size: 8pt; }
+.opslag__tekst { padding: 0 3mm 2.5mm; font-size: 8.5pt; line-height: 1.4; }
+.opslag__tekst b { color: #4F4E4D; text-decoration: underline; }
+.opslag figure { position: relative; margin: 0; aspect-ratio: 4 / 5; }
+.opslag figure img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.opslag figcaption { position: absolute; left: 2mm; bottom: 2mm; padding: 0.5mm 1.5mm; background: rgba(43, 42, 41, 0.8); color: #F3EDE4; font-size: 7.5pt; }
+.opslag__nr { text-align: center; color: #4F4E4D; font-size: 8pt; margin: 1.5mm 0; }
+
+/* Tjeklisten med tomme felter til at krydse af på papir */
+.tjekliste { list-style: none; padding: 0; margin: 6pt 0; }
+.tjekliste li { display: grid; grid-template-columns: 7mm 1fr; padding: 4pt 0; border-bottom: 1px solid #D8D1C6; break-inside: avoid; }
+.tjekliste li::before { content: ""; width: 4.5mm; height: 4.5mm; border: 1.5px solid #2B2A29; border-radius: 1px; margin-top: 1pt; }
+
+
+/* ---------- Årshjul ---------- */
+.soejler { margin: 6pt 0 10pt; }
+.soejle {
+  display: grid;
+  grid-template-columns: 22mm 1fr 52mm;
+  gap: 0 5mm;
+  padding: 4mm;
+  margin-bottom: 2.5mm;
+  background: #FFFFFF;
+  break-inside: avoid;
+}
+.soejle p { margin: 0 0 2pt; }
+.soejle__andel { grid-row: span 3; font-size: 26pt; font-weight: 300; color: #A6192E; line-height: 1; }
+.soejle__spoergsmaal { color: #5B4632; font-weight: 700; }
+.soejle__eks { grid-column: 3; grid-row: 1 / span 3; color: #4F4E4D; padding-left: 4mm; border-left: 1px solid #D8D1C6; }
+.soejle h4, .soejle p:not(.soejle__andel):not(.soejle__eks) { grid-column: 2; }
+
+.maaneder { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; list-style: none; padding: 0; margin: 6pt 0 0; }
+.maaned { background: #FFFFFF; padding: 3mm 3.5mm; font-size: 9pt; break-inside: avoid; }
+.maaned p { margin: 0 0 2pt; }
+.maaned__navn { color: #A6192E; }
+.maaned__fase { font-weight: 700; }
+.maaned--kampagne { background: #E7D8BE; border-left: 5px solid #A6192E; }
+.side-skift { break-before: page; }

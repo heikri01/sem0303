@@ -18,7 +18,8 @@
   <header class="hoved">
     <div class="hoved__linje indhold">
       <a class="hoved__logo" href="#start">
-        <img src="img/guide/RDU_logo.png" alt="Ringsted Dun">
+        <!-- Det aflange logo fra Dykon: gåsen og navnet ved siden af hinanden. Logoet ændres aldrig -->
+        <img src="img/playbook/RDU_logo_aflang.png" alt="Ringsted Dun – Established 1947">
         <span>AI Playbook</span>
       </a>
 
@@ -29,8 +30,8 @@
         <ul class="soeg__resultater" id="soegeresultater" hidden></ul>
       </div>
 
-      <!-- Åbner browserens udskriv-vindue. Vælg "Gem som PDF" som printer -->
-      <button class="knap knap--sekundaer hoved__pdf" type="button" id="gemPdf">Gem som PDF</button>
+      <!-- Den færdige PDF (laves ud fra playbook-pdf.html – se SÅDAN-VIRKER-DET.md) -->
+      <a class="knap knap--sekundaer hoved__pdf" href="pdf/ai-playbook.pdf" target="_blank" rel="noopener">Hent som PDF</a>
     </div>
 
     <!-- Menuen: hvert link peger på et afsnits id -->
@@ -38,6 +39,7 @@
       <ul class="indhold">
         <li><a href="#start">Start</a></li>
         <li><a href="#lav">Lav en produktion</a></li>
+        <li><a href="#aarshjul">Årshjul</a></li>
         <li><a href="#principper">Principper</a></li>
         <li><a href="#kontekst">Baggrundsfilen</a></li>
         <li><a href="#cases">Erfaringer</a></li>
@@ -84,6 +86,7 @@
                 <tbody>
                   <tr><td>i gang for første gang</td><td><a href="#principper">Principper</a> og <a href="#etik">Etik og ansvar</a> (ca. 10 minutter)</td></tr>
                   <tr><td>lave et opslag, en mail eller et klip</td><td><a href="#lav">Lav en produktion</a> – vælg, hvad du vil lave, og følg trinene</td></tr>
+                  <tr><td>finde ud af, hvad der skal ud hvornår</td><td><a href="#aarshjul">Årshjul</a></td></tr>
                   <tr><td>vide, hvad du skal give AI</td><td><a href="#kontekst">Baggrundsfilen</a></td></tr>
                   <tr><td>se, hvordan det er gået i praksis</td><td><a href="#cases">Erfaringer</a></td></tr>
                 </tbody>
@@ -115,6 +118,8 @@
               <dd>Den besked, du skriver til AI – altså opgaven. Playbooken har færdige prompts, du kan kopiere.</dd>
               <dt>Baggrundsfilen</dt>
               <dd>En fil, der fortæller AI alt om kampagnen: hvem vi skriver til, hvordan vi lyder, og hvad vi ikke må. Den uploades hver gang.</dd>
+              <dt>Indholdssøjle</dt>
+              <dd>Et af de fem emner, alt indhold handler om – fx søvnvaner eller dynepleje. Se <a href="#aarshjul">Årshjul</a>.</dd>
               <dt>Karrusel</dt>
               <dd>Et opslag med flere billeder, man kan swipe igennem.</dd>
               <dt>Forside A og B</dt>
@@ -403,7 +408,95 @@ Skriv ikke logo, sidefod, afmelding, AI-mærkning eller "mail X af 5" – de lig
       </div>
     </section>
 
-    <!-- ========== 3 · PRINCIPPER ========== -->
+    <!-- ========== 3 · ÅRSHJUL (indholdssøjler og årshjul – fra FigJam "Ringsted Dun", siden Strategi) ========== -->
+    <section class="afsnit" id="aarshjul">
+      <div class="afsnit__top">
+        <div class="indhold">
+          <h2>Årshjul</h2>
+          <p>Hvad skal du lave hvornår? Alt indhold hører til ét af fem emner. Årshjulet viser, hvilke emner og kapitler der passer til hver måned.</p>
+        </div>
+      </div>
+      <div class="indhold">
+        <div class="note">
+          <h3>Sådan bruger du årshjulet med AI</h3>
+          <p>Find måneden nedenfor. Se, hvilket kapitel fra søvnguiden der passer, og vælg det i prompten under <a href="#lav">Lav en produktion</a>. Hold øje med fordelingen: Over en måned skal de fleste opslag handle om søvn – ikke om dyner.</p>
+        </div>
+
+        <h3>De fem emner (indholdssøjler)</h3>
+        <p>Hvert opslag, hver mail og hvert klip hører til ét emne. Emnet bestemmer, hvad læseren får ud af det.</p>
+        <div class="soejler">
+          <article class="soejle">
+            <p class="soejle__andel">40 %</p>
+            <h4>Søvnvaner</h4>
+            <p class="soejle__spoergsmaal">»Hvordan sover jeg bedre?«</p>
+            <p>Temperatur, lys, døgnrytme og gode vaner. Grethe fortæller, søvnguiden giver rådene.</p>
+            <p class="soejle__eks"><strong>Fx:</strong> karrusel, quizzen, den lange video</p>
+          </article>
+          <article class="soejle">
+            <p class="soejle__andel">20 %</p>
+            <h4>Dynepleje</h4>
+            <p class="soejle__spoergsmaal">»Hvordan passer jeg på min dyne?«</p>
+            <p>Luftning, vask og opbevaring. Fylder mere om sommeren og efteråret.</p>
+            <p class="soejle__eks"><strong>Fx:</strong> karrusel, afstemning i story</p>
+          </article>
+          <article class="soejle">
+            <p class="soejle__andel">15 %</p>
+            <h4>Dynen til dig</h4>
+            <p class="soejle__spoergsmaal">»Hvilken dyne passer til mig?«</p>
+            <p>Varm eller kølig, fyld og vægt. Det emne, der sælger – derfor aldrig mere end en femtedel.</p>
+            <p class="soejle__eks"><strong>Fx:</strong> Ringsted Duns dynevælger</p>
+          </article>
+          <article class="soejle">
+            <p class="soejle__andel">15 %</p>
+            <h4>Håndværket</h4>
+            <p class="soejle__spoergsmaal">»Hvad gør dynen til det, den er?«</p>
+            <p>Fra dun til dyne, kvalitet og historien siden 1947. Nostalgi, som Mette gerne deler.</p>
+            <p class="soejle__eks"><strong>Fx:</strong> »Fra dun til dyne«-video eller karrusel</p>
+          </article>
+          <article class="soejle">
+            <p class="soejle__andel">10 %</p>
+            <h4>Ansvar</h4>
+            <p class="soejle__spoergsmaal">»Hvor kommer dunene fra?«</p>
+            <p>Dyrevelfærd, mærker som OEKO-TEX og NOMITE, og det Ringsted Dun kan dokumentere.</p>
+            <p class="soejle__eks"><strong>Fx:</strong> billedserie eller plakat</p>
+          </article>
+        </div>
+
+        <h3>Fordelingen skifter med årstiden</h3>
+        <p>Emnerne er de samme hele året, men fordelingen ændrer sig. Tallene er procent af det, der lægges ud.</p>
+        <div class="tabel-ramme">
+          <table class="tabel tabel--tal">
+            <thead><tr><th scope="col">Periode</th><th scope="col">Søvnvaner</th><th scope="col">Dynepleje</th><th scope="col">Dynen til dig</th><th scope="col">Håndværket</th><th scope="col">Ansvar</th></tr></thead>
+            <tbody>
+              <tr><td>Normalt (jan.–mar.)</td><td>40</td><td>20</td><td>15</td><td>15</td><td>10</td></tr>
+              <tr><td>Kampagnen (apr.–maj)</td><td>45</td><td>10</td><td>15 <small>gave</small></td><td>20 <small>nostalgi</small></td><td>10</td></tr>
+              <tr><td>Sommer (jun.–aug.)</td><td>35</td><td>25 <small>sommerhus</small></td><td>15</td><td>15</td><td>10</td></tr>
+              <tr><td>Efterår (sep.–okt.)</td><td>35</td><td>30 <small>dynevask</small></td><td>15</td><td>10</td><td>10</td></tr>
+              <tr><td>Jul (nov.–dec.)</td><td>30</td><td>15</td><td>20 <small>gaver</small></td><td>25 <small>siden 1947</small></td><td>10</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Året måned for måned</h3>
+        <p>Kampagnen ligger i de fire uger op til Mors Dag: <strong>12. april – 9. maj 2027</strong>. Resten af året holdes kontakten ved lige med nyhedsbrev og opslag.</p>
+        <ol class="maaneder">
+          <li class="maaned"><p class="maaned__navn">Januar</p><p class="maaned__fase">Vi laver guide, quiz og video</p><p><strong>Anledning:</strong> nytår, gode vaner, mørke morgener</p><p><strong>Kapitel:</strong> 07.00 Morgen – lys ind</p></li>
+          <li class="maaned"><p class="maaned__navn">Februar</p><p class="maaned__fase">Vi laver og tester quizzen</p><p><strong>Anledning:</strong> mørke morgener</p><p><strong>Kapitel:</strong> Vinter – lune nætter</p></li>
+          <li class="maaned"><p class="maaned__navn">Marts</p><p class="maaned__fase">Opvarmning: opslag + videoen på YouTube</p><p><strong>Anledning:</strong> sommertid 28/3, påske</p><p><strong>Kapitel:</strong> 22.30 Sengetid</p></li>
+          <li class="maaned maaned--kampagne"><p class="maaned__navn">April</p><p class="maaned__fase">Kampagnen starter 12/4: annoncer, quiz, test af to forsider</p><p><strong>Anledning:</strong> lyse morgener</p><p><strong>Indhold:</strong> quizzen, »send den til din mor«, Grethe-citater</p><p><strong>Nyhedsbrev:</strong> velkomstmail med guiden</p></li>
+          <li class="maaned maaned--kampagne"><p class="maaned__navn">Maj</p><p class="maaned__fase">Kampagnen slutter på Mors Dag 9/5</p><p><strong>Anledning:</strong> Mors Dag</p><p><strong>Indhold:</strong> en god nat til mor</p><p><strong>Nyhedsbrev:</strong> 3–4 mails, ét kapitel hver</p></li>
+          <li class="maaned"><p class="maaned__navn">Juni</p><p class="maaned__fase">Nyhedsbrev og opslag hver måned</p><p><strong>Anledning:</strong> lyse nætter, sommerhuset åbner</p><p><strong>Kapitel:</strong> Sommer</p></li>
+          <li class="maaned"><p class="maaned__navn">Juli</p><p class="maaned__fase">Nyhedsbrev og opslag</p><p><strong>Anledning:</strong> sommerferie</p><p><strong>Kapitel:</strong> Når børnebørnene sover over</p></li>
+          <li class="maaned"><p class="maaned__navn">August</p><p class="maaned__fase">Nyhedsbrev og opslag</p><p><strong>Anledning:</strong> sommerhuset lukkes</p><p><strong>Kapitel:</strong> Din side af sengen, opbevaring</p></li>
+          <li class="maaned"><p class="maaned__navn">September</p><p class="maaned__fase">Nyhedsbrev og opslag</p><p><strong>Anledning:</strong> hverdag igen</p><p><strong>Kapitel:</strong> 14.00 Eftermiddag – bevægelse</p></li>
+          <li class="maaned"><p class="maaned__navn">Oktober</p><p class="maaned__fase">Nyhedsbrev og opslag</p><p><strong>Anledning:</strong> vintertid 31/10, efterårsferie</p><p><strong>Kapitel:</strong> Efterår – den store dynevask, 04.30 Natten</p></li>
+          <li class="maaned"><p class="maaned__navn">November</p><p class="maaned__fase">Nyhedsbrev og opslag</p><p><strong>Anledning:</strong> mørke aftener, gaver</p><p><strong>Kapitel:</strong> 20.00 Aften – skru ned for lyset</p></li>
+          <li class="maaned"><p class="maaned__navn">December</p><p class="maaned__fase">Nyhedsbrev og opslag</p><p><strong>Anledning:</strong> jul, gæster, gaver</p><p><strong>Kapitel:</strong> Børnebørnene og gæstesengen, siden 1947</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ========== 4 · PRINCIPPER ========== -->
     <section class="afsnit" id="principper">
       <div class="afsnit__top">
         <div class="indhold">

@@ -131,10 +131,19 @@ code {
   gap: 1rem;
   text-decoration: none;
 }
-.hoved__logo img { height: 48px; width: auto; }
-.hoved__logo span { @include etiket($roed); }
+.hoved__logo img { height: 52px; width: auto; }
+// "AI Playbook" adskilt fra logoet af en lige, tynd linje
+.hoved__logo span {
+  @include etiket($roed);
+  padding-left: 1rem;
+  border-left: 1px solid $p-papirstreg;
+  line-height: 52px;
+}
 
+// Linket ser ud som en knap
 .hoved__pdf {
+  display: inline-flex;
+  align-items: center;
   flex-shrink: 0;
   width: auto;
   min-height: 48px;
@@ -378,6 +387,61 @@ code {
 .laering li { margin-bottom: 0.75rem; }
 .laering li::marker { color: $roed; font-weight: 700; }
 
+
+// ---------- Årshjul: de fem emner, fordeling og måneder ----------
+.soejler {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.soejle {
+  padding: 1.5rem;
+  background: $hvid;
+}
+.soejle p { margin: 0 0 0.75rem; }
+.soejle h4 {
+  margin: 0 0 0.25rem;
+  font-size: 1.375rem;
+  font-weight: 300;
+}
+// Andelen er det, man ser først: stort tal i Ringsted-rød
+.soejle__andel {
+  font-size: 2.5rem;
+  font-weight: 300;
+  line-height: 1;
+  color: $roed;
+}
+.soejle__spoergsmaal { color: $sepia; font-weight: 700; }
+.soejle__eks {
+  padding-top: 0.75rem;
+  border-top: 1px solid $p-papirstreg;
+  color: $p-moerkegraa;
+}
+
+.tabel--tal td + td { text-align: center; }
+.tabel--tal small { display: block; color: $p-moerkegraa; font-size: 1rem; }
+
+.maaneder {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.maaned {
+  padding: 1.25rem;
+  background: $hvid;
+}
+.maaned p { margin: 0 0 0.5rem; }
+.maaned__navn { @include etiket($roed); }
+.maaned__fase { font-weight: 700; }
+// Kampagnemånederne står frem som designguidens "Prøv det"-felt
+.maaned--kampagne {
+  background: $p-linned;
+  border-left: 6px solid $roed;
+}
 
 // ---------- 6. Værkstedet: faner, trin og højre side ----------
 .faner {

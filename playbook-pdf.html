@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Playbook · Ringsted Dun (PDF-udgave)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <!-- PDF-udgaven af playbooken. Lavet ud fra playbook.html 23/11 – se SÅDAN-VIRKER-DET.md -->
+  <link rel="stylesheet" href="css/playbook-pdf.css">
+</head>
+<body>
+
+  <p class="skaerm-note">Det her er PDF-udgaven af AI Playbooken. Den færdige PDF ligger i <code>pdf/ai-playbook.pdf</code>. Vil du lave den igen: Ctrl+P → »Gem som PDF« → margener »Standard«, sidehoveder og sidefødder fra.</p>
+
+  <!-- ===== FORSIDE ===== -->
+  <div class="omslag ark">
+    <div class="omslag__top">
+      <img class="omslag__logo" src="img/guide/RDU_logo_hvid.png" alt="Ringsted Dun – Established 1947">
+      <p class="omslag__etiket etiket">Søvnguiden – dengang og i dag · 2027</p>
+      <h1>AI Playbook</h1>
+      <p class="omslag__tekst">Sådan laver du opslag, mails og videoklip til kampagnen med hjælp fra AI – hurtigere, men lige så godt, som hvis du havde skrevet det hele selv.</p>
+    </div>
+    <div class="omslag__billeder">
+      <figure><img src="img/guide/dengang-sengetid.jpg" alt=""><p class="mrk etiket">Dengang</p><figcaption>AI-genereret billede</figcaption></figure>
+      <div class="traad"></div>
+      <figure><img src="img/guide/idag-sengetid.jpg" alt=""><p class="mrk etiket">I dag</p><figcaption>AI-genereret billede</figcaption></figure>
+    </div>
+  </div>
+
+  <!-- ===== INDHOLD ===== -->
+  <section class="kapitel kapitel--indhold">
+    <header class="kapitel__top">
+      <p class="kapitel__nr">Indhold</p>
+      <h2>Det finder du her</h2>
+      <p>Playbooken findes også som hjemmeside med søgning, kopiér-knapper og forhåndsvisning af opslag.</p>
+    </header>
+    <ol class="indholdsliste"><li><a href="#start"><strong>Sådan bruger du playbooken</strong><span>Hvem playbooken er til, værktøjerne og de ord, du møder.</span></a></li><li><a href="#lav"><strong>Lav en produktion</strong><span>Trin for trin fra opgave til godkendt karrusel, mail, klip eller opslag.</span></a></li><li><a href="#aarshjul"><strong>Årshjul</strong><span>De fem emner, og hvad der skal ud hvornår.</span></a></li><li><a href="#principper"><strong>Principper</strong><span>Seks regler, der gælder, uanset hvad du laver.</span></a></li><li><a href="#kontekst"><strong>Baggrundsfilen</strong><span>Det, AI skal have med hver gang.</span></a></li><li><a href="#cases"><strong>Erfaringer</strong><span>Hvad vi lærte af at lave karrusellen 22.30 Sengetid.</span></a></li><li><a href="#etik"><strong>Etik og ansvar</strong><span>Det, du skal passe på, når du bruger AI i Ringsted Duns navn.</span></a></li></ol>
+  </section>
+
+  <section class="kapitel" id="start"><header class="kapitel__top"><p class="kapitel__nr">Kapitel 1</p><h2>Sådan bruger du playbooken</h2><p>Sådan laver du opslag, mails og videoklip til kampagnen med hjælp fra AI – hurtigere, men lige så godt, som hvis du havde skrevet det hele selv.</p></header>
+<div class="kort-gitter kort-gitter--tre">
+<article class="kort">
+<h3>Til dig, der</h3>
+<p>skal lave indhold til kampagnen – i de fire uger op til Mors Dag og bagefter, når nyhedsbrevet sendes én gang hver årstid.</p>
+</article>
+<article class="kort">
+<h3>Den hjælper med</h3>
+<p>karruseller, velkomstmails, korte videoklip og små opslag – alt sammen lavet ud fra søvnguiden.</p>
+</article>
+<article class="kort">
+<h3>Den ændrer ikke</h3>
+<p>Søvnguiden er stadig det eneste sted, fakta kommer fra, og Grethe er stadig den samme. AI hjælper med at skrive og tilpasse – ikke med at finde på.</p>
+</article>
+</div>
+<div class="to-spalter">
+<div>
+<h3>Hvor skal du hen?</h3>
+<div class="tabel-ramme">
+<table class="tabel">
+<thead><tr><th scope="col">Du vil …</th><th scope="col">Gå til</th></tr></thead>
+<tbody>
+<tr><td>i gang for første gang</td><td><a href="#principper">Principper</a> og <a href="#etik">Etik og ansvar</a> (ca. 10 minutter)</td></tr>
+<tr><td>lave et opslag, en mail eller et klip</td><td><a href="#lav">Lav en produktion</a> – vælg, hvad du vil lave, og følg trinene</td></tr>
+<tr><td>finde ud af, hvad der skal ud hvornår</td><td><a href="#aarshjul">Årshjul</a></td></tr>
+<tr><td>vide, hvad du skal give AI</td><td><a href="#kontekst">Baggrundsfilen</a></td></tr>
+<tr><td>se, hvordan det er gået i praksis</td><td><a href="#cases">Erfaringer</a></td></tr>
+</tbody>
+</table>
+</div>
+<h3>Værktøjer, vi har brugt</h3>
+<div class="tabel-ramme">
+<table class="tabel">
+<thead><tr><th scope="col">Til</th><th scope="col">Værktøj</th></tr></thead>
+<tbody>
+<tr><td>Tekst (karrusel, mails, opslag)</td><td>Claude eller ChatGPT – playbooken virker med begge</td></tr>
+<tr><td>Billeder og videoklip af Grethe</td><td>Google Flow</td></tr>
+<tr><td>Grethes stemme</td><td>CapCut eller ElevenLabs</td></tr>
+<tr><td>Klip og undertekster</td><td>CapCut</td></tr>
+<tr><td>Opsætning af slides</td><td>Jeres eget layoutprogram, fx Canva eller Adobe Express</td></tr>
+</tbody>
+</table>
+</div>
+<p>Værktøjerne kan skiftes ud. Det, der holder kvaliteten, er baggrundsfilen, opgaverne til AI og tjeklisten.</p>
+</div>
+<div>
+<h3>Ord, du møder i playbooken</h3>
+<dl class="ordliste">
+<div><dt>AI</dt><dd>Et program som ChatGPT eller Claude, der kan skrive tekst og lave billeder ud fra det, du beder om.</dd></div>
+
+<div><dt>Prompt</dt><dd>Den besked, du skriver til AI – altså opgaven. Playbooken har færdige prompts, du kan kopiere.</dd></div>
+
+<div><dt>Baggrundsfilen</dt><dd>En fil, der fortæller AI alt om kampagnen: hvem vi skriver til, hvordan vi lyder, og hvad vi ikke må. Den uploades hver gang.</dd></div>
+
+<div><dt>Indholdssøjle</dt><dd>Et af de fem emner, alt indhold handler om – fx søvnvaner eller dynepleje. Se <a href="#aarshjul">Årshjul</a>.</dd></div>
+
+<div><dt>Karrusel</dt><dd>Et opslag med flere billeder, man kan swipe igennem.</dd></div>
+
+<div><dt>Forside A og B</dt><dd>To forskellige forsider til samme karrusel. Halvdelen ser A, resten ser B – så kan vi se, hvilken flest klikker på.</dd></div>
+
+<div><dt>AI-mærkning</dt><dd>En kort tekst, der fortæller, at et billede eller en stemme er lavet med AI. Den skal altid med.</dd></div>
+
+<div><dt>[FAKTA MANGLER]</dt><dd>Det skriver AI, når den mangler en oplysning i stedet for at gætte. Det skal et menneske finde svar på.</dd></div>
+
+<div><dt>Billedbeskrivelse</dt><dd>En kort tekst, der beskriver billedet for blinde og svagtseende (kaldes også alt-tekst).</dd></div>
+
+</dl>
+</div>
+</div>
+</section><section class="kapitel" id="lav"><header class="kapitel__top"><p class="kapitel__nr">Kapitel 2</p><h2>Lav en produktion</h2><p>Vælg, hvad du vil lave, og følg trinene. Ved siden af kan du se, hvordan det bliver.</p></header><div class="produktion"><h3 class="produktion__navn">Karrusel</h3><ol class="trin">
+<li>
+<h3>Giv AI filerne</h3>
+<p>Start en ny samtale med AI, og upload:</p>
+<ul>
+<li>baggrundsfilen, søvnguiden og Grethes karakterark (eller den samlede PDF – se <a href="#kontekst">Baggrundsfilen</a>)</li>
+<li>de to billeder til kapitlet – dengang og i dag, fx <code>dengang_2230.png</code> og <code>idag_2230.png</code></li>
+</ul>
+</li>
+<li>
+<h3>Kopiér opgaven til AI</h3>
+<p>Tryk »Kopiér«, sæt teksten ind i samtalen, og ret kapitlet i [firkantede klammer].</p>
+<div class="prompt">
+
+<p class="prompt__titel">Prompt · Karrusel</p>
+
+
+<pre id="p-karrusel">Læs de vedhæftede filer. Lav en karrusel ud fra kapitlet [22.30 Sengetid] efter formatet i afsnit 6. Lever alt fra afsnit 7, med to varianter af forsiden: én med nostalgi-krog og én med myte-krog. Lav ingen nye Grethe-replikker – brug dem, der står i v6. Brug kun de vedhæftede billeder; generér eller hent ingen billeder.</pre>
+
+</div>
+</li>
+<li>
+<h3>Læs AI's svar, og lav dine slides</h3>
+<ul>
+<li>Læs først listen over det, AI er i tvivl om. Find svar på alt, der står [FAKTA MANGLER] ved</li>
+<li>Grethes ord skal stå præcis som i søvnguiden og slutte med »– Grethe«</li>
+<li>Har AI fundet billeder på nettet, så brug dem ikke (se <a href="#cases">Erfaringer</a>)</li>
+<li>Kun forsiden må være forskellig i A og B – resten er ens</li>
+<li>Sæt teksten på dine slides i jeres layoutprogram, og gem hver slide i stående format: 1080 × 1350 pixels</li>
+</ul>
+</li>
+<li>
+<h3>Se karrusellen</h3>
+<p>Upload dine slides og teksten til opslaget. I højre side kan du se, hvordan opslaget kommer til at se ud.</p>
+<div class="eksempel">
+<article class="opslag">
+<header class="opslag__hoved">
+<img alt="" class="opslag__logo" src="img/guide/RDU_logo.png"/>
+<div><p class="opslag__navn">Ringsted Dun</p><p class="opslag__tid">Sponsoreret</p></div>
+</header>
+<p class="opslag__tekst">Kan du huske de kolde soveværelser, hvor dynen var det luneste sted?<br/><br/>Meget har ændret sig siden dengang. Men de gode rammer… <b>Se mere</b></p>
+<figure><img alt="Soveværelse dengang" src="img/guide/dengang-sengetid.jpg"/><figcaption>AI-genereret billede</figcaption></figure>
+<p class="opslag__nr">Slide 1 af 8</p>
+</article>
+<div>
+<p>På websiden kan du uploade dine egne slides og teksten og se opslaget, før det lægges ud. Siden tjekker også for dig:</p>
+<ul>
+<li>at der er 6–8 slides</li>
+<li>at billederne har det stående format (1080 × 1350)</li>
+<li>hvad der står før »Se mere« – fanger det?</li>
+<li>at AI-mærkningen er med</li>
+<li>om der er en forside B at teste med</li>
+</ul>
+<p>Eksemplet her er fra kapitlet 22.30 Sengetid.</p>
+</div>
+</div>
+</li>
+<li><h3>Tjek, før du bruger det</h3><p>Gå tjeklisten igennem – den står sidst i dette kapitel.</p></li>
+</ol></div><div class="produktion"><h3 class="produktion__navn">Velkomstmail</h3><div class="produktion__fakta"><dl class="fakta">
+<div><dt>Bredde</dt><dd>600 pixels – passer til både mobil og computer</dd></div>
+<div><dt>Emnelinje</dt><dd>Højst ca. 45 tegn + en kort tekst under (preheader)</dd></div>
+<div><dt>Indhold</dt><dd>Mail 1 byder velkommen. Mail 2–5 handler om ét kapitel hver</dd></div>
+<div><dt>Leder hen til</dt><dd>Kapitlet i søvnguiden</dd></div>
+</dl></div><ol class="trin">
+<li>
+<h3>Giv AI filerne</h3>
+<p>Upload baggrundsfilen, søvnguiden og Grethes karakterark.</p>
+</li>
+<li>
+<h3>Kopiér opgaven til AI</h3>
+<p>Ret mailens nummer og kapitlet i [firkantede klammer].</p>
+<div class="prompt">
+
+<p class="prompt__titel">Prompt · Velkomstmail</p>
+
+
+<pre id="p-mail">Læs de vedhæftede filer. Skriv velkomstmail nr. [2] af 5 om kapitlet [07.00 Morgen] efter formatet i afsnit 6. Teksten skal sættes ind i en fast mail-template, så lever den opdelt i præcis disse blokke – og skriv ikke andet:
+1. EMNELINJE – 2 varianter, højst 45 tegn
+2. PREHEADER – højst 90 tegn
+3. HILSEN – "Kære [Fornavn]" + én indledende sætning
+4. DENGANG – Grethes erindring fra kapitlet, ordret fra v6
+5. I DAG – rådet i 2–4 sætninger, kun med v6's formuleringer
+6. PRØV DET – kapitlets "Prøv det", ordret fra v6
+7. MORMOR I DAG – Grethes replik fra kapitlet, ordret fra v6
+8. KNAP – knaptekst (højst 4 ord) + navnet på kapitlets anker i guiden
+9. ALT-TEKST – til billedparret (dengang og i dag)
+10. TVIVLSLISTE – og alle [FAKTA MANGLER]
+
+Skriv ikke logo, sidefod, afmelding, AI-mærkning eller "mail X af 5" – de ligger fast i templaten. Markér nye Grethe-replikker som NYE.</pre>
+
+</div>
+</li>
+<li>
+<h3>Sæt teksten ind i mailen</h3>
+<p>AI deler teksten op i små stykker. Sæt dem ind på deres plads i jeres faste mailskabelon. Logo, bund, afmelding og AI-mærkning ligger der i forvejen.</p>
+</li>
+<li><h3>Tjek, før du bruger det</h3><p>Gå tjeklisten igennem – den står sidst i dette kapitel.</p></li>
+</ol></div><div class="produktion"><h3 class="produktion__navn">Korte klip</h3><div class="produktion__fakta"><dl class="fakta">
+<div><dt>Format</dt><dd>Stående (9:16) til Reels og Stories, firkantet (1:1) til feedet</dd></div>
+<div><dt>Længde</dt><dd>Ca. 25 sekunder</dd></div>
+<div><dt>Tekst</dt><dd>Undertekster altid på – mange ser uden lyd. Hold teksten væk fra øverste og nederste femtedel, hvor appen lægger knapper</dd></div>
+<div><dt>Leder hen til</dt><dd>Quizzen »Myte eller sandhed?«</dd></div>
+</dl></div><ol class="trin">
+<li>
+<h3>Giv AI filerne</h3>
+<p>Upload baggrundsfilen, søvnguiden, Grethes karakterark og storyboardet (tegneserien over filmen).</p>
+</li>
+<li>
+<h3>Kopiér opgaven til AI</h3>
+<p>Ret scenen i [firkantede klammer].</p>
+<div class="prompt">
+
+<p class="prompt__titel">Prompt · Kort klip</p>
+
+
+<pre id="p-klip">Læs de vedhæftede filer og storyboardet. Tilpas scenen [07.00 Morgen] til et klip i 9:16 og 1:1 efter afsnit 6. Lever tidskode, billede, undertekst og opslagstekst (2 varianter).</pre>
+
+</div>
+</li>
+<li>
+<h3>Lav klippene</h3>
+<ul>
+<li>Lav Grethe i Google Flow. Brug altid grundbilledet af hende, så hun ser ens ud hver gang. Lav én version ad gangen</li>
+<li>Se hvert klip igennem: Samme ansigt, hår og tøj? Lukket mund? Normale hænder? Ingen nye personer eller tekst? Kassér hellere et klip end at bruge et, der næsten passer</li>
+<li>Klip filmen i CapCut. Slå lyden fra Flow fra, og læg Grethes gemte stemme ind over</li>
+<li>Gem i to formater: stående (9:16) og firkantet (1:1). Brænd underteksterne ind, og slut med det faste slutkort med AI-mærkning</li>
+</ul>
+</li>
+<li><h3>Tjek, før du bruger det</h3><p>Gå tjeklisten igennem – den står sidst i dette kapitel.</p></li>
+</ol></div><div class="produktion"><h3 class="produktion__navn">Små opslag</h3><div class="produktion__fakta"><dl class="fakta">
+<div><dt>Opslag med råd</dt><dd>Billede eller klip + et råd fra søvnguiden</dd></div>
+<div><dt>»Dengang«-opslag</dt><dd>Et gammelt billede + et spørgsmål, fx »Kan du huske …?«</dd></div>
+<div><dt>Grethe-citat</dt><dd>Firkantet billede med en af hendes replikker</dd></div>
+<div><dt>Kort annonce</dt><dd>6–15 sekunder fra de korte klip. Det vigtigste i de første 3 sekunder</dd></div>
+</dl></div><ol class="trin">
+<li>
+<h3>Giv AI filerne</h3>
+<p>Upload baggrundsfilen, søvnguiden, Grethes karakterark og de to billeder til kapitlet.</p>
+</li>
+<li>
+<h3>Kopiér opgaven til AI</h3>
+<p>Skriv i [firkantede klammer], hvilke opslag og hvilke kapitler du vil have.</p>
+<div class="prompt">
+
+<p class="prompt__titel">Prompt · Små opslag</p>
+
+
+<pre id="p-mikro">Læs de vedhæftede filer. Lav [3 Grethe-citater og 2 nostalgiopslag] ud fra kapitlerne [Døgnet rundt] efter afsnit 6. Brug kun replikker fra v6. Lever opslagstekst, billedreference og alt-tekst.</pre>
+
+</div>
+</li>
+<li>
+<h3>Læs AI's svar, og lav opslagene</h3>
+<ul>
+<li>Står det vigtigste i de første par linjer? Resten gemmes bag »Se mere«</li>
+<li>Står Grethes ord præcis som i søvnguiden?</li>
+<li>Slutter et »dengang«-opslag med et spørgsmål, så folk har lyst til at svare?</li>
+<li>Grethe-citater sættes op som firkantede billeder: hendes skrift på den lyse linnedfarve</li>
+</ul>
+</li>
+<li><h3>Tjek, før du bruger det</h3><p>Gå tjeklisten igennem – den står sidst i dette kapitel.</p></li>
+</ol></div><div class="produktion"><h3 class="produktion__navn">Tjeklisten</h3><p>Kryds alle punkter af, før noget bliver brugt. Den gælder alle produktioner.</p><ul class="tjekliste"><li><span>Alle fakta står i søvnguiden</span></li><li><span>Ingen af de ord, vi undgår (fx »ældre« og »seniorer«). Vi skriver altid »du«</span></li><li><span>Grethe lyder som sig selv, og nye replikker er godkendt</span></li><li><span>AI-mærkningen er med</span></li><li><span>Formatet passer til stedet, det skal bruges (størrelse, længde, undertekster)</span></li><li><span>Det leder videre til det rigtige sted (quizzen, guiden eller nyhedsbrevet)</span></li><li><span>Du har skrevet ned, hvilket værktøj og hvilken prompt du brugte, og hvor mange forsøg det tog</span></li></ul></div></section><section class="kapitel" id="aarshjul"><header class="kapitel__top"><p class="kapitel__nr">Kapitel 3</p><h2>Årshjul</h2><p>Hvad skal du lave hvornår? Alt indhold hører til ét af fem emner. Årshjulet viser, hvilke emner og kapitler der passer til hver måned.</p></header>
+<div class="note">
+<h3>Sådan bruger du årshjulet med AI</h3>
+<p>Find måneden nedenfor. Se, hvilket kapitel fra søvnguiden der passer, og vælg det i prompten under <a href="#lav">Lav en produktion</a>. Hold øje med fordelingen: Over en måned skal de fleste opslag handle om søvn – ikke om dyner.</p>
+</div>
+<h3>De fem emner (indholdssøjler)</h3>
+<p>Hvert opslag, hver mail og hvert klip hører til ét emne. Emnet bestemmer, hvad læseren får ud af det.</p>
+<div class="soejler">
+<article class="soejle">
+<p class="soejle__andel">40 %</p>
+<h4>Søvnvaner</h4>
+<p class="soejle__spoergsmaal">»Hvordan sover jeg bedre?«</p>
+<p>Temperatur, lys, døgnrytme og gode vaner. Grethe fortæller, søvnguiden giver rådene.</p>
+<p class="soejle__eks"><strong>Fx:</strong> karrusel, quizzen, den lange video</p>
+</article>
+<article class="soejle">
+<p class="soejle__andel">20 %</p>
+<h4>Dynepleje</h4>
+<p class="soejle__spoergsmaal">»Hvordan passer jeg på min dyne?«</p>
+<p>Luftning, vask og opbevaring. Fylder mere om sommeren og efteråret.</p>
+<p class="soejle__eks"><strong>Fx:</strong> karrusel, afstemning i story</p>
+</article>
+<article class="soejle">
+<p class="soejle__andel">15 %</p>
+<h4>Dynen til dig</h4>
+<p class="soejle__spoergsmaal">»Hvilken dyne passer til mig?«</p>
+<p>Varm eller kølig, fyld og vægt. Det emne, der sælger – derfor aldrig mere end en femtedel.</p>
+<p class="soejle__eks"><strong>Fx:</strong> Ringsted Duns dynevælger</p>
+</article>
+<article class="soejle">
+<p class="soejle__andel">15 %</p>
+<h4>Håndværket</h4>
+<p class="soejle__spoergsmaal">»Hvad gør dynen til det, den er?«</p>
+<p>Fra dun til dyne, kvalitet og historien siden 1947. Nostalgi, som Mette gerne deler.</p>
+<p class="soejle__eks"><strong>Fx:</strong> »Fra dun til dyne«-video eller karrusel</p>
+</article>
+<article class="soejle">
+<p class="soejle__andel">10 %</p>
+<h4>Ansvar</h4>
+<p class="soejle__spoergsmaal">»Hvor kommer dunene fra?«</p>
+<p>Dyrevelfærd, mærker som OEKO-TEX og NOMITE, og det Ringsted Dun kan dokumentere.</p>
+<p class="soejle__eks"><strong>Fx:</strong> billedserie eller plakat</p>
+</article>
+</div>
+<h3>Fordelingen skifter med årstiden</h3>
+<p>Emnerne er de samme hele året, men fordelingen ændrer sig. Tallene er procent af det, der lægges ud.</p>
+<div class="tabel-ramme">
+<table class="tabel tabel--tal">
+<thead><tr><th scope="col">Periode</th><th scope="col">Søvnvaner</th><th scope="col">Dynepleje</th><th scope="col">Dynen til dig</th><th scope="col">Håndværket</th><th scope="col">Ansvar</th></tr></thead>
+<tbody>
+<tr><td>Normalt (jan.–mar.)</td><td>40</td><td>20</td><td>15</td><td>15</td><td>10</td></tr>
+<tr><td>Kampagnen (apr.–maj)</td><td>45</td><td>10</td><td>15 <small>gave</small></td><td>20 <small>nostalgi</small></td><td>10</td></tr>
+<tr><td>Sommer (jun.–aug.)</td><td>35</td><td>25 <small>sommerhus</small></td><td>15</td><td>15</td><td>10</td></tr>
+<tr><td>Efterår (sep.–okt.)</td><td>35</td><td>30 <small>dynevask</small></td><td>15</td><td>10</td><td>10</td></tr>
+<tr><td>Jul (nov.–dec.)</td><td>30</td><td>15</td><td>20 <small>gaver</small></td><td>25 <small>siden 1947</small></td><td>10</td></tr>
+</tbody>
+</table>
+</div>
+<h3 class="side-skift">Året måned for måned</h3>
+<p>Kampagnen ligger i de fire uger op til Mors Dag: <strong>12. april – 9. maj 2027</strong>. Resten af året holdes kontakten ved lige med nyhedsbrev og opslag.</p>
+<ol class="maaneder">
+<li class="maaned"><p class="maaned__navn">Januar</p><p class="maaned__fase">Vi laver guide, quiz og video</p><p><strong>Anledning:</strong> nytår, gode vaner, mørke morgener</p><p><strong>Kapitel:</strong> 07.00 Morgen – lys ind</p></li>
+<li class="maaned"><p class="maaned__navn">Februar</p><p class="maaned__fase">Vi laver og tester quizzen</p><p><strong>Anledning:</strong> mørke morgener</p><p><strong>Kapitel:</strong> Vinter – lune nætter</p></li>
+<li class="maaned"><p class="maaned__navn">Marts</p><p class="maaned__fase">Opvarmning: opslag + videoen på YouTube</p><p><strong>Anledning:</strong> sommertid 28/3, påske</p><p><strong>Kapitel:</strong> 22.30 Sengetid</p></li>
+<li class="maaned maaned--kampagne"><p class="maaned__navn">April</p><p class="maaned__fase">Kampagnen starter 12/4: annoncer, quiz, test af to forsider</p><p><strong>Anledning:</strong> lyse morgener</p><p><strong>Indhold:</strong> quizzen, »send den til din mor«, Grethe-citater</p><p><strong>Nyhedsbrev:</strong> velkomstmail med guiden</p></li>
+<li class="maaned maaned--kampagne"><p class="maaned__navn">Maj</p><p class="maaned__fase">Kampagnen slutter på Mors Dag 9/5</p><p><strong>Anledning:</strong> Mors Dag</p><p><strong>Indhold:</strong> en god nat til mor</p><p><strong>Nyhedsbrev:</strong> 3–4 mails, ét kapitel hver</p></li>
+<li class="maaned"><p class="maaned__navn">Juni</p><p class="maaned__fase">Nyhedsbrev og opslag hver måned</p><p><strong>Anledning:</strong> lyse nætter, sommerhuset åbner</p><p><strong>Kapitel:</strong> Sommer</p></li>
+<li class="maaned"><p class="maaned__navn">Juli</p><p class="maaned__fase">Nyhedsbrev og opslag</p><p><strong>Anledning:</strong> sommerferie</p><p><strong>Kapitel:</strong> Når børnebørnene sover over</p></li>
+<li class="maaned"><p class="maaned__navn">August</p><p class="maaned__fase">Nyhedsbrev og opslag</p><p><strong>Anledning:</strong> sommerhuset lukkes</p><p><strong>Kapitel:</strong> Din side af sengen, opbevaring</p></li>
+<li class="maaned"><p class="maaned__navn">September</p><p class="maaned__fase">Nyhedsbrev og opslag</p><p><strong>Anledning:</strong> hverdag igen</p><p><strong>Kapitel:</strong> 14.00 Eftermiddag – bevægelse</p></li>
+<li class="maaned"><p class="maaned__navn">Oktober</p><p class="maaned__fase">Nyhedsbrev og opslag</p><p><strong>Anledning:</strong> vintertid 31/10, efterårsferie</p><p><strong>Kapitel:</strong> Efterår – den store dynevask, 04.30 Natten</p></li>
+<li class="maaned"><p class="maaned__navn">November</p><p class="maaned__fase">Nyhedsbrev og opslag</p><p><strong>Anledning:</strong> mørke aftener, gaver</p><p><strong>Kapitel:</strong> 20.00 Aften – skru ned for lyset</p></li>
+<li class="maaned"><p class="maaned__navn">December</p><p class="maaned__fase">Nyhedsbrev og opslag</p><p><strong>Anledning:</strong> jul, gæster, gaver</p><p><strong>Kapitel:</strong> Børnebørnene og gæstesengen, siden 1947</p></li>
+</ol>
+</section><section class="kapitel" id="principper"><header class="kapitel__top"><p class="kapitel__nr">Kapitel 4</p><h2>Principper</h2><p>Seks regler, der gælder, uanset hvad du laver.</p></header>
+<div class="kort-gitter kort-gitter--tre">
+<article class="kort">
+<h3>Baggrund og opgave hver for sig</h3>
+<p>Alt det, der aldrig ændrer sig – hvem vi skriver til, hvordan vi lyder, og hvad vi ikke må – står i baggrundsfilen. Prompten siger kun, hvad der skal laves i dag. Så skal du ikke huske reglerne hver gang.</p>
+</article>
+<article class="kort">
+<h3>Skabelonen laves én gang</h3>
+<p>Logo, bund og AI-mærkning ligger fast i skabelonerne. De er lavet af et menneske én gang. AI fylder kun teksten ind – så kan den ikke glemme mærkningen eller ændre designet.</p>
+</article>
+<article class="kort">
+<h3>Et menneske siger god for det</h3>
+<p>AI laver et udkast. Et menneske tjekker det og trykker »send«. AI lægger aldrig noget ud selv og svarer aldrig på kommentarer som Grethe.</p>
+</article>
+<article class="kort">
+<h3>Fakta kommer kun fra søvnguiden</h3>
+<p>Alle råd om søvn står i søvnguiden, som er tjekket mod Sundhedsstyrelsen, sundhed.dk, Ældre Sagen og søvnforsker Birgitte Kornum. Mangler AI noget, skriver den [FAKTA MANGLER] i stedet for at gætte.</p>
+</article>
+<article class="kort">
+<h3>Ret baggrundsfilen, når AI fejler</h3>
+<p>Laver AI den samme fejl to gange, mangler der noget i baggrundsfilen. Skriv det ind dér, så fejlen ikke kommer igen næste gang (se <a href="#cases">Erfaringer</a>).</p>
+</article>
+<article class="kort">
+<h3>Man skal kunne se, at det er AI</h3>
+<p>Grethe findes ikke i virkeligheden, og det siger vi højt. Det er både et krav i loven og en del af, at Ringsted Dun er ærlig.</p>
+</article>
+</div>
+</section><section class="kapitel" id="kontekst"><header class="kapitel__top"><p class="kapitel__nr">Kapitel 5</p><h2>Baggrundsfilen</h2><p>AI husker ikke kampagnen fra gang til gang. Baggrundsfilen er dens hukommelse – den uploades hver gang sammen med søvnguiden og Grethes karakterark.</p></header>
+<div class="to-spalter">
+<div>
+<h3>Det står der i den</h3>
+<p>Filen er delt i dele, så AI læser baggrunden, før den får opgaven:</p>
+<div class="tabel-ramme">
+<table class="tabel">
+<thead><tr><th scope="col">Del</th><th scope="col">Indhold</th><th scope="col">Ændres</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>Sådan bruges filen</td><td>Sjældent</td></tr>
+<tr><td>1–5</td><td>Hvem der skriver · hvem vi skriver til · hvordan vi lyder · fakta og kilder · farver og billeder</td><td>Kun hvis kampagnen ændres</td></tr>
+<tr><td>6</td><td>Formater: størrelser, længder og rækkefølgen på slides</td><td>Når der kommer en ny slags opslag</td></tr>
+<tr><td>7</td><td>Hvad AI skal levere – og hvad den ikke må</td><td>Sjældent</td></tr>
+<tr><td>Prompten</td><td>Dagens opgave: hvilket kapitel, og hvad der skal laves</td><td>Hver gang</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div>
+<h3>Her ligger filerne</h3>
+<ul>
+<li>Baggrundsfilen: <code>Content-kit/kampagne_baggrundsfil_til_AI.md</code></li>
+<li>Søvnguiden: <code>Content-kit/soevnguide_tekst_v6.md</code></li>
+<li>Grethes karakterark: <code>Content-kit/mormor_grethe_karakterark.md</code></li>
+<li>Billederne: <code>Mediefiler/img/dengang/</code> og <code>Mediefiler/img/idag/</code></li>
+</ul>
+<div class="note">
+<h3>Kan dit AI-program ikke åbne filerne?</h3>
+<p>Nogle programmer kan ikke læse .md-filer eller tager kun få filer ad gangen. Brug så den samlede PDF: <code>Content-kit/AI-pakke_soevnguiden.pdf</code>. Den indeholder baggrundsfilen, karakterarket og søvnguiden. Upload billederne ved siden af.</p>
+</div>
+</div>
+</div>
+</section><section class="kapitel" id="cases"><header class="kapitel__top"><p class="kapitel__nr">Kapitel 6</p><h2>Erfaringer</h2><p>Sådan gik det, da vi lavede karrusellen »22.30 Sengetid« i ChatGPT – og hvad vi lærte af det.</p></header>
+<div class="kort-gitter kort-gitter--tre">
+<article class="kort">
+<h3>Første forsøg</h3>
+<ul>
+<li>ChatGPT fandt selv billeder på nettet – fra billedbanker, en ukrainsk nyhedsside og en taiwansk gardinbutik. Vi måtte ikke bruge dem, og de passede ikke</li>
+<li>Billedet af Grethe lignede slet ikke hende</li>
+<li>Den skrev forslag til nye billeder, selvom vi havde dem i forvejen</li>
+<li>Grethes ord sluttede med »– Mormor« i stedet for »– Grethe«</li>
+</ul>
+<p><strong>Det gik godt:</strong> rækkefølgen af slides, ingen nye replikker til Grethe, alle fakta fra søvnguiden og to forsider at teste.</p>
+</article>
+<article class="kort">
+<h3>Andet forsøg</h3>
+<p>Denne gang uploadede vi de to billeder til kapitlet.</p>
+<ul>
+<li>Billederne var nu de rigtige</li>
+<li>Men én slide sagde »et godt sovemiljø handler om mere end en varm dyne«. Det gør dynen mindre vigtig – og søvnguidens sætning om dynen manglede</li>
+<li>Teksten til opslaget var forskellig til forside A og B. Så kunne vi ikke se, om det var forsiden eller teksten, der virkede</li>
+<li>Den sidste slide afslørede svaret på quizspørgsmålet</li>
+</ul>
+</article>
+<article class="kort">
+<h3>Det skrev vi ind i baggrundsfilen</h3>
+<ul>
+<li>»Søg aldrig efter billeder på nettet.« Brug de uploadede billeder</li>
+<li>Grethes ord slutter altid med »– Grethe«</li>
+<li>Søvnguidens sætning om dynen skal med i 22.30 Sengetid</li>
+<li>Kun forsiden må være forskellig i A og B</li>
+<li>Afslør aldrig svaret på quizzen</li>
+</ul>
+</article>
+</div>
+<h3>Det lærte vi</h3>
+<ol class="laering">
+<li><strong>AI gør, hvad der står – og gætter resten.</strong> Når noget går galt, skal det skrives ind i baggrundsfilen, ikke kun rettes i den ene karrusel.</li>
+<li><strong>Upload altid billederne.</strong> Uden dem finder AI selv på – og så går det galt med både rettigheder og genkendelighed.</li>
+<li><strong>Læs det hele, også det, der ser rigtigt ud.</strong> Fejlen i andet forsøg var én lille sætning, der ændrede budskabet.</li>
+<li><strong>To forsøg var nok,</strong> fordi rettelserne kom ind i baggrundsfilen. Næste kapitel starter med de nye regler.</li>
+</ol>
+</section><section class="kapitel" id="etik"><header class="kapitel__top"><p class="kapitel__nr">Kapitel 7</p><h2>Etik og ansvar</h2><p>Det, du skal passe på, når du bruger AI i Ringsted Duns navn.</p></header>
+<div class="to-spalter">
+<div>
+<h3>Mærk altid AI</h3>
+<p>Siden 2. august 2026 kræver EU's regler om AI, at billeder, video og stemmer lavet med AI bliver mærket, når de ligner noget ægte. Det gælder også en person, der ikke findes, men ser ægte ud – altså Grethe.</p>
+<div class="tabel-ramme">
+<table class="tabel">
+<thead><tr><th scope="col">Hvor</th><th scope="col">Mærkning</th></tr></thead>
+<tbody>
+<tr><td>Video (sidste billede) og beskrivelsen af videoen</td><td>»Mormor Grethe er en fiktiv person. Hendes billede og stemme er skabt med AI.«</td></tr>
+<tr><td>Billeder i guiden og karruseller</td><td>»AI-genereret billede«</td></tr>
+<tr><td>Mails og tekst til opslag</td><td>»Mormor Grethe er en fiktiv person. Billeder og stemme er skabt med AI.«</td></tr>
+<tr><td>YouTube</td><td>Sæt flueben ved »ændret eller syntetisk indhold«, når videoen lægges op</td></tr>
+<tr><td>Facebook og Instagram</td><td>Slå »AI-info« til, når opslaget lægges op</td></tr>
+</tbody>
+</table>
+</div>
+<p>Mærkningen ligger fast i skabelonerne, så den ikke bliver glemt.</p>
+</div>
+<div>
+<h3>Det bruger vi ikke AI til</h3>
+<ul>
+<li>At lægge noget ud eller sende noget</li>
+<li>At svare på kommentarer eller beskeder som Grethe</li>
+<li>At finde på fakta, tal eller kilder</li>
+<li>At arbejde med kunders navne, mails eller svar</li>
+<li>At skrive nye replikker til Grethe, uden at de bliver godkendt</li>
+</ul>
+</div>
+</div>
+<div class="kort-gitter kort-gitter--tre">
+<article class="kort">
+<h3>Grethe fortæller – hun sælger ikke</h3>
+<p>Hun fortæller om sine egne minder. Rådene kommer fra kilderne. Hun giver aldrig sundhedsråd og roser aldrig en dyne – en person, der ikke findes, og som anbefaler et produkt, ville ligne en falsk anmeldelse.</p>
+</article>
+<article class="kort">
+<h3>Ingen løfter om bedre søvn</h3>
+<p>Vi lover aldrig »garanteret bedre søvn« eller lignende. Nye påstande om dyner, mærker eller håndværk skal Ringsted Dun godkende, før de bruges.</p>
+</article>
+<article class="kort">
+<h3>Kun billeder, vi må bruge</h3>
+<p>Brug kampagnens egne billeder, Ringsted Duns fotos eller AI-billeder lavet til kampagnen – aldrig billeder fundet på nettet. Bed aldrig AI om at efterligne en bestemt kunstner eller et andet mærke.</p>
+</article>
+<article class="kort">
+<h3>Kunders oplysninger bliver hos jer</h3>
+<p>Tilmelding til nyhedsbrevet efter quizzen er frivillig. Navne, mails og quizsvar må aldrig lægges ind i et AI-program. Navnet i mailen sættes ind af mailsystemet, ikke af AI. Brug en firmakonto, hvor jeres tekst ikke bruges til at træne AI'en.</p>
+</article>
+<article class="kort">
+<h3>AI har fordomme</h3>
+<p>Beder man AI om en kvinde på 79, får man tit en skrøbelig dame med stok. Det passer ikke til vores læsere, som er aktive. Derfor siger Grethes karakterark, hvordan hun aldrig må se ud.</p>
+</article>
+<article class="kort">
+<h3>Spar på strømmen</h3>
+<p>Især video bruger meget strøm og mange forsøg. Lav én version ad gangen, sæt et loft over antal forsøg, og genbrug baggrundsfilen i stedet for at starte forfra.</p>
+</article>
+</div>
+<div class="note">
+<h3>Vores anbefaling: et rigtigt menneske på sigt</h3>
+<p>Med AI-Grethe kan Ringsted Dun hurtigt og billigt teste, om en fortæller virker. Viser tallene, at hun gør, anbefaler vi at lave de faste videoer med et rigtigt menneske – fx en skuespiller, en trofast kunde eller en medarbejders mor eller mormor. Det koster mere, men det er ægte og passer til ærligheden i Ringsted Duns måde at tale på og historien om mere end 75 års håndværk.</p>
+</div>
+</section>
+
+  <!-- ===== BAGSIDE ===== -->
+  <div class="bagside ark">
+    <img src="img/guide/RDU_logo_hvid.png" alt="Ringsted Dun – Established 1947">
+    <p class="etiket">Eksperter i god søvn siden 1947</p>
+    <p>AI Playbook til kampagnen »Søvnguiden – dengang og i dag«<br>MMD 3. semester, gruppe 22</p>
+  </div>
+
+</body>
+</html>

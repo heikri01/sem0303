@@ -7,6 +7,7 @@
    4. Værkstedet: faner med én produktion ad gangen
    5. Forhåndsvisning af karrusellen
    6. Søgning
+   7. PDF (kun en note – se nederst)
 
    Selve indholdet ligger i playbook.html.
    ========================================================== */
@@ -464,10 +465,9 @@ function visSoegeMaal() {
 soegefelt.addEventListener('input', visResultater);
 
 
-/* ---------- 7. Gem som PDF ---------- */
-
-// Åbner browserens udskriv-vindue. CSS'en (@media print) sørger for, at alle sider kommer med
-document.getElementById('gemPdf').addEventListener('click', function () { window.print(); });
+/* ---------- 7. PDF ----------
+   Knappen »Hent som PDF« er et almindeligt link til pdf/ai-playbook.pdf, så der skal ingen JavaScript til.
+   Den PDF er designet for sig i playbook-pdf.html. */
 
 // Enter hopper til første resultat. Esc lukker listen. Pil ned går ind i listen
 soegefelt.addEventListener('keydown', function (e) {

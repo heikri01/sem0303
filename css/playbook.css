@@ -200,7 +200,7 @@ code {
   gap: 1rem;
   text-decoration: none;
 }
-.hoved__logo img { height: 48px; width: auto; }
+.hoved__logo img { height: 52px; width: auto; }
 .hoved__logo span {
   margin: 0;
   font-family: 'Lato', sans-serif;
@@ -209,9 +209,13 @@ code {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #A6192E;
+  padding-left: 1rem;
+  border-left: 1px solid #D8D1C6;
+  line-height: 52px;
 }
-
 .hoved__pdf {
+  display: inline-flex;
+  align-items: center;
   flex-shrink: 0;
   width: auto;
   min-height: 48px;
@@ -472,6 +476,65 @@ code {
 .laering { padding-left: 1.5rem; }
 .laering li { margin-bottom: 0.75rem; }
 .laering li::marker { color: #A6192E; font-weight: 700; }
+.soejler {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.soejle {
+  padding: 1.5rem;
+  background: #FFFFFF;
+}
+.soejle p { margin: 0 0 0.75rem; }
+.soejle h4 {
+  margin: 0 0 0.25rem;
+  font-size: 1.375rem;
+  font-weight: 300;
+}
+.soejle__andel {
+  font-size: 2.5rem;
+  font-weight: 300;
+  line-height: 1;
+  color: #A6192E;
+}
+.soejle__spoergsmaal { color: #5B4632; font-weight: 700; }
+.soejle__eks {
+  padding-top: 0.75rem;
+  border-top: 1px solid #D8D1C6;
+  color: #4F4E4D;
+}
+
+.tabel--tal td + td { text-align: center; }
+.tabel--tal small { display: block; color: #4F4E4D; font-size: 1rem; }
+
+.maaneder {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.maaned {
+  padding: 1.25rem;
+  background: #FFFFFF;
+}
+.maaned p { margin: 0 0 0.5rem; }
+.maaned__navn {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #A6192E;
+}
+.maaned__fase { font-weight: 700; }
+.maaned--kampagne {
+  background: #E7D8BE;
+  border-left: 6px solid #A6192E;
+}
 .faner {
   display: flex;
   flex-wrap: wrap;
