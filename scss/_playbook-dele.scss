@@ -1,260 +1,735 @@
 // ==========================================================
-// AI PLAYBOOK · layout, menu, kort, prompts og tjekliste
+// AI PLAYBOOK · opsat som en lille hjemmeside (som ringsted-dun.dk)
+//
+// Design: Marcus' designguide v2 (Figma "RD - Content div. medier").
+// Lato til alt – Light til overskrifter, Bold versaler til etiketter og knapper.
+// Flad og enkel grafik. Den røde tråd er altid en lige linje.
+//
+// Opbygning af filen:
+//   1. Farver og små genbrugte stykker
+//   2. Grundlag og knapper
+//   3. Sidehoved, søgning og menu
+//   4. Afsnit (undersider), forside og bånd
+//   5. Kort, tabeller, ordliste og noter
+//   6. Værkstedet: faner, trin og højre side
+//   7. Forhåndsvisningen af opslaget
+//   8. Prompts og tjekliste
+//   9. Print / gem som PDF
 // ==========================================================
 @use 'tokens' as *;
 @use 'mixins' as *;
 
-// To kolonner: menu til venstre, indhold til højre – én kolonne på smalle skærme
-.playbook {
-  display: grid;
-  grid-template-columns: 16rem 1fr;
-  gap: 3rem;
-  max-width: 72rem;
+
+// ---------- 1. Farver og små genbrugte stykker ----------
+// $linned i _tokens.scss er quizzens gamle farve. Playbooken bruger designguidens
+$p-linned:      #E7D8BE;  // dengang, "Prøv det", prompts
+$p-moerkegraa:  #4F4E4D;  // lille tekst
+$p-papirstreg:  #D8D1C6;  // kun skillelinjer
+$p-nat-tekst:   #F3EDE4;  // tekst på mørk baggrund
+$p-nat-daempet: #C9BFB2;  // små etiketter på mørk baggrund
+$p-sans:        'Lato', sans-serif;
+$p-bredde:      76rem;    // indholdets største bredde
+
+// Etiket: Lato Bold versaler med 12 % luft
+@mixin etiket($farve: $sepia) {
+  margin: 0;
+  font-family: $p-sans;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $farve;
+}
+
+
+// ---------- 2. Grundlag og knapper (overskriver _base.scss, som deles med quizzen) ----------
+body { font-family: $p-sans; }
+
+h1, h2, h3 {
+  font-family: $p-sans;
+  font-weight: 300;  // Lato Light
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin: 2.5rem 0 0.75rem;
+}
+
+a { color: $blaek; }
+
+code {
+  font-size: 0.9em;
+  background: $p-linned;
+  padding: 0.1rem 0.3rem;
+  overflow-wrap: anywhere;  // lange filnavne må brydes på små skærme
+}
+
+// Skjult for øjet, men læses af skærmlæsere
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.spring-over {
+  position: absolute;
+  left: 8px;
+  top: -100px;
+  z-index: 100;
+  padding: 12px 18px;
+  background: $blaek;
+  color: $hvid;
+  font-weight: 700;
+}
+.spring-over:focus { top: 8px; }
+
+// Indholdet holdes inden for en fast bredde, mens båndene går helt ud til kanten
+.indhold {
+  max-width: $p-bredde;
   margin: 0 auto;
-  padding: 2rem $luft;
-
-  @media (max-width: 800px) {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
+  padding: 0 $luft;
 }
 
-.intro { font-size: 1.25rem; }
-
-// ---------- Menu ----------
-.menu {
-  // sticky: menuen bliver stående, mens man scroller i indholdet
-  position: sticky;
-  top: 1.5rem;
-  align-self: start;
-
-  &__titel {
-    @include spaerret(0.875rem);
-    color: $sepia;
-    margin: 0 0 0.75rem;
-  }
-
-  ol {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  a {
-    @include fokus;
-    display: block;
-    padding: 0.5rem 0.75rem;
-    border-left: 3px solid transparent;
-    color: $blaek;
-    text-decoration: none;
-
-    &:hover { background: $linned; }
-
-    // .aktiv sættes af playbook.js på det afsnit, man er i
-    &.aktiv {
-      border-left-color: $roed;
-      font-weight: 700;
-    }
-  }
-
-  @media (max-width: 800px) { position: static; }
+// Knapper: Lato Bold versaler
+.knap {
+  font-family: $p-sans;
+  font-size: 1.1875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+}
+.knap--sekundaer:hover { background: $p-linned; }
+.knap--link {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: $tekst-lille;
 }
 
-// ---------- Afsnit ----------
-.afsnit {
-  padding-bottom: 3rem;
-  margin-bottom: 3rem;
-  border-bottom: 1px solid rgba($sepia, 0.2);
-  scroll-margin-top: 1.5rem; // luft over overskriften, når man hopper via menuen
 
-  h2 { font-size: 1.75rem; }
+// ---------- 3. Sidehoved, søgning og menu ----------
+.hoved {
+  background: $hvid;
+  border-bottom: 1px solid $p-papirstreg;
 }
 
-// Stiplet felt = indhold, der ikke er skrevet endnu. Skal være væk før aflevering
-.pladsholder {
-  padding: 1rem 1.25rem;
-  border: 2px dashed $sepia;
-  background: $linned;
-  color: $sepia;
-  font-style: italic;
+.hoved__linje {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
-// ---------- Kort ----------
+.hoved__logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+}
+.hoved__logo img { height: 48px; width: auto; }
+.hoved__logo span { @include etiket($roed); }
+
+.hoved__pdf {
+  flex-shrink: 0;
+  width: auto;
+  min-height: 48px;
+  font-size: 1rem;
+}
+
+// Søgefeltet med en liste over resultater, der lægger sig ned over siden
+.soeg {
+  position: relative;
+  flex: 0 1 26rem;
+}
+
+.soeg input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.5rem 1rem;
+  border: 1px solid $p-papirstreg;
+  border-radius: 24px;
+  background: $papir;
+  font-family: $p-sans;
+  font-size: 1rem;
+}
+.soeg input:focus-visible { outline: 3px solid $roed; outline-offset: 2px; }
+
+.soeg__resultater {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  max-height: 70vh;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0.5rem 0;
+  list-style: none;
+  background: $hvid;
+  border: 1px solid $p-papirstreg;
+  box-shadow: 0 8px 24px rgba($blaek, 0.12);
+}
+.soeg__resultater[hidden] { display: none; }
+
+.soeg__resultater a {
+  display: block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+}
+.soeg__resultater a:hover,
+.soeg__resultater a:focus-visible { background: $p-linned; outline: none; }
+.soeg__resultater small {
+  @include etiket($roed);
+  display: block;
+}
+.soeg__resultater mark { background: $p-linned; color: inherit; font-weight: 700; }
+.soeg__tom { padding: 0.5rem 1rem; color: $p-moerkegraa; }
+
+// Menuen i toppen. Den røde tråd under det afsnit, man er på
+.menu { border-top: 1px solid $p-papirstreg; }
+
+.menu ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 2rem;
+  list-style: none;
+}
+
+.menu a {
+  display: block;
+  padding: 1rem 0 0.75rem;
+  border-bottom: 3px solid transparent;
+  text-decoration: none;
+  font-weight: 700;
+}
+.menu a:hover { border-bottom-color: $p-papirstreg; }
+.menu a:focus-visible { outline: 3px solid $roed; outline-offset: 2px; }
+.menu a.aktiv { border-bottom-color: $roed; }
+
+@media (max-width: 700px) {
+  .hoved__linje { flex-wrap: wrap; }
+  .soeg { flex-basis: 100%; }
+  .menu ul { gap: 0 1.25rem; }
+}
+
+
+// ---------- 4. Afsnit (undersider), forside og bånd ----------
+// playbook.js viser ét afsnit ad gangen og skjuler resten med hidden
+.afsnit[hidden] { display: none; }
+.afsnit { padding-bottom: 3rem; }
+.afsnit h2:focus,
+.afsnit h1:focus { outline: none; }
+
+// Båndet øverst på hver underside
+.afsnit__top {
+  margin-bottom: 2rem;
+  padding: 3rem 0 2rem;
+  border-bottom: 1px solid $p-papirstreg;
+}
+.afsnit__top h2 {
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+}
+.afsnit__top p {
+  max-width: 44rem;
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+// Forsiden: et mørkt bånd som de mørke sider i søvnguiden
+.forside {
+  margin-bottom: 2.5rem;
+  padding: 4.5rem 0;
+  background: $blaek;
+  color: $p-nat-tekst;
+  border-bottom: 6px solid $roed;  // den røde tråd
+}
+.forside__etiket { @include etiket($p-nat-daempet); }
+.forside__titel {
+  margin: 0.75rem 0 1rem;
+  font-size: 4rem;
+  font-weight: 300;
+}
+.forside__tekst {
+  max-width: 40rem;
+  margin: 0;
+  font-size: 1.375rem;
+}
+.forside__knap {
+  display: inline-block;
+  width: auto;
+  margin-top: 2rem;
+  line-height: 2;
+}
+
+// Forrige / Næste nederst (lavet af playbook.js)
+.bladr {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: $p-bredde;
+  margin: 3rem auto 0;
+  padding: $luft $luft 0;
+  border-top: 1px solid $p-papirstreg;
+}
+.bladr a {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-height: $klikflade;
+  padding: 0.5rem 0;
+  text-decoration: none;
+}
+.bladr a:focus-visible { outline: 3px solid $roed; outline-offset: 3px; }
+.bladr a span { @include etiket($roed); }
+.bladr a:hover strong { text-decoration: underline; }
+.bladr__naeste { margin-left: auto; text-align: right; }
+
+
+// ---------- 5. Kort, tabeller, ordliste og noter ----------
+// Kort = designguidens "I dag-felt": hvidt med rød etiket
 .kort-gitter {
   display: grid;
-  // auto-fill: så mange kolonner, der er plads til, mindst 16rem brede
-  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
-  gap: 1rem;
-  margin-bottom: $luft;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: 1.25rem;
+  margin: 2rem 0;
 }
+.kort-gitter--tre { grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr)); }
 
 .kort {
   background: $hvid;
-  padding: 1.25rem 1.5rem;
-  border-top: 4px solid $roed;
+  padding: 1.75rem;
+}
+.kort h3 {
+  @include etiket($roed);
+  margin-bottom: 0.75rem;
+}
+.kort ul,
+.kort ol { margin: 0 0 0.75rem; padding-left: 1.25rem; }
+.kort li { margin-bottom: 0.4rem; }
 
-  h3 {
-    margin: 0 0 0.75rem;
-    font-size: 1.25rem;
-  }
-
-  ol { margin: 0; padding-left: 1.25rem; }
-
-  &[hidden] { display: none; }
+// To spalter på store skærme, én på små
+.to-spalter {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+  gap: 0 3rem;
 }
 
-// ---------- Filter ----------
-.filter {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: $luft;
-
-  .knap {
-    display: inline-block;
-    width: auto;
-    min-height: 48px;
-  }
-
-  // Den valgte produktion
-  .knap--aktiv {
-    background: $blaek;
-    color: $hvid;
-    border-color: $blaek;
-  }
-}
-
-// ---------- Prompts ----------
-.prompt {
-  background: $hvid;
-  border-left: 3px solid $roed;
-  margin-bottom: $luft;
-
-  &__hoved {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.75rem 1.25rem;
-    border-bottom: 1px solid rgba($sepia, 0.2);
-  }
-
-  &__titel {
-    margin: 0;
-    font-weight: 700;
-  }
-
-  // pre bevarer linjeskiftene i prompten. pre-wrap gør, at lange linjer stadig brydes
-  pre {
-    margin: 0;
-    padding: 1.25rem;
-    white-space: pre-wrap;
-    font-family: $sans;
-    font-size: $tekst-lille;
-    line-height: 1.5;
-  }
-
-  .knap {
-    width: auto;
-    min-height: 48px;
-    padding: 0.5rem 1rem;
-    font-size: $tekst-lille;
-  }
-}
-
-.kopi-status {
-  color: $sepia;
-  font-weight: 700;
-}
-
-// ---------- Tjekliste ----------
-.tjekliste {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 1rem;
-
-  li { margin-bottom: 0.75rem; }
-
-  label {
-    display: flex;
-    gap: 0.75rem;
-    align-items: flex-start;
-    cursor: pointer;
-  }
-
-  input {
-    @include fokus;
-    flex-shrink: 0;
-    width: 28px;
-    height: 28px;
-    margin: 0;
-    accent-color: $roed;
-  }
-}
-
-.tjekliste-status {
-  font-weight: 700;
-  color: $sepia;
-}
-
-// ---------- Underoverskrifter, tabeller og læring (20/11) ----------
-.afsnit > h3 {
-  font-size: 1.25rem;
-  margin: 2rem 0 0.75rem;
-}
-
-// Rammen gør, at brede tabeller kan scrolles sidelæns på mobil i stedet for at sprænge layoutet
+// Rammen gør, at brede tabeller kan scrolles sidelæns på mobil
 .tabel-ramme {
   overflow-x: auto;
   margin-bottom: $luft;
 }
-
 .tabel {
   width: 100%;
-  border-collapse: collapse; // én streg mellem cellerne i stedet for to
+  border-collapse: collapse;
   background: $hvid;
   font-size: $tekst-lille;
-
-  th,
-  td {
-    text-align: left;
-    vertical-align: top;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid rgba($sepia, 0.2);
-  }
-
-  th {
-    @include spaerret(0.875rem);
-    color: $sepia;
-    background: $linned;
-  }
+}
+.tabel th,
+.tabel td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid $p-papirstreg;
+}
+.tabel th {
+  @include etiket($sepia);
+  background: $p-linned;
 }
 
-.kort ul { margin: 0 0 0.75rem; padding-left: 1.25rem; }
+// Ordlisten på forsiden
+.ordliste {
+  margin: 0;
+  background: $hvid;
+  padding: 0.5rem 1.5rem;
+}
+.ordliste dt {
+  @include etiket($roed);
+  padding-top: 1rem;
+}
+.ordliste dd {
+  margin: 0.25rem 0 0;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid $p-papirstreg;
+}
+.ordliste dd:last-child { border-bottom: 0; }
 
-// Læringen i casen: tallene står i Ringsted-rød
-.laering li::marker {
-  color: $roed;
+// Note = designguidens "Prøv det": linned med rød kant i venstre side
+.note {
+  margin: 2rem 0;
+  padding: 1.25rem 1.5rem;
+  background: $p-linned;
+  border-left: 6px solid $roed;
+}
+.note h3 {
+  @include etiket($sepia);
+  margin-bottom: 0.5rem;
+}
+.note p { margin: 0; }
+
+// Læringen i "Erfaringer": tallene står i Ringsted-rød
+.laering { padding-left: 1.5rem; }
+.laering li { margin-bottom: 0.75rem; }
+.laering li::marker { color: $roed; font-weight: 700; }
+
+
+// ---------- 6. Værkstedet: faner, trin og højre side ----------
+.faner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+.faner[hidden] { display: none; }
+.faner .knap {
+  display: inline-block;
+  width: auto;
+  min-height: 48px;
+  font-size: 1rem;
+}
+.faner .knap--aktiv {
+  background: $blaek;
+  color: $hvid;
+  border-color: $blaek;
+}
+
+// Trin til venstre, forhåndsvisning til højre
+.vaerksted {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 26rem);
+  gap: 3rem;
+  align-items: start;
+}
+.vaerksted[hidden] { display: none; }
+
+// sticky: højre side bliver stående, mens man scroller i trinene
+.vaerksted__side {
+  position: sticky;
+  top: 1rem;
+}
+
+@media (max-width: 1000px) {
+  .vaerksted { grid-template-columns: minmax(0, 1fr); }
+  .vaerksted__side { position: static; }
+}
+
+.side__etiket {
+  @include etiket($sepia);
+  margin: 0 0 0.75rem;
+}
+
+// Trinene: en lige linje i venstre side med "TRIN 1", "TRIN 2" …
+.trin {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: trin;
+}
+.trin > li {
+  counter-increment: trin;
+  padding: 0 0 2.5rem 1.5rem;
+  border-left: 2px solid $p-papirstreg;
+}
+.trin > li:last-child { padding-bottom: 0; }
+.trin > li > h3 { margin: 0 0 0.75rem; }
+.trin > li > h3::before {
+  @include etiket($roed);
+  content: "Trin " counter(trin);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.trin ul { padding-left: 1.25rem; }
+.trin li li { margin-bottom: 0.4rem; }
+
+// Fakta om produktionen i højre side
+.fakta {
+  margin: 0;
+  padding: 0.5rem 1.5rem;
+  background: $hvid;
+}
+.fakta dt {
+  @include etiket($roed);
+  padding-top: 1rem;
+}
+.fakta dd {
+  margin: 0.25rem 0 0;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid $p-papirstreg;
+}
+.fakta dd:last-child { border-bottom: 0; }
+
+// Felterne i trinet "Se karrusellen"
+.felter {
+  padding: 1.5rem;
+  background: $hvid;
+}
+.felt {
+  margin: 0 0 1.25rem;
+  padding: 0;
+  border: 0;
+}
+.felt__navn {
+  @include etiket($sepia);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.felt input[type="file"] { max-width: 100%; font-size: 1rem; }
+.felt textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid $p-papirstreg;
+  border-radius: 4px;
+  font-family: $p-sans;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.felt input:focus-visible,
+.felt textarea:focus-visible { outline: 3px solid $roed; outline-offset: 3px; }
+.felt__valg {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+.felt__valg input {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  margin: 0.15rem 0 0;
+  accent-color: $roed;
+}
+.felt__hjaelp { margin: 0.5rem 0 0; color: $p-moerkegraa; }
+
+
+// ---------- 7. Forhåndsvisningen af opslaget ----------
+// Et neutralt opslag i Ringsted Duns farver – ikke en kopi af Facebook
+.opslag {
+  overflow: hidden;
+  background: $hvid;
+  border: 1px solid $p-papirstreg;
+  border-radius: 8px;
+}
+.opslag__hoved {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.75rem 1rem;
+}
+.opslag__logo {
+  width: 44px;
+  height: 44px;
+  padding: 4px;
+  object-fit: contain;
+  border: 1px solid $p-papirstreg;
+  border-radius: 50%;
+  background: $papir;
+}
+.opslag__navn { margin: 0; font-weight: 700; font-size: 1rem; }
+.opslag__tid { margin: 0; color: $p-moerkegraa; font-size: 1rem; }
+
+// pre-line: linjeskift i teksten bliver vist
+.opslag__tekst {
+  padding: 0 1rem 0.75rem;
+  white-space: pre-line;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+.opslag__se-mere {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: 700;
+  color: $p-moerkegraa;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+// Karrusellen: alle slides på en række. playbook.js flytter sporet med translateX
+.karrusel { position: relative; }
+.karrusel:focus-visible { outline: 3px solid $roed; outline-offset: 3px; }
+.karrusel__vindue { overflow: hidden; }
+.karrusel__spor {
+  display: flex;
+  transition: transform 0.35s ease;
+}
+.karrusel__slide {
+  position: relative;
+  flex: 0 0 100%;
+  margin: 0;
+  aspect-ratio: 4 / 5;  // 1080 × 1350
+  background: $p-papirstreg;
+}
+// cover: billeder i et andet format bliver beskåret – ligesom på Facebook
+.karrusel__slide img { width: 100%; height: 100%; object-fit: cover; }
+.karrusel__maerke {
+  position: absolute;
+  left: 0.5rem;
+  bottom: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  background: rgba($blaek, 0.8);
+  color: $p-nat-tekst;
+  font-size: 1rem;
+}
+.karrusel__pil {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba($hvid, 0.9);
+  color: $blaek;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.karrusel__pil:focus-visible { outline: 3px solid $roed; outline-offset: 3px; }
+.karrusel__pil--forrige { left: 0.5rem; }
+.karrusel__pil--naeste { right: 0.5rem; }
+.karrusel__pil:disabled { display: none; }
+.karrusel__nr {
+  margin: 0.5rem 0 0.75rem;
+  text-align: center;
+  color: $p-moerkegraa;
+  font-size: 1rem;
+}
+
+.ab { margin-bottom: 1rem; }
+
+// Det, der tjekkes automatisk under opslaget
+.kontrol {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+}
+.kontrol li {
+  position: relative;
+  padding: 0.5rem 0 0.5rem 2rem;
+  border-bottom: 1px solid $p-papirstreg;
+  font-size: 1rem;
+}
+.kontrol li::before {
+  position: absolute;
+  left: 0.25rem;
+  top: 0.5rem;
   font-weight: 700;
 }
+.kontrol--ok::before { content: "✓"; color: $groen; }
+.kontrol--obs::before { content: "!"; color: $roed; }
+.vaerksted__side .opslag + .side__etiket { margin-top: 1.5rem; }
 
-code {
-  font-size: 0.9em;
-  background: $linned;
-  padding: 0.1rem 0.3rem;
+
+// ---------- 8. Prompts og tjekliste ----------
+// Prompt = designguidens "Prøv det": linned med rød kant i venstre side
+.prompt {
+  background: $p-linned;
+  border-left: 6px solid $roed;
+  margin-bottom: $luft;
+}
+.prompt__hoved {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid rgba($sepia, 0.25);
+}
+.prompt__titel { @include etiket($sepia); }
+// pre bevarer linjeskiftene i prompten. pre-wrap gør, at lange linjer stadig brydes
+.prompt pre {
+  margin: 0;
+  padding: 1.25rem;
+  white-space: pre-wrap;
+  font-family: $p-sans;
+  font-size: $tekst-lille;
+  line-height: 1.5;
+}
+.prompt .knap {
+  width: auto;
+  min-height: 48px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background: $hvid;
+}
+.kopi-status {
+  margin: 0;
+  padding: 0 1.25rem;
+  color: $sepia;
+  font-weight: 700;
+}
+.kopi-status:not(:empty) { padding-bottom: 1rem; }
+
+.tjekblok {
+  padding: 1.5rem;
+  background: $hvid;
+}
+.tjekblok > p:first-child { margin-top: 0; }
+.tjekliste {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+.tjekliste li { margin-bottom: 0.75rem; }
+.tjekliste label {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  cursor: pointer;
+}
+.tjekliste input {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  accent-color: $roed;
+}
+.tjekliste input:focus-visible { outline: 3px solid $roed; outline-offset: 3px; }
+.tjekliste-status { font-weight: 700; color: $sepia; }
+
+// Søgeresultatet, man hopper til, blinker kort
+.fundet { animation: fundet 2s ease; }
+@keyframes fundet {
+  0%, 40% { background: $p-linned; }
+  100% { background: transparent; }
 }
 
-// ---------- Print / gem som PDF ----------
-// Ved udskrift skjules menu og knapper, og alle kort vises – også dem, filteret har skjult
+.bund {
+  max-width: none;
+  margin-top: 0;
+  padding: 2rem 0;
+  background: $hvid;
+  border-top: 1px solid $p-papirstreg;
+  color: $p-moerkegraa;
+}
+
+
+// ---------- 9. Print / gem som PDF ----------
+// Ved udskrift vises alle afsnit efter hinanden. Menu, søgning og knapper skjules
 @media print {
   .menu,
-  .filter,
+  .soeg,
+  .hoved__pdf,
+  .faner,
+  .bladr,
+  .felter,
+  .karrusel__pil,
   .prompt .knap,
-  #nulstil { display: none; }
+  #nulstil,
+  .spring-over { display: none; }
 
-  .playbook { display: block; }
+  .afsnit[hidden],
+  .vaerksted[hidden] { display: block; }
 
-  .kort[hidden] { display: block; }
-
-  .afsnit { break-inside: avoid-page; }
+  .vaerksted { display: block; }
+  .vaerksted__side { position: static; margin-top: 2rem; }
+  .afsnit { break-before: page; }
+  .afsnit:first-of-type { break-before: auto; }
 }

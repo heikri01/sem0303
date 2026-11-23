@@ -95,24 +95,40 @@ web/
 > **Nyt begreb: `data-valg`**
 > `data-`-attributter gemmer små oplysninger på et HTML-element. Knapperne har `data-valg="myte"` og `data-valg="sandhed"`, og JavaScript læser dem med `knap.dataset.valg`.
 
-## AI Playbook (playbook.html) – skelet 18/11
+## AI Playbook (playbook.html) – opdateret 23/11
 
-Siden er et opslagsværk med syv afsnit og en menu i venstre side. **Stiplede felter (`class="pladsholder"`) er indhold, der ikke er skrevet endnu** – det godkendte indhold kommer fra FigJam (siden AI Playbook). Alle pladsholdere skal være væk før afleveringen.
+Playbooken er sat op som en lille hjemmeside, inspireret af ringsted-dun.dk: logo og søgefelt øverst, en menu med seks sider og brede bånd. Al tekst ligger i `playbook.html`. **Designet følger Marcus' designguide v2** (Lato, linned `#E7D8BE`, skillelinjer `#D8D1C6`, den røde tråd som lige linje). Farverne står øverst i `scss/_playbook-dele.scss` som `$p-…`, fordi `$linned` i `_tokens.scss` stadig er quizzens gamle farve.
+
+**Sproget** er hverdagsdansk. Fagord som prompt, baggrundsfil og AI-mærkning er forklaret i ordlisten på forsiden. Prompterne til AI er ikke skrevet om – de skal passe til baggrundsfilen.
 
 | Jeg vil … | Gå ind i |
 |---|---|
-| Skrive indhold i et afsnit | `playbook.html` – find `<section class="afsnit" id="…">` |
-| Tilføje et afsnit | Kopiér en `<section class="afsnit">`, giv den et nyt `id`, og tilføj et link i `<nav class="menu">` |
-| Tilføje en prompt med kopiér-knap | Kopiér en `<div class="prompt">`. `id` på `<pre>` skal være det samme som `data-kopier` på knappen |
-| Tilføje en produktion til filteret | En knap med `data-filter="navn"` + et kort med `data-produktion="navn"` |
-| Tilføje et punkt til tjeklisten | Kopiér en `<li>` i `<ul class="tjekliste">`. Tælleren tilpasser sig selv |
-| Gemme som PDF | Udskriv siden (Ctrl+P) → Gem som PDF. Menu og knapper skjules, og alle kort vises |
+| Rette tekst på en side | `playbook.html` – find `<section class="afsnit" id="…">` |
+| Tilføje en side | Kopiér en `<section class="afsnit">`, giv den et nyt `id`, og tilføj et link i `<nav class="menu">`. Forrige/Næste laver `playbook.js` selv |
+| Linke til en side | `<a href="#etik">` – så skifter siden |
+| Tilføje et ord til ordlisten | Et `<dt>` + `<dd>` i `<dl class="ordliste">` på forsiden |
+| Tilføje en prompt med kopiér-knap | Kopiér en `<div class="prompt">` (med `<p class="kopi-status">` nederst). `id` på `<pre>` skal være det samme som `data-kopier` på knappen |
+| Tilføje en produktion til værkstedet | En fane `<button role="tab" aria-controls="v-navn">` + et panel `<div class="vaerksted" id="v-navn" role="tabpanel" hidden>` med `<ol class="trin">` og `<aside class="vaerksted__side">`. Sidste trin skal have `<div data-tjek-plads></div>` |
+| Rette eksemplet i forhåndsvisningen | `js/playbook.js` – `EKSEMPEL` (billeder og opslagstekst) |
+| Tilføje et punkt til tjeklisten | Kopiér en `<li>` i `<ul class="tjekliste">` (i `#tjekblok`). Tælleren tilpasser sig selv |
+| Gemme som PDF | Udskriv siden (Ctrl+P) → Gem som PDF. Alle sider kommer med efter hinanden; menu, søgning og knapper skjules |
+
+**Undersider.** `playbook.js` viser én `<section class="afsnit">` ad gangen. Hvilken, står i adressen efter `#` (fx `playbook.html#lav`), så links, tilbage-knappen og bogmærker virker.
+
+**Værkstedet (»Lav en produktion«)** har én fane pr. produktion. Trinene står til venstre, og til højre står `vaerksted__side`, som bliver stående (`position: sticky`), mens man scroller. For karrusellen er det forhåndsvisningen af opslaget, for de andre et kort med format og længde. Tjeklisten findes kun ét sted i koden (`#tjekblok`) og flyttes af `playbook.js` ind i den valgte produktions sidste trin.
+
+**Forhåndsvisningen** viser slides og opslagstekst som et opslag. Teksten kortes af ved ca. 125 tegn (»Se mere«), AI-mærkningen sættes på, og »Tjekket for dig« tjekker antal slides, formatet, Grethe-mærkningen og forside B.
+
+**Søgningen** (afsnit 6 i `playbook.js`) leder i overskrifter, tekst, punkter og tabeller på alle sider – også dem, der er skjult. Klikker man på et resultat, skifter siden (og fanen, hvis det er i værkstedet), og teksten blinker kort.
+
+> **Nyt begreb: `hashchange`**
+> Delen af adressen efter `#` hedder en hash. Klikker man på et link til `#lav`, sker hændelsen `hashchange`. `playbook.js` lytter efter den og viser det afsnit, der har `id="lav"`.
+
+> **Nyt begreb: `URL.createObjectURL`**
+> Laver en midlertidig adresse til en fil, man har valgt på sin egen computer, så billedet kan vises på siden. Filen bliver på computeren og sendes ingen steder hen.
 
 > **Nyt begreb: `position: sticky`**
-> Menuen bliver stående i toppen af skærmen, mens man scroller i indholdet. På smalle skærme er den slået fra, så menuen står øverst som en almindelig liste.
-
-> **Nyt begreb: `IntersectionObserver`**
-> En indbygget funktion i browseren, der holder øje med, hvilket afsnit der er synligt. `playbook.js` bruger den til at markere afsnittet i menuen med rød streg.
+> Et element, der scroller med, indtil det rammer toppen – så bliver det stående. Bruges til forhåndsvisningen i værkstedet.
 
 > **Nyt begreb: `@media print`**
 > Regler, der kun gælder, når siden udskrives eller gemmes som PDF. Så kan samme side både være et klikbart værktøj og en pæn PDF til afleveringen.
