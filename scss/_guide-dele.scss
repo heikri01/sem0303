@@ -35,11 +35,23 @@ $smal:    760px;    // under denne bredde vises mobilvisningen
   color: $farve;
 }
 
+// Grethes stemme: EB Garamond kursiv. Bruges KUN til hendes citater
 @mixin kursiv($stoerrelse: 16px, $linje: 1.4) {
   margin: 0;
   font-family: $serif;
   font-style: italic;
   font-weight: 400;
+  font-size: $stoerrelse;
+  line-height: $linje;
+}
+
+// Lato til al anden tekst end Grethes (billedtekster, undertitler, Prøv det osv.)
+// $stil: italic til undertekst – undertitler under en overskrift og tekst lige efter en etiket
+@mixin lato($stoerrelse: 16px, $linje: 1.4, $vaegt: 300, $stil: normal) {
+  margin: 0;
+  font-family: $sans;
+  font-style: $stil;
+  font-weight: $vaegt;
   font-size: $stoerrelse;
   line-height: $linje;
 }
@@ -375,7 +387,7 @@ $blad-tykkelse: 1.1px;
   }
 
   &__etiket { @include etiket($nat-tekst); }
-  &__tekst  { @include kursiv(16px); color: $nat-daempet; }
+  &__tekst  { @include lato(16px, $stil: italic); color: $nat-daempet; }
   // AI-mærkning: lille tekst i Lato Regular, 16 px
   &__ai     { margin: 0; font-family: $sans; font-size: $tekst-lille; line-height: 1.4; color: $nat-daempet; }
 
@@ -400,8 +412,8 @@ $blad-tykkelse: 1.1px;
   text-align: center;
   font-weight: 400;
 
-  &__nr    { @include kursiv(24px, 1.1); color: $nat-tekst; }
-  &__under { @include kursiv(17px, 1.3); color: $nat-daempet; }
+  &__nr    { @include lato(24px, 1.1, 300); color: $nat-tekst; }
+  &__under { @include lato(17px, 1.3, $stil: italic); color: $nat-daempet; }
 
   &__navn {
     font-family: $sans;
@@ -453,7 +465,7 @@ $blad-tykkelse: 1.1px;
     white-space: nowrap;
 
     span { @include etiket($sepia); }
-    em   { @include kursiv(16px); }
+    em   { @include lato(16px, $stil: italic); }
   }
 
   &__citat    { @include kursiv(17px, 1.38); }
@@ -510,7 +522,7 @@ $blad-tykkelse: 1.1px;
   border-top: 2px solid $roed;
 
   &__etiket { @include etiket($roed); }
-  &__tekst  { @include kursiv(16px); color: $blaek; }
+  &__tekst  { @include lato(16px, $stil: italic); color: $blaek; }
 
   // Årstidssiderne: Prøv det på én linje uden streg
   &--linje {
@@ -551,7 +563,7 @@ $blad-tykkelse: 1.1px;
     text-transform: uppercase;
   }
 
-  &__under { @include kursiv(16px); color: $moerkegraa; }
+  &__under { @include lato(16px, $stil: italic); color: $moerkegraa; }
 }
 
 
@@ -608,7 +620,7 @@ $blad-tykkelse: 1.1px;
     color: $sepia;
   }
 
-  &__undertitel { @include kursiv(21px, 1.3); color: $roed; }
+  &__undertitel { @include lato(21px, 1.3, 300, italic); color: $roed; }
   &__tekst      { font-size: 16px; line-height: 1.6; }
   &__siden      { @include etiket($moerkegraa); }
 
@@ -645,7 +657,7 @@ $blad-tykkelse: 1.1px;
     &:hover { background: $blaek; }
   }
 
-  &__note { @include kursiv(17px); color: $moerkegraa; }
+  &__note { @include lato(17px); color: $moerkegraa; }
 }
 
 // ---------- Side 3 · Mød Mormor og indhold ----------
@@ -664,7 +676,7 @@ $blad-tykkelse: 1.1px;
   }
 
   &__etiket { @include etiket($moerkegraa); }
-  &__navn   { @include kursiv(17px, 1.3); }
+  &__navn   { @include lato(17px, 1.3, $stil: italic); }
   &__tekst  { font-size: $tekst-lille; line-height: 1.45; }
 }
 
@@ -693,7 +705,7 @@ $blad-tykkelse: 1.1px;
     text-transform: uppercase;
   }
 
-  &__beskriv { @include kursiv(16px); color: $moerkegraa; }
+  &__beskriv { @include lato(16px, $stil: italic); color: $moerkegraa; }
 
   &__links {
     display: flex;
@@ -730,7 +742,7 @@ $blad-tykkelse: 1.1px;
     align-items: baseline;
     padding: 8px 0;
     counter-increment: udsagn;
-    @include kursiv(17px, 1.38);
+    @include lato(17px, 1.38);
 
     & + li { border-top: 1px solid $papirstreg; }
 
@@ -766,7 +778,7 @@ $blad-tykkelse: 1.1px;
     bottom: 0;
     padding: 3px 10px;
     background: $papir;
-    @include kursiv(16px);
+    @include lato(16px);
     color: $moerkegraa;
   }
 }
@@ -774,7 +786,7 @@ $blad-tykkelse: 1.1px;
 // ---------- Side 24 og 25 ----------
 .afslutning {
   &__citat {
-    @include kursiv(27px, 1.3);
+    @include lato(27px, 1.3, 300);
     text-align: center;
     color: $nat-tekst;
   }
@@ -817,6 +829,70 @@ $blad-tykkelse: 1.1px;
 }
 
 
+// ---------- Hjørnerne, man kan bladre med (som i Marcus' bladrebog) ----------
+// Når musen er over hjørnet nederst på siden, folder hjørnet sig op.
+// Klik bladrer, og trækker man i hjørnet, følger folden med (guide.js sætter --fold).
+// guide.js skjuler hjørnet, når der ikke er en side at bladre til
+.hjoerne {
+  position: absolute;
+  bottom: 0;
+  z-index: 150;           // over bladene, også mens et blad vender
+  width: 120px;
+  height: 120px;
+  cursor: pointer;
+  touch-action: none;     // så man kan trække i hjørnet på en trykskærm
+  user-select: none;      // tekst bliver ikke markeret, når man trækker
+
+  &[hidden] { display: none; }
+
+  &--hoejre { right: 0; }
+  &--venstre { left: 0; }
+
+  &:hover { --fold: 64px; }
+
+  &__fold {
+    position: absolute;
+    bottom: 0;
+    width: var(--fold, 0px);
+    height: var(--fold, 0px);
+    pointer-events: none;
+    filter: drop-shadow(-2px -2px 4px rgba($blaek, 0.3));
+    transition: width 0.25s ease, height 0.25s ease;
+  }
+
+  // Den øverste trekant er bagsiden af papiret (lys, med skygge ind mod folden).
+  // Den nederste trekant er skyggen under hjørnet, der er løftet op
+  &--hoejre &__fold {
+    right: 0;
+    border-top-left-radius: 35%;
+    background: linear-gradient(to bottom right, $papir 0%, $papirstreg 40%, $nat-daempet 49.5%, rgba($blaek, 0.75) 50.5%, rgba($blaek, 0.9) 100%);
+  }
+
+  &--venstre &__fold {
+    left: 0;
+    border-top-right-radius: 35%;
+    filter: drop-shadow(2px -2px 4px rgba($blaek, 0.3));
+    background: linear-gradient(to bottom left, $papir 0%, $papirstreg 40%, $nat-daempet 49.5%, rgba($blaek, 0.75) 50.5%, rgba($blaek, 0.9) 100%);
+  }
+
+  // Mens man trækker, følger folden fingeren/musen uden forsinkelse
+  &--traek &__fold { transition: none; }
+}
+
+// Billeder i bogen kan ikke trækkes ud af siden (så afbrydes bladringen)
+.bog img { -webkit-user-drag: none; }
+
+// Mens et blad vender, er folden væk
+.bog--bladrer .hjoerne__fold { --fold: 0px; transition: none; }
+
+// Hjørnerne findes kun i bogen – ikke i mobilvisningen
+.guide--laes .hjoerne { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hjoerne__fold { transition: none; }
+}
+
+
 // ==========================================================
 // 6. KNAPPER OG TÆLLER
 // Hvilke knapper der vises, afhænger af visningen (klassen på <body>)
@@ -845,6 +921,8 @@ $blad-tykkelse: 1.1px;
 
   &__knap {
     @include fokus;
+    display: inline-flex;     // "Hent som pdf" er et link, så det skal stå som knapperne
+    align-items: center;
     min-height: 56px;
     padding: 0 28px;
     border: 0;
@@ -855,6 +933,7 @@ $blad-tykkelse: 1.1px;
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
+    text-decoration: none;
     cursor: pointer;
 
     &:hover { background: $blaek; }

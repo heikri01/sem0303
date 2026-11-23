@@ -112,7 +112,11 @@ function besvar(valg) {
   // Den valgte knap markeres, så man kan se, hvad man trykkede på
   quiz.querySelectorAll('[data-valg]').forEach(function (knap) {
     knap.disabled = true;
-    if (knap.dataset.valg === valg) knap.classList.add('knap--valgt');
+    if (knap.dataset.valg === valg) {
+      knap.classList.add('knap--valgt');
+      // Rigtigt svar: knappen bliver grøn, så man tydeligt kan se, at man ramte
+      if (korrekt) knap.classList.add('knap--rigtig');
+    }
   });
 
   const sidste = nr === SPOERGSMAAL.length - 1;

@@ -18,6 +18,10 @@ $nat-daempet:  #C9BFB2;  // små etiketter på blæk
 $papirstreg:   #D8D1C6;  // kun skillelinjer, aldrig tekst
 // Rød på blæk er aldrig tekst, kun linjer. Al tekst skal have mindst 4,5:1 i kontrast
 
+// Undtagelse fra paletten (aftalt 23/11): grøn viser KUN et rigtigt svar i quizzen.
+// Kontrast 6,4:1 på hvid og 5,8:1 på papir
+$groen:        #2F6B3A;
+
 // Skrift: Lato til alt, EB Garamond kursiv kun til Grethes stemme
 $sans:  'Lato', sans-serif;
 $serif: 'EB Garamond', Georgia, serif;

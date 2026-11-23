@@ -37,6 +37,10 @@
       <div class="bog__kant bog__kant--venstre" aria-hidden="true"></div>
       <div class="bog__kant bog__kant--hoejre" aria-hidden="true"></div>
 
+      <!-- Hjørnerne, man kan bladre med: musen over hjørnet folder siden op, klik eller træk bladrer (se guide.js) -->
+      <div class="hjoerne hjoerne--venstre" id="hjoerne-venstre" aria-hidden="true"><span class="hjoerne__fold"></span></div>
+      <div class="hjoerne hjoerne--hoejre" id="hjoerne-hoejre" aria-hidden="true"><span class="hjoerne__fold"></span></div>
+
       <!-- ========== BLAD 1 ========== -->
       <div class="blad">
 
@@ -743,10 +747,11 @@
     </div><!-- /bog -->
     </div><!-- /bog-ramme -->
 
-    <!-- Forsiden: vælg mellem bogen og tekstvisningen (som i Marcus' bladrebog) -->
+    <!-- Forsiden: åbn bogen, læs den som tekst eller hent den som pdf -->
     <div class="valg" id="valg">
       <button class="valg__knap" id="aabn" type="button">Åbn bogen</button>
       <button class="valg__knap valg__knap--sekundaer" id="tekst-fra-start" type="button">Læs som tekst</button>
+      <a class="valg__knap valg__knap--sekundaer" href="pdf/soevnguiden.pdf" download>Hent som pdf<span class="sr-only"> (pdf, 9 MB)</span></a>
     </div>
 
     <!-- Knapper, når bogen er åben -->

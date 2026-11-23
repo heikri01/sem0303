@@ -178,6 +178,10 @@ img {
   background: #2B2A29;
   color: #FFFFFF;
 }
+.knap--valgt.knap--rigtig:disabled {
+  background: #2F6B3A;
+  border-color: #2F6B3A;
+}
 .knap--sekundaer {
   background: transparent;
   color: #2B2A29;

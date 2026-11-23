@@ -2,6 +2,8 @@
 
 *Opdateret 23/11 (Heidi + Claude): hele sitet følger nu designguide v2. Opdatér filen, når noget flyttes, tilføjes eller fjernes.*
 
+> **Designguiden:** Alle designregler (farver, skrift, faste elementer og formater) står i `RD_Designguide.pdf` i mappen `aflevering gruppe 22`, én mappe over `web`. Farverne og skriften fra guiden er lagt ind i `scss/_tokens.scss`. Ændres guiden, så ret `_tokens.scss`, så slår ændringen igennem på alle sider.
+
 ## Overblik
 
 ```

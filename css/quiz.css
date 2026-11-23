@@ -177,6 +177,10 @@ img {
   background: #2B2A29;
   color: #FFFFFF;
 }
+.knap--valgt.knap--rigtig:disabled {
+  background: #2F6B3A;
+  border-color: #2F6B3A;
+}
 .knap--sekundaer {
   background: transparent;
   color: #2B2A29;
@@ -327,10 +331,10 @@ img {
   margin: 0.25rem 0 0;
 }
 .facit--rigtigt {
-  border-color: #2B2A29;
+  border-color: #2F6B3A;
 }
 .facit--rigtigt .facit__overskrift {
-  color: #2B2A29;
+  color: #2F6B3A;
 }
 .facit--forkert {
   border-color: #5B4632;
@@ -428,6 +432,6 @@ img {
   color: #4F4E4D;
 }
 .oversigt .rigtigt .oversigt__facit {
-  color: #2B2A29;
+  color: #2F6B3A;
   font-weight: 700;
 }

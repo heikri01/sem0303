@@ -30,6 +30,8 @@ const sider = Array.from(bog.querySelectorAll('.side'));
 const forrigeKnap = document.getElementById('forrige');
 const naesteKnap = document.getElementById('naeste');
 const taeller = document.getElementById('taeller');
+const hjoerneVenstre = document.getElementById('hjoerne-venstre');
+const hjoerneHoejre = document.getElementById('hjoerne-hoejre');
 
 const ANTAL_BLADE = blade.length;   // 13
 const ANTAL_SIDER = sider.length;   // 26
@@ -39,6 +41,7 @@ const tekstpanel = document.getElementById('tekstpanel');
 let visning = 'start';   // 'start', 'bog' eller 'laes'
 let vendt = 0;           // antal vendte blade
 let tekstKnap = null;    // den knap, der åbnede tekstpanelet (fokus går tilbage hertil)
+let skala = 1;           // hvor meget bogen er gjort større eller mindre (zoom)
 
 
 // ==========================================================
@@ -132,7 +135,7 @@ function tegn() {
   const bund = visning === 'start' ? 108 : 44;
   const pladsB = window.innerWidth - 2 * 100;
   const pladsH = window.innerHeight - top - bund;
-  const skala = Math.min(pladsB / (SIDE_B * 2), pladsH / SIDE_H, 1.3);
+  skala = Math.min(pladsB / (SIDE_B * 2), pladsH / SIDE_H, 1.3);
 
   // Forsiden og bagsiden står alene, så bogen skubbes, så de står i midten
   let skub = 0;
@@ -156,6 +159,18 @@ function tegn() {
   forrigeKnap.disabled = vendt === 0;
   naesteKnap.disabled = vendt === ANTAL_BLADE;
   taeller.textContent = tekstTilTaeller(synlige);
+
+  // 5. Hjørnerne: kun der, hvor der er en side at bladre til.
+  //    På forsiden kan man kun bladre frem (det åbner bogen)
+  hjoerneVenstre.hidden = visning !== 'bog' || vendt === 0;
+  hjoerneHoejre.hidden = vendt === ANTAL_BLADE;
+}
+
+// Mens et blad vender, skjules folden i hjørnet (ellers ses den oven på bladet)
+function bladrer() {
+  bog.classList.add('bog--bladrer');
+  clearTimeout(bog.bladreTimer);
+  bog.bladreTimer = setTimeout(() => bog.classList.remove('bog--bladrer'), 950);
 }
 
 // Hvilke sidetal kan man se lige nu?
@@ -180,12 +195,14 @@ function naeste() {
   if (visning === 'start') { aabnBog(); return; }
   if (vendt >= ANTAL_BLADE) return;
   vendt++;
+  bladrer();
   tegn();
 }
 
 function forrige() {
   if (visning !== 'bog' || vendt <= 0) return;
   vendt--;
+  bladrer();
   tegn();
 }
 
@@ -334,13 +351,44 @@ bog.addEventListener('click', (e) => {
 // Swipe og klik: træk eller klik i højre side af bogen = næste, venstre side = forrige
 let startX = null;
 let startY = null;
+let traekHjoerne = null;   // det hjørne, man trækker i (eller null)
 
 bog.addEventListener('pointerdown', (e) => {
   startX = e.clientX;
   startY = e.clientY;
+
+  // Trykker man i et hjørne, følger folden med, når man trækker
+  traekHjoerne = e.target.closest('.hjoerne');
+  if (traekHjoerne) {
+    e.preventDefault();   // ingen tekstmarkering, mens man trækker i hjørnet
+    traekHjoerne.classList.add('hjoerne--traek');
+    bog.setPointerCapture(e.pointerId);   // så slip af musen opdages, selv uden for bogen
+  }
 });
 
+bog.addEventListener('pointermove', (e) => {
+  if (!traekHjoerne) return;
+  // Hvor langt er der trukket ind mod ryggen? (højre hjørne: mod venstre, venstre hjørne: mod højre)
+  const ind = traekHjoerne === hjoerneHoejre ? startX - e.clientX : e.clientX - startX;
+  // Folden vokser med trækket. Der divideres med skala, fordi bogen er zoomet
+  const fold = Math.max(64, Math.min(320, 64 + ind / skala));
+  traekHjoerne.style.setProperty('--fold', fold + 'px');
+});
+
+function slipHjoerne() {
+  if (!traekHjoerne) return;
+  traekHjoerne.classList.remove('hjoerne--traek');
+  traekHjoerne.style.removeProperty('--fold');
+  traekHjoerne = null;
+}
+bog.addEventListener('pointercancel', slipHjoerne);
+
+// Browseren vil gerne selv trække i billeder og links ("træk og slip" med stoptegnet).
+// Det afbryder bladringen, så det slås fra inde i bogen
+bog.addEventListener('dragstart', (e) => e.preventDefault());
+
 bog.addEventListener('pointerup', (e) => {
+  slipHjoerne();
   if (startX === null || visning === 'laes') return;
   const dx = e.clientX - startX;
   const dy = e.clientY - startY;

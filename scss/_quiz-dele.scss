@@ -137,7 +137,7 @@
   &__respons { margin: 0.25rem 0 0; }
 
   // Rigtigt/forkert vises både med farve og med ord, så det ikke kun afhænger af farvesyn
-  &--rigtigt { border-color: $blaek; .facit__overskrift { color: $blaek; } }
+  &--rigtigt { border-color: $groen; .facit__overskrift { color: $groen; } }
   &--forkert { border-color: $sepia; .facit__overskrift { color: $sepia; } }
 }
 
@@ -229,5 +229,5 @@
     color: $moerkegraa;
   }
 
-  .rigtigt .oversigt__facit { color: $blaek; font-weight: 700; }
+  .rigtigt .oversigt__facit { color: $groen; font-weight: 700; }
 }

@@ -447,9 +447,9 @@ img {
 }
 .fotopar__tekst {
   margin: 0;
-  font-family: "EB Garamond", Georgia, serif;
+  font-family: "Lato", sans-serif;
   font-style: italic;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 16px;
   line-height: 1.4;
   color: #C9BFB2;
@@ -491,18 +491,18 @@ img {
 }
 .kapiteltitel__nr {
   margin: 0;
-  font-family: "EB Garamond", Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: 300;
   font-size: 24px;
   line-height: 1.1;
   color: #F3EDE4;
 }
 .kapiteltitel__under {
   margin: 0;
-  font-family: "EB Garamond", Georgia, serif;
+  font-family: "Lato", sans-serif;
   font-style: italic;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 17px;
   line-height: 1.3;
   color: #C9BFB2;
@@ -581,9 +581,9 @@ img {
 }
 .dengang__etiket em {
   margin: 0;
-  font-family: "EB Garamond", Georgia, serif;
+  font-family: "Lato", sans-serif;
   font-style: italic;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 16px;
   line-height: 1.4;
 }
@@ -669,9 +669,9 @@ img {
 }
 .proev-det__tekst {
   margin: 0;
-  font-family: "EB Garamond", Georgia, serif;
+  font-family: "Lato", sans-serif;
   font-style: italic;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 16px;
   line-height: 1.4;
   color: #2B2A29;
@@ -712,9 +712,9 @@ img {
 }
 .aarstid__under {
   margin: 0;
-  font-family: "EB Garamond", Georgia, serif;
+  font-family: "Lato", sans-serif;
   font-style: italic;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 16px;
   line-height: 1.4;
   color: #4F4E4D;
@@ -769,9 +769,9 @@ img {
 }
 .titelboks__undertitel {
   margin: 0;
-  font-family: "EB Garamond", Georgia, serif;
+  font-family: "Lato", sans-serif;
   font-style: italic;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 21px;
   line-height: 1.3;
   color: #A6192E;
@@ -827,9 +827,9 @@ img {
 }
 .hent__note {
   margin: 0;
-  font-family: "EB Garamond", Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: 300;
   font-size: 17px;
   line-height: 1.4;
   color: #4F4E4D;
@@ -860,9 +860,9 @@ img {
 }
 .tre-spor__navn {
   margin: 0;
-  font-family: "EB Garamond", Georgia, serif;
+  font-family: "Lato", sans-serif;
   font-style: italic;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 17px;
   line-height: 1.3;
 }
@@ -903,9 +903,9 @@ img {
 }
 .indhold__beskriv {
   margin: 0;
-  font-family: "EB Garamond", Georgia, serif;
+  font-family: "Lato", sans-serif;
   font-style: italic;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 16px;
   line-height: 1.4;
   color: #4F4E4D;
@@ -947,9 +947,9 @@ img {
   padding: 8px 0;
   counter-increment: udsagn;
   margin: 0;
-  font-family: "EB Garamond", Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: 300;
   font-size: 17px;
   line-height: 1.38;
 }
@@ -986,9 +986,9 @@ img {
   padding: 3px 10px;
   background: #F7F3EC;
   margin: 0;
-  font-family: "EB Garamond", Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: 300;
   font-size: 16px;
   line-height: 1.4;
   color: #4F4E4D;
@@ -996,9 +996,9 @@ img {
 
 .afslutning__citat {
   margin: 0;
-  font-family: "EB Garamond", Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: 300;
   font-size: 27px;
   line-height: 1.3;
   text-align: center;
@@ -1064,6 +1064,70 @@ img {
   color: #F3EDE4;
 }
 
+.hjoerne {
+  position: absolute;
+  bottom: 0;
+  z-index: 150;
+  width: 120px;
+  height: 120px;
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+}
+.hjoerne[hidden] {
+  display: none;
+}
+.hjoerne--hoejre {
+  right: 0;
+}
+.hjoerne--venstre {
+  left: 0;
+}
+.hjoerne:hover {
+  --fold: 64px;
+}
+.hjoerne__fold {
+  position: absolute;
+  bottom: 0;
+  width: var(--fold, 0px);
+  height: var(--fold, 0px);
+  pointer-events: none;
+  filter: drop-shadow(-2px -2px 4px rgba(43, 42, 41, 0.3));
+  transition: width 0.25s ease, height 0.25s ease;
+}
+.hjoerne--hoejre .hjoerne__fold {
+  right: 0;
+  border-top-left-radius: 35%;
+  background: linear-gradient(to bottom right, #F7F3EC 0%, #D8D1C6 40%, #C9BFB2 49.5%, rgba(43, 42, 41, 0.75) 50.5%, rgba(43, 42, 41, 0.9) 100%);
+}
+.hjoerne--venstre .hjoerne__fold {
+  left: 0;
+  border-top-right-radius: 35%;
+  filter: drop-shadow(2px -2px 4px rgba(43, 42, 41, 0.3));
+  background: linear-gradient(to bottom left, #F7F3EC 0%, #D8D1C6 40%, #C9BFB2 49.5%, rgba(43, 42, 41, 0.75) 50.5%, rgba(43, 42, 41, 0.9) 100%);
+}
+.hjoerne--traek .hjoerne__fold {
+  transition: none;
+}
+
+.bog img {
+  -webkit-user-drag: none;
+}
+
+.bog--bladrer .hjoerne__fold {
+  --fold: 0px;
+  transition: none;
+}
+
+.guide--laes .hjoerne {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hjoerne__fold {
+    transition: none;
+  }
+}
 .valg,
 .bladre,
 .taeller,
@@ -1100,6 +1164,8 @@ img {
   outline-offset: 3px;
 }
 .valg__knap {
+  display: inline-flex;
+  align-items: center;
   min-height: 56px;
   padding: 0 28px;
   border: 0;
@@ -1111,6 +1177,7 @@ img {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   cursor: pointer;
+  text-decoration: none;
 }
 .valg__knap:hover {
   background: #2B2A29;

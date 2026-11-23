@@ -49,6 +49,12 @@
     color: $hvid;
   }
 
+  // Valgte man rigtigt, bliver knappen grøn (quiz.js sætter klassen knap--rigtig)
+  &--valgt.knap--rigtig:disabled {
+    background: $groen;
+    border-color: $groen;
+  }
+
   &--sekundaer {
     background: transparent;
     color: $blaek;
