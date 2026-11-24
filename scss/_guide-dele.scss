@@ -537,6 +537,39 @@ $blad-tykkelse: 1.1px;
   }
 }
 
+// ---------- Illustrationer · de røde stregtegninger (Figma: "Illustration · …") ----------
+// Står nederst i I dag-feltet (sol og måne på side 2 og Zzz på side 22 står, hvor der før var luft).
+// --bog er bredden i bogen, --laes bredden på mobil – begge taget fra Figma.
+// Er der for lidt plads på en side, skrumper tegningen (object-fit holder formen), så teksten aldrig skubbes ud.
+// alt="" i HTML'en: tegningerne er pynt, så skærmlæsere springer dem over.
+.illu {
+  --bog: 160px;
+  --laes: 110px;
+  flex: 0 1 auto;
+  align-self: center;
+  width: var(--bog);
+  max-width: 100%;
+  min-height: 0;
+  margin-block: auto;
+  object-fit: contain;
+
+  &--sol-og-maane { --bog: 179px; --laes: 116px; }
+  &--kaffekop     { --bog: 223px; --laes: 130px; }
+  &--lampe        { --bog: 143px; --laes: 93px; }
+  &--vaekkeur     { --bog: 169px; --laes: 110px; }
+  &--maane        { --bog: 111px; --laes: 90px; }
+  &--dyne         { --bog: 170px; --laes: 111px; }
+  &--bamse        { --bog: 208px; --laes: 130px; }
+  &--zzz          { --bog: 158px; --laes: 103px; }
+
+  // Lampen og månen står nederst til højre i feltet, som i Figma
+  &--lampe,
+  &--maane { align-self: flex-end; margin-block: auto 0; }
+
+  // Zzz står lidt til højre for midten på søvnkortet
+  &--zzz { translate: 19px 0; }
+}
+
 // ---------- Årstider (side 15 og 17) ----------
 .aarstid {
   display: flex;
@@ -1166,6 +1199,15 @@ $blad-tykkelse: 1.1px;
   .idag--lille { padding: 12px 17px 13px; }
   .idag__etiket { font-size: 16px; letter-spacing: 2.24px; }
   .idag__overskrift { font-size: 22px; letter-spacing: 1.32px; }
+
+  // Illustrationerne står midt under teksten med Figmas mobilstørrelse
+  .illu {
+    flex: none;
+    align-self: center;
+    width: var(--laes);
+    margin: 8px auto 4px;
+    translate: none;
+  }
 
   .proev-det {
     gap: 5px;

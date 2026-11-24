@@ -54,11 +54,17 @@
     <!-- ========== 1 · START ========== -->
     <section class="afsnit" id="start">
       <div class="forside">
-        <div class="indhold">
+        <div class="indhold forside__gitter">
+          <div>
           <p class="forside__etiket">Ringsted Dun · Søvnguiden – dengang og i dag</p>
           <h1 class="forside__titel">AI Playbook</h1>
           <p class="forside__tekst">Sådan laver du opslag, mails og videoklip til kampagnen med hjælp fra AI – hurtigere, men lige så godt, som hvis du havde skrevet det hele selv.</p>
           <a class="knap knap--primaer forside__knap" href="#lav">Lav en produktion</a>
+          </div>
+          <!-- Marcus' illustration: gåsen og tandhjulet i lys streg til den mørke bjælke -->
+          <figure class="forside__illustration">
+            <img src="img/playbook/AIlog_ilu_gaas_tandhjul_hvid.svg" alt="">
+          </figure>
         </div>
       </div>
 
@@ -163,7 +169,7 @@
               <p>Start en ny samtale med AI, og upload:</p>
               <ul>
                 <li>baggrundsfilen, søvnguiden og Grethes karakterark (eller den samlede PDF – se <a href="#kontekst">Baggrundsfilen</a>)</li>
-                <li>de to billeder til kapitlet – dengang og i dag, fx <code>dengang_2230.png</code> og <code>idag_2230.png</code></li>
+                <li>de to billeder til kapitlet – dengang og i dag, fx <code>dengang-sengetid.jpg</code> og <code>idag-sengetid.jpg</code> (se <a href="#kontekst">Baggrundsfilen</a>)</li>
               </ul>
             </li>
             <li>
@@ -190,12 +196,18 @@
             </li>
             <li>
               <h3>Se karrusellen</h3>
-              <p>Upload dine slides og teksten til opslaget. I højre side kan du se, hvordan opslaget kommer til at se ud.</p>
+              <p>Upload dine slides, eller vælg billeder fra søvnguiden, og sæt teksten til opslaget ind. I højre side kan du se, hvordan opslaget kommer til at se ud.</p>
               <div class="felter" id="forhaand">
                 <div class="felt">
                   <label class="felt__navn" for="fSlides">Dine slides – forside A først</label>
                   <input type="file" id="fSlides" accept="image/*" multiple>
                   <p class="felt__hjaelp">Giv filerne navne som 01, 02, 03 … så kommer de i den rigtige rækkefølge.</p>
+                </div>
+                <div class="felt">
+                  <p class="felt__navn" id="gNavn">Eller vælg billeder fra søvnguiden</p>
+                  <p class="felt__hjaelp">Klik på billederne i den rækkefølge, de skal stå i karrusellen. Klik igen for at fjerne et billede.</p>
+                  <!-- Knapperne laves af playbook.js (afsnit 5) ud fra listen KAPITLER -->
+                  <div class="galleri" id="galleri" role="group" aria-labelledby="gNavn"></div>
                 </div>
                 <div class="felt">
                   <label class="felt__navn" for="fForsideB">Forside B (hvis du vil teste to forsider)</label>
@@ -253,7 +265,7 @@
         </div>
 
         <!-- ===== VELKOMSTMAIL ===== -->
-        <div class="vaerksted" id="v-mail" role="tabpanel" aria-labelledby="fane-mail" hidden>
+        <div class="vaerksted vaerksted--mail" id="v-mail" role="tabpanel" aria-labelledby="fane-mail" hidden>
           <ol class="trin">
             <li>
               <h3>Giv AI filerne</h3>
@@ -284,6 +296,50 @@ Skriv ikke logo, sidefod, afmelding, AI-mærkning eller "mail X af 5" – de lig
               </div>
             </li>
             <li>
+              <h3>Se mailen</h3>
+              <p>Sæt hele AI's svar ind. Teksten bliver fordelt på mailens felter, og i højre side kan du se, hvordan mailen bliver. Du kan rette i felterne bagefter.</p>
+              <div class="felter">
+                <div class="felt">
+                  <label class="felt__navn" for="mSvar">AI's svar</label>
+                  <textarea id="mSvar" rows="9"></textarea>
+                </div>
+                <div class="felt felt--to">
+                  <div>
+                    <label class="felt__navn" for="mKapitel">Kapitel</label>
+                    <select id="mKapitel"></select>
+                  </div>
+                  <div>
+                    <label class="felt__navn" for="mNr">Mail nr.</label>
+                    <select id="mNr">
+                      <option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option>
+                    </select>
+                  </div>
+                </div>
+                <p class="felt__hjaelp">Kapitlet bestemmer billedparret og knappens link til søvnguiden.</p>
+                <details class="felt rette">
+                  <summary>Ret felterne enkeltvis</summary>
+                  <label class="felt__navn" for="mEmne">Emnelinje</label>
+                  <input type="text" id="mEmne">
+                  <label class="felt__navn" for="mPre">Preheader</label>
+                  <input type="text" id="mPre">
+                  <label class="felt__navn" for="mHilsen">Hilsen</label>
+                  <textarea id="mHilsen" rows="2"></textarea>
+                  <label class="felt__navn" for="mDengang">Dengang (Grethes erindring)</label>
+                  <textarea id="mDengang" rows="3"></textarea>
+                  <label class="felt__navn" for="mIdag">I dag</label>
+                  <textarea id="mIdag" rows="4"></textarea>
+                  <label class="felt__navn" for="mProev">Prøv det</label>
+                  <textarea id="mProev" rows="2"></textarea>
+                  <label class="felt__navn" for="mMormor">Mormor i dag</label>
+                  <textarea id="mMormor" rows="2"></textarea>
+                  <label class="felt__navn" for="mKnap">Knaptekst</label>
+                  <input type="text" id="mKnap">
+                </details>
+                <button class="knap knap--link" id="mEksempel" type="button">Vis eksemplet igen</button>
+                <p class="felt__hjaelp">Teksten bliver på din computer. Intet sendes nogen steder hen.</p>
+              </div>
+            </li>
+            <li>
               <h3>Sæt teksten ind i mailen</h3>
               <p>AI deler teksten op i små stykker. Sæt dem ind på deres plads i jeres faste mailskabelon. Logo, bund, afmelding og AI-mærkning ligger der i forvejen.</p>
             </li>
@@ -292,7 +348,52 @@ Skriv ikke logo, sidefod, afmelding, AI-mærkning eller "mail X af 5" – de lig
               <div data-tjek-plads></div>
             </li>
           </ol>
-          <aside class="vaerksted__side" aria-label="Om velkomstmailen">
+          <aside class="vaerksted__side" aria-label="Forhåndsvisning af mailen">
+            <p class="side__etiket">Sådan ser det ud i indbakken</p>
+            <div class="indbakke">
+              <p class="indbakke__afsender">Ringsted Dun</p>
+              <p class="indbakke__emne" id="mvEmne"></p>
+              <p class="indbakke__pre" id="mvPre"></p>
+            </div>
+
+            <p class="side__etiket">Sådan ser mailen ud</p>
+            <article class="mail" aria-label="Forhåndsvisning af velkomstmailen">
+              <header class="mail__top">
+                <img class="mail__logo" src="img/playbook/RDU_logo_aflang.png" alt="Ringsted Dun">
+              </header>
+              <figure class="billedpar billedpar--bred" id="mvBilleder"></figure>
+              <div class="mail__indhold">
+                <p class="mail__hilsen" id="mvHilsen"></p>
+                <blockquote class="mail__dengang">
+                  <p class="mail__etiket">Dengang</p>
+                  <p class="mail__citat" id="mvDengang"></p>
+                  <p class="mail__afsender">– Grethe</p>
+                </blockquote>
+                <div class="mail__idag">
+                  <p class="mail__etiket mail__etiket--roed">I dag</p>
+                  <div id="mvIdag"></div>
+                </div>
+                <div class="mail__proev">
+                  <p class="mail__etiket mail__etiket--roed">Prøv det</p>
+                  <p id="mvProev"></p>
+                </div>
+                <div class="mail__mormor">
+                  <p class="mail__etiket">Mormor i dag</p>
+                  <p class="mail__citat" id="mvMormor"></p>
+                  <p class="mail__afsender">– Grethe</p>
+                </div>
+                <p class="mail__knap-plads"><a class="mail__knap" id="mvKnap" href="guide.html"></a></p>
+              </div>
+              <footer class="mail__bund">
+                <p>Mormor Grethe er en fiktiv person. Billeder og stemme er skabt med AI.</p>
+                <p>Du får mailen, fordi du har hentet Søvnguiden. <span class="mail__afmeld">Afmeld nyhedsbrevet</span> · Mail <span id="mvNr">2</span> af 5</p>
+                <p>Ringsted Dun · ringsted-dun.dk</p>
+              </footer>
+            </article>
+
+            <p class="side__etiket">Tjekket for dig</p>
+            <ul class="kontrol" id="mvKontrol" aria-live="polite"></ul>
+
             <p class="side__etiket">Det skal du lave</p>
             <dl class="fakta">
               <dt>Bredde</dt><dd>600 pixels – passer til både mobil og computer</dd>
@@ -376,11 +477,55 @@ Skriv ikke logo, sidefod, afmelding, AI-mærkning eller "mail X af 5" – de lig
               </ul>
             </li>
             <li>
+              <h3>Se opslaget</h3>
+              <p>Vælg kapitlet, så henter siden billederne fra søvnguiden. Sæt teksten fra AI ind. I højre side kan du se, hvordan opslaget bliver på Facebook.</p>
+              <div class="felter">
+                <div class="felt">
+                  <label class="felt__navn" for="oKapitel">Kapitel</label>
+                  <select id="oKapitel"></select>
+                </div>
+                <fieldset class="felt">
+                  <legend class="felt__navn">Billede</legend>
+                  <label class="felt__valg"><input type="radio" name="oBillede" value="par" checked> Billedpar: dengang og i dag med den røde tråd</label>
+                  <label class="felt__valg"><input type="radio" name="oBillede" value="dengang"> Kun dengang</label>
+                  <label class="felt__valg"><input type="radio" name="oBillede" value="idag"> Kun i dag</label>
+                </fieldset>
+                <div class="felt">
+                  <label class="felt__navn" for="oTekst">Teksten til opslaget</label>
+                  <textarea id="oTekst" rows="7"></textarea>
+                </div>
+                <fieldset class="felt">
+                  <legend class="felt__navn">AI-mærkning</legend>
+                  <label class="felt__valg"><input type="checkbox" id="oAiBillede" checked> Billederne er lavet med AI – sæt »AI-genereret billede« på</label>
+                  <label class="felt__valg"><input type="checkbox" id="oGrethe"> Grethe er med – sæt mærkningen under teksten</label>
+                </fieldset>
+                <button class="knap knap--sekundaer felt__hent" id="oHent" type="button">Hent billedet (1080 × 1080)</button>
+                <p class="felt__hjaelp" id="oHentStatus" aria-live="polite"></p>
+                <button class="knap knap--link" id="oEksempel" type="button">Vis eksemplet igen</button>
+              </div>
+            </li>
+            <li>
               <h3>Tjek, før du bruger det</h3>
               <div data-tjek-plads></div>
             </li>
           </ol>
-          <aside class="vaerksted__side" aria-label="Om de små opslag">
+          <aside class="vaerksted__side" aria-label="Forhåndsvisning af opslaget">
+            <p class="side__etiket">Sådan ser det ud</p>
+            <article class="opslag" aria-label="Forhåndsvisning af opslaget">
+              <header class="opslag__hoved">
+                <img class="opslag__logo" src="img/guide/RDU_logo.png" alt="">
+                <div>
+                  <p class="opslag__navn">Ringsted Dun</p>
+                  <p class="opslag__tid">Lige nu</p>
+                </div>
+              </header>
+              <div class="opslag__tekst" id="ovTekst"></div>
+              <figure class="billedpar" id="ovBilleder"></figure>
+            </article>
+
+            <p class="side__etiket">Tjekket for dig</p>
+            <ul class="kontrol" id="ovKontrol" aria-live="polite"></ul>
+
             <p class="side__etiket">Det kan du lave</p>
             <dl class="fakta">
               <dt>Opslag med råd</dt><dd>Billede eller klip + et råd fra søvnguiden</dd>
@@ -564,14 +709,17 @@ Skriv ikke logo, sidefod, afmelding, AI-mærkning eller "mail X af 5" – de lig
           <div>
             <h3>Her ligger filerne</h3>
             <ul>
-              <li>Baggrundsfilen: <code>Content-kit/kampagne_baggrundsfil_til_AI.md</code></li>
-              <li>Søvnguiden: <code>Content-kit/soevnguide_tekst_v6.md</code></li>
-              <li>Grethes karakterark: <code>Content-kit/mormor_grethe_karakterark.md</code></li>
-              <li>Billederne: <code>Mediefiler/img/dengang/</code> og <code>Mediefiler/img/idag/</code></li>
+              <!-- Filerne ligger i webmappen (docs/ og img/). download gør, at filen hentes ned i stedet for at blive vist i browseren -->
+              <li>Baggrundsfilen: <a href="docs/kampagne_baggrundsfil_til_AI.md" download>kampagne_baggrundsfil_til_AI.md</a></li>
+              <li>Søvnguiden: <a href="docs/soevnguide_tekst.md" download>soevnguide_tekst.md</a></li>
+              <li>Grethes karakterark: <a href="docs/mormor_grethe_karakterark.md" download>mormor_grethe_karakterark.md</a></li>
+              <li>Dengang-billederne: <a href="img/guide/dengang-0430-klokken-fem.jpg" download>04.30</a> · <a href="img/guide/dengang-0700-morgen.jpg" download>07.00</a> · <a href="img/guide/dengang-1400-eftermiddag.jpg" download>14.00</a> · <a href="img/guide/dengang-2000-aften.jpg" download>20.00</a> · <a href="img/guide/dengang-sengetid.jpg" download>22.30</a> · <a href="img/guide/dengang-vinter.jpg" download>Vinter og forår</a> · <a href="img/guide/dengang-dyner-luftes.jpg" download>Sommer og efterår</a> · <a href="img/guide/dengang-for-to.jpg" download>Din side af sengen</a> · <a href="img/guide/dengang-boerneboern.jpg" download>Børnebørnene</a></li>
+              <li>I dag-billederne: <a href="img/guide/idag-0430-klokken-fem.jpg" download>04.30</a> · <a href="img/guide/idag-0700-morgen.jpg" download>07.00</a> · <a href="img/guide/idag-1400-eftermiddag.jpg" download>14.00</a> · <a href="img/guide/idag-2000-aften.jpg" download>20.00</a> · <a href="img/guide/idag-sengetid.jpg" download>22.30</a> · <a href="img/guide/idag-vinter.jpg" download>Vinter og forår</a> · <a href="img/guide/idag-dyner-luftes.jpg" download>Sommer og efterår</a> · <a href="img/guide/idag-for-to.jpg" download>Din side af sengen</a> · <a href="img/guide/idag-boerneboern.jpg" download>Børnebørnene</a></li>
+              <li>Grethes masterbillede (når Grethe skal ses i billeder eller video): <a href="img/guide/grethe_master.png" download>grethe_master.png</a></li>
             </ul>
             <div class="note">
               <h3>Kan dit AI-program ikke åbne filerne?</h3>
-              <p>Nogle programmer kan ikke læse .md-filer eller tager kun få filer ad gangen. Brug så den samlede PDF: <code>Content-kit/AI-pakke_soevnguiden.pdf</code>. Den indeholder baggrundsfilen, karakterarket og søvnguiden. Upload billederne ved siden af.</p>
+              <p>Nogle programmer kan ikke læse .md-filer eller tager kun få filer ad gangen. Brug så den samlede PDF: <a href="docs/AI-pakke-soevnguide.pdf" download>AI-pakke-soevnguide.pdf</a>. Den indeholder baggrundsfilen, karakterarket og søvnguiden. Upload billederne ved siden af.</p>
             </div>
           </div>
         </div>

@@ -688,6 +688,58 @@ img {
   white-space: nowrap;
 }
 
+.illu {
+  --bog: 160px;
+  --laes: 110px;
+  flex: 0 1 auto;
+  align-self: center;
+  width: var(--bog);
+  max-width: 100%;
+  min-height: 0;
+  margin-block: auto;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.illu--sol-og-maane {
+  --bog: 179px;
+  --laes: 116px;
+}
+.illu--kaffekop {
+  --bog: 223px;
+  --laes: 130px;
+}
+.illu--lampe {
+  --bog: 143px;
+  --laes: 93px;
+}
+.illu--vaekkeur {
+  --bog: 169px;
+  --laes: 110px;
+}
+.illu--maane {
+  --bog: 111px;
+  --laes: 90px;
+}
+.illu--dyne {
+  --bog: 170px;
+  --laes: 111px;
+}
+.illu--bamse {
+  --bog: 208px;
+  --laes: 130px;
+}
+.illu--zzz {
+  --bog: 158px;
+  --laes: 103px;
+}
+.illu--lampe, .illu--maane {
+  align-self: flex-end;
+  margin-block: auto 0;
+}
+.illu--zzz {
+  translate: 19px 0;
+}
+
 .aarstid {
   display: flex;
   flex-direction: column;
@@ -1072,7 +1124,9 @@ img {
   height: 120px;
   cursor: pointer;
   touch-action: none;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 .hjoerne[hidden] {
   display: none;
@@ -1176,8 +1230,8 @@ img {
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  cursor: pointer;
   text-decoration: none;
+  cursor: pointer;
 }
 .valg__knap:hover {
   background: #2B2A29;
@@ -1461,6 +1515,13 @@ img {
 .guide--laes .idag__overskrift {
   font-size: 22px;
   letter-spacing: 1.32px;
+}
+.guide--laes .illu {
+  flex: none;
+  align-self: center;
+  width: var(--laes);
+  margin: 8px auto 4px;
+  translate: none;
 }
 .guide--laes .proev-det {
   gap: 5px;

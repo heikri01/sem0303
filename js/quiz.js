@@ -78,7 +78,7 @@ function visSpoergsmaal() {
       </div>
 
       <figure class="dengang-billede">
-        <img src="img/dengang/${s.billede}" alt="${s.alt}">
+        <img src="img/guide/${s.billede}" alt="${s.alt}">
         <figcaption>Dengang · AI-genereret billede</figcaption>
       </figure>
 

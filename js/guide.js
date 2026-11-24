@@ -252,6 +252,8 @@ function bygTekst() {
       if (el.closest('.sidehoved')) return;       // "Søvnguiden · Ringsted Dun" gentages på hver side
       if (el.closest('h2, h3') !== el && el.closest('h2, h3')) return;
 
+      if (el.tagName === 'IMG' && !el.alt) return; // pynt uden alt-tekst (fx illustrationerne) springes over
+
       let ny;
       if (el.tagName === 'IMG') {
         ny = lavAfsnit('p', 'tekst__afsnit tekst__billede', 'Billede: ' + el.alt);

@@ -221,6 +221,7 @@ a {
 }
 
 code {
+  font-family: "Lato", sans-serif;
   font-size: 0.9em;
   background: #E7D8BE;
   padding: 0.1rem 0.3rem;
@@ -479,6 +480,36 @@ code {
   border-bottom: 2px solid #A6192E;
 }
 
+.forside__gitter {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 26rem);
+  gap: 3rem;
+  align-items: center;
+}
+
+.forside__illustration {
+  margin: 0;
+}
+
+.forside__illustration[hidden] {
+  display: none;
+}
+
+.forside__illustration img {
+  width: 100%;
+  max-height: 22rem;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+@media (max-width: 800px) {
+  .forside__gitter {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .forside__illustration img {
+    max-height: 14rem;
+  }
+}
 .forside__etiket {
   margin: 0;
   font-family: "Lato", sans-serif;
@@ -1291,4 +1322,328 @@ code {
     -moz-column-break-before: auto;
          break-before: auto;
   }
+}
+.felt select,
+.felt input[type=text] {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #D8D1C6;
+  border-radius: 4px;
+  background: #FFFFFF;
+  font-family: "Lato", sans-serif;
+  font-size: 1rem;
+}
+
+.felt select:focus-visible,
+.felt input[type=text]:focus-visible {
+  outline: 3px solid #A6192E;
+  outline-offset: 3px;
+}
+
+.felt--to {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.rette summary {
+  cursor: pointer;
+  font-weight: 700;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+}
+
+.rette summary:focus-visible {
+  outline: 3px solid #A6192E;
+  outline-offset: 3px;
+}
+
+.rette .felt__navn {
+  margin-top: 1rem;
+}
+
+.felt__hent {
+  width: auto;
+  margin-bottom: 0.5rem;
+}
+
+.galleri {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+  gap: 0.75rem;
+}
+
+.galleri__billede {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  border: 2px solid #D8D1C6;
+  background: #F7F3EC;
+  text-align: left;
+  cursor: pointer;
+}
+
+.galleri__billede img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.galleri__navn {
+  padding: 0.25rem 0.5rem 0.4rem;
+  font-family: "Lato", sans-serif;
+  font-size: 1rem;
+  line-height: 1.3;
+  color: #2B2A29;
+}
+
+.galleri__billede:hover {
+  border-color: #5B4632;
+}
+
+.galleri__billede:focus-visible {
+  outline: 3px solid #A6192E;
+  outline-offset: 3px;
+}
+
+.galleri__billede[aria-pressed=true] {
+  border-color: #A6192E;
+}
+
+.galleri__nr {
+  position: absolute;
+  top: 0.4rem;
+  left: 0.4rem;
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 0.4rem;
+  border-radius: 1rem;
+  background: #A6192E;
+  color: #FFFFFF;
+  font-family: "Lato", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 2rem;
+  text-align: center;
+}
+
+.galleri__nr:empty {
+  display: none;
+}
+
+.billedpar {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  background: #D8D1C6;
+}
+
+.billedpar--bred {
+  aspect-ratio: 16/9;
+}
+
+.billedpar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.billedpar .billedpar__idag {
+  clip-path: inset(0 0 0 50%);
+}
+
+.billedpar--enkelt .billedpar__idag {
+  clip-path: none;
+}
+
+.billedpar__traad {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: #A6192E;
+}
+
+.vaerksted--mail {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 37.5rem);
+}
+
+@media (max-width: 1000px) {
+  .vaerksted--mail {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.indbakke {
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1rem;
+  background: #FFFFFF;
+  border-left: 2px solid #A6192E;
+}
+
+.indbakke p {
+  margin: 0;
+}
+
+.indbakke__afsender {
+  font-weight: 700;
+}
+
+.indbakke__emne {
+  font-weight: 700;
+}
+
+.indbakke__pre {
+  color: #4F4E4D;
+  font-size: 1rem;
+}
+
+.mail {
+  max-width: 600px;
+  margin-bottom: 1.5rem;
+  background: #F7F3EC;
+  border: 1px solid #D8D1C6;
+}
+
+.mail p {
+  margin: 0;
+}
+
+.mail .mail__etiket {
+  margin-bottom: 0.4rem;
+}
+
+.mail .mail__afsender {
+  margin-top: 0.25rem;
+}
+
+.mail__hilsen {
+  white-space: pre-line;
+}
+
+.mail__top {
+  padding: 1.25rem;
+  background: #FFFFFF;
+  text-align: center;
+}
+
+.mail__logo {
+  display: inline-block;
+  height: 44px;
+  width: auto;
+}
+
+.mail__indhold {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem;
+}
+
+.mail__etiket {
+  margin-bottom: 0.4rem;
+  font-family: "Lato", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #5B4632;
+}
+
+.mail__etiket--roed {
+  color: #A6192E;
+}
+
+.mail__citat {
+  font-family: "EB Garamond", Georgia, serif;
+  font-style: italic;
+  font-size: 1.375rem;
+  line-height: 1.4;
+  color: #5B4632;
+}
+
+.mail__afsender {
+  margin-top: 0.25rem;
+  color: #5B4632;
+  font-size: 1rem;
+}
+
+.mail__dengang {
+  margin: 0;
+  padding: 1rem 1.25rem;
+  background: #E7D8BE;
+}
+
+.mail__idag {
+  padding: 1rem 1.25rem;
+  background: #FFFFFF;
+  border-top: 2px solid #A6192E;
+}
+
+.mail__idag p + p {
+  margin-top: 0.75rem;
+}
+
+.mail__proev {
+  padding: 1rem 1.25rem;
+  background: #E7D8BE;
+  border-left: 4px solid #A6192E;
+}
+
+.mail__mormor {
+  padding-top: 1rem;
+  border-top: 1px solid #D8D1C6;
+}
+
+.mail__knap-plads {
+  text-align: center;
+}
+
+.mail__knap {
+  display: inline-block;
+  min-height: 56px;
+  padding: 1rem 1.75rem;
+  border-radius: 6px;
+  background: #A6192E;
+  color: #FFFFFF;
+  font-family: "Lato", sans-serif;
+  font-size: 1.1875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.mail__knap:hover {
+  background: #2B2A29;
+}
+
+.mail__knap:focus-visible {
+  outline: 3px solid #A6192E;
+  outline-offset: 3px;
+}
+
+.mail__bund {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid #D8D1C6;
+  color: #4F4E4D;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.mail__bund p + p {
+  margin-top: 0.5rem;
+}
+
+.mail__afmeld {
+  text-decoration: underline;
 }

@@ -1,0 +1,261 @@
+// ==========================================================
+// FORHÅNDSVISNINGER · billedpar, galleri, Facebook-opslag og velkomstmail
+// Bruges i værkstedet i AI Playbook (playbook.js afsnit 5 og 5b).
+// Følger designguiden: Lato, palet C, den røde tråd som lige linje.
+// ==========================================================
+@use 'tokens' as *;
+
+
+// ---------- Felter: valglister og tekstfelter på én linje ----------
+.felt select,
+.felt input[type="text"] {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid $papirstreg;
+  border-radius: 4px;
+  background: $hvid;
+  font-family: $sans;
+  font-size: $tekst-lille;
+}
+.felt select:focus-visible,
+.felt input[type="text"]:focus-visible { outline: 3px solid $roed; outline-offset: 3px; }
+
+// To felter ved siden af hinanden (kapitel og mail nr.)
+.felt--to {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 1rem;
+}
+
+// "Ret felterne enkeltvis" – foldet sammen, til man har brug for det
+.rette summary {
+  cursor: pointer;
+  font-weight: 700;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+}
+.rette summary:focus-visible { outline: 3px solid $roed; outline-offset: 3px; }
+.rette .felt__navn { margin-top: 1rem; }
+
+.felt__hent {
+  width: auto;
+  margin-bottom: 0.5rem;
+}
+
+
+// ---------- Galleriet med søvnguidens billeder (karrusellen) ----------
+.galleri {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+  gap: 0.75rem;
+}
+.galleri__billede {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  border: 2px solid $papirstreg;
+  background: $papir;
+  text-align: left;
+  cursor: pointer;
+}
+.galleri__billede img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+.galleri__navn {
+  padding: 0.25rem 0.5rem 0.4rem;
+  font-family: $sans;
+  font-size: $tekst-lille;
+  line-height: 1.3;
+  color: $blaek;
+}
+.galleri__billede:hover { border-color: $sepia; }
+.galleri__billede:focus-visible { outline: 3px solid $roed; outline-offset: 3px; }
+.galleri__billede[aria-pressed="true"] { border-color: $roed; }
+// Nummeret viser rækkefølgen i karrusellen
+.galleri__nr {
+  position: absolute;
+  top: 0.4rem;
+  left: 0.4rem;
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 0.4rem;
+  border-radius: 1rem;
+  background: $roed;
+  color: $hvid;
+  font-family: $sans;
+  font-size: $tekst-lille;
+  font-weight: 700;
+  line-height: 2rem;
+  text-align: center;
+}
+.galleri__nr:empty { display: none; }
+
+
+// ---------- Billedparret: dengang og i dag delt af den røde tråd ----------
+.billedpar {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 1 / 1;      // firkantet til Facebook-feedet
+  overflow: hidden;
+  background: $papirstreg;
+}
+.billedpar--bred { aspect-ratio: 16 / 9; }   // i mailen
+
+.billedpar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+// I dag-billedet ligger oven på og vises kun i højre halvdel
+.billedpar .billedpar__idag { clip-path: inset(0 0 0 50%); }
+.billedpar--enkelt .billedpar__idag { clip-path: none; }
+
+.billedpar__traad {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: $roed-traad;
+  transform: translateX(-50%);
+  background: $roed;
+}
+
+
+// ---------- Velkomstmailen ----------
+// Mailen er 600 px bred, så højre side er bredere i mail-fanen
+.vaerksted--mail { grid-template-columns: minmax(0, 1fr) minmax(0, 37.5rem); }
+
+@media (max-width: 1000px) {
+  .vaerksted--mail { grid-template-columns: minmax(0, 1fr); }
+}
+
+// Sådan ser mailen ud i indbakken: afsender, emnelinje og preheader
+.indbakke {
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1rem;
+  background: $hvid;
+  border-left: $roed-traad solid $roed;
+}
+.indbakke p { margin: 0; }
+.indbakke__afsender { font-weight: 700; }
+.indbakke__emne { font-weight: 700; }
+.indbakke__pre {
+  color: $moerkegraa;
+  font-size: $tekst-lille;
+}
+
+.mail {
+  max-width: 600px;
+  margin-bottom: 1.5rem;
+  background: $papir;
+  border: 1px solid $papirstreg;
+}
+.mail p { margin: 0; }
+// Etiketter og afsender har deres egen luft (to klasser vinder over .mail p)
+.mail .mail__etiket { margin-bottom: 0.4rem; }
+.mail .mail__afsender { margin-top: 0.25rem; }
+
+// Hilsenen kan være på to linjer ("Kære …" + en sætning)
+.mail__hilsen { white-space: pre-line; }
+
+.mail__top {
+  padding: 1.25rem;
+  background: $hvid;
+  text-align: center;
+}
+.mail__logo {
+  display: inline-block;
+  height: 44px;
+  width: auto;
+}
+
+.mail__indhold {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem;
+}
+
+.mail__etiket {
+  margin-bottom: 0.4rem;
+  font-family: $sans;
+  font-size: $etiket;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $sepia;
+}
+.mail__etiket--roed { color: $roed; }
+
+// Grethes ord: EB Garamond kursiv – kun til hende
+.mail__citat {
+  font-family: $serif;
+  font-style: italic;
+  font-size: $citat;
+  line-height: 1.4;
+  color: $sepia;
+}
+.mail__afsender {
+  margin-top: 0.25rem;
+  color: $sepia;
+  font-size: $tekst-lille;
+}
+
+// Dengang-feltet: linned med Grethes erindring
+.mail__dengang {
+  margin: 0;
+  padding: 1rem 1.25rem;
+  background: $linned;
+}
+// I dag-feltet: hvidt med rød etiket
+.mail__idag {
+  padding: 1rem 1.25rem;
+  background: $hvid;
+  border-top: $roed-traad solid $roed;
+}
+.mail__idag p + p { margin-top: 0.75rem; }
+// Prøv det: linned med rød kant i venstre side
+.mail__proev {
+  padding: 1rem 1.25rem;
+  background: $linned;
+  border-left: 4px solid $roed;
+}
+.mail__mormor {
+  padding-top: 1rem;
+  border-top: 1px solid $papirstreg;
+}
+
+.mail__knap-plads { text-align: center; }
+.mail__knap {
+  display: inline-block;
+  min-height: $klikflade;
+  padding: 1rem 1.75rem;
+  border-radius: 6px;
+  background: $roed;
+  color: $hvid;
+  font-family: $sans;
+  font-size: $knap;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.mail__knap:hover { background: $blaek; }
+.mail__knap:focus-visible { outline: 3px solid $roed; outline-offset: 3px; }
+
+.mail__bund {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid $papirstreg;
+  color: $moerkegraa;
+  font-size: $tekst-lille;
+  text-align: center;
+}
+.mail__bund p + p { margin-top: 0.5rem; }
+.mail__afmeld { text-decoration: underline; }

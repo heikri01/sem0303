@@ -33,8 +33,7 @@ web/
 │   ├── quiz.js          Quizzens logik: hvad der sker, når man klikker
 │   ├── playbook.js      Kopiér-knapper, filter, tjekliste og aktiv menu
 │   └── guide.js         Søvnguidens visninger og bladre-funktion
-├── img/dengang/         De seks dengang-billeder (kopieret fra søvnguiden)
-├── img/guide/           Søvnguidens billeder og logoer (kopieret fra Marcus' Mobilguide/img)
+├── img/guide/           ALLE billeder: de 9 billedpar (dengang-…/idag-…), fotos og logoer. Bruges af søvnguiden, quizzen og playbooken
 ├── pdf/soevnguiden.pdf  Søvnguiden som pdf (knappen "Hent guiden som pdf")
 └── .vscode/settings.json  Fortæller Live Sass Compiler, at CSS'en skal i css/ (opret selv – se nedenfor)
 ```
@@ -52,7 +51,7 @@ web/
 | Citatboksen, billedet, svarfeltet eller formularen | `scss/_quiz-dele.scss` |
 | Teksten i sidefoden (AI-mærkning og kilder) | `quiz.html` – `<footer class="bund">` |
 
-**Tilføj et spørgsmål:** Kopiér en blok `{ … },` i `SPOERGSMAAL`, ret teksterne, og læg billedet i `img/dengang/`. Antallet ("Spørgsmål 2 af 7") og fremdriftsbjælken tilpasser sig selv.
+**Tilføj et spørgsmål:** Kopiér en blok `{ … },` i `SPOERGSMAAL`, ret teksterne, og læg billedet i `img/guide/`. Antallet ("Spørgsmål 2 af 7") og fremdriftsbjælken tilpasser sig selv.
 
 ## Sådan hænger quizzen sammen
 
@@ -190,7 +189,7 @@ Indhold, der kun hører til én visning, har klassen `kun-bog` (fx bagsiden) ell
 
 **Bemærk:**
 - Skrifterne (Lato og EB Garamond) hentes stadig fra Google Fonts. De lægges lokalt, når designet opdateres samlet.
-- `pdf/soevnguiden.pdf` er Marcus' `Soevnguiden_bog.pdf` fra 19/11 (9 MB).
+- `pdf/soevnguiden.pdf` er `RD_Soevnguide_PDF.pdf` fra 24/11 med illustrationerne (7 MB). Den gamle var Marcus' `Soevnguiden_bog.pdf` fra 19/11 uden illustrationer.
 
 ## Prototype – det mangler før lancering
 

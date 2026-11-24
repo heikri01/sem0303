@@ -5,7 +5,8 @@
    2. Tjeklisten tæller, hvor mange punkter der er krydset af
    3. Undersider: ét afsnit vises ad gangen, med Forrige/Næste
    4. Værkstedet: faner med én produktion ad gangen
-   5. Forhåndsvisning af karrusellen
+   5. Forhåndsvisning af karrusellen (egne slides eller søvnguidens billeder)
+   5b. Forhåndsvisning af små opslag (Facebook) og velkomstmailen
    6. Søgning
    7. PDF (kun en note – se nederst)
 
@@ -153,6 +154,44 @@ visFane(faner[0]);
 
 /* ---------- 5. Forhåndsvisning af karrusellen ---------- */
 
+// Søvnguidens kapitler og billedpar. Alle billeder ligger i img/guide/:
+// dengang-<fil>.jpg og idag-<fil>.jpg. side = siden i søvnguiden, knappen i mailen linker til
+const KAPITLER = [
+  { navn: '07.00 Morgen',       fil: '0700-morgen',      side: '04' },
+  { navn: '14.00 Eftermiddag',  fil: '1400-eftermiddag', side: '06' },
+  { navn: '20.00 Aften',        fil: '2000-aften',       side: '08' },
+  { navn: '22.30 Sengetid',     fil: 'sengetid',         side: '10' },
+  { navn: '04.30 Natten',       fil: '0430-klokken-fem', side: '12' },
+  { navn: 'Vinter og forår',    fil: 'vinter',           side: '14' },
+  { navn: 'Sommer og efterår',  fil: 'dyner-luftes',     side: '16' },
+  { navn: 'Din side af sengen', fil: 'for-to',           side: '18' },
+  { navn: 'Børnebørnene',       fil: 'boerneboern',      side: '20' }
+];
+
+function billedSti(kapitel, tid) {   // tid = 'dengang' eller 'idag'
+  return 'img/guide/' + tid + '-' + kapitel.fil + '.jpg';
+}
+
+// Fylder en <select> med kapitlerne
+function fyldKapitler(select, valgt) {
+  KAPITLER.forEach(function (k, i) {
+    const o = document.createElement('option');
+    o.value = i;
+    o.textContent = k.navn;
+    if (k.navn === valgt) { o.selected = true; }
+    select.append(o);
+  });
+}
+
+// Ord fra baggrundsfilen, vi ikke bruger. »Ældre Sagen« er en kilde og tæller ikke med
+const UNDGAA = ['ældre', 'seniorer', 'senior', 'powernap', 'sover varmt', 'sover koldt', 'laboratorium'];
+function undgaaedeOrd(tekst) {
+  const t = tekst.toLowerCase().replace(/ældre sagen/g, '');
+  return UNDGAA.filter(function (ord) {
+    return new RegExp('(^|[^a-zæøå])' + ord + '(?![a-zæøå])').test(t);
+  });
+}
+
 // Billederne læses med URL.createObjectURL – de bliver på computeren og sendes ingen steder hen
 const fSlides = document.getElementById('fSlides');
 const fForsideB = document.getElementById('fForsideB');
@@ -181,6 +220,7 @@ const EKSEMPEL = {
 };
 
 let slides = [];          // { src, navn, forhold } – forside A er nr. 0
+let galleriValg = [];     // billeder valgt i galleriet, i den rækkefølge man klikkede
 let forsideB = null;      // samme form som en slide, eller null
 let visB = false;         // true = forside B vises i stedet for A
 let nr = 0;               // den slide, der vises nu
@@ -316,6 +356,8 @@ fSlides.addEventListener('change', function () {
   const filer = Array.from(fSlides.files).sort(function (a, b) {
     return a.name.localeCompare(b.name, 'da', { numeric: true });
   });
+  galleriValg = [];
+  visGalleriValg();
   Promise.all(filer.map(filTilSlide)).then(function (nye) {
     slides = nye;
     nr = 0;
@@ -345,7 +387,49 @@ vAB.querySelectorAll('[data-forside]').forEach(function (knap) {
   });
 });
 
+// Galleriet: søvnguidens 18 billeder som knapper. Valgte billeder bliver slides i klikrækkefølge
+const galleri = document.getElementById('galleri');
+
+KAPITLER.forEach(function (k) {
+  ['dengang', 'idag'].forEach(function (tid) {
+    const knap = document.createElement('button');
+    knap.type = 'button';
+    knap.className = 'galleri__billede';
+    knap.dataset.src = billedSti(k, tid);
+    knap.setAttribute('aria-pressed', 'false');
+    knap.innerHTML = '<img src="' + knap.dataset.src + '" alt=""><span class="galleri__navn">' +
+      (tid === 'dengang' ? 'Dengang' : 'I dag') + ' · ' + k.navn + '</span><span class="galleri__nr" aria-hidden="true"></span>';
+    knap.addEventListener('click', function () { vaelgIGalleri(knap.dataset.src); });
+    galleri.append(knap);
+  });
+});
+
+function vaelgIGalleri(src) {
+  const plads = galleriValg.indexOf(src);
+  if (plads === -1) { galleriValg.push(src); } else { galleriValg.splice(plads, 1); }
+  fSlides.value = '';   // galleriet afløser de uploadede slides
+  visGalleriValg();
+  Promise.all(galleriValg.map(function (s) {
+    return maalBillede({ src: s, navn: s.replace('img/guide/', '') });
+  })).then(function (nye) {
+    slides = nye;
+    nr = Math.max(0, nye.length - 1);   // vis det billede, man lige har valgt
+    tegnAlt();
+  });
+}
+
+// Viser nummeret på de valgte billeder, så man kan se rækkefølgen
+function visGalleriValg() {
+  galleri.querySelectorAll('.galleri__billede').forEach(function (knap) {
+    const plads = galleriValg.indexOf(knap.dataset.src);
+    knap.setAttribute('aria-pressed', plads !== -1 ? 'true' : 'false');
+    knap.querySelector('.galleri__nr').textContent = plads !== -1 ? plads + 1 : '';
+  });
+}
+
 function visEksempel() {
+  galleriValg = [];
+  visGalleriValg();
   fSlides.value = '';
   fForsideB.value = '';
   forsideB = null;
@@ -359,6 +443,389 @@ function visEksempel() {
 
 document.getElementById('eksempel').addEventListener('click', visEksempel);
 visEksempel();
+
+
+/* ---------- 5b. Forhåndsvisning af små opslag og velkomstmailen ---------- */
+
+// Fælles: billedparret. To billeder oven på hinanden – dengang til venstre, i dag til højre,
+// delt af den røde tråd. Billederne viser samme rum, så de mødes ved tråden
+function tegnBilledpar(figur, kapitel, valg, aiMaerke) {
+  figur.innerHTML = '';
+  figur.classList.toggle('billedpar--enkelt', valg !== 'par');
+
+  if (valg === 'par' || valg === 'dengang') {
+    figur.append(lavBillede(billedSti(kapitel, 'dengang'), 'billedpar__dengang', 'Dengang · ' + kapitel.navn));
+  }
+  if (valg === 'par' || valg === 'idag') {
+    figur.append(lavBillede(billedSti(kapitel, 'idag'), 'billedpar__idag', 'I dag · ' + kapitel.navn));
+  }
+  if (valg === 'par') {
+    const traad = document.createElement('span');
+    traad.className = 'billedpar__traad';
+    figur.append(traad);
+  }
+  if (aiMaerke) {
+    const m = document.createElement('figcaption');
+    m.className = 'karrusel__maerke';
+    m.textContent = 'AI-genereret billede';
+    figur.append(m);
+  }
+}
+
+function lavBillede(src, klasse, alt) {
+  const img = document.createElement('img');
+  img.src = src;
+  img.className = klasse;
+  img.alt = alt;
+  return img;
+}
+
+// Viser en liste med tjek (samme udseende som under karrusellen)
+function tegnPunkter(liste, punkter) {
+  liste.innerHTML = '';
+  punkter.forEach(function (p) {
+    const li = document.createElement('li');
+    li.className = p.ok ? 'kontrol--ok' : 'kontrol--obs';
+    li.textContent = p.t;
+    liste.append(li);
+  });
+}
+
+
+// ===== Små opslag (Facebook) =====
+const oKapitel = document.getElementById('oKapitel');
+const oTekst = document.getElementById('oTekst');
+const oAiBillede = document.getElementById('oAiBillede');
+const oGrethe = document.getElementById('oGrethe');
+const ovTekst = document.getElementById('ovTekst');
+const ovBilleder = document.getElementById('ovBilleder');
+const ovKontrol = document.getElementById('ovKontrol');
+let oUdvidet = false;
+
+fyldKapitler(oKapitel, '07.00 Morgen');
+
+const O_EKSEMPEL = 'Kan du huske, hvordan far trak gardinerne fra, så snart han var oppe? »Lys ind, så vågner man,« sagde han.\n\n' +
+  'Han havde ret. Lys om morgenen hjælper kroppens døgnrytme på vej, så du lettere bliver træt om aftenen.\n\n' +
+  'Prøv det i morgen: Tag den første kop kaffe et sted med dagslys.\n\nHvem trak gardinerne fra hjemme hos dig?';
+
+function oValg() {
+  return document.querySelector('input[name="oBillede"]:checked').value;
+}
+
+function tegnOpslag() {
+  const kapitel = KAPITLER[oKapitel.value];
+  tegnBilledpar(ovBilleder, kapitel, oValg(), oAiBillede.checked);
+
+  // Teksten: kortes af ved »Se mere« ligesom på Facebook
+  let tekst = oTekst.value.trim();
+  if (oGrethe.checked && tekst.indexOf('fiktiv person') === -1) {
+    tekst += (tekst ? '\n\n' : '') + MAERKNING;
+  }
+  ovTekst.textContent = '';
+  if (!oUdvidet && tekst.length > SE_MERE) {
+    ovTekst.textContent = tekst.slice(0, SE_MERE).trimEnd() + '… ';
+    const knap = document.createElement('button');
+    knap.type = 'button';
+    knap.className = 'opslag__se-mere';
+    knap.textContent = 'Se mere';
+    knap.addEventListener('click', function () { oUdvidet = true; tegnOpslag(); });
+    ovTekst.append(knap);
+  } else {
+    ovTekst.textContent = tekst;
+  }
+
+  // Tjek
+  const egen = oTekst.value.trim();
+  const punkter = [];
+  punkter.push(egen.length > SE_MERE
+    ? { ok: true, t: 'Før »Se mere« står: »' + egen.slice(0, SE_MERE).split('\n')[0] + '« – fanger det?' }
+    : { ok: true, t: 'Hele teksten ses uden »Se mere«' });
+  punkter.push(/\?\s*$/.test(egen)
+    ? { ok: true, t: 'Slutter med et spørgsmål, så folk har lyst til at svare' }
+    : { ok: false, t: 'Slutter ikke med et spørgsmål – et »dengang«-opslag skal helst invitere til svar' });
+  const ord = undgaaedeOrd(egen);
+  punkter.push(ord.length
+    ? { ok: false, t: 'Ord, vi undgår: ' + ord.join(', ') }
+    : { ok: true, t: 'Ingen af de ord, vi undgår' });
+  punkter.push(oAiBillede.checked
+    ? { ok: true, t: '»AI-genereret billede« står på billedet' }
+    : { ok: false, t: 'Ingen AI-mærkning på billedet – billederne i søvnguiden er lavet med AI' });
+  tegnPunkter(ovKontrol, punkter);
+}
+
+[oKapitel, oAiBillede, oGrethe].forEach(function (el) { el.addEventListener('change', tegnOpslag); });
+document.querySelectorAll('input[name="oBillede"]').forEach(function (el) { el.addEventListener('change', tegnOpslag); });
+oTekst.addEventListener('input', function () { oUdvidet = false; tegnOpslag(); });
+
+document.getElementById('oEksempel').addEventListener('click', function () {
+  oKapitel.value = 0;
+  document.querySelector('input[name="oBillede"][value="par"]').checked = true;
+  oTekst.value = O_EKSEMPEL;
+  oUdvidet = false;
+  tegnOpslag();
+});
+
+// Hent billedet: tegner billedparret i 1080 × 1080 på et canvas og gemmer det som png.
+// Virker, når siden ligger på nettet. Åbnes filen direkte fra computeren, blokerer browseren det
+const oHentStatus = document.getElementById('oHentStatus');
+
+function hentBillede(src) {
+  return new Promise(function (svar, fejl) {
+    const img = new Image();
+    img.onload = function () { svar(img); };
+    img.onerror = fejl;
+    img.src = src;
+  });
+}
+
+// Tegner et billede, så det fylder hele lærredet (ligesom object-fit: cover)
+function tegnDaekkende(ctx, img, str) {
+  const skala = Math.max(str / img.naturalWidth, str / img.naturalHeight);
+  const b = img.naturalWidth * skala;
+  const h = img.naturalHeight * skala;
+  ctx.drawImage(img, (str - b) / 2, (str - h) / 2, b, h);
+}
+
+document.getElementById('oHent').addEventListener('click', function () {
+  const kapitel = KAPITLER[oKapitel.value];
+  const valg = oValg();
+  const STR = 1080;
+  const kilder = valg === 'par'
+    ? [billedSti(kapitel, 'dengang'), billedSti(kapitel, 'idag')]
+    : [billedSti(kapitel, valg)];
+
+  Promise.all(kilder.map(hentBillede)).then(function (billeder) {
+    const canvas = document.createElement('canvas');
+    canvas.width = STR;
+    canvas.height = STR;
+    const ctx = canvas.getContext('2d');
+
+    tegnDaekkende(ctx, billeder[0], STR);
+    if (valg === 'par') {
+      // I dag-billedet tegnes kun i højre halvdel
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(STR / 2, 0, STR / 2, STR);
+      ctx.clip();
+      tegnDaekkende(ctx, billeder[1], STR);
+      ctx.restore();
+      // Den røde tråd: 6 px på 1080 px (designguiden)
+      ctx.fillStyle = '#A6192E';
+      ctx.fillRect(STR / 2 - 3, 0, 6, STR);
+    }
+    if (oAiBillede.checked) {
+      ctx.font = '26px Lato, sans-serif';
+      const tekst = 'AI-genereret billede';
+      const b = ctx.measureText(tekst).width;
+      ctx.fillStyle = 'rgba(43, 42, 41, 0.8)';
+      ctx.fillRect(24, STR - 24 - 44, b + 28, 44);
+      ctx.fillStyle = '#F3EDE4';
+      ctx.fillText(tekst, 38, STR - 24 - 13);
+    }
+
+    canvas.toBlob(function (blob) {
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'opslag_' + kapitel.fil + '_' + valg + '.png';
+      a.click();
+      oHentStatus.textContent = 'Billedet er hentet.';
+    }, 'image/png');
+  }).catch(function () {
+    oHentStatus.textContent = 'Billedet kunne ikke hentes. Det virker, når siden ligger på nettet (heididesire.dk/dykon), ikke når filen er åbnet direkte fra computeren.';
+  });
+});
+
+document.getElementById('oEksempel').click();
+
+
+// ===== Velkomstmailen =====
+// AI's svar er delt i nummererede blokke (se prompten). Vi finder blokkene ud fra deres navne
+const mSvar = document.getElementById('mSvar');
+const mKapitel = document.getElementById('mKapitel');
+const mNr = document.getElementById('mNr');
+const mFelter = {
+  emne: document.getElementById('mEmne'),
+  pre: document.getElementById('mPre'),
+  hilsen: document.getElementById('mHilsen'),
+  dengang: document.getElementById('mDengang'),
+  idag: document.getElementById('mIdag'),
+  proev: document.getElementById('mProev'),
+  mormor: document.getElementById('mMormor'),
+  knap: document.getElementById('mKnap')
+};
+
+fyldKapitler(mKapitel, '07.00 Morgen');
+
+// Blokkenes navne, som de står i prompten. Rækkefølgen betyder noget: »I DAG« før »DAG« osv.
+const BLOKKE = [
+  { noegle: 'emne', ord: 'EMNELINJE' },
+  { noegle: 'pre', ord: 'PREHEADER' },
+  { noegle: 'hilsen', ord: 'HILSEN' },
+  { noegle: 'dengang', ord: 'DENGANG' },
+  { noegle: 'idag', ord: 'I DAG' },
+  { noegle: 'proev', ord: 'PRØV DET' },
+  { noegle: 'mormor', ord: 'MORMOR I DAG' },
+  { noegle: 'knap', ord: 'KNAP' },
+  { noegle: 'alt', ord: 'ALT-TEKST' },
+  { noegle: 'tvivl', ord: 'TVIVLSLISTE' }
+];
+
+// Deler AI's svar op. En blok starter med en linje som »4. DENGANG« eller »**4. DENGANG** – …«
+function fordelSvar(tekst) {
+  const blokke = {};
+  let aktiv = null;
+  tekst.split('\n').forEach(function (linje) {
+    const ren = linje.replace(/[*#_]/g, '').trim();
+    const m = ren.match(/^(\d{1,2})\s*[.)]\s*(.+)$/);
+    const blok = m && BLOKKE.find(function (b) { return m[2].toUpperCase().indexOf(b.ord) === 0; });
+    if (blok) {
+      aktiv = blok.noegle;
+      // Tekst på samme linje efter navnet, fx »1. EMNELINJE – Godmorgen, Grethe«
+      const rest = m[2].slice(blok.ord.length).replace(/^[\s:–—-]+/, '').replace(/^\([^)]*\)\s*[:–—-]?\s*/, '');
+      blokke[aktiv] = rest ? [rest] : [];
+    } else if (aktiv) {
+      blokke[aktiv].push(linje.replace(/\*\*/g, '').trim());
+    }
+  });
+  Object.keys(blokke).forEach(function (k) { blokke[k] = blokke[k].join('\n').trim(); });
+  return blokke;
+}
+
+// Første rigtige linje i en blok – uden »A:«, »Variant 1:«, punkttegn og anførselstegn
+function foersteLinje(tekst) {
+  const linje = (tekst || '').split('\n').map(function (l) { return l.trim(); }).filter(Boolean)[0] || '';
+  return linje.replace(/^[-•]\s*/, '').replace(/^(variant\s*)?[a-c1-3][.):]\s*/i, '').replace(/^["»“]|["«”]$/g, '').trim();
+}
+
+// Fjerner citattegn og »– Grethe« fra Grethes ord, så de ikke står to gange
+function renCitat(tekst) {
+  return (tekst || '').replace(/\n?\s*[–-]\s*(Grethe|Mormor)\s*$/i, '').trim().replace(/^[»"“]+|[«"”]+$/g, '').trim();
+}
+
+function udfyldFraSvar() {
+  const b = fordelSvar(mSvar.value);
+  mFelter.emne.value = foersteLinje(b.emne);
+  mFelter.pre.value = foersteLinje(b.pre);
+  mFelter.hilsen.value = b.hilsen || '';
+  mFelter.dengang.value = renCitat(b.dengang);
+  mFelter.idag.value = b.idag || '';
+  mFelter.proev.value = b.proev || '';
+  mFelter.mormor.value = renCitat(b.mormor);
+  // Knappen: kun knapteksten – ikke navnet på ankeret, der står efter »+« eller »–«
+  mFelter.knap.value = foersteLinje(b.knap).split(/\s+[+–—-]\s+|\s*\(/)[0].replace(/^["»“]|["«”]$/g, '');
+  tegnMail();
+}
+
+function tegnMail() {
+  const f = {};
+  Object.keys(mFelter).forEach(function (k) { f[k] = mFelter[k].value.trim(); });
+  const kapitel = KAPITLER[mKapitel.value];
+
+  document.getElementById('mvEmne').textContent = f.emne || '(emnelinje)';
+  document.getElementById('mvPre').textContent = f.pre || '(preheader)';
+  document.getElementById('mvHilsen').textContent = f.hilsen;
+  document.getElementById('mvDengang').textContent = f.dengang ? '»' + f.dengang + '«' : '';
+  document.getElementById('mvProev').textContent = f.proev;
+  document.getElementById('mvMormor').textContent = f.mormor ? '»' + f.mormor + '«' : '';
+  document.getElementById('mvNr').textContent = mNr.value;
+
+  // I dag kan have flere afsnit
+  const idag = document.getElementById('mvIdag');
+  idag.innerHTML = '';
+  f.idag.split(/\n\s*\n|\n/).filter(Boolean).forEach(function (afsnit) {
+    const p = document.createElement('p');
+    p.textContent = afsnit.trim();
+    idag.append(p);
+  });
+
+  const knap = document.getElementById('mvKnap');
+  knap.textContent = f.knap || 'Læs kapitlet';
+  knap.href = 'guide.html#side-' + kapitel.side;
+
+  tegnBilledpar(document.getElementById('mvBilleder'), kapitel, 'par', true);
+
+  // Tjek
+  const alt = Object.keys(f).map(function (k) { return f[k]; }).join('\n') + '\n' + mSvar.value;
+  const punkter = [];
+  punkter.push(f.emne && f.emne.length <= 45
+    ? { ok: true, t: 'Emnelinjen er ' + f.emne.length + ' tegn (højst 45)' }
+    : { ok: false, t: f.emne ? 'Emnelinjen er ' + f.emne.length + ' tegn – højst 45, ellers bliver den skåret af' : 'Der mangler en emnelinje' });
+  punkter.push(f.pre && f.pre.length <= 90
+    ? { ok: true, t: 'Preheaderen er ' + f.pre.length + ' tegn (højst 90)' }
+    : { ok: false, t: f.pre ? 'Preheaderen er ' + f.pre.length + ' tegn – højst 90' : 'Der mangler en preheader' });
+  const ordIKnap = f.knap ? f.knap.split(/\s+/).length : 0;
+  punkter.push(ordIKnap && ordIKnap <= 4
+    ? { ok: true, t: 'Knapteksten er ' + ordIKnap + ' ord (højst 4)' }
+    : { ok: false, t: ordIKnap ? 'Knapteksten er ' + ordIKnap + ' ord – højst 4' : 'Der mangler en knaptekst' });
+  const tomme = ['dengang', 'idag', 'proev', 'mormor'].filter(function (k) { return !f[k]; });
+  punkter.push(tomme.length
+    ? { ok: false, t: 'Tomme felter: ' + tomme.map(function (k) { return { dengang: 'Dengang', idag: 'I dag', proev: 'Prøv det', mormor: 'Mormor i dag' }[k]; }).join(', ') }
+    : { ok: true, t: 'Dengang, I dag, Prøv det og Mormor i dag er udfyldt' });
+  punkter.push(/FAKTA MANGLER/i.test(alt)
+    ? { ok: false, t: 'AI har skrevet [FAKTA MANGLER] – find svaret i søvnguiden, før mailen bruges' }
+    : { ok: true, t: 'Ingen [FAKTA MANGLER]' });
+  punkter.push(/\bNYE?\b/.test(mSvar.value)
+    ? { ok: false, t: 'AI har markeret nye Grethe-replikker – de skal godkendes af jer begge' }
+    : { ok: true, t: 'Ingen nye Grethe-replikker' });
+  const ord = undgaaedeOrd(alt);
+  punkter.push(ord.length
+    ? { ok: false, t: 'Ord, vi undgår: ' + ord.join(', ') }
+    : { ok: true, t: 'Ingen af de ord, vi undgår' });
+  tegnPunkter(document.getElementById('mvKontrol'), punkter);
+}
+
+let mVent;
+mSvar.addEventListener('input', function () {
+  clearTimeout(mVent);
+  mVent = setTimeout(udfyldFraSvar, 250);   // vent til man er færdig med at sætte ind
+});
+Object.keys(mFelter).forEach(function (k) { mFelter[k].addEventListener('input', tegnMail); });
+mKapitel.addEventListener('change', tegnMail);
+mNr.addEventListener('change', tegnMail);
+
+// Eksemplet: sådan kan et svar fra AI se ud for mail 2 om 07.00 Morgen (teksten er fra søvnguiden)
+const M_EKSEMPEL = [
+  '1. EMNELINJE',
+  'A: Lys ind, så vågner man',
+  'B: Din nat begynder i morgen tidlig',
+  '',
+  '2. PREHEADER',
+  'Grethes far havde ret: Dagslys om morgenen gør det lettere at sove om aftenen.',
+  '',
+  '3. HILSEN',
+  'Kære [Fornavn]',
+  'I dag handler det om morgenen – for en god nat begynder, længe før du slukker lyset.',
+  '',
+  '4. DENGANG',
+  '»Far trak gardinerne fra, så snart han var oppe. \'Lys ind, så vågner man,\' sagde han.«',
+  '',
+  '5. I DAG',
+  'Lys er med til at styre kroppens døgnrytme. Kraftigt lys om morgenen fremskynder den, så du lettere bliver træt om aftenen.',
+  'Stå op på samme tid hver dag, også efter en dårlig nat. En fast rytme hjælper søvnen.',
+  '',
+  '6. PRØV DET',
+  'Tag den første kop kaffe et sted med dagslys, ved vinduet eller ude på terrassen.',
+  '',
+  '7. MORMOR I DAG',
+  '»Morfar siger, han er et B-menneske. Det har han sagt i 50 år, og han står op klokken seks.«',
+  '',
+  '8. KNAP',
+  'Læs om morgenen + 07.00 Morgen',
+  '',
+  '9. ALT-TEKST',
+  'Dengang: En kvinde trækker blomstrede gardiner fra. I dag: Dagslys over en nyredt seng.',
+  '',
+  '10. TVIVLSLISTE',
+  'Ingen.'
+].join('\n');
+
+document.getElementById('mEksempel').addEventListener('click', function () {
+  mSvar.value = M_EKSEMPEL;
+  mKapitel.value = 0;
+  mNr.value = '2';
+  udfyldFraSvar();
+});
+document.getElementById('mEksempel').click();
 
 
 /* ---------- 6. Søgning ---------- */
