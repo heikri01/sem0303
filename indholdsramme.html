@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indholdsramme · Søvnguiden – dengang og i dag · Ringsted Dun</title>
+  <!-- Skrifterne fra designguide v2: Lato til alt, EB Garamond kursiv kun til Grethes stemme -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+  <!-- Samme design som playbooken (playbook.css) + det nye til præsentationen (praesentation.css) -->
+  <link rel="stylesheet" href="css/playbook.css">
+  <link rel="stylesheet" href="css/praesentation.css">
+</head>
+<body>
+
+  <a class="spring-over" href="#indhold">Spring til indholdet</a>
+
+  <header class="hoved">
+    <div class="hoved__linje indhold">
+      <a class="hoved__logo" href="index.html">
+        <img src="img/playbook/RDU_logo_aflang.png" alt="Ringsted Dun – til oversigten">
+        <span>Indholdsramme</span>
+      </a>
+      <div class="hoved__hoejre">
+        <p class="hoved__trin">Del 3 af 6</p>
+        <a class="knap knap--sekundaer hoved__pdf" href="index.html">Oversigt</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="indhold">
+
+    <section class="forside" aria-labelledby="titel">
+      <div class="indhold forside__gitter">
+        <div>
+          <p class="forside__etiket">Del 3 af 6 · Søvnguiden – dengang og i dag</p>
+          <h1 class="forside__titel" id="titel">Indholdsramme</h1>
+          <p class="forside__tekst">Reglerne for, hvad vi laver, hvornår – og hvordan det skal være.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menuen viser de to dele. Hver del har sine egne afsnit -->
+    <nav class="sidenav" aria-label="Afsnit på siden">
+      <div class="indhold">
+        <ul>
+          <li><a href="#soejler">Indholdssøjler</a></li>
+          <li><a href="#aarshjul">Kampagneperiode og årshjul</a></li>
+          <li><a href="#kvalitet">Kvalitetskrav</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="indhold">
+
+      <section class="del" id="soejler" aria-labelledby="soejler-titel">
+        <h2 id="soejler-titel">Fem indholdssøjler</h2>
+        <p class="ingress">Alt indhold hører til én søjle. Det, der sælger direkte (Dynen til dig), fylder højst en femtedel. Det understøtter oprigtigheden.</p>
+        <div class="soejler">
+          <article class="soejle">
+            <p class="soejle__andel">40 %</p>
+            <h4>Søvnvaner</h4>
+            <p class="soejle__spoergsmaal">»Hvordan sover jeg bedre?«</p>
+            <p>Temperatur, lys, døgnrytme og gode vaner.</p>
+          </article>
+          <article class="soejle">
+            <p class="soejle__andel">20 %</p>
+            <h4>Dynepleje</h4>
+            <p class="soejle__spoergsmaal">»Hvordan passer jeg på min dyne?«</p>
+            <p>Luftning, vask og opbevaring.</p>
+          </article>
+          <article class="soejle">
+            <p class="soejle__andel">15 %</p>
+            <h4>Dynen til dig</h4>
+            <p class="soejle__spoergsmaal">»Hvilken dyne passer til mig?«</p>
+            <p>Varm eller kølig, fyld og vægt.</p>
+          </article>
+          <article class="soejle">
+            <p class="soejle__andel">15 %</p>
+            <h4>Håndværket</h4>
+            <p class="soejle__spoergsmaal">»Hvad gør dynen til det, den er?«</p>
+            <p>Fra dun til dyne og historien siden 1947.</p>
+          </article>
+          <article class="soejle">
+            <p class="soejle__andel">10 %</p>
+            <h4>Ansvar</h4>
+            <p class="soejle__spoergsmaal">»Hvor kommer dunene fra?«</p>
+            <p>Dyrevelfærd og mærker som OEKO-TEX og NOMITE.</p>
+          </article>
+        </div>
+
+        <h3>Fordelingen skifter med årstiden</h3>
+        <div class="tabel-ramme">
+          <table class="tabel tabel--tal">
+            <caption class="sr-only">Søjlernes andel i procent pr. periode</caption>
+            <thead><tr><th scope="col">Periode</th><th scope="col">Søvnvaner</th><th scope="col">Dynepleje</th><th scope="col">Dynen til dig</th><th scope="col">Håndværket</th><th scope="col">Ansvar</th></tr></thead>
+            <tbody>
+              <tr><td>Normalt (jan.–mar.)</td><td>40</td><td>20</td><td>15</td><td>15</td><td>10</td></tr>
+              <tr><td>Kampagnen (apr.–maj)</td><td>45</td><td>10</td><td>15 <small>gave</small></td><td>20 <small>nostalgi</small></td><td>10</td></tr>
+              <tr><td>Sommer (jun.–aug.)</td><td>35</td><td>25 <small>sommerhus</small></td><td>15</td><td>15</td><td>10</td></tr>
+              <tr><td>Efterår (sep.–okt.)</td><td>35</td><td>30 <small>dynevask</small></td><td>15</td><td>10</td><td>10</td></tr>
+              <tr><td>Jul (nov.–dec.)</td><td>30</td><td>15</td><td>20 <small>gaver</small></td><td>25 <small>siden 1947</small></td><td>10</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="del" id="aarshjul" aria-labelledby="aarshjul-titel">
+        <h2 id="aarshjul-titel">Kampagneperiode og årshjul</h2>
+        <p class="ingress">Kampagnen ligger de fire uger op til Mors Dag: <strong>12. april – 9. maj 2027</strong>. Så får Mette en naturlig grund til at dele med sin mor.</p>
+        <ol class="maaneder">
+          <li class="maaned"><p class="maaned__navn">Januar–februar</p><p class="maaned__fase">Forberedelse</p><p>Guide, quiz og video produceres. Quizzen testes.</p></li>
+          <li class="maaned"><p class="maaned__navn">Marts</p><p class="maaned__fase">Opvarmning</p><p>Opslag og den lange video på YouTube. Sommertid 28/3.</p></li>
+          <li class="maaned maaned--kampagne"><p class="maaned__navn">April</p><p class="maaned__fase">Kampagnen starter 12/4</p><p>Annoncer, quiz og A/B-test af to karrusel-forsider. Velkomstmail med guiden.</p></li>
+          <li class="maaned maaned--kampagne"><p class="maaned__navn">Maj</p><p class="maaned__fase">Slutter på Mors Dag 9/5</p><p>»En god nat til mor«. 3–4 mails med ét kapitel hver.</p></li>
+          <li class="maaned"><p class="maaned__navn">Juni–december</p><p class="maaned__fase">Altid på</p><p>Nyhedsbrev og opslag, hvor guidens kapitler følger årstiderne.</p></li>
+        </ol>
+        <p>Hele årshjulet måned for måned står i <a href="playbook.html#aarshjul">AI Playbooken</a>.</p>
+      </section>
+
+      <section class="del" id="kvalitet" aria-labelledby="kvalitet-titel">
+        <h2 id="kvalitet-titel">Kvalitetskrav</h2>
+        <p class="ingress">En kampagne, der bygger på oprigtighed, kan kun love det, virksomheden faktisk holder.</p>
+        <div class="kort-gitter kort-gitter--tre">
+          <article class="kort"><h3>Faktatjekket</h3><p>Søvnrådene er tjekket mod Sundhedsstyrelsen, sundhed.dk, Ældre Sagen og søvnforsker Birgitte Kornum, som Dykon har godkendt, at vi citerer.</p></article>
+          <article class="kort"><h3>Tydeligt fiktivt</h3><p>Mormor Grethe er en fiktiv fortæller og mærkes sådan. Vi bruger ingen opdigtede kundecitater. AI-billeder og AI-stemme mærkes.</p></article>
+          <article class="kort"><h3>Frivillig tilmelding</h3><p>Quizresultatet vises uden e-mail. Tilmelding sker med samtykke efter markedsføringsloven og GDPR.</p></article>
+          <article class="kort"><h3>Nyhedsbrevets løfte</h3><p>Fem ugentlige mails, derefter én pr. årstid – og ikke tilbud hver uge. Vores anbefaling, som Ringsted Dun skal godkende.</p></article>
+          <article class="kort"><h3>Quizzen</h3><p>»Myte eller sandhed?« bygger på nostalgi frem for produkt. Den leder hen til guiden og er ikke en del af den.</p></article>
+          <article class="kort"><h3>Et menneske siger god for det</h3><p>AI laver udkast. Et menneske tjekker og godkender, før noget lægges ud.</p></article>
+        </div>
+
+        <!-- Anbefalinger til Ringsted Dun: det, der skal være på plads, før løftet om samtykke og GDPR holder -->
+        <div class="note">
+          <h3>Før kampagnen går i luften – vores anbefalinger til Ringsted Dun</h3>
+          <p>Vi har tjekket ringsted-dun.dk (24/11). Fire ting bør være i orden, før kampagnen sendes i gang:</p>
+          <ol class="laering">
+            <li><strong>Vis tilmeldingen for alle.</strong> Formularen i bunden af hjemmesiden (»Tilmeld nyhedsbrev og vind en pude«) kommer fra Klaviyo og bliver først vist, når man har sagt ja til marketing-cookies. Siger man nej, ser man kun overskriften. En formular, der altid vises og først sender oplysningerne til Klaviyo, når man tilmelder sig, når flere.</li>
+            <li><strong>Nævn Klaviyo i privatlivspolitikken.</strong> Klaviyo behandler navn og e-mail og er databehandler, men står ikke i <a href="https://ringsted-dun.dk/cookie-og-privatlivspolitik/">politikken</a>.</li>
+            <li><strong>Udfyld afsnittet om cookies.</strong> Overskriften er der, men der står ingen liste over cookies og tredjeparter.</li>
+            <li><strong>Opdatér politikken.</strong> Den er fra 1. oktober 2021.</li>
+          </ol>
+        </div>
+      </section>
+
+    </div>
+
+    <nav class="bladr" aria-label="Præsentationen">
+      <a href="indholdskoncept.html"><span>Forrige · del 2</span><strong>Indholdskoncept</strong></a>
+      <a class="bladr__naeste" href="content-kit.html"><span>Næste · del 4</span><strong>Content kit</strong></a>
+    </nav>
+  </main>
+
+  <footer class="bund">
+    <div class="indhold">
+      <p>Kampagnen »Søvnguiden – dengang og i dag« · Ringsted Dun</p>
+      <p>MMD 3. semester, gruppe 22 · Heidi og Marcus · Mormor Grethe er en fiktiv person. Billederne er skabt med AI.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indholdskoncept · Søvnguiden – dengang og i dag · Ringsted Dun</title>
+  <!-- Skrifterne fra designguide v2: Lato til alt, EB Garamond kursiv kun til Grethes stemme -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+  <!-- Samme design som playbooken (playbook.css) + det nye til præsentationen (praesentation.css) -->
+  <link rel="stylesheet" href="css/playbook.css">
+  <link rel="stylesheet" href="css/praesentation.css">
+</head>
+<body>
+
+  <a class="spring-over" href="#indhold">Spring til indholdet</a>
+
+  <header class="hoved">
+    <div class="hoved__linje indhold">
+      <a class="hoved__logo" href="index.html">
+        <img src="img/playbook/RDU_logo_aflang.png" alt="Ringsted Dun – til oversigten">
+        <span>Indholdskoncept</span>
+      </a>
+      <div class="hoved__hoejre">
+        <p class="hoved__trin">Del 2 af 6</p>
+        <a class="knap knap--sekundaer hoved__pdf" href="index.html">Oversigt</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="indhold">
+
+    <section class="forside" aria-labelledby="titel">
+      <div class="indhold forside__gitter">
+        <div>
+          <p class="forside__etiket">Del 2 af 6 · Søvnguiden – dengang og i dag</p>
+          <h1 class="forside__titel" id="titel">Indholdskoncept</h1>
+          <p class="forside__tekst">Idéen, som alt indhold i kampagnen bygger på – og hvordan den lyder og ser ud.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menuen viser de to dele. Hver del har sine egne afsnit -->
+    <!-- Menuen: hvert link peger på et id længere nede -->
+    <nav class="sidenav" aria-label="Afsnit på siden">
+      <div class="indhold">
+        <ul>
+          <li><a href="#koncept">Konceptet</a></li>
+          <li><a href="#opbygning">Guidens opbygning</a></li>
+          <li><a href="#afledt">Fra big rock til mikro</a></li>
+          <li><a href="#tone">Tone of voice</a></li>
+          <li><a href="#stil">Visuel stil</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="indhold">
+
+      <!-- ================= KONCEPTET ================= -->
+      <section class="del" id="koncept" aria-labelledby="koncept-titel">
+        <h2 id="koncept-titel">Søvnguiden – dengang og i dag</h2>
+
+        <blockquote class="udsagn">
+          <p>Meget har ændret sig siden 1947. Det, der giver god søvn, har ikke.</p>
+          <footer>Kampagnens budskab</footer>
+        </blockquote>
+
+        <p class="ingress">Kampagnens big rock er en ny søvnguide. Søvnen er hovedpersonen – dynen er én del af helheden. Rådene fortælles i to lag:</p>
+
+        <div class="tolag">
+          <figure class="tolag__dengang">
+            <img src="img/guide/dengang-2000-aften.jpg" alt="Aften i en stue i 1950'erne (AI-genereret)">
+            <figcaption><strong>Dengang</strong>En kort erindring fra Mormor Grethe. Stemning – ikke fakta. Det giver glimtet i øjet.</figcaption>
+          </figure>
+          <figure class="tolag__idag">
+            <img src="img/guide/idag-2000-aften.jpg" alt="Samme aften i dag (AI-genereret)">
+            <figcaption><strong>I dag</strong>Et konkret, dokumenteret råd. Det viser Ringsted Duns ekspertise.</figcaption>
+          </figure>
+        </div>
+
+      </section>
+
+      <section class="del" id="opbygning" aria-labelledby="opbygning-titel">
+        <h2 id="opbygning-titel">Sådan er guiden bygget</h2>
+        <h3>Ens stationer</h3>
+        <p>Hver station har de samme fire dele. Derfor kan én station klippes ud til ét opslag, én karrusel, én mail eller ét klip.</p>
+        <div class="kort-gitter kort-gitter--fire">
+          <article class="kort"><h3>Dengang</h3><p>Grethes citat i <span class="grethe">EB Garamond kursiv</span> – kun hendes stemme står sådan.</p></article>
+          <article class="kort"><h3>I dag</h3><p>Hvad vi ved om søvn nu, faktatjekket mod Sundhedsstyrelsen, sundhed.dk, Ældre Sagen og Birgitte Kornum.</p></article>
+          <article class="kort"><h3>Prøv det</h3><p>Ét lille, konkret råd, læseren kan prøve allerede i aften.</p></article>
+          <article class="kort"><h3>Mormor i dag</h3><p>En lun kommentar fra Grethe, som hun er i dag. Den giver glimtet i øjet.</p></article>
+        </div>
+
+        <h3>Tre dele i guiden</h3>
+        <div class="kort-gitter kort-gitter--tre">
+          <article class="kort">
+            <h3>Døgnet rundt</h3>
+            <ul><li>07.00 Morgen</li><li>14.00 Eftermiddag</li><li>20.00 Aften</li><li>22.30 Sengetid</li><li>04.30 Natten</li></ul>
+          </article>
+          <article class="kort">
+            <h3>Året rundt</h3>
+            <ul><li>Vinter</li><li>Forår</li><li>Sommer</li><li>Efterår</li></ul>
+          </article>
+          <article class="kort">
+            <h3>Dine nætter</h3>
+            <ul><li>Din side af sengen</li><li>Når børnebørnene sover over</li><li>Mit søvnkort</li></ul>
+          </article>
+        </div>
+
+      </section>
+
+      <section class="del" id="afledt" aria-labelledby="afledt-titel">
+        <h2 id="afledt-titel">Fra big rock til mikroindhold</h2>
+        <p class="ingress">Guiden brydes ned i mindre stykker. Alt indhold peger tilbage på guiden. Hvilke stykker vi har lavet, ser du i <a href="content-kit.html">content kittet</a>.</p>
+        <ol class="kaede">
+          <li><p class="kaede__niveau">Big rock</p><h4>Søvnguiden</h4><p>Web med pdf. Velkomstgave i nyhedsbrevet – ligger ikke offentligt fremme.</p></li>
+          <li><p class="kaede__niveau">Primære afledte</p><h4>Lang video og quiz</h4><p>Grethe fortæller døgnet rundt. Quizzen leder hen til guiden.</p></li>
+          <li><p class="kaede__niveau">Sekundære afledte</p><h4>Annoncer og mails</h4><p>Reel, videoannonce, karrusel og velkomstmail.</p></li>
+          <li><p class="kaede__niveau">Mikroindhold</p><h4>Små opslag</h4><p>Grethe-citater og nostalgispørgsmål, der skaber dialog.</p></li>
+        </ol>
+      </section>
+
+      <section class="del" id="tone" aria-labelledby="tone-titel">
+        <h2 id="tone-titel">Tone of voice</h2>
+        <p class="ingress">Tonen bygger på Aakers (1997) dimensioner af brandpersonlighed.</p>
+        <div class="kort-gitter kort-gitter--tre">
+          <article class="kort"><h3>Oprigtighed · primær</h3><p>»Dengang som nu«. Ærlig og jordnær. Vi lover kun det, Ringsted Dun kan holde.</p></article>
+          <article class="kort"><h3>Kompetence · sekundær</h3><p>75+ års håndværk og dokumenterede søvnråd. Ekspert uden at belære.</p></article>
+          <article class="kort"><h3>Entusiasme · glimtet i øjet</h3><p>Kontrasten mellem dengang og i dag – og Grethes lune kommentarer.</p></article>
+        </div>
+        <div class="note">
+          <h3>Ord, vi bruger – og undgår</h3>
+          <p>Vi skriver »du« og »dine nætter«. Vi undgår »ældre« og »seniorer«, alder i overskrifter og store påstande som »skelsættende«. 1950'ernes tidsbillede er stemning, ikke historisk fakta.</p>
+        </div>
+      </section>
+
+      <section class="del" id="stil" aria-labelledby="stil-titel">
+        <h2 id="stil-titel">Visuel stil</h2>
+        <p class="ingress">Enkel, flad og minimalistisk – bygget på Ringsted Duns Design DNA. Paletten skiller dengang og i dag ad, og den røde farve er den røde tråd.</p>
+        <!-- Farverne er de samme som i scss/_tokens.scss (palet C »To temperaturer«) -->
+        <ul class="palet">
+          <li><span style="background:#F7F3EC"></span><p>Papir</p><small>#F7F3EC · baggrund</small></li>
+          <li><span style="background:#E7D8BE"></span><p>Linned</p><small>#E7D8BE · dengang</small></li>
+          <li><span style="background:#FFFFFF"></span><p>Hvid</p><small>#FFFFFF · i dag</small></li>
+          <li><span style="background:#5B4632"></span><p>Sepia</p><small>#5B4632 · Grethes tekst</small></li>
+          <li><span style="background:#2B2A29"></span><p>Blæk</p><small>#2B2A29 · tekst og nat</small></li>
+          <li><span style="background:#A6192E"></span><p>Rød</p><small>#A6192E · den røde tråd</small></li>
+        </ul>
+        <div class="to-spalter">
+          <div>
+            <h3>Skrift</h3>
+            <p><strong>Lato</strong> til alt – overskrifter i Lato Light. <span class="grethe">EB Garamond kursiv</span> kun til Grethes stemme.</p>
+          </div>
+          <div>
+            <h3>Designguiden</h3>
+            <p>Alle regler for farver, skrift, faste elementer og formater står i <a href="../RD_Designguide.pdf">designguiden (pdf)</a>.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <nav class="bladr" aria-label="Præsentationen">
+      <a href="strategi.html"><span>Forrige · del 1</span><strong>Strategi</strong></a>
+      <a class="bladr__naeste" href="indholdsramme.html"><span>Næste · del 3</span><strong>Indholdsramme</strong></a>
+    </nav>
+  </main>
+
+  <footer class="bund">
+    <div class="indhold">
+      <p>Kampagnen »Søvnguiden – dengang og i dag« · Ringsted Dun</p>
+      <p>MMD 3. semester, gruppe 22 · Heidi og Marcus · Mormor Grethe er en fiktiv person. Billederne er skabt med AI.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

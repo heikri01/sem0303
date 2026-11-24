@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strategi · Søvnguiden – dengang og i dag · Ringsted Dun</title>
+  <!-- Skrifterne fra designguide v2: Lato til alt, EB Garamond kursiv kun til Grethes stemme -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+  <!-- Samme design som playbooken (playbook.css) + det nye til præsentationen (praesentation.css).
+       Begge laves af Live Sass Compiler ud fra scss/. Ret i SCSS-filerne -->
+  <link rel="stylesheet" href="css/playbook.css">
+  <link rel="stylesheet" href="css/praesentation.css">
+</head>
+<body>
+
+  <a class="spring-over" href="#indhold">Spring til indholdet</a>
+
+  <!-- ===== SIDEHOVED: logoet fører tilbage til oversigten (index.html) ===== -->
+  <header class="hoved">
+    <div class="hoved__linje indhold">
+      <a class="hoved__logo" href="index.html">
+        <img src="img/playbook/RDU_logo_aflang.png" alt="Ringsted Dun – til oversigten">
+        <span>Strategi</span>
+      </a>
+      <div class="hoved__hoejre">
+        <p class="hoved__trin">Del 1 af 6</p>
+        <a class="knap knap--sekundaer hoved__pdf" href="index.html">Oversigt</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="indhold">
+
+    <!-- ===== FORSIDEBÅNDET ===== -->
+    <section class="forside" aria-labelledby="titel">
+      <div class="indhold forside__gitter">
+        <div>
+          <p class="forside__etiket">Del 1 af 6 · Søvnguiden – dengang og i dag</p>
+          <h1 class="forside__titel" id="titel">Strategi</h1>
+          <p class="forside__tekst">Hvem taler vi til, hvorfor skal de lytte til Ringsted Dun, hvor møder vi dem – og hvordan ved vi, om det virker?</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MENU PÅ SIDEN: hver linje peger på et id længere nede ===== -->
+    <nav class="sidenav" aria-label="Afsnit på siden">
+      <div class="indhold">
+        <ul>
+          <li><a href="#case">Case</a></li>
+          <li><a href="#maalgruppe">Målgruppe</a></li>
+          <li><a href="#positionering">Positionering</a></li>
+          <li><a href="#kanaler">Kanaler</a></li>
+          <li><a href="#kunderejse">Kunderejse</a></li>
+          <li><a href="#kpi">Mål og KPI</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="indhold">
+
+      <!-- ========== 1 · CASE ========== -->
+      <section class="del" id="case" aria-labelledby="case-titel">
+        <h2 id="case-titel">Case og afsender</h2>
+        <p class="ingress">Vi har valgt case 2: en B2C-kampagne med søvntips. Afsenderen er <strong>Ringsted Dun</strong> – ikke Dykon.</p>
+        <div class="kort-gitter kort-gitter--tre">
+          <article class="kort">
+            <h3>Hvorfor Ringsted Dun</h3>
+            <p>Brandet kalder sig allerede »Eksperter i god søvn« og har en historie, der går tilbage til 1947. Det giver et troværdigt fundament for en kampagne om god søvn.</p>
+          </article>
+          <article class="kort">
+            <h3>Hullet, vi fylder</h3>
+            <p>Ringsted-dun.dk har søvnguides og en dynevælger, men indholdet bliver ikke ført videre ud på sociale medier. Det gør kampagnen.</p>
+          </article>
+          <article class="kort">
+            <h3>Fravalgt</h3>
+            <p>Engmo Dun henvender sig mest til det svenske marked. Case 1 (B2B på LinkedIn) blev også fravalgt. Dykons Sleep Lab er nedprioriteret, fordi det er Dykons egen fortælling.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ========== 2 · MÅLGRUPPE ========== -->
+      <section class="del" id="maalgruppe" aria-labelledby="maalgruppe-titel">
+        <h2 id="maalgruppe-titel">Målgruppe og personas</h2>
+        <div class="to-spalter">
+          <div>
+            <p class="del__etiket">Primær · Conzoom D3</p>
+            <h3>»Guldkant på tilværelsen«</h3>
+            <p>Velhavende par på 66+ med voksne børn. De bor i villa og interesserer sig for kultur, design, have, sundhed og rejser. De bruger nettet sjældnere end gennemsnittet, og sociale medier fylder ikke meget i hverdagen.</p>
+          </div>
+          <div>
+            <p class="del__etiket">Sekundær · Conzoom A3</p>
+            <h3>»Gyldne hjem«</h3>
+            <p>Her er det de voksne børn på 40–50 år, der er interessante. De deler indhold med deres forældre – og kan købe dynen som gave.</p>
+          </div>
+        </div>
+
+        <div class="personaer">
+          <article class="persona">
+            <img src="img/guide/grethe_master.png" alt="Grethe, en kvinde sidst i 70'erne med gråt hår (AI-genereret, fiktiv person)">
+            <div>
+              <h3 class="persona__navn">Grethe, 79</h3>
+              <p class="persona__rolle">Primær proto-persona</p>
+              <ul>
+                <li>Født i 1947 – ligesom Ringsted Dun</li>
+                <li>Husker sin første dyne fra 1950'erne</li>
+                <li>Sover lettere og vågner tidligere end før</li>
+                <li>Sover dårligere i sommerhuset, og gæsteværelset skal være klar til børnebørnene</li>
+              </ul>
+            </div>
+          </article>
+          <article class="persona">
+            <span class="persona__initial" aria-hidden="true">M</span>
+            <div>
+              <h3 class="persona__navn">Mette, 52</h3>
+              <p class="persona__rolle">Sekundær persona · Grethes datter</p>
+              <ul>
+                <li>Bruger mobilen først</li>
+                <li>Er på Facebook og Instagram</li>
+                <li>Deler links og quizzer med sin mor</li>
+                <li>Køber måske dynen som gave – fx til Mors Dag</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <div class="note">
+          <h3>»Dine nætter« – ikke »jeres«</h3>
+          <p>Ægtepar er den største husstandstype blandt 60–80-årige, men andelen af enlige stiger med alderen (Danmarks Statistik 2026). Vi taler derfor om søvn som et individuelt behov. Et fokus på partneren kan udelukke – og minde enker og enkemænd om et tab. Det bekræftede brugertesten af søvnguiden. Af samme grund undgår vi ord som »ældre« og »seniorer«.</p>
+        </div>
+        <p><small>Personaerne bygger på Conzoom-data og vores egne antagelser, ikke på interviews.</small></p>
+      </section>
+
+      <!-- ========== 3 · POSITIONERING ========== -->
+      <section class="del" id="positionering" aria-labelledby="positionering-titel">
+        <h2 id="positionering-titel">Brand, positionering og konkurrenter</h2>
+
+        <blockquote class="udsagn">
+          <p>Vi hos Ringsted Dun hjælper dig med at give dine nætter samme guldkant som dine dage, gennem søvnråd og dansk dunhåndværk, vi har forfinet siden 1947.</p>
+          <footer>Ringsted Duns USP</footer>
+        </blockquote>
+        <p class="ingress">USP'en kobler målgruppens eget navn (»Guldkant på tilværelsen«) med brandets historie og håndværk.</p>
+
+        <h3>Konkurrenterne</h3>
+        <div class="kort-gitter">
+          <article class="kort">
+            <h3>Bedre Nætter</h3>
+            <p>Klart størst på sociale medier. Bruger kendte, influencere og meget annoncering.</p>
+          </article>
+          <article class="kort">
+            <h3>Quilts of Denmark</h3>
+            <p>Den tætteste konkurrent på vores positioneringskort. Fokuserer mest på produktet.</p>
+          </article>
+          <!-- TJEK: kortet kan uddybes med en sætning om hver fra konkurrentanalysen på FigJam -->
+          <article class="kort">
+            <h3>Fossflakes og Relaxy</h3>
+            <p>Med i sammenligningen af tilstedeværelse og fortælling på sociale medier – begge mindre synlige end Bedre Nætter.</p>
+          </article>
+        </div>
+        <div class="note">
+          <h3>Det, vi tog med fra analysen</h3>
+          <p>Konkurrenterne vinder på fortælling, ansigter og følelse. Dykons brands har stærke beviser, men de formidles tørt og mest på hjemmesiden. Ringsted Duns historie siden 1947 er et fortællemæssigt aktiv, som ingen konkurrent kan kopiere – og Ringsted Dun vil være eksperter i <em>søvn</em>, ikke kun i produkter. Hele analysen ligger på vores <a href="https://www.figma.com/board/niiu0S9VnHbLkp0h1nYT3d/Ringsted-Dun">FigJam-board</a>.</p>
+        </div>
+      </section>
+
+      <!-- ========== 4 · KANALER ========== -->
+      <section class="del" id="kanaler" aria-labelledby="kanaler-titel">
+        <h2 id="kanaler-titel">Kanaler</h2>
+        <p class="ingress">Sociale medier fylder ikke meget for D3-segmentet. Derfor bruger vi Facebook til at <em>finde</em> målgruppen, quizzen til at gøre det personligt, og nyhedsbrevet til at bygge tillid over tid.</p>
+        <div class="tabel-ramme">
+          <table class="tabel">
+            <caption class="sr-only">Kanalerne og deres rolle i kampagnen</caption>
+            <thead>
+              <tr><th scope="col">Kanal</th><th scope="col">Rolle</th><th scope="col">Hvorfor</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Facebook</th><td>Primær kanal: betalt rækkevidde, lead ads og retargeting</td><td>Annoncerne kan målrettes præcist mod Grethe og Mette</td></tr>
+              <tr><th scope="row">Instagram</th><td>Sekundær kanal til delbare opslag</td><td>Her er Mette – og hun deler videre til sin mor</td></tr>
+              <tr><th scope="row">YouTube</th><td>Hjemmet for den lange video</td><td>Ringsted Dun har allerede en kanal. Ikke en kanal til rækkevidde</td></tr>
+              <tr><th scope="row">Quizzen</th><td>»Myte eller sandhed?« – engagement</td><td>Gør søvn personligt og leder hen til søvnguiden</td></tr>
+              <tr><th scope="row">Nyhedsbrev</th><td>Ejet kanal (Klaviyo, som Ringsted Dun allerede har på hjemmesiden) med søvnguiden som velkomstgave</td><td>Ringsted Dun ejer selv kontakten – uafhængigt af algoritmer</td></tr>
+              <tr><th scope="row">Fravalgt</th><td>TikTok og LinkedIn</td><td>Målgruppen er der ikke, og kampagnen er B2C</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ========== 5 · KUNDEREJSE ========== -->
+      <section class="del" id="kunderejse" aria-labelledby="kunderejse-titel">
+        <h2 id="kunderejse-titel">Kunderejsen i fem trin</h2>
+        <p class="ingress">Den røde tråd går fra et opslag i feedet til et køb i butikken eller online.</p>
+        <!-- Ét <li> pr. trin. »Trin 1« osv. skrives af CSS (counter), så rækkefølgen passer af sig selv -->
+        <ol class="rejse">
+          <li>
+            <h3 class="rejse__navn">Awareness</h3>
+            <p>Grethe-film, reel, karrusel og nostalgiopslag i feedet.</p>
+            <p class="rejse__kanal">Facebook · Instagram</p>
+          </li>
+          <li>
+            <h3 class="rejse__navn">Engagement</h3>
+            <p>Quizzen »Myte eller sandhed?« – nostalgi frem for produkt.</p>
+            <p class="rejse__kanal">Quiz</p>
+          </li>
+          <li>
+            <h3 class="rejse__navn">Lead</h3>
+            <p>Resultatet vises uden krav om e-mail. Tilmeldingen er frivillig.</p>
+            <p class="rejse__kanal">Quizresultat · lead ads</p>
+          </li>
+          <li>
+            <h3 class="rejse__navn">Nurture</h3>
+            <p>Søvnguiden som velkomstgave, derefter ét kapitel pr. mail.</p>
+            <p class="rejse__kanal">Nyhedsbrev</p>
+          </li>
+          <li>
+            <h3 class="rejse__navn">Køb</h3>
+            <p>Dynen til sig selv – eller som gave fra Mette til Mors Dag.</p>
+            <p class="rejse__kanal">Butik · ringsted-dun.dk</p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ========== 6 · MÅL OG KPI ========== -->
+      <section class="del" id="kpi" aria-labelledby="kpi-titel">
+        <h2 id="kpi-titel">Mål og KPI</h2>
+        <div class="kpi">
+          <p class="kpi__tal">50</p>
+          <div>
+            <p class="kpi__etiket">Kampagnens KPI</p>
+            <p><strong>nye tilmeldinger til Ringsted Duns nyhedsbrev via kampagnen inden for fire uger fra lanceringen.</strong></p>
+            <p>Baseline er listens størrelse ved lanceringen – den skal Ringsted Dun oplyse.</p>
+          </div>
+        </div>
+        <div class="kort-gitter kort-gitter--tre">
+          <article class="kort">
+            <h3>Hvorfor nyhedsbrevet</h3>
+            <p>Ringsted Dun har en tilmelding i bunden af hjemmesiden, men den bliver kun vist for dem, der siger ja til marketing-cookies (tjekket 24/11). Kampagnen giver en grund til at tilmelde sig: søvnguiden. Quizzens tilmelding vises for alle. Listen ejer brandet selv, og den har værdi længe efter kampagnen.</p>
+          </article>
+          <article class="kort">
+            <h3>Et forsigtigt bud</h3>
+            <p>50 tilmeldinger svarer fx til 2.500 besøgende på landingssiden med en konvertering på 2 %. Vi kender ikke tal fra Ringsted Duns nuværende tilmelding, så der er ikke et sammenligningsgrundlag.</p>
+          </article>
+          <article class="kort">
+            <h3>Sådan måler vi</h3>
+            <p>Hver uge i Klaviyo og Google Analytics, så kampagnen kan justeres undervejs. Resultatet bliver baseline for de næste mål.</p>
+          </article>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ===== BLADR: forrige og næste del af præsentationen ===== -->
+    <nav class="bladr" aria-label="Præsentationen">
+      <a href="index.html"><span>Forrige</span><strong>Oversigt</strong></a>
+      <a class="bladr__naeste" href="indholdskoncept.html"><span>Næste · del 2</span><strong>Indholdskoncept</strong></a>
+    </nav>
+  </main>
+
+  <footer class="bund">
+    <div class="indhold">
+      <p>Kampagnen »Søvnguiden – dengang og i dag« · Ringsted Dun</p>
+      <p>MMD 3. semester, gruppe 22 · Heidi og Marcus · Grethe og Mette er fiktive personer. Billedet af Grethe er skabt med AI.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

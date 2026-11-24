@@ -1,0 +1,568 @@
+// ==========================================================
+// PRAESENTATION.SCSS · hovedfil til præsentationssiderne
+// index.html, strategi.html, koncept-ramme.html og content-kit.html
+// Live Sass Compiler laver den om til css/praesentation.css.
+//
+// Siderne henter OGSÅ css/playbook.css (ligesom ai-log.html), så
+// sidehoved, mørkt forsidebånd, kort, note, tabel, søjler, måneder,
+// bladr-links og sidefod er de samme som i playbooken.
+// Her står KUN det, der er nyt for præsentationen.
+// ==========================================================
+
+@use 'tokens' as *;
+
+// Etiket: Lato Bold i versaler med 12 % luft (samme som i playbooken)
+@mixin etiket($farve: $sepia) {
+  margin: 0;
+  font-family: $sans;
+  font-size: $etiket;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $farve;
+}
+
+// ---------- 1 · Sidehovedet: »Del 2 af 5« ved siden af knappen ----------
+.hoved__hoejre {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.hoved__trin {
+  @include etiket($moerkegraa);
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .hoved__trin { display: none; } // står også i forsidebåndet
+}
+
+// ---------- 2 · Menuen inde på siden (hop til afsnit) ----------
+// Bliver stående øverst, mens man scroller (position: sticky)
+.sidenav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  margin: -2.5rem 0 2.5rem; // lægger sig lige under forsidebåndet
+  background: $hvid;
+  border-bottom: 1px solid $papirstreg;
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    display: block;
+    padding: 1rem 0 0.75rem;
+    border-bottom: 3px solid transparent;
+    font-weight: 700;
+    text-decoration: none;
+
+    &:hover { border-bottom-color: $roed; }
+
+    &:focus-visible {
+      outline: 3px solid $roed;
+      outline-offset: 2px;
+    }
+  }
+}
+
+// Mobil: menuen bliver én linje, man kan swipe sidelæns – så fylder den ikke skærmen
+@media (max-width: 700px) {
+  .sidenav ul {
+    flex-wrap: nowrap;
+    gap: 0 1.25rem;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+// Afsnit, man hopper til, må ikke gemme sig under den faste menu
+.del {
+  scroll-margin-top: 5rem;
+  padding-bottom: 1rem;
+
+  > h2 {
+    margin-top: 0;
+    font-size: $overskrift;
+  }
+}
+
+// Skillelinje mellem afsnittene (står på afsnittet, så etiketten kommer under linjen)
+.del + .del {
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid $papirstreg;
+}
+
+// Kort indledning under en overskrift
+.ingress {
+  max-width: 46rem;
+  font-size: 1.25rem;
+}
+
+// Etiket over en hel del (fx »Del 1 · Indholdskoncept«)
+.del__etiket {
+  @include etiket($roed);
+  margin-bottom: 0.5rem;
+}
+
+// ---------- 3 · Stort udsagn (USP, budskab) ----------
+.udsagn {
+  margin: 2rem 0;
+  padding: 2rem 2.5rem;
+  background: $hvid;
+  border-left: 6px solid $roed;
+
+  p {
+    margin: 0;
+    font-size: 1.625rem;
+    font-weight: 300;
+    line-height: 1.35;
+  }
+
+  footer {
+    @include etiket($sepia);
+    margin-top: 1rem;
+  }
+}
+
+// ---------- 4 · Personas ----------
+.personaer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 28rem), 1fr));
+  gap: 1.25rem;
+  margin: 2rem 0;
+}
+
+.persona {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+  padding: 1.75rem;
+  background: $hvid;
+
+  img {
+    width: 9rem;
+    height: 9rem;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 50%;
+  }
+
+  &__navn {
+    margin: 0 0 0.25rem;
+    font-size: $overskrift-2;
+  }
+
+  &__rolle { @include etiket($roed); margin-bottom: 1rem; }
+
+  ul { margin: 0; padding-left: 1.25rem; }
+  li { margin-bottom: 0.4rem; }
+}
+
+// Pladsholder, når der ikke er et billede (Mette)
+.persona__initial {
+  display: grid;
+  place-items: center;
+  width: 9rem;
+  height: 9rem;
+  border-radius: 50%;
+  background: $linned;
+  color: $sepia;
+  font-size: 3rem;
+  font-weight: 300;
+}
+
+@media (max-width: 600px) {
+  .persona { grid-template-columns: minmax(0, 1fr); }
+}
+
+// ---------- 5 · Kunderejsen: fem trin på række ----------
+.rejse {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0;
+  margin: 2rem 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: rejse;
+
+  li {
+    position: relative;
+    counter-increment: rejse;
+    padding: 1.5rem 1.25rem;
+    background: $hvid;
+    border-top: $roed-traad solid $roed; // den røde tråd løber gennem hele rejsen
+    border-right: 1px solid $papirstreg;
+
+    &:last-child { border-right: 0; }
+
+    &::before {
+      @include etiket($roed);
+      content: "Trin " counter(rejse);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &__navn {
+    margin: 0 0 0.5rem;
+    font-size: 1.375rem;
+    font-weight: 300;
+  }
+
+  p { margin: 0 0 0.5rem; font-size: $tekst-lille; }
+
+  &__kanal { color: $moerkegraa; }
+}
+
+@media (max-width: 900px) {
+  .rejse {
+    grid-template-columns: minmax(0, 1fr);
+
+    li {
+      border-right: 0;
+      border-top: 0;
+      border-left: $roed-traad solid $roed;
+      border-bottom: 1px solid $papirstreg;
+    }
+  }
+}
+
+// ---------- 6 · KPI: det store tal ----------
+.kpi {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: center;
+  margin: 2rem 0;
+  padding: 2rem 2.5rem;
+  background: $blaek;
+  color: $nat-tekst;
+  border-bottom: $roed-traad solid $roed;
+
+  &__tal {
+    margin: 0;
+    font-size: 6rem;
+    font-weight: 300;
+    line-height: 1;
+  }
+
+  &__etiket { @include etiket($nat-daempet); margin-bottom: 0.5rem; }
+
+  p { margin: 0 0 0.5rem; }
+}
+
+@media (max-width: 600px) {
+  .kpi { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+}
+
+// Fire kort på række (stationens fire dele)
+.kort-gitter--fire {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+}
+
+// ---------- 7 · Billedpar: dengang og i dag ----------
+.tolag {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+
+  figure { margin: 0; }
+
+  img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  figcaption {
+    padding: 1rem 1.25rem;
+    font-size: $tekst-lille;
+  }
+
+  // Dengang står på linned, i dag på hvid – som i søvnguiden
+  &__dengang figcaption { background: $linned; color: $sepia; }
+  &__idag figcaption { background: $hvid; }
+
+  strong { @include etiket($roed); display: block; margin-bottom: 0.25rem; }
+}
+
+@media (max-width: 600px) {
+  .tolag { grid-template-columns: minmax(0, 1fr); }
+}
+
+// Grethes stemme: EB Garamond kursiv – KUN til hende
+.grethe {
+  font-family: $serif;
+  font-style: italic;
+  font-size: $citat;
+}
+
+// ---------- 8 · Kæden: fra big rock til mikroindhold ----------
+.kaede {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    position: relative;
+    padding: 1.5rem;
+    background: $hvid;
+  }
+
+  // Pil mellem leddene (pynt – skjult for skærmlæsere, fordi det er CSS)
+  li + li::before {
+    content: "→";
+    position: absolute;
+    left: -0.95rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $roed;
+    font-weight: 700;
+  }
+
+  &__niveau { @include etiket($roed); margin-bottom: 0.5rem; }
+
+  h3, h4 {
+    margin: 0 0 0.5rem;
+    font-size: 1.375rem;
+    font-weight: 300;
+  }
+
+  p { margin: 0; font-size: $tekst-lille; }
+
+  li:first-child {
+    background: $blaek;
+    color: $nat-tekst;
+
+    .kaede__niveau { color: $nat-daempet; }
+  }
+}
+
+@media (max-width: 900px) {
+  .kaede {
+    grid-template-columns: minmax(0, 1fr);
+
+    li + li::before {
+      content: "↓";
+      left: 1.5rem;
+      top: -1.05rem;
+      transform: none;
+    }
+  }
+}
+
+// ---------- 9 · Palet og skrift (visuel stil) ----------
+.palet {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+  padding: 0;
+  list-style: none;
+
+  li {
+    background: $hvid;
+    border: 1px solid $papirstreg; // så den lyse papirfarve også kan ses
+    font-size: $tekst-lille;
+  }
+
+  span { display: block; height: 4.5rem; border-bottom: 1px solid $papirstreg; }
+
+  p { margin: 0; padding: 0.5rem 0.75rem 0; font-weight: 700; }
+  small { display: block; padding: 0 0.75rem 0.75rem; color: $moerkegraa; font-size: $tekst-lille; }
+}
+
+// ---------- 10 · Content kit: én produktion pr. kort ----------
+.produktion {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 2.5rem;
+  align-items: start;
+  margin: 0 0 2rem;
+  padding: 2rem;
+  background: $hvid;
+  scroll-margin-top: 5rem;
+
+  // Big rock får den mørke flade, så den skiller sig ud
+  &--bigrock {
+    background: $blaek;
+    color: $nat-tekst;
+    border-bottom: $roed-traad solid $roed;
+
+    a { color: $nat-tekst; }
+    .produktion__niveau { color: $nat-daempet; }
+    .fakta-linje dt { color: $nat-daempet; }
+    .fakta-linje dd { border-color: rgba($nat-tekst, 0.25); }
+    .knap--sekundaer { color: $nat-tekst; border-color: $nat-tekst; }
+    .knap--sekundaer:hover { background: transparent; text-decoration: underline; }
+  }
+
+  &__niveau { @include etiket($roed); margin-bottom: 0.5rem; }
+
+  h3 {
+    margin: 0 0 1rem;
+    font-size: $overskrift-2;
+    font-weight: 300;
+  }
+
+  &__medie {
+    margin: 0;
+
+    img, video {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: $papir;
+    }
+
+    // Den lodrette reel må ikke blive højere end skærmen
+    video { max-height: 36rem; background: $blaek; }
+
+    figcaption {
+      padding-top: 0.5rem;
+      color: $moerkegraa;
+      font-size: $tekst-lille;
+    }
+  }
+
+  &--bigrock &__medie figcaption { color: $nat-daempet; }
+}
+
+@media (max-width: 900px) {
+  .produktion { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+}
+
+// Små fakta om produktionen: format, kanal, rolle
+.fakta-linje {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0 1rem;
+  margin: 1.25rem 0;
+  font-size: $tekst-lille;
+
+  dt { @include etiket($sepia); font-size: 0.875rem; padding: 0.5rem 0; }
+  dd { margin: 0; padding: 0.5rem 0; border-bottom: 1px solid $papirstreg; }
+}
+
+// Knapper ved siden af hinanden (playbookens .knap er 100 % bred som standard)
+.knap-raekke {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+
+  .knap {
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+    margin: 0;
+    font-size: 1rem;
+  }
+}
+
+// Galleri med små billeder (karrusel, mikroindhold, nyhedsbrev)
+.galleri {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 9rem), 1fr));
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  a { display: block; }
+
+  a:focus-visible {
+    outline: 3px solid $roed;
+    outline-offset: 3px;
+  }
+
+  img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border: 1px solid $papirstreg;
+  }
+
+  &--hoej img { aspect-ratio: auto; object-fit: contain; }
+}
+
+// ---------- 11 · Forsiden (index): kapitlerne ----------
+.kapitler {
+  display: grid;
+  gap: 1rem;
+  margin: 2rem 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: kapitel;
+}
+
+.kapitel {
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1fr) auto;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.75rem 2rem;
+  background: $hvid;
+  counter-increment: kapitel;
+
+  // Det store nummer til venstre
+  &::before {
+    content: counter(kapitel);
+    font-size: 3.5rem;
+    font-weight: 300;
+    line-height: 1;
+    color: $roed;
+  }
+
+  h3 {
+    margin: 0 0 0.25rem;
+    font-size: $overskrift-2;
+    font-weight: 300;
+  }
+
+  p { margin: 0; }
+
+  &__under {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    margin: 0.75rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: $tekst-lille;
+
+    a { font-weight: 700; }
+  }
+
+  > .knap {
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+    margin: 0;
+    font-size: 1rem;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 700px) {
+  .kapitel {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+
+    &::before { font-size: 2.5rem; }
+  }
+}

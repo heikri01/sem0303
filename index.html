@@ -1,15 +1,148 @@
 <!DOCTYPE html>
 <html lang="da">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- Skrifterne fra designguide v2: Lato til alt, EB Garamond kursiv kun til Grethes stemme -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Søvnguiden – dengang og i dag · Kampagne for Ringsted Dun · Gruppe 22</title>
+  <!-- Skrifterne fra designguide v2: Lato til alt, EB Garamond kursiv kun til Grethes stemme -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+  <!-- Samme design som playbooken (playbook.css) + det nye til præsentationen (praesentation.css) -->
+  <link rel="stylesheet" href="css/playbook.css">
+  <link rel="stylesheet" href="css/praesentation.css">
 </head>
 <body>
-    
+
+  <a class="spring-over" href="#indhold">Spring til indholdet</a>
+
+  <header class="hoved">
+    <div class="hoved__linje indhold">
+      <a class="hoved__logo" href="index.html">
+        <img src="img/playbook/RDU_logo_aflang.png" alt="Ringsted Dun – Established 1947">
+        <span>Kampagnen</span>
+      </a>
+      <a class="knap knap--sekundaer hoved__pdf" href="strategi.html">Start</a>
+    </div>
+  </header>
+
+  <main id="indhold">
+
+    <!-- ===== FORSIDEBÅNDET ===== -->
+    <section class="forside" aria-labelledby="titel">
+      <div class="indhold forside__gitter">
+        <div>
+          <p class="forside__etiket">Kampagne for Ringsted Dun · MMD 3. semester · Gruppe 22</p>
+          <h1 class="forside__titel" id="titel">Søvnguiden – dengang og i dag</h1>
+          <p class="forside__tekst">Meget har ændret sig siden 1947. Det, der giver god søvn, har ikke.</p>
+          <a class="knap knap--primaer forside__knap" href="strategi.html">Start præsentationen</a>
+        </div>
+        <figure class="forside__illustration">
+          <img src="img/guide/sol_og_maane_hvid.svg" alt="">
+        </figure>
+      </div>
+    </section>
+
+    <div class="indhold">
+
+      <h2>Præsentationen i seks dele</h2>
+      <p class="ingress">Gå igennem delene i rækkefølge med »Næste« nederst på hver side – eller hop direkte til en del herfra. Logoet øverst fører altid tilbage hertil.</p>
+
+      <!-- ===== KAPITLERNE =====
+           Ét <li class="kapitel"> pr. del. Nummeret skrives af CSS (counter), så det passer af sig selv.
+           Ny del: kopiér et <li>, og husk at rette »Del x af 6« og Forrige/Næste på siderne -->
+      <ol class="kapitler">
+        <li class="kapitel">
+          <div>
+            <h3>Strategi</h3>
+            <p>Case, målgruppe og personas, positionering, kanaler, kunderejse og KPI.</p>
+          </div>
+          <a class="knap knap--sekundaer" href="strategi.html">Åbn <span class="sr-only">Strategi</span></a>
+        </li>
+        <li class="kapitel">
+          <div>
+            <h3>Indholdskoncept</h3>
+            <p>Konceptet »dengang og i dag«, guidens opbygning, tone of voice og visuel stil.</p>
+          </div>
+          <a class="knap knap--sekundaer" href="indholdskoncept.html">Åbn <span class="sr-only">Indholdskoncept</span></a>
+        </li>
+        <li class="kapitel">
+          <div>
+            <h3>Indholdsramme</h3>
+            <p>Indholdssøjler, kampagneperiode og årshjul, og kvalitetskrav.</p>
+          </div>
+          <a class="knap knap--sekundaer" href="indholdsramme.html">Åbn <span class="sr-only">Indholdsramme</span></a>
+        </li>
+        <li class="kapitel">
+          <div>
+            <h3>Content kit</h3>
+            <p>Seks produktioner og mikroindhold – alle klippet ud af søvnguiden.</p>
+            <ul class="kapitel__under" aria-label="Produktionerne">
+              <li><a href="guide.html">Søvnguiden</a></li>
+              <li><a href="content-kit.html#video">Lang video</a></li>
+              <li><a href="quiz.html">Quiz</a></li>
+              <li><a href="content-kit.html#annonce">Videoannonce</a></li>
+              <li><a href="content-kit.html#karrusel">Karrusel</a></li>
+              <li><a href="content-kit.html#nyhedsbrev">Nyhedsbrev</a></li>
+              <li><a href="content-kit.html#mikro">Mikroindhold</a></li>
+            </ul>
+          </div>
+          <a class="knap knap--sekundaer" href="content-kit.html">Åbn <span class="sr-only">Content kit</span></a>
+        </li>
+        <li class="kapitel">
+          <div>
+            <h3>AI Playbook</h3>
+            <p>Ringsted Duns guide til at bruge kampagnen videre med AI – med prompts, værksted og tjekliste.</p>
+          </div>
+          <a class="knap knap--sekundaer" href="playbook.html">Åbn <span class="sr-only">AI Playbook</span></a>
+        </li>
+        <li class="kapitel">
+          <div>
+            <h3>AI log</h3>
+            <p>Hvor, hvordan og hvorfor vi har brugt AI – og hvad vi selv gjorde ved det.</p>
+          </div>
+          <a class="knap knap--sekundaer" href="ai-log.html">Åbn <span class="sr-only">AI log</span></a>
+        </li>
+      </ol>
+
+      <h2>Bilag</h2>
+      <div class="kort-gitter kort-gitter--fire">
+        <article class="kort">
+          <h3>Designguide</h3>
+          <p>Farver, skrift, faste elementer og formater.</p>
+          <p><a href="../RD_Designguide.pdf">Åbn designguiden (pdf)</a></p>
+        </article>
+        <article class="kort">
+          <h3>Søvnguiden som pdf</h3>
+          <p>Den samme guide som på webben, til download.</p>
+          <p><a href="pdf/soevnguiden.pdf">Åbn søvnguiden (pdf)</a></p>
+        </article>
+        <article class="kort">
+          <h3>FigJam</h3>
+          <p>Hele vores arbejdsboard: research, strategi, indholdskoncept, proces og AI log.</p>
+          <p><a href="https://www.figma.com/board/niiu0S9VnHbLkp0h1nYT3d/Ringsted-Dun">Åbn FigJam-boardet</a></p>
+        </article>
+        <article class="kort">
+          <h3>Figma</h3>
+          <p>Designfilen med søvnguiden, karrusellen, mikroindholdet og de andre medier.</p>
+          <p><a href="https://www.figma.com/design/D2hHAomOqdgr0AzTombe8k/RD---Content--div.-medier-">Åbn Figma-filen</a></p>
+        </article>
+      </div>
+
+      <div class="note">
+        <h3>Om gruppen</h3>
+        <p>Heidi og Marcus, MMD 3. semester, gruppe 22. Hvem der har haft ansvaret for hvilke dele, står i rapporten.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="bund">
+    <div class="indhold">
+      <p>Kampagnen »Søvnguiden – dengang og i dag« · Ringsted Dun</p>
+      <p>Mormor Grethe er en fiktiv person. Billeder og stemme i kampagnen er skabt med AI.</p>
+    </div>
+  </footer>
+
 </body>
 </html>

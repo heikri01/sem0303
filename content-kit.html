@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content kit · Søvnguiden – dengang og i dag · Ringsted Dun</title>
+  <!-- Skrifterne fra designguide v2: Lato til alt, EB Garamond kursiv kun til Grethes stemme -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+  <!-- Samme design som playbooken (playbook.css) + det nye til præsentationen (praesentation.css) -->
+  <link rel="stylesheet" href="css/playbook.css">
+  <link rel="stylesheet" href="css/praesentation.css">
+</head>
+<body>
+
+  <a class="spring-over" href="#indhold">Spring til indholdet</a>
+
+  <header class="hoved">
+    <div class="hoved__linje indhold">
+      <a class="hoved__logo" href="index.html">
+        <img src="img/playbook/RDU_logo_aflang.png" alt="Ringsted Dun – til oversigten">
+        <span>Content kit</span>
+      </a>
+      <div class="hoved__hoejre">
+        <p class="hoved__trin">Del 4 af 6</p>
+        <a class="knap knap--sekundaer hoved__pdf" href="index.html">Oversigt</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="indhold">
+
+    <section class="forside" aria-labelledby="titel">
+      <div class="indhold forside__gitter">
+        <div>
+          <p class="forside__etiket">Del 4 af 6 · Søvnguiden – dengang og i dag</p>
+          <h1 class="forside__titel" id="titel">Content kit</h1>
+          <p class="forside__tekst">Seks produktioner og fire mikroopslag – alle klippet ud af søvnguiden. Klik dig ind og se dem, som målgruppen ville møde dem.</p>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      STIER TIL FILERNE
+      Siden ligger i web/. Filerne i content kit ligger én mappe oppe (../).
+      Mellemrum og æ/ø/å er skrevet som %20, %C3%A6 osv., så linkene virker i alle browsere:
+        content%20kit            = content kit
+        prim%C3%A6re%20afledte   = primære afledte
+        sekund%C3%A6re%20afledte = sekundære afledte
+        %C2%B7                   = ·
+    -->
+
+    <nav class="sidenav" aria-label="Produktioner på siden">
+      <div class="indhold">
+        <ul>
+          <li><a href="#soevnguiden">Søvnguiden</a></li>
+          <li><a href="#video">Lang video</a></li>
+          <li><a href="#quiz">Quiz</a></li>
+          <li><a href="#annonce">Videoannonce</a></li>
+          <li><a href="#karrusel">Karrusel</a></li>
+          <li><a href="#nyhedsbrev">Nyhedsbrev</a></li>
+          <li><a href="#mikro">Mikroindhold</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="indhold">
+
+      <h2 class="sr-only">Produktionerne</h2>
+      <ol class="kaede" aria-label="Sådan hænger indholdet sammen">
+        <li><p class="kaede__niveau">Big rock</p><p>Søvnguiden</p></li>
+        <li><p class="kaede__niveau">Primære afledte</p><p>Lang video · quiz</p></li>
+        <li><p class="kaede__niveau">Sekundære afledte</p><p>Videoannonce og reel · karrusel · nyhedsbrev</p></li>
+        <li><p class="kaede__niveau">Mikroindhold</p><p>Grethe-citater · nostalgiopslag</p></li>
+      </ol>
+
+      <!-- ========== 1 · SØVNGUIDEN (big rock) ========== -->
+      <article class="produktion produktion--bigrock" id="soevnguiden">
+        <div>
+          <p class="produktion__niveau">1 · Big rock</p>
+          <h3>Søvnguiden – dengang og i dag</h3>
+          <p>Hele kampagnens kerne. Mormor Grethe fører læseren døgnet rundt, året rundt og gennem »dine nætter«. Webversion som bladremagasin på computer og mobildesign på telefon – med pdf til download.</p>
+          <dl class="fakta-linje">
+            <dt>Rolle</dt><dd>Velkomstgave i nyhedsbrevet (nurture)</dd>
+            <dt>Format</dt><dd>Web (computer og mobil) + pdf</dd>
+            <dt>Søjle</dt><dd>Søvnvaner, dynepleje, dynen til dig</dd>
+          </dl>
+          <div class="knap-raekke">
+            <a class="knap knap--primaer" href="guide.html">Åbn søvnguiden</a>
+            <a class="knap knap--sekundaer" href="pdf/soevnguiden.pdf">Pdf-udgaven</a>
+          </div>
+        </div>
+        <figure class="produktion__medie">
+          <img src="img/guide/rd-morgen-sovevaerelse.jpg" alt="Soveværelse i morgenlys med en Ringsted Dun-dyne">
+        </figure>
+      </article>
+
+      <!-- ========== 2 · LANG VIDEO ========== -->
+      <article class="produktion" id="video">
+        <div>
+          <p class="produktion__niveau">2 · Primær afledt</p>
+          <h3>Den lange video: Grethe fortæller</h3>
+          <p>Grethe følger døgnet fra morgenlys til nattens stille timer – fem stationer fra guiden. Videoen er hjemmet på YouTube og klippes ned til annoncer.</p>
+          <dl class="fakta-linje">
+            <dt>Rolle</dt><dd>Awareness og opvarmning (marts)</dd>
+            <dt>Format</dt><dd>16:9 på YouTube · Facebook-version · med og uden undertekster</dd>
+            <dt>AI</dt><dd>Billeder og stemme er skabt med AI og mærket</dd>
+          </dl>
+          <div class="knap-raekke">
+            <a class="knap knap--primaer" href="../Interaktive_SoMe_mockups/YouTube_mockup/index.html" target="_blank" rel="noopener">Se på YouTube-mockup <span class="sr-only">(åbner i ny fane)</span></a>
+            <a class="knap knap--sekundaer" href="../content%20kit/prim%C3%A6re%20afledte/Video_lang/RingstedDun_Soevnguiden_Grethe_16x9_med_undertekster.mp4">Videofilen</a>
+          </div>
+        </div>
+        <figure class="produktion__medie">
+          <!-- preload="none": den store fil (150 MB) hentes først, når man trykker afspil -->
+          <video controls preload="none" poster="../Interaktive_SoMe_mockups/YouTube_mockup/poster.jpg">
+            <source src="../content%20kit/prim%C3%A6re%20afledte/Video_lang/RingstedDun_Soevnguiden_Grethe_16x9_med_undertekster.mp4" type="video/mp4">
+          </video>
+          <figcaption>Med undertekster. Mormor Grethe er en fiktiv person.</figcaption>
+        </figure>
+      </article>
+
+      <!-- ========== 3 · QUIZ ========== -->
+      <article class="produktion" id="quiz">
+        <div>
+          <p class="produktion__niveau">3 · Primær afledt</p>
+          <h3>Quizzen »Myte eller sandhed?«</h3>
+          <p>Nostalgi frem for produkt: udsagn om søvn fra dengang, hvor læseren gætter på myte eller sandhed. Resultatet vises uden krav om e-mail, og tilmelding til nyhedsbrevet er frivillig.</p>
+          <dl class="fakta-linje">
+            <dt>Rolle</dt><dd>Engagement og lead</dd>
+            <dt>Format</dt><dd>Web, mobil først</dd>
+            <dt>Søjle</dt><dd>Søvnvaner</dd>
+          </dl>
+          <div class="knap-raekke">
+            <a class="knap knap--primaer" href="quiz.html">Tag quizzen</a>
+          </div>
+        </div>
+        <figure class="produktion__medie">
+          <img src="img/guide/dengang-vinter.jpg" alt="Et koldt soveværelse en vinteraften i 1950'erne (AI-genereret)">
+        </figure>
+      </article>
+
+      <!-- ========== 4 · VIDEOANNONCE OG REEL ========== -->
+      <article class="produktion" id="annonce">
+        <div>
+          <p class="produktion__niveau">4 · Sekundær afledt</p>
+          <h3>Videoannonce og reel: »Det koldeste rum i huset«</h3>
+          <p>Klippet ud af den lange video. Starter uden lyd og med indbrændte undertekster, så den virker i feedet.</p>
+          <dl class="fakta-linje">
+            <dt>Rolle</dt><dd>Awareness og retargeting</dd>
+            <dt>Format</dt><dd>16:9 i desktop-feed · reel 3:4 på mobil</dd>
+            <dt>Kanal</dt><dd>Facebook og Instagram (sponsoreret)</dd>
+          </dl>
+          <div class="knap-raekke">
+            <a class="knap knap--primaer" href="../Interaktive_SoMe_mockups/Facebook_Annonce_video_mockup/index.html" target="_blank" rel="noopener">Se på Facebook-mockup <span class="sr-only">(åbner i ny fane)</span></a>
+            <a class="knap knap--sekundaer" href="../content%20kit/mikroindhold/annoncetekst_fb.txt">Annoncetekster</a>
+          </div>
+        </div>
+        <figure class="produktion__medie">
+          <video controls preload="metadata" poster="../Interaktive_SoMe_mockups/Facebook_Annonce_video_mockup/poster.jpg">
+            <source src="../content%20kit/sekund%C3%A6re%20afledte/Video_kort/RingstedDun_Soevnguiden_Grethe_reel_med_undertekster.mp4" type="video/mp4">
+          </video>
+          <figcaption>Reel med undertekster.</figcaption>
+        </figure>
+      </article>
+
+      <!-- ========== 5 · KARRUSEL ========== -->
+      <article class="produktion" id="karrusel">
+        <div>
+          <p class="produktion__niveau">5 · Sekundær afledt</p>
+          <h3>Karrusel: »Kan du huske de kolde soveværelser?«</h3>
+          <p>Stationen 22.30 Sengetid fra guiden som seks slides. To forsider (A og B) til A/B-test.</p>
+          <dl class="fakta-linje">
+            <dt>Rolle</dt><dd>Awareness – leder til quiz og guide</dd>
+            <dt>Format</dt><dd>6 slides i 1:1</dd>
+            <dt>Kanal</dt><dd>Facebook og Instagram (sponsoreret)</dd>
+          </dl>
+          <div class="knap-raekke">
+            <a class="knap knap--primaer" href="../Interaktive_SoMe_mockups/Facebook_Karrusel_mockup/index.html" target="_blank" rel="noopener">Se på Facebook-mockup <span class="sr-only">(åbner i ny fane)</span></a>
+            <a class="knap knap--sekundaer" href="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/annoncetekst_karrusel.txt">Opslagstekst</a>
+          </div>
+        </div>
+        <!-- Klik på et billede åbner det i fuld størrelse -->
+        <ul class="galleri" aria-label="Karrusellens slides">
+          <li><a href="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide1_forside.png"><img src="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide1_forside.png" alt="Slide 1, forside A"></a></li>
+          <li><a href="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide1B_forside-myte.png"><img src="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide1B_forside-myte.png" alt="Slide 1, forside B: myte"></a></li>
+          <li><a href="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide2_dengang.png"><img src="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide2_dengang.png" alt="Slide 2: dengang"></a></li>
+          <li><a href="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide3_i-dag.png"><img src="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide3_i-dag.png" alt="Slide 3: i dag"></a></li>
+          <li><a href="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide4_temperaturen.png"><img src="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide4_temperaturen.png" alt="Slide 4: temperaturen"></a></li>
+          <li><a href="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide5_dynen-og-telefonen.png"><img src="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide5_dynen-og-telefonen.png" alt="Slide 5: dynen og telefonen"></a></li>
+          <li><a href="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide6_myte-eller-sandhed.png"><img src="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide6_myte-eller-sandhed.png" alt="Slide 6: myte eller sandhed"></a></li>
+        </ul>
+      </article>
+
+      <!-- ========== 6 · NYHEDSBREV ========== -->
+      <article class="produktion" id="nyhedsbrev">
+        <div>
+          <p class="produktion__niveau">6 · Sekundær afledt</p>
+          <h3>Nyhedsbrevet: velkomstmailen</h3>
+          <p>Den første mail efter tilmeldingen. Her får læseren søvnguiden som gave og et løfte om, hvad der kommer: fem ugentlige mails, derefter én pr. årstid.</p>
+          <dl class="fakta-linje">
+            <dt>Rolle</dt><dd>Nurture – kampagnens KPI måles her</dd>
+            <dt>Format</dt><dd>Mail i 600 px bredde</dd>
+            <dt>System</dt><dd>Klaviyo – det Ringsted Dun allerede bruger</dd>
+          </dl>
+        </div>
+        <ul class="galleri galleri--hoej" aria-label="Nyhedsbrevet">
+          <li><a href="../content%20kit/sekund%C3%A6re%20afledte/nyhedsbrev/Velkomstmail%201%20%C2%B7%20600%20px.png"><img src="../content%20kit/sekund%C3%A6re%20afledte/nyhedsbrev/Velkomstmail%201%20%C2%B7%20600%20px.png" alt="Velkomstmailen med søvnguiden som gave"></a></li>
+          <li><a href="../content%20kit/sekund%C3%A6re%20afledte/nyhedsbrev/Indbakke%20%C2%B7%20emnelinje%20og%20afsender.png"><img src="../content%20kit/sekund%C3%A6re%20afledte/nyhedsbrev/Indbakke%20%C2%B7%20emnelinje%20og%20afsender.png" alt="Mailen i indbakken: emnelinje og afsender"></a></li>
+        </ul>
+      </article>
+
+      <!-- ========== 7 · MIKROINDHOLD ========== -->
+      <article class="produktion" id="mikro">
+        <div>
+          <p class="produktion__niveau">Mikroindhold</p>
+          <h3>Fire små opslag til feedet</h3>
+          <p>Grethe-citater ordret fra guiden og nostalgispørgsmål, der inviterer til kommentarer. De ligger i kampagnens første tre uger.</p>
+          <dl class="fakta-linje">
+            <dt>Rolle</dt><dd>Dialog og organisk rækkevidde</dd>
+            <dt>Format</dt><dd>1:1 (1080 × 1080)</dd>
+            <dt>Kanal</dt><dd>Facebook og Instagram</dd>
+          </dl>
+          <div class="knap-raekke">
+            <a class="knap knap--sekundaer" href="../content%20kit/mikroindhold/mikroindhold_opslagstekster.txt">Opslagstekster</a>
+          </div>
+        </div>
+        <ul class="galleri" aria-label="Mikroopslagene">
+          <li><a href="../content%20kit/mikroindhold/1_nostalgiopslag_0700_gardinerne_uge1-ons.png"><img src="../content%20kit/mikroindhold/1_nostalgiopslag_0700_gardinerne_uge1-ons.png" alt="Nostalgiopslag: Hvem trak gardinerne fra hjemme hos dig?"></a></li>
+          <li><a href="../content%20kit/mikroindhold/2_grethe-citat_0700_B-menneske_uge1-loer.png"><img src="../content%20kit/mikroindhold/2_grethe-citat_0700_B-menneske_uge1-loer.png" alt="Grethe-citat om Morfar, der kalder sig B-menneske"></a></li>
+          <li><a href="../content%20kit/mikroindhold/3_nostalgiopslag_2230_koldeste-rum_uge2-loer.png"><img src="../content%20kit/mikroindhold/3_nostalgiopslag_2230_koldeste-rum_uge2-loer.png" alt="Nostalgiopslag: Hvad var det koldeste rum i dit barndomshjem?"></a></li>
+          <li><a href="../content%20kit/mikroindhold/4_grethe-citat_0430_huset-sover_uge3-loer.png"><img src="../content%20kit/mikroindhold/4_grethe-citat_0430_huset-sover_uge3-loer.png" alt="Grethe-citat om natten, når huset sover"></a></li>
+        </ul>
+      </article>
+
+      <div class="note">
+        <h3>Værktøjer til at lave mere</h3>
+        <p>Alt indhold er lavet med samme <a href="docs/kampagne_baggrundsfil_til_AI.md">baggrundsfil til AI</a> og <a href="docs/mormor_grethe_karakterark.md">karakterark for Grethe</a>. Alt designet ligger i vores <a href="https://www.figma.com/design/D2hHAomOqdgr0AzTombe8k/RD---Content--div.-medier-">Figma-fil</a>. Hvordan Ringsted Dun selv laver flere produktioner, står i <a href="playbook.html">AI Playbooken</a>.</p>
+      </div>
+
+    </div>
+
+    <nav class="bladr" aria-label="Præsentationen">
+      <a href="indholdsramme.html"><span>Forrige · del 3</span><strong>Indholdsramme</strong></a>
+      <a class="bladr__naeste" href="playbook.html"><span>Næste · del 5</span><strong>AI Playbook</strong></a>
+    </nav>
+  </main>
+
+  <footer class="bund">
+    <div class="indhold">
+      <p>Kampagnen »Søvnguiden – dengang og i dag« · Ringsted Dun</p>
+      <p>MMD 3. semester, gruppe 22 · Heidi og Marcus · Mormor Grethe er en fiktiv person. Billeder og stemme er skabt med AI.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

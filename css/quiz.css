@@ -401,6 +401,13 @@ img {
   margin: 0.1rem 0 0;
   accent-color: #A6192E;
 }
+.tilmeld .privatliv {
+  margin: 0.75rem 0 0;
+  text-align: left;
+}
+.tilmeld .privatliv a {
+  color: #2B2A29;
+}
 
 .fejl {
   color: #A6192E;

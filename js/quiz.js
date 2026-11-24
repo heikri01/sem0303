@@ -183,6 +183,8 @@ function visResultat() {
             <input id="samtykke" type="checkbox" required>
             <span>Ja tak, send mig søvnguiden og Ringsted Duns nyhedsbrev. Jeg kan altid afmelde mig.</span>
           </label>
+          <!-- Linket står uden for <label>, så et klik på linket ikke sætter flueben -->
+          <p class="lille privatliv">Læs, hvordan Ringsted Dun behandler dine oplysninger, i <a href="https://ringsted-dun.dk/cookie-og-privatlivspolitik/" target="_blank" rel="noopener">privatlivspolitikken</a> (åbner i ny fane).</p>
 
           <p class="fejl" id="fejl" role="alert"></p>
           <button class="knap knap--primaer" type="submit">Send mig guiden</button>
@@ -207,7 +209,7 @@ function visResultat() {
 }
 
 // PROTOTYPE: Formularen sender ikke noget. I en rigtig kampagne skal den forbindes
-// til et nyhedsbrevssystem (fx Mailchimp), som også sender guiden ud.
+// til et nyhedsbrevssystem (Ringsted Dun bruger Klaviyo), som også sender guiden ud.
 function tilmeld(event) {
   event.preventDefault(); // stopper browseren i at genindlæse siden
 

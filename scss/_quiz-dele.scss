@@ -198,6 +198,14 @@
       accent-color: $roed;
     }
   }
+
+  // Linket til privatlivspolitikken under samtykket
+  .privatliv {
+    margin: 0.75rem 0 0;
+    text-align: left;
+
+    a { color: $blaek; }
+  }
 }
 
 .fejl {

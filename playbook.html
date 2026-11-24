@@ -45,6 +45,9 @@
         <li><a href="#kontekst">Baggrundsfilen</a></li>
         <li><a href="#cases">Erfaringer</a></li>
         <li><a href="#etik">Etik og ansvar</a></li>
+        <!-- Tilbage til præsentationens oversigt (index.html). Logoet går til playbookens egen forside.
+             margin-left: auto skubber linket helt ud til højre -->
+        <li style="margin-left: auto"><a href="index.html">← Oversigt</a></li>
       </ul>
     </nav>
   </header>
@@ -850,6 +853,12 @@ Skriv ikke logo, sidefod, afmelding, AI-mærkning eller "mail X af 5" – de lig
         </div>
       </div>
     </section>
+
+    <!-- Præsentationen: forrige og næste del (playbook.js laver selv bladr-linkene mellem playbookens egne sider) -->
+    <nav class="bladr" aria-label="Præsentationen">
+      <a href="content-kit.html"><span>Forrige del · 4 af 6</span><strong>Content kit</strong></a>
+      <a class="bladr__naeste" href="ai-log.html"><span>Næste del · 6 af 6</span><strong>AI log</strong></a>
+    </nav>
   </main>
 
   <footer class="bund">

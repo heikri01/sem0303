@@ -227,10 +227,29 @@ Tallene øverst (opslag og værktøjer) tælles af `js/ai-log.js` ud fra tabelle
 > **Nyt begreb: `&shy;`**
 > En blød bindestreg. Ordet deles kun dér, hvis der ikke er plads (bruges i »Gruppe&shy;medlem« i tabellens top).
 
+## Præsentationen (index, strategi, indholdskoncept, indholdsramme, content-kit) – 24/11
+
+Afleveringen er én digital præsentation. `index.html` er indgangen: den viser de seks dele i rækkefølge og bilagene. Hver side har »Del x af 6« i toppen og Forrige/Næste nederst (`<nav class="bladr">`). Logoet fører altid tilbage til `index.html`.
+
+Rækkefølgen: **1 Strategi** (`strategi.html`) → **2 Indholdskoncept** (`indholdskoncept.html`) → **3 Indholdsramme** (`indholdsramme.html`) → **4 Content kit** (`content-kit.html`, som linker til `guide.html`, `quiz.html` og mockups) → **5 AI Playbook** (`playbook.html`) → **6 AI log** (`ai-log.html`).
+
+I `playbook.html` står »← Oversigt« yderst til højre i menuen, og Forrige/Næste del står nederst. `ai-log.html` har knappen »Oversigt« i toppen og Forrige/Tilbage til oversigten nederst. Playbookens og AI loggens sider henter ikke `praesentation.css` (klassen `.galleri` findes også i playbooken).
+
+Siderne henter `css/playbook.css` (sidehoved, forsidebånd, kort, note, tabel, søjler, måneder, bladr) og `css/praesentation.css` (kun det nye). Ret designet i `scss/praesentation.scss`.
+
+| Jeg vil … | Gå ind i |
+|---|---|
+| Rette tekst | Den pågældende `.html`-fil – hvert afsnit er en `<section class="del" id="…">` |
+| Tilføje et afsnit | Kopiér en `<section class="del">`, giv den et nyt `id`, og tilføj et link i `<nav class="sidenav">` |
+| Ændre rækkefølgen af delene | `index.html` (`<ol class="kapitler">`) + »Del x af 6« og Forrige/Næste på hver side |
+| Tilføje en produktion | `content-kit.html` – kopiér en `<article class="produktion">`. Filer i `content kit/` hentes med `../`, og mellemrum/æ skrives `%20`/`%C3%A6` |
+
+> **Bemærk:** `css/praesentation.css` er lavet af Claude uden Live Sass. Gem `scss/praesentation.scss` én gang med Watch Sass slået til, så laver Live Sass den på ny.
+
 ## Prototype – det mangler før lancering
 
-- **Tilmeldingen sender ikke noget.** Den skal forbindes til et nyhedsbrevssystem (fx Mailchimp), som også sender søvnguiden ud. Se funktionen `tilmeld()` i `quiz.js`.
-- **Link til privatlivspolitik** under samtykket, når Ringsted Duns side er klar.
+- **Tilmeldingen sender ikke noget.** Den skal forbindes til Ringsted Duns nyhedsbrevssystem, Klaviyo (formularen på ringsted-dun.dk hedder `klaviyo-form-Upnt9s`), som også sender søvnguiden ud. Se funktionen `tilmeld()` i `quiz.js`.
+- **Privatlivspolitikken** er linket under samtykket (ringsted-dun.dk/cookie-og-privatlivspolitik). Den er fra 1/10 2021, nævner ikke Klaviyo, og afsnittet om cookies er tomt. Ringsted Dun bør opdatere den, før kampagnen går i luften.
 - **Skrifttyper:** Lato og EB Garamond hentes i dag fra Google Fonts. På en rigtig side bør de ligge lokalt i mappen (GDPR).
 - **Målepunkter** (start, gennemført, tilmelding, frafald pr. spørgsmål) kræver et analyseværktøj, fx Meta Pixel og Google Analytics.
 
