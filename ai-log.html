@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI log · Søvnguiden – dengang og i dag · Ringsted Dun</title>
+  <!-- Skrifterne fra designguide v2: Lato til alt, EB Garamond kursiv kun til Grethes stemme -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+  <!-- Siden genbruger playbookens design (playbook.css) og lægger kun det nye oveni (ai-log.css).
+       Begge laves af Live Sass Compiler ud fra scss/. Ret i SCSS-filerne -->
+  <link rel="stylesheet" href="css/playbook.css">
+  <link rel="stylesheet" href="css/ai-log.css">
+</head>
+<body>
+
+  <a class="spring-over" href="#indhold">Spring til indholdet</a>
+
+  <!-- ===== SIDEHOVED: samme som i playbooken, men uden søgning ===== -->
+  <header class="hoved">
+    <div class="hoved__linje indhold">
+      <a class="hoved__logo" href="index.html">
+        <img src="img/playbook/RDU_logo_aflang.png" alt="Ringsted Dun – Established 1947">
+        <span>AI log</span>
+      </a>
+      <a class="knap knap--sekundaer hoved__pdf" href="playbook.html">Til AI Playbook</a>
+    </div>
+  </header>
+
+  <main id="indhold">
+
+    <!-- ===== FORSIDEBÅNDET: samme mørke bjælke som playbookens forside ===== -->
+    <section class="forside" aria-labelledby="titel">
+      <div class="indhold forside__gitter">
+        <div>
+          <p class="forside__etiket">Ringsted Dun · Søvnguiden – dengang og i dag</p>
+          <h1 class="forside__titel" id="titel">AI log</h1>
+          <p class="forside__tekst">Her kan du se, hvor, hvordan og hvorfor vi har brugt AI i projektet – og hvad vi selv har gjort ved det, AI lavede.</p>
+        </div>
+        <figure class="forside__illustration">
+          <img src="img/playbook/AIlog_ilu_gaas_tandhjul_hvid.svg" alt="">
+        </figure>
+      </div>
+    </section>
+
+    <div class="indhold">
+
+      <!-- Tallene opdateres af ai-log.js, så de altid passer til tabellen -->
+      <div class="kort-gitter kort-gitter--tre">
+        <article class="kort">
+          <h2 class="kort__etiket">Opslag i loggen</h2>
+          <p class="log-tal" data-tal="raekker">35</p>
+        </article>
+        <article class="kort">
+          <h2 class="kort__etiket">AI-værktøjer</h2>
+          <p class="log-tal" data-tal="vaerktoejer">8</p>
+        </article>
+        <article class="kort">
+          <h2 class="kort__etiket">Sådan har vi arbejdet</h2>
+          <p>AI har lavet udkast. Vi har tjekket, rettet og valgt. Kolonnen »Bearbejdning« viser, hvad vi selv gjorde.</p>
+        </article>
+      </div>
+
+      <div class="note">
+        <h2 class="note__titel">Om loggen</h2>
+        <p>Vi har ført loggen løbende på vores FigJam-board, mens vi arbejdede. Denne side er den samme log sat op som en side, så den er lettere at læse og filtrere.</p>
+      </div>
+
+      <!-- ===== FILTER: styres af js/ai-log.js. Uden JavaScript vises hele tabellen bare ===== -->
+      <div class="filter" id="filter" hidden>
+        <div class="filter__gruppe" role="group" aria-labelledby="filter-person">
+          <p class="filter__navn" id="filter-person">Gruppemedlem</p>
+          <div class="filter__knapper">
+            <button type="button" class="filter__knap" data-filter="person" data-vaerdi="alle" aria-pressed="true">Alle</button>
+            <button type="button" class="filter__knap" data-filter="person" data-vaerdi="heidi" aria-pressed="false">Heidi</button>
+            <button type="button" class="filter__knap" data-filter="person" data-vaerdi="marcus" aria-pressed="false">Marcus</button>
+          </div>
+        </div>
+        <div class="filter__gruppe" role="group" aria-labelledby="filter-vaerktoej">
+          <p class="filter__navn" id="filter-vaerktoej">AI-værktøj</p>
+          <div class="filter__knapper">
+            <button type="button" class="filter__knap" data-filter="vaerktoej" data-vaerdi="alle" aria-pressed="true">Alle</button>
+            <button type="button" class="filter__knap" data-filter="vaerktoej" data-vaerdi="claude" aria-pressed="false">Claude</button>
+            <button type="button" class="filter__knap" data-filter="vaerktoej" data-vaerdi="chatgpt" aria-pressed="false">ChatGPT</button>
+            <button type="button" class="filter__knap" data-filter="vaerktoej" data-vaerdi="perplexity" aria-pressed="false">Perplexity</button>
+            <button type="button" class="filter__knap" data-filter="vaerktoej" data-vaerdi="google-flow" aria-pressed="false">Google Flow</button>
+            <button type="button" class="filter__knap" data-filter="vaerktoej" data-vaerdi="google" aria-pressed="false">Google</button>
+            <button type="button" class="filter__knap" data-filter="vaerktoej" data-vaerdi="elevenlabs" aria-pressed="false">ElevenLabs</button>
+            <button type="button" class="filter__knap" data-filter="vaerktoej" data-vaerdi="figma" aria-pressed="false">Figma</button>
+            <button type="button" class="filter__knap" data-filter="vaerktoej" data-vaerdi="arena" aria-pressed="false">Arena</button>
+          </div>
+        </div>
+        <div class="filter__gruppe" role="group" aria-labelledby="filter-sortering">
+          <p class="filter__navn" id="filter-sortering">Rækkefølge</p>
+          <div class="filter__knapper">
+            <button type="button" class="filter__knap" data-filter="sortering" data-vaerdi="aeldste" aria-pressed="true">Ældste først</button>
+            <button type="button" class="filter__knap" data-filter="sortering" data-vaerdi="nyeste" aria-pressed="false">Nyeste først</button>
+          </div>
+        </div>
+        <!-- aria-live: skærmlæsere læser antallet højt, når filteret ændres -->
+        <p class="filter__status" id="filter-status" aria-live="polite"></p>
+      </div>
+
+      <!-- ===== LOGGEN =====
+           Én <tr> pr. opslag. Ny række: kopiér en <tr>, og ret teksten.
+           data-personer: heidi og/eller marcus (små bogstaver, mellemrum imellem)
+           data-slut: sidste dato (år-måned-dag). Ved én dato er den samme som datetime – bruges til »Nyeste først«
+           data-vaerktoejer: claude, chatgpt, perplexity, google, google-flow, elevenlabs, figma, arena
+           data-felt: overskriften, der vises over teksten på mobil -->
+      <div class="tabel-ramme log-ramme">
+        <table class="tabel log">
+          <caption class="sr-only">AI log – alle opslag sorteret efter dato</caption>
+          <!-- Kolonnebredderne står i css (scss/ai-log.scss: .log col) -->
+          <colgroup>
+            <col class="log__kol-dato"><col class="log__kol-ai"><col class="log__kol-formaal"><col><col><col class="log__kol-bearbejdning"><col class="log__kol-gruppe">
+          </colgroup>
+          <thead>
+            <tr>
+              <th scope="col">Dato</th>
+              <th scope="col">AI</th>
+              <th scope="col">Formål</th>
+              <th scope="col">Prompt</th>
+              <th scope="col">Genereret output</th>
+              <th scope="col">Bearbejdning</th>
+              <th scope="col">Gruppe&shy;medlem</th><!-- &shy; = blød bindestreg: ordet må deles her, hvis der ikke er plads -->
+            </tr>
+          </thead>
+          <tbody>
+          <tr data-personer="heidi" data-vaerktoejer="claude" data-slut="2026-10-21">
+            <td data-felt="Dato"><time datetime="2026-10-21"><span class="log__dato">21-10-26</span></time></td>
+            <td data-felt="AI">Claude (Pro)</td>
+            <th scope="row" data-felt="Formål">Opsætning af projekt i Claude</th>
+            <td data-felt="Prompt">Projektbeskrivelse, data fra Dykon</td>
+            <td data-felt="Genereret output">Punkter på Trello, opklarende spørgsmål og forslag til proces</td>
+            <td data-felt="Bearbejdning">Besvaret spørgsmål, tilpasset Trello</td>
+            <td data-felt="Gruppemedlem">Heidi</td>
+          </tr>
+          <tr data-personer="heidi" data-vaerktoejer="claude" data-slut="2026-10-22">
+            <td data-felt="Dato"><time datetime="2026-10-22"><span class="log__dato">22-10-26</span></time></td>
+            <td data-felt="AI">Claude (Pro)</td>
+            <th scope="row" data-felt="Formål">Analyse af hjemmesiden i forhold til brandpersonlighed</th>
+            <td data-felt="Prompt">Link til hjemmeside, formål og brandguide</td>
+            <td data-felt="Genereret output">Forslag til Aakers brandpersonligheder, samt uddybning af tone-of-voice</td>
+            <td data-felt="Bearbejdning">Tilføjelse af præsentation fra virksomhedsbesøget</td>
+            <td data-felt="Gruppemedlem">Heidi</td>
+          </tr>
+          <tr data-personer="heidi" data-vaerktoejer="claude" data-slut="2026-10-22">
+            <td data-felt="Dato"><time datetime="2026-10-22"><span class="log__dato">22-10-26</span></time></td>
+            <td data-felt="AI">Claude (Pro)</td>
+            <th scope="row" data-felt="Formål">Undersøge grundlag bag idé om dyne som medarbejdergode</th>
+            <td data-felt="Prompt">Forklaring af idé, inspirationskilder og overvejelser</td>
+            <td data-felt="Genereret output">Fordele og ulemper, links til videre undersøgelser</td>
+            <td data-felt="Bearbejdning">Overvejet, idéen droppet</td>
+            <td data-felt="Gruppemedlem">Heidi</td>
+          </tr>
+          <tr data-personer="heidi" data-vaerktoejer="claude" data-slut="2026-10-23">
+            <td data-felt="Dato"><time datetime="2026-10-23"><span class="log__dato">23-10-26</span></time></td>
+            <td data-felt="AI">Claude (Pro)</td>
+            <th scope="row" data-felt="Formål">Finde det rette hul at skabe kampagne ud fra</th>
+            <td data-felt="Prompt">SEO-data fra Morningscore (Ringsted Dun + konkurrenter), konkurrentanalyse (inkl. SoMe)</td>
+            <td data-felt="Genereret output">Specifikation af kampagnens fokus: bygge bro til eksisterende guides på website</td>
+            <td data-felt="Bearbejdning">Brainstorming og idéudvikling</td>
+            <td data-felt="Gruppemedlem">Heidi</td>
+          </tr>
+          <tr data-personer="heidi" data-vaerktoejer="claude" data-slut="2026-10-26">
+            <td data-felt="Dato"><time datetime="2026-10-26"><span class="log__dato">26-10-26</span></time></td>
+            <td data-felt="AI">Claude (Pro)</td>
+            <th scope="row" data-felt="Formål">Opsætte vores filer via Google Drive, så vores Claudes også arbejder sammen</th>
+            <td data-felt="Prompt">Adgang til mappe, opsæt regler og begrund</td>
+            <td data-felt="Genereret output">Styringsdokumenter med prioriteret rækkefølge</td>
+            <td data-felt="Bearbejdning">Tilføjelser, Marcus&#x27; kommentarer</td>
+            <td data-felt="Gruppemedlem">Heidi</td>
+          </tr>
+          <tr data-personer="heidi" data-vaerktoejer="perplexity" data-slut="2026-10-27">
+            <td data-felt="Dato"><time datetime="2026-10-27"><span class="log__dato">27-10-26</span></time></td>
+            <td data-felt="AI">Perplexity (gratis)</td>
+            <th scope="row" data-felt="Formål">Data på aldersfordeling, forbrug og adfærd på sociale medier i Danmark – til målgruppe/persona</th>
+            <td data-felt="Prompt">Bad om konkret data på aldersfordeling, forbrug og adfærd og beskrev formålet</td>
+            <td data-felt="Genereret output">Oversigt, generelle tendenser, anbefalinger og konkrete kilder</td>
+            <td data-felt="Bearbejdning">Tilføjelse af konceptidé og målgruppebeskrivelse</td>
+            <td data-felt="Gruppemedlem">Heidi</td>
+          </tr>
+          <tr data-personer="heidi" data-vaerktoejer="claude" data-slut="2026-10-27">
+            <td data-felt="Dato"><time datetime="2026-10-27"><span class="log__dato">27-10-26</span></time></td>
+            <td data-felt="AI">Claude (Pro)</td>
+            <th scope="row" data-felt="Formål">Lave en persona</th>
+            <td data-felt="Prompt">Information fra Perplexity, vores målgruppebeskrivelse og kampagneidé</td>
+            <td data-felt="Genereret output">Udkast til persona (Birgitte, 68) + kunderejse; kildekritik af Perplexity-data</td>
+            <td data-felt="Bearbejdning">Tilpasset tone of voice, USP og D3-træk; Perplexity spurgt igen med målgruppe og koncept; valgt Facebook + quiz + nyhedsbrev; lagt på boardet (Kampagne Strategi)</td>
+            <td data-felt="Gruppemedlem">Heidi</td>
+          </tr>
+          <tr data-personer="heidi" data-vaerktoejer="claude" data-slut="2026-10-27">
+            <td data-felt="Dato"><time datetime="2026-10-27"><span class="log__dato">27-10-26</span></time></td>
+            <td data-felt="AI">Claude (Pro)</td>
+            <th scope="row" data-felt="Formål">Lave opgaver fra undervisning »Big Rock«</th>
+            <td data-felt="Prompt">Opgavearket »Fra Big Rock til content«, projektbeskrivelse, faktaark fra søvnforsker, undervisningsslides, tekst fra dynevælgeren</td>
+            <td data-felt="Genereret output">Tekst i 3 formater (før/efter kontekstpakke), kontekstpakke, Big Rock-forslag, atomer, koncept, formatkort og 3 produktioner; idéer og AI Playbook-stikord lagt på FigJam</td>
+            <td data-felt="Bearbejdning">Egen formulering (»får det for varmt / fryser«) gendannet, efter AI rettede den væk; generationsscene, tankeboble og persona-alder 79 tilføjet af Heidi; tempo sat ned og taget ét trin ad gangen</td>
+            <td data-felt="Gruppemedlem">Heidi</td>
+          </tr>
+          <tr data-personer="heidi" data-vaerktoejer="chatgpt" data-slut="2026-10-27">
+            <td data-felt="Dato"><time datetime="2026-10-27"><span class="log__dato">27-10-26</span></time></td>
+            <td data-felt="AI">ChatGPT</td>
+            <th scope="row" data-felt="Formål">Big Rock-forslag til sammenligning med Claude</th>
+            <td data-felt="Prompt">Big Rock-prompt fra opgavearket + projektbeskrivelse, DesignDNA, faktaark; persona-screenshots fra FigJam</td>
+            <td data-felt="Genereret output">5 Big Rocks – generiske, indtil persona blev tilføjet, derefter målrettet (bl.a. »To mennesker, to temperaturer«)</td>
+            <td data-felt="Bearbejdning">Fremmede produkter/billeder fjernet; »Guldalder« fravalgt; historiske påstande markeret til tjek</td>
+            <td data-felt="Gruppemedlem">Heidi</td>
+          </tr>
+          <tr data-personer="heidi" data-vaerktoejer="google" data-slut="2026-10-27">
+            <td data-felt="Dato"><time datetime="2026-10-27"><span class="log__dato">27-10-26</span></time></td>
+            <td data-felt="AI">Google</td>
+            <th scope="row" data-felt="Formål">Finde fakta om sovevaner og brug af dyner i Danmark uafhængigt af Ringsted Duns egen fortælling</th>
+            <td data-felt="Prompt">Historisk data om sovevaner og brugen af dyner fra 1945 og frem</td>
+            <td data-felt="Genereret output">Opsummeret historisk tidslinje</td>
+            <td data-felt="Bearbejdning">Gemt som inspiration</td>
+            <td data-felt="Gruppemedlem">Heidi</td>
+          </tr>
+          <tr data-personer="marcus" data-vaerktoejer="claude" data-slut="2026-11-17">
+            <td data-felt="Dato"><time datetime="2026-10-28"><span class="log__dato">28-10</span>–<wbr><span class="log__dato">17-11-26</span></time></td>
+            <td data-felt="AI">Claude</td>
+            <th scope="row" data-felt="Formål">Overblik og planlægning</th>
+            <td data-felt="Prompt">Projektbeskrivelse, fælles filer</td>
+            <td data-felt="Genereret output">Opsummering og arbejdsplan</td>
+            <td data-felt="Bearbejdning">Afstemt med Heidi</td>
+            <td data-felt="Gruppemedlem">Marcus</td>
+          </tr>
+          <tr data-personer="heidi marcus" data-vaerktoejer="claude chatgpt arena" data-slut="2026-11-10">
+            <td data-felt="Dato"><time datetime="2026-11-10"><span class="log__dato">10-11-26</span></time></td>
+            <td data-felt="AI">Claude, ChatGPT, Arena</td>
+            <th scope="row" data-felt="Formål">Bygge den bedst mulige Big Rock: opdateret søvnguide</th>
+            <td data-felt="Prompt">Nuværende søvnguide, kontekstfil, prompt</td>
+            <td data-felt="Genereret output">Forskellige udkast</td>
+            <td data-felt="Bearbejdning">Gennemtjekket og samlet til 2 konkrete forslag, der kan brugertestes</td>
+            <td data-felt="Gruppemedlem">Heidi &amp; Marcus</td>
+          </tr>
+          <tr data-personer="marcus" data-vaerktoejer="claude" data-slut="2026-11-10">
+            <td data-felt="Dato"><time datetime="2026-11-10"><span class="log__dato">10-11-26</span></time></td>
+            <td data-felt="AI">Claude</td>
+            <th scope="row" data-felt="Formål">Søvnguiden (første mockups) og første idéer til designguide</th>
+            <td data-felt="Prompt">Tekstudkast, kontekstfil, Design DNA</td>
+            <td data-felt="Genereret output">Udkast til søvnguide</td>
+            <td data-felt="Bearbejdning">Idéer til og grundlag for den endelige guide</td>
+            <td data-felt="Gruppemedlem">Marcus</td>
+          </tr>
+          <tr data-personer="marcus" data-vaerktoejer="claude" data-slut="2026-11-19">
+            <td data-felt="Dato"><time datetime="2026-11-10"><span class="log__dato">10-11</span>–<wbr><span class="log__dato">19-11-26</span></time></td>
+            <td data-felt="AI">Claude</td>
+            <th scope="row" data-felt="Formål">Designguide</th>
+            <td data-felt="Prompt">Design DNA, farvepaletter</td>
+            <td data-felt="Genereret output">Stilretninger og designguide</td>
+            <td data-felt="Bearbejdning">Inspiration/eksperimenteret med farver, fonte m.m. før endeligt valg</td>
+            <td data-felt="Gruppemedlem">Marcus</td>
+          </tr>
+          <tr data-personer="marcus" data-vaerktoejer="claude" data-slut="2026-11-11">
+            <td data-felt="Dato"><time datetime="2026-11-11"><span class="log__dato">11-11-26</span></time></td>
+            <td data-felt="AI">Claude</td>
+            <th scope="row" data-felt="Formål">Idéer til content</th>
+            <td data-felt="Prompt">Big Rock, persona</td>
+            <td data-felt="Genereret output">Idéer pr. format</td>
+            <td data-felt="Bearbejdning">Par-fokus fravalgt i forhold til seer</td>
+            <td data-felt="Gruppemedlem">Marcus</td>
+          </tr>
+          <tr data-personer="marcus" data-vaerktoejer="claude" data-slut="2026-11-24">
+            <td data-felt="Dato"><time datetime="2026-11-12"><span class="log__dato">12-11</span>–<wbr><span class="log__dato">24-11-26</span></time></td>
+            <td data-felt="AI">Claude</td>
+            <th scope="row" data-felt="Formål">Opsætning af AI-log</th>
+            <td data-felt="Prompt">Projekthistorik</td>
+            <td data-felt="Genereret output">Forslag til rækker</td>
+            <td data-felt="Bearbejdning">Hver række godkendt og/eller rettet</td>
+            <td data-felt="Gruppemedlem">Marcus</td>
+          </tr>
+          <tr data-personer="heidi" data-vaerktoejer="claude" data-slut="2026-11-15">
+            <td data-felt="Dato"><time datetime="2026-11-15"><span class="log__dato">15-11-26</span></time></td>
+            <td data-felt="AI">Claude (Pro)</td>
+            <th scope="row" data-felt="Formål">Rydde op i Figma</th>
+            <td data-felt="Prompt">Præsentationer fra undervisning samt beskrivelse af idé og forslag</td>
+            <td data-felt="Genereret output">Præcisering af huller, modsigelser, fejl og mangler</td>
+            <td data-felt="Bearbejdning">Undersøgt, diskuteret og besluttet de ting, vi manglede eller var i tvivl om</td>
+            <td data-felt="Gruppemedlem">Heidi</td>
+          </tr>
+          <tr data-personer="heidi" data-vaerktoejer="claude" data-slut="2026-11-16">
+            <td data-felt="Dato"><time datetime="2026-11-16"><span class="log__dato">16-11-26</span></time></td>
+            <td data-felt="AI">Claude (Pro)</td>
+            <th scope="row" data-felt="Formål">Skabe indhold til produktionerne til content-kittet</th>
+            <td data-felt="Prompt">Den nye søvnguide samt idéer til atomisering og versionering</td>
+            <td data-felt="Genereret output">Personas karaktertræk til prompt, storyboards, stories og quizspørgsmål</td>
+            <td data-felt="Bearbejdning">Testet/afprøvet ChatGPT (karaktertræk), gennemlæst storyboard og tilpasset stories og quizspørgsmål</td>
+            <td data-felt="Gruppemedlem">Heidi</td>
+          </tr>
+          <tr data-personer="heidi" data-vaerktoejer="claude" data-slut="2026-11-17">
+            <td data-felt="Dato"><time datetime="2026-11-17"><span class="log__dato">17-11-26</span></time></td>
+            <td data-felt="AI">Claude (Pro)</td>
+            <th scope="row" data-felt="Formål">Skabe kontekstfil til vores mikroindhold og til AI Playbook</th>
+            <td data-felt="Prompt">Eksisterende kontekstfiler, strategi og rammer</td>
+            <td data-felt="Genereret output">Udkast til kontekstfil</td>
+            <td data-felt="Bearbejdning">Testet og tilpasset</td>
+            <td data-felt="Gruppemedlem">Heidi</td>
+          </tr>
+          <tr data-personer="heidi marcus" data-vaerktoejer="chatgpt" data-slut="2026-11-17">
+            <td data-felt="Dato"><time datetime="2026-11-17"><span class="log__dato">17-11-26</span></time></td>
+            <td data-felt="AI">ChatGPT</td>
+            <th scope="row" data-felt="Formål">Billeder »dengang og i dag« og billeder af Grethe</th>
+            <td data-felt="Prompt">Billedprompts</td>
+            <td data-felt="Genereret output">Billedpar og portrætter af Grethe</td>
+            <td data-felt="Bearbejdning">Udvalgt og rettet</td>
+            <td data-felt="Gruppemedlem">Marcus &amp; Heidi</td>
+          </tr>
+          <tr data-personer="marcus" data-vaerktoejer="claude figma" data-slut="2026-11-19">
+            <td data-felt="Dato"><time datetime="2026-11-18"><span class="log__dato">18-11</span>–<wbr><span class="log__dato">19-11-26</span></time></td>
+            <td data-felt="AI">Claude + Figma</td>
+            <th scope="row" data-felt="Formål">Søvnguiden konverteret fra design til bladrebog, mobil og PDF</th>
+            <td data-felt="Prompt">Figma-sider, Heidis tekst</td>
+            <td data-felt="Genereret output">Bladrebog (HTML), mobilversion og PDF</td>
+            <td data-felt="Bearbejdning">Gennemset, rettet og lavet i alle formater; guiden gjort bladre-bar</td>
+            <td data-felt="Gruppemedlem">Marcus</td>
+          </tr>
+          <tr data-personer="heidi" data-vaerktoejer="claude" data-slut="2026-11-19">
+            <td data-felt="Dato"><time datetime="2026-11-19"><span class="log__dato">19-11-26</span></time></td>
+            <td data-felt="AI">Claude (Pro)</td>
+            <th scope="row" data-felt="Formål">AI Playbook opsætning</th>
+            <td data-felt="Prompt">Strategi og indhold, designfil</td>
+            <td data-felt="Genereret output">Struktur og første udkast til playbookens sektioner</td>
+            <td data-felt="Bearbejdning">Gennemlæst, omstruktureret og tilpasset vores strategi og design</td>
+            <td data-felt="Gruppemedlem">Heidi</td>
+          </tr>
+          <tr data-personer="marcus" data-vaerktoejer="claude" data-slut="2026-11-19">
+            <td data-felt="Dato"><time datetime="2026-11-19"><span class="log__dato">19-11-26</span></time></td>
+            <td data-felt="AI">Claude</td>
+            <th scope="row" data-felt="Formål">Tilgængelighedstjek af HTML-sider</th>
+            <td data-felt="Prompt">Bladrebog og mobilversion af søvnguiden</td>
+            <td data-felt="Genereret output">Alt-tekst til billeder, tekstvisning og automatisk test</td>
+            <td data-felt="Bearbejdning">Gennemset; fejl rettet</td>
+            <td data-felt="Gruppemedlem">Marcus</td>
+          </tr>
+          <tr data-personer="marcus" data-vaerktoejer="claude figma" data-slut="2026-11-19">
+            <td data-felt="Dato"><time datetime="2026-11-19"><span class="log__dato">19-11-26</span></time></td>
+            <td data-felt="AI">Claude + Figma</td>
+            <th scope="row" data-felt="Formål">Karrusel og velkomstmail</th>
+            <td data-felt="Prompt">Heidis tekst, Design DNA, billedpar</td>
+            <td data-felt="Genereret output">Udkast i Figma</td>
+            <td data-felt="Bearbejdning">Én version valgt; Heidis tekst bevaret</td>
+            <td data-felt="Gruppemedlem">Marcus</td>
+          </tr>
+          <tr data-personer="heidi marcus" data-vaerktoejer="google-flow" data-slut="2026-11-20">
+            <td data-felt="Dato"><time datetime="2026-11-19"><span class="log__dato">19-11</span>–<wbr><span class="log__dato">20-11-26</span></time></td>
+            <td data-felt="AI">Google Flow (Veo 3.1 Lite)</td>
+            <th scope="row" data-felt="Formål">Levende klip af Grethe</th>
+            <td data-felt="Prompt">Masterbillede, startbilleder og faste prompts</td>
+            <td data-felt="Genereret output">6 klip af 8 sek.</td>
+            <td data-felt="Bearbejdning">Bedste forsøg udvalgt; samme ansigt i alle klip; lyd slået fra</td>
+            <td data-felt="Gruppemedlem">Marcus &amp; Heidi</td>
+          </tr>
+          <tr data-personer="heidi" data-vaerktoejer="claude" data-slut="2026-11-20">
+            <td data-felt="Dato"><time datetime="2026-11-20"><span class="log__dato">20-11-26</span></time></td>
+            <td data-felt="AI">Claude (Pro)</td>
+            <th scope="row" data-felt="Formål">Søvnguide kodet</th>
+            <td data-felt="Prompt">Ny søvnguide (tekst), designfil og kontekstfil</td>
+            <td data-felt="Genereret output">Kodet søvnguide (HTML/CSS)</td>
+            <td data-felt="Bearbejdning">Testet i browser, rettet layout og tekst, tjekket mod design</td>
+            <td data-felt="Gruppemedlem">Heidi</td>
+          </tr>
+          <tr data-personer="marcus" data-vaerktoejer="elevenlabs" data-slut="2026-11-20">
+            <td data-felt="Dato"><time datetime="2026-11-20"><span class="log__dato">20-11-26</span></time></td>
+            <td data-felt="AI">ElevenLabs</td>
+            <th scope="row" data-felt="Formål">AI-stemme til fortæller</th>
+            <td data-felt="Prompt">Manus (kort version)</td>
+            <td data-felt="Genereret output">Stemmen »Mia – Warm Danish Narrator«, 1 lydklip pr. bid</td>
+            <td data-felt="Bearbejdning">Indstillinger justeret, klip valgt og lagt på filmen</td>
+            <td data-felt="Gruppemedlem">Marcus</td>
+          </tr>
+          <tr data-personer="heidi marcus" data-vaerktoejer="claude" data-slut="2026-11-23">
+            <td data-felt="Dato"><time datetime="2026-11-23"><span class="log__dato">23-11-26</span></time></td>
+            <td data-felt="AI">Claude (Pro)</td>
+            <th scope="row" data-felt="Formål">AI Playbook færdig, opdateret informationer + laves som pdf</th>
+            <td data-felt="Prompt">Playbook-udkast, opdaterede informationer og designfil</td>
+            <td data-felt="Genereret output">Opdateret playbook og pdf-version</td>
+            <td data-felt="Bearbejdning">Korrekturlæst, faktatjekket og tilrettet sammen</td>
+            <td data-felt="Gruppemedlem">Heidi &amp; Marcus</td>
+          </tr>
+          <tr data-personer="heidi" data-vaerktoejer="claude" data-slut="2026-11-24">
+            <td data-felt="Dato"><time datetime="2026-11-24"><span class="log__dato">24-11-26</span></time></td>
+            <td data-felt="AI">Claude (Pro)</td>
+            <th scope="row" data-felt="Formål">AI log som kodet side</th>
+            <td data-felt="Prompt">AI log fra FigJam og design fra playbooken</td>
+            <td data-felt="Genereret output">AI log som webside</td>
+            <td data-felt="Bearbejdning">Gennemlæst for fejl, tilpasset layout</td>
+            <td data-felt="Gruppemedlem">Heidi</td>
+          </tr>
+          <tr data-personer="heidi" data-vaerktoejer="claude" data-slut="2026-11-24">
+            <td data-felt="Dato"><time datetime="2026-11-24"><span class="log__dato">24-11-26</span></time></td>
+            <td data-felt="AI">Claude (Pro)</td>
+            <th scope="row" data-felt="Formål">Indexside samt opsætning på domæne – til vores digitale præsentation, som er en del af afleveringen</th>
+            <td data-felt="Prompt">Links til produktioner og ønsket struktur</td>
+            <td data-felt="Genereret output">Indexside og vejledning til opsætning på domæne</td>
+            <td data-felt="Bearbejdning">Testet links og opsat på domæne</td>
+            <td data-felt="Gruppemedlem">Heidi</td>
+          </tr>
+          <tr data-personer="heidi marcus" data-vaerktoejer="claude" data-slut="2026-11-24">
+            <td data-felt="Dato"><time datetime="2026-11-24"><span class="log__dato">24-11-26</span></time></td>
+            <td data-felt="AI">Claude (Pro)</td>
+            <th scope="row" data-felt="Formål">Paper</th>
+            <td data-felt="Prompt">Projektbeskrivelse, samlenoter, AI log og playbook</td>
+            <td data-felt="Genereret output">Disposition og feedback på afsnit</td>
+            <td data-felt="Bearbejdning">Selv skrevet tekst, brugt AI til at tjekke struktur og sammenhæng</td>
+            <td data-felt="Gruppemedlem">Heidi &amp; Marcus</td>
+          </tr>
+          <tr data-personer="marcus" data-vaerktoejer="claude" data-slut="2026-11-24">
+            <td data-felt="Dato"><time datetime="2026-11-24"><span class="log__dato">24-11-26</span></time></td>
+            <td data-felt="AI">Claude</td>
+            <th scope="row" data-felt="Formål">HTML-mockups af Facebook- og YouTube-annoncer/film</th>
+            <td data-felt="Prompt">Reel, film og karrusel fra Figma, skærmbilleder af FB og YouTube</td>
+            <td data-felt="Genereret output">Mockups til mobil og desktop</td>
+            <td data-felt="Bearbejdning">Layout rettet efter rigtige skærmbilleder, kilder dobbelttjekket</td>
+            <td data-felt="Gruppemedlem">Marcus</td>
+          </tr>
+          <tr data-personer="marcus" data-vaerktoejer="claude" data-slut="2026-11-24">
+            <td data-felt="Dato"><time datetime="2026-11-24"><span class="log__dato">24-11-26</span></time></td>
+            <td data-felt="AI">Claude</td>
+            <th scope="row" data-felt="Formål">Mikroindhold til Facebook</th>
+            <td data-felt="Prompt">Manus, billedpar, contentplan</td>
+            <td data-felt="Genereret output">2 Grethe-citater, 2 nostalgiopslag og opslagstekster</td>
+            <td data-felt="Bearbejdning">Citater kun fra manus; tekster gennemset</td>
+            <td data-felt="Gruppemedlem">Marcus</td>
+          </tr>
+          <tr data-personer="marcus" data-vaerktoejer="claude" data-slut="2026-11-24">
+            <td data-felt="Dato"><time datetime="2026-11-24"><span class="log__dato">24-11-26</span></time></td>
+            <td data-felt="AI">Claude</td>
+            <th scope="row" data-felt="Formål">Annoncetekster til Facebook og YouTube</th>
+            <td data-felt="Prompt">Film, reel, karrusel og kilder</td>
+            <td data-felt="Genereret output">Tekster til FB-video, FB-karrusel og YouTube</td>
+            <td data-felt="Bearbejdning">Kilder tjekket; rettet til tone of voice</td>
+            <td data-felt="Gruppemedlem">Marcus</td>
+          </tr>
+          <tr data-personer="marcus" data-vaerktoejer="claude" data-slut="2026-11-24">
+            <td data-felt="Dato"><time datetime="2026-11-24"><span class="log__dato">24-11-26</span></time></td>
+            <td data-felt="AI">Claude</td>
+            <th scope="row" data-felt="Formål">Tilgængelighedstjek af afleveringsfiler</th>
+            <td data-felt="Prompt">Tjek søvnguide-PDF, designguide-PDF og mockups</td>
+            <td data-felt="Genereret output">Tilgængelig PDF med tekstlag og alt-tekst; rettede mockups (kontrast, overskrifter)</td>
+            <td data-felt="Bearbejdning">Først gennemtjekket af Claude, derefter af os</td>
+            <td data-felt="Gruppemedlem">Marcus</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="log-tom" id="log-tom" hidden>Ingen opslag passer til filteret.</p>
+    </div>
+  </main>
+
+  <footer class="bund">
+    <div class="indhold">
+      <p>AI log til kampagnen »Søvnguiden – dengang og i dag« · Ringsted Dun</p>
+      <p>MMD 3. semester, gruppe 22</p>
+    </div>
+  </footer>
+
+  <script src="js/ai-log.js"></script>
+</body>
+</html>

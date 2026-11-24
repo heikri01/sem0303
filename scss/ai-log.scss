@@ -1,0 +1,219 @@
+// ==========================================================
+// AI-LOG.SCSS · hovedfil til AI log-siden (ai-log.html)
+// Live Sass Compiler laver den om til css/ai-log.css.
+// Siden henter også css/playbook.css, så sidehoved, forsidebånd,
+// kort, note, tabel og sidefod er de samme som i playbooken.
+// Her står KUN det, der er nyt for loggen: tallene, filteret og
+// tabellen, der bliver til kort på mobil.
+// ==========================================================
+
+@use 'tokens' as *;
+
+// Små etiketter med store, spærrede bogstaver (som .kort h3 i playbooken).
+// Her er de h2, fordi de er de første overskrifter under sidens h1
+.kort__etiket,
+.note__titel,
+.filter__navn {
+  margin: 0 0 0.75rem;
+  font-family: $sans;
+  font-size: $etiket;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $roed;
+}
+
+.note__titel {
+  color: $sepia;
+}
+
+// Det store tal i kortene øverst
+.log-tal {
+  margin: 0;
+  font-size: $overskrift;
+  font-weight: 300;
+  line-height: 1;
+}
+
+// ---------- Filteret ----------
+.filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem 3rem;
+  margin: 2rem 0 1.5rem;
+  padding: 1.5rem;
+  background: $hvid;
+
+  &[hidden] {
+    display: none;
+  }
+
+  &__navn {
+    color: $sepia;
+  }
+
+  &__knapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &__knap {
+    min-height: 48px;
+    padding: 0.5rem 1rem;
+    border: 2px solid $blaek;
+    border-radius: 6px;
+    background: transparent;
+    color: $blaek;
+    font-family: $sans;
+    font-size: $tekst-lille;
+    font-weight: 700;
+    cursor: pointer;
+
+    &:hover {
+      background: $linned;
+    }
+
+    &:focus-visible {
+      outline: 3px solid $roed;
+      outline-offset: 3px;
+    }
+
+    // Den valgte knap. aria-pressed sættes af ai-log.js
+    &[aria-pressed="true"] {
+      background: $blaek;
+      color: $hvid;
+    }
+  }
+
+  &__status {
+    flex-basis: 100%;
+    margin: 0;
+    color: $moerkegraa;
+    font-size: $tekst-lille;
+  }
+}
+
+// ---------- Tabellen ----------
+.log {
+  min-width: 64rem; // under det bliver kolonnerne for smalle – så scroller rammen i stedet
+
+  // Faste kolonnebredder, så tabellen passer i bredden og ikke skal scrolles
+  table-layout: fixed;
+
+  .log__kol-dato { width: 9%; }
+  .log__kol-ai { width: 9%; }
+  .log__kol-formaal { width: 16%; }
+  .log__kol-bearbejdning { width: 19%; }
+  .log__kol-gruppe { width: 13%; }
+
+  th,
+  td {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  // Lidt mindre luft mellem bogstaverne i toppen, så »Gruppemedlem« kan være der
+  thead th {
+    letter-spacing: 0.04em;
+  }
+
+  &__dato {
+    white-space: nowrap;
+  }
+
+  // Formål er rækkens overskrift (godt for skærmlæsere), men skal ligne en
+  // almindelig celle – ikke de spærrede overskrifter i toppen af tabellen
+  tbody th {
+    background: $hvid;
+    color: $blaek;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  tbody tr[hidden] {
+    display: none;
+  }
+}
+
+.log-tom {
+  padding: 1.5rem;
+  background: $hvid;
+  font-weight: 700;
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+// ---------- Mobil: hver række bliver et kort ----------
+// data-felt på hver celle bliver til en lille overskrift over teksten
+@media (max-width: 800px) {
+  .log-ramme {
+    overflow: visible;
+  }
+
+  .log {
+    min-width: 0;
+    table-layout: auto;
+    background: transparent;
+
+    thead {
+      // Skjult for øjet, men stadig læst af skærmlæsere
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+    }
+
+    tbody,
+    tr,
+    td,
+    tbody th {
+      display: block;
+    }
+
+    // Formål står først i kortet som titel (order flytter kun visningen, ikke rækkefølgen i HTML)
+    tr {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1.25rem;
+      padding: 1.25rem 1.5rem;
+      background: $hvid;
+      border-top: $roed-traad solid $roed;
+    }
+
+    colgroup {
+      display: none;
+    }
+
+    td,
+    tbody th {
+      padding: 0.5rem 0;
+      border-bottom: 0;
+    }
+
+    td::before,
+    tbody th::before {
+      content: attr(data-felt);
+      display: block;
+      font-size: $etiket;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: $sepia;
+    }
+
+    // Formålet er rækkens titel, så det står stort og uden lille overskrift
+    tbody th {
+      order: -1;
+      font-size: $tekst;
+    }
+
+    tbody th::before {
+      content: none;
+    }
+  }
+}

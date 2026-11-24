@@ -1,0 +1,178 @@
+.kort__etiket,
+.note__titel,
+.filter__navn {
+  margin: 0 0 0.75rem;
+  font-family: "Lato", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #A6192E;
+}
+
+.note__titel {
+  color: #5B4632;
+}
+
+.log-tal {
+  margin: 0;
+  font-size: 2.25rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem 3rem;
+  margin: 2rem 0 1.5rem;
+  padding: 1.5rem;
+  background: #FFFFFF;
+}
+.filter[hidden] {
+  display: none;
+}
+.filter__navn {
+  color: #5B4632;
+}
+.filter__knapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.filter__knap {
+  min-height: 48px;
+  padding: 0.5rem 1rem;
+  border: 2px solid #2B2A29;
+  border-radius: 6px;
+  background: transparent;
+  color: #2B2A29;
+  font-family: "Lato", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.filter__knap:hover {
+  background: #E7D8BE;
+}
+.filter__knap:focus-visible {
+  outline: 3px solid #A6192E;
+  outline-offset: 3px;
+}
+.filter__knap[aria-pressed=true] {
+  background: #2B2A29;
+  color: #FFFFFF;
+}
+.filter__status {
+  flex-basis: 100%;
+  margin: 0;
+  color: #4F4E4D;
+  font-size: 1rem;
+}
+
+.log {
+  min-width: 64rem;
+  table-layout: fixed;
+}
+.log .log__kol-dato {
+  width: 9%;
+}
+.log .log__kol-ai {
+  width: 9%;
+}
+.log .log__kol-formaal {
+  width: 16%;
+}
+.log .log__kol-bearbejdning {
+  width: 19%;
+}
+.log .log__kol-gruppe {
+  width: 13%;
+}
+.log th,
+.log td {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.log thead th {
+  letter-spacing: 0.04em;
+}
+.log__dato {
+  white-space: nowrap;
+}
+.log tbody th {
+  background: #FFFFFF;
+  color: #2B2A29;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.log tbody tr[hidden] {
+  display: none;
+}
+
+.log-tom {
+  padding: 1.5rem;
+  background: #FFFFFF;
+  font-weight: 700;
+}
+.log-tom[hidden] {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .log-ramme {
+    overflow: visible;
+  }
+  .log {
+    min-width: 0;
+    table-layout: auto;
+    background: transparent;
+  }
+  .log thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+  .log tbody,
+  .log tr,
+  .log td,
+  .log tbody th {
+    display: block;
+  }
+  .log tr {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.25rem;
+    padding: 1.25rem 1.5rem;
+    background: #FFFFFF;
+    border-top: 2px solid #A6192E;
+  }
+  .log colgroup {
+    display: none;
+  }
+  .log td,
+  .log tbody th {
+    padding: 0.5rem 0;
+    border-bottom: 0;
+  }
+  .log td::before,
+  .log tbody th::before {
+    content: attr(data-felt);
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #5B4632;
+  }
+  .log tbody th {
+    order: -1;
+    font-size: 1.125rem;
+  }
+  .log tbody th::before {
+    content: none;
+  }
+}

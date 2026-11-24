@@ -12,10 +12,12 @@ web/
 ├── playbook.html        AI Playbook som opslagsværk (SKELET – indhold kommer)
 ├── index.html           Tom – landingssiden kommer her
 ├── guide.html           Søvnguiden: bladremagasin på computer, mobildesign på telefon
+├── ai-log.html          AI log: Heidis og Marcus' log fra FigJam som filtrerbar tabel
 ├── scss/                Designet. Her retter du farver, skrift og layout
 │   ├── quiz.scss        Hovedfil til quizzen
 │   ├── playbook.scss    Hovedfil til AI Playbook
 │   ├── guide.scss       Hovedfil til søvnguiden
+│   ├── ai-log.scss      Hovedfil til AI log (kun det nye – resten kommer fra playbook.css)
 │   ├── _tokens.scss     Farver (palet C), skrift og mål – ét sted for hele sitet
 │   ├── _skrift.scss     Hjælpeklasser: .lato-thin … .lato-black-italic og .eb-garamond-italic
 │   ├── _mixins.scss     Genbrugte stykker: spærret skrift og fokusramme
@@ -27,12 +29,14 @@ web/
 ├── css/
 │   ├── quiz.css         Lavet automatisk ud fra scss/quiz.scss. Ret IKKE her
 │   ├── playbook.css     Lavet automatisk ud fra scss/playbook.scss. Ret IKKE her
-│   └── guide.css        Lavet automatisk ud fra scss/guide.scss. Ret IKKE her
+│   ├── guide.css        Lavet automatisk ud fra scss/guide.scss. Ret IKKE her
+│   └── ai-log.css       Lavet automatisk ud fra scss/ai-log.scss. Ret IKKE her
 ├── js/
 │   ├── spoergsmaal.js   Teksterne: udsagn, svar, fakta, Grethes replikker, resultater
 │   ├── quiz.js          Quizzens logik: hvad der sker, når man klikker
 │   ├── playbook.js      Kopiér-knapper, filter, tjekliste og aktiv menu
-│   └── guide.js         Søvnguidens visninger og bladre-funktion
+│   ├── guide.js         Søvnguidens visninger og bladre-funktion
+│   └── ai-log.js        Filteret og tallene på AI log-siden
 ├── img/guide/           ALLE billeder: de 9 billedpar (dengang-…/idag-…), fotos og logoer. Bruges af søvnguiden, quizzen og playbooken
 ├── pdf/soevnguiden.pdf  Søvnguiden som pdf (knappen "Hent guiden som pdf")
 └── .vscode/settings.json  Fortæller Live Sass Compiler, at CSS'en skal i css/ (opret selv – se nedenfor)
@@ -190,6 +194,38 @@ Indhold, der kun hører til én visning, har klassen `kun-bog` (fx bagsiden) ell
 **Bemærk:**
 - Skrifterne (Lato og EB Garamond) hentes stadig fra Google Fonts. De lægges lokalt, når designet opdateres samlet.
 - `pdf/soevnguiden.pdf` er `RD_Soevnguide_PDF.pdf` fra 24/11 med illustrationerne (7 MB). Den gamle var Marcus' `Soevnguiden_bog.pdf` fra 19/11 uden illustrationer.
+
+## AI log (ai-log.html) – 24/11
+
+Siden viser vores AI-log fra FigJam (siden »Proces & bilag & Log«: tabellerne »AI log« og »AI log (M)«) som én tabel sorteret efter dato. Den bruger playbookens design: `ai-log.html` henter både `css/playbook.css` (sidehoved, mørkt forsidebånd, kort, note, tabel, sidefod) og `css/ai-log.css` (kun tallene, filteret og mobilvisningen).
+
+| Jeg vil … | Gå ind i |
+|---|---|
+| Tilføje et opslag | `ai-log.html` – kopiér en `<tr>` i `<tbody>`, og ret teksten. Sæt den ind, så datoerne står i rækkefølge |
+| Sætte, hvem der har lavet det | `data-personer="heidi"`, `"marcus"` eller `"heidi marcus"` på `<tr>` |
+| Sætte datoen | `<time datetime="2026-11-24">` er startdatoen, `data-slut="2026-11-24"` på `<tr>` er slutdatoen (samme ved én dato). Bruges af »Ældste/Nyeste først« |
+| Sætte AI-værktøjet til filteret | `data-vaerktoejer="claude chatgpt"` på `<tr>` (små bogstaver, mellemrum imellem) |
+| Tilføje et nyt værktøj til filteret | Ny `<button class="filter__knap" data-filter="vaerktoej" data-vaerdi="navn">` i `#filter`, og samme navn i `data-vaerktoejer` |
+| Rette design | `scss/ai-log.scss` (gem → Live Sass laver `css/ai-log.css`). Fælles ting rettes i playbookens SCSS |
+| Rette kolonnebredder | `scss/ai-log.scss` – `.log__kol-…` (procent af bredden) |
+
+**Rækkefølgen** vælges med »Ældste først« (efter startdato) og »Nyeste først« (efter slutdato, så perioder står ved den dag, de sluttede). `js/ai-log.js` flytter rækkerne – HTML'en behøver ikke ændres.
+
+Tallene øverst (opslag og værktøjer) tælles af `js/ai-log.js` ud fra tabellen, så de passer af sig selv. Uden JavaScript vises hele tabellen uden filter.
+
+**Hold FigJam og siden ens:** Retter I i loggen på FigJam, så ret også `ai-log.html`.
+
+> **Nyt begreb: `<th scope="row">`**
+> Formål-cellen er rækkens overskrift. Så kan en skærmlæser sige »Lave en persona – Prompt: …« i stedet for bare at læse løse celler op.
+
+> **Nyt begreb: `attr(data-felt)`**
+> På mobil bliver hver række til et kort. CSS henter teksten fra `data-felt` på cellen og viser den som lille overskrift over indholdet med `content: attr(data-felt)`. Derfor skal hver ny celle have `data-felt`.
+
+> **Nyt begreb: `aria-pressed`**
+> Fortæller skærmlæsere, at en knap er slået til eller fra. Filterknapperne bruger det, og CSS'en farver den valgte knap mørk ud fra samme attribut.
+
+> **Nyt begreb: `&shy;`**
+> En blød bindestreg. Ordet deles kun dér, hvis der ikke er plads (bruges i »Gruppe&shy;medlem« i tabellens top).
 
 ## Prototype – det mangler før lancering
 
