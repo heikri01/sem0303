@@ -1,0 +1,377 @@
+/* Marcus' tre mockups (Interaktive_SoMe_mockups), lagt ind på content-kit.html.
+   Almindelig CSS – ikke lavet af Live Sass. Hver mockup har sin egen klasse
+   (.mockup-yt, .mockup-fb, .mockup-ka), så reglerne ikke rammer resten af siden. */
+
+/* ---------- Facebook_Annonce_video_mockup ---------- */
+.mockup-fb{--bg:#F0F2F5;--card:#fff;--txt:#050505;--sub:#65676B;--line:#CED0D4;--btn:#E4E6EB;--blue:#1877F2;--page:#F7F3EC;--media:#2B2630}
+.mockup-fb *{box-sizing:border-box}
+.mockup-fb{margin:0;background:var(--page);font-family:"Segoe UI Historic","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;color:var(--txt)}
+.mockup-fb svg{display:block}
+.mockup-fb .wrap{max-width:1500px;margin:0 auto;padding:32px 16px 64px}
+.mockup-fb .h1{font-size:22px;margin:0 0 4px}
+.mockup-fb .note{color:var(--sub);font-size:14px;margin:0 0 20px;max-width:900px}
+.mockup-fb .switch{display:flex;gap:8px;margin-bottom:24px}
+.mockup-fb .switch button{font:inherit;font-weight:600;border:0;border-radius:6px;padding:8px 16px;background:var(--btn);cursor:pointer}
+.mockup-fb .switch button[aria-pressed=true]{background:var(--txt);color:#fff}
+.mockup-fb .stage{display:flex;gap:48px;align-items:flex-start;flex-wrap:wrap}
+.mockup-fb .label{font-size:13px;font-weight:600;color:var(--sub);text-transform:uppercase;letter-spacing:.06em;margin:0 0 10px}
+.mockup-fb .logo{width:40px;height:40px;border-radius:50%;background:var(--blue);flex:none;position:relative;overflow:hidden}
+.mockup-fb .logo:after{content:"f";position:absolute;left:12px;bottom:-9px;color:#fff;font:700 40px/1 Arial,Helvetica,sans-serif}
+.mockup-fb .circ{width:40px;height:40px;border-radius:50%;background:var(--btn);display:grid;place-items:center;flex:none;position:relative}
+.mockup-fb .circ svg{width:20px;height:20px;fill:var(--txt)}
+.mockup-fb .badge{position:absolute;top:-6px;right:-8px;background:#E41E3F;color:#fff;font:700 12px/1 system-ui;border-radius:10px;padding:3px 5px}
+.mockup-fb .me{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#d9c4b0,#a98d78);flex:none}
+.mockup-fb .phone{width:390px;max-width:100%;background:#fff;border-radius:40px;overflow:hidden;border:10px solid #1c1c1e;box-shadow:0 20px 50px rgba(0,0,0,.18)}
+.mockup-fb .phone .status{display:flex;justify-content:space-between;padding:12px 24px 4px;font-weight:600;font-size:15px}
+.mockup-fb .phone .topbar{display:flex;align-items:center;gap:8px;padding:6px 12px 10px;border-bottom:1px solid #e4e6eb}
+.mockup-fb .phone .topbar .sp{flex:1}
+.mockup-fb .phone .feed{background:var(--bg);padding-bottom:16px}
+.mockup-fb .phone .post .vid{aspect-ratio:3/4}
+.mockup-fb .phone .post .vid video{width:100%;height:100%;object-fit:cover}
+.mockup-fb .desk{width:1440px;max-width:100%;background:var(--bg);border-radius:10px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.14)}
+.mockup-fb .desk .top{height:56px;background:#fff;display:flex;align-items:center;padding:0 16px;gap:8px;box-shadow:0 1px 2px rgba(0,0,0,.1);position:relative;z-index:1}
+.mockup-fb .desk .search{background:var(--bg);border-radius:20px;height:40px;padding:0 14px;display:flex;align-items:center;gap:8px;color:var(--sub);width:240px;font-size:15px}
+.mockup-fb .desk .search svg{width:16px;fill:var(--sub)}
+.mockup-fb .desk .tabs{position:absolute;left:50%;transform:translateX(-50%);display:flex;height:56px}
+.mockup-fb .desk .tabs span{width:112px;display:grid;place-items:center;border-bottom:3px solid transparent}
+.mockup-fb .desk .tabs span svg{width:26px;height:26px;fill:var(--sub)}
+.mockup-fb .desk .tabs span.on{border-color:var(--blue)}
+.mockup-fb .desk .tabs span.on svg{fill:var(--blue)}
+.mockup-fb .desk .rt{margin-left:auto;display:flex;gap:8px;align-items:center}
+.mockup-fb .desk .cols{display:grid;grid-template-columns:280px 1fr 280px;gap:16px;padding:16px 16px 40px}
+.mockup-fb .nav{display:flex;flex-direction:column;gap:4px;font-size:15px;font-weight:500}
+.mockup-fb .nav div{display:flex;align-items:center;gap:12px;padding:8px}
+.mockup-fb .nav i{width:36px;height:36px;border-radius:50%;flex:none;display:block}
+.mockup-fb .nav hr{border:0;border-top:1px solid var(--line);margin:8px}
+.mockup-fb .nav .h2{margin:4px 8px;color:var(--sub);font-size:17px;font-weight:600}
+.mockup-fb .desk .center{display:flex;justify-content:center}
+.mockup-fb .desk .post{width:680px;border-radius:8px}
+.mockup-fb .desk .post .vid{display:block}
+.mockup-fb .desk .post .vid video{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.mockup-fb .rc .h2{margin:0 0 12px;color:var(--sub);font-size:17px;font-weight:600}
+.mockup-fb .rc .req{display:flex;gap:12px}
+.mockup-fb .rc .req .ph{width:60px;height:60px;border-radius:50%;background:#bfb5a8}
+.mockup-fb .rc .bt{display:flex;gap:8px;margin-top:8px}
+.mockup-fb .rc .bt span{flex:1;text-align:center;border-radius:6px;padding:8px;font-weight:600;font-size:15px;background:var(--btn)}
+.mockup-fb .rc .bt span.p{background:#1464D2;color:#fff}
+.mockup-fb .rc hr{border:0;border-top:1px solid var(--line);margin:16px 0}
+.mockup-fb .rc p{margin:0;font-size:15px}
+.mockup-fb .post{background:var(--card);width:100%}
+.mockup-fb .hd{display:flex;align-items:center;gap:8px;padding:12px 16px 8px}
+.mockup-fb .av{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#F4EFE6 url(../mockups/logo.png) center/cover;flex:none}
+.mockup-fb .nm{flex:1;line-height:1.3}
+.mockup-fb .nm b{font-size:15px;display:block;font-weight:600}
+.mockup-fb .nm small{font-size:13px;color:var(--sub)}
+.mockup-fb .hd .ic{display:flex;gap:18px;align-items:center}
+.mockup-fb .hd .ic svg{width:20px;height:20px;fill:var(--sub)}
+.mockup-fb .txt{padding:0 16px 12px;font-size:15px;line-height:1.35}
+.mockup-fb .txt p{margin:0 0 8px}
+.mockup-fb .vid{position:relative;background:var(--media)}
+.mockup-fb .vid video{display:block;cursor:pointer}
+.mockup-fb .sound{position:absolute;right:10px;bottom:10px;background:rgba(0,0,0,.55);color:#fff;border:0;border-radius:16px;padding:6px 10px;font:600 12px system-ui;cursor:pointer}
+.mockup-fb .cta{display:flex;align-items:center;gap:12px;background:var(--bg);padding:10px 16px}
+.mockup-fb .cta div{flex:1;line-height:1.3;min-width:0}
+.mockup-fb .cta small{color:var(--sub);font-size:12px;display:block}
+.mockup-fb .cta b{font-size:15px;font-weight:600}
+.mockup-fb .cta a{background:var(--btn);color:var(--txt);text-decoration:none;font-weight:600;font-size:15px;border-radius:6px;padding:8px 14px;white-space:nowrap}
+.mockup-fb .bar{display:flex;align-items:center;padding:10px 16px;color:var(--sub);font-size:14px}
+.mockup-fb .bar .a{display:flex;gap:22px}
+.mockup-fb .bar .a span{display:flex;align-items:center;gap:6px}
+.mockup-fb .bar svg{width:20px;height:20px;fill:none;stroke:var(--sub);stroke-width:1.8}
+.mockup-fb .bar .r{margin-left:auto;display:flex}
+.mockup-fb .bar .r i{width:18px;height:18px;border-radius:50%;border:2px solid #fff;display:grid;place-items:center;font-style:normal;font-size:10px;color:#fff}
+.mockup-fb .more{padding:0 16px 12px;color:var(--sub);font-size:15px;font-weight:600}
+.mockup-fb .mock{font-size:12px;color:var(--sub);margin-top:12px}
+.mockup-fb [hidden]{display:none!important}
+@media (max-width:700px){
+.mockup-fb .phone{border-width:6px;border-radius:28px}
+}
+.mockup-fb{font-family:"Segoe UI Historic","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;background:transparent;color:var(--txt)}
+.mockup-fb .desk .cols{grid-template-columns:220px minmax(0,1fr)}
+.mockup-fb .desk .rc{display:none}
+.mockup-fb .desk .post{max-width:100%}
+@media (max-width:1200px){.mockup-fb .desk .cols{grid-template-columns:minmax(0,1fr)}.mockup-fb .desk .nav,.mockup-fb .desk .rc{display:none}}
+
+/* ---------- Facebook_Karrusel_mockup ---------- */
+.mockup-ka{--bg:#F0F2F5;--card:#fff;--txt:#050505;--sub:#65676B;--line:#CED0D4;--btn:#E4E6EB;--blue:#1877F2;--page:#F7F3EC;--media:#2B2630}
+.mockup-ka *{box-sizing:border-box}
+.mockup-ka{margin:0;background:var(--page);font-family:"Segoe UI Historic","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;color:var(--txt)}
+.mockup-ka svg{display:block}
+.mockup-ka .wrap{max-width:1500px;margin:0 auto;padding:32px 16px 64px}
+.mockup-ka .h1{font-size:22px;margin:0 0 4px}
+.mockup-ka .note{color:var(--sub);font-size:14px;margin:0 0 20px;max-width:900px}
+.mockup-ka .switch{display:flex;gap:8px;margin-bottom:24px}
+.mockup-ka .switch button{font:inherit;font-weight:600;border:0;border-radius:6px;padding:8px 16px;background:var(--btn);cursor:pointer}
+.mockup-ka .switch button[aria-pressed=true]{background:var(--txt);color:#fff}
+.mockup-ka .stage{display:flex;gap:48px;align-items:flex-start;flex-wrap:wrap}
+.mockup-ka .label{font-size:13px;font-weight:600;color:var(--sub);text-transform:uppercase;letter-spacing:.06em;margin:0 0 10px}
+.mockup-ka .logo{width:40px;height:40px;border-radius:50%;background:var(--blue);flex:none;position:relative;overflow:hidden}
+.mockup-ka .logo:after{content:"f";position:absolute;left:12px;bottom:-9px;color:#fff;font:700 40px/1 Arial,Helvetica,sans-serif}
+.mockup-ka .circ{width:40px;height:40px;border-radius:50%;background:var(--btn);display:grid;place-items:center;flex:none;position:relative}
+.mockup-ka .circ svg{width:20px;height:20px;fill:var(--txt)}
+.mockup-ka .badge{position:absolute;top:-6px;right:-8px;background:#E41E3F;color:#fff;font:700 12px/1 system-ui;border-radius:10px;padding:3px 5px}
+.mockup-ka .me{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#d9c4b0,#a98d78);flex:none}
+.mockup-ka .phone{width:390px;max-width:100%;background:#fff;border-radius:40px;overflow:hidden;border:10px solid #1c1c1e;box-shadow:0 20px 50px rgba(0,0,0,.18)}
+.mockup-ka .phone .status{display:flex;justify-content:space-between;padding:12px 24px 4px;font-weight:600;font-size:15px}
+.mockup-ka .phone .topbar{display:flex;align-items:center;gap:8px;padding:6px 12px 10px;border-bottom:1px solid #e4e6eb}
+.mockup-ka .phone .topbar .sp{flex:1}
+.mockup-ka .phone .feed{background:var(--bg);padding-bottom:16px}
+.mockup-ka .phone .post .vid{aspect-ratio:3/4}
+.mockup-ka .phone .post .vid video{width:100%;height:100%;object-fit:cover}
+.mockup-ka .desk{width:1440px;max-width:100%;background:var(--bg);border-radius:10px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.14)}
+.mockup-ka .desk .top{height:56px;background:#fff;display:flex;align-items:center;padding:0 16px;gap:8px;box-shadow:0 1px 2px rgba(0,0,0,.1);position:relative;z-index:1}
+.mockup-ka .desk .search{background:var(--bg);border-radius:20px;height:40px;padding:0 14px;display:flex;align-items:center;gap:8px;color:var(--sub);width:240px;font-size:15px}
+.mockup-ka .desk .search svg{width:16px;fill:var(--sub)}
+.mockup-ka .desk .tabs{position:absolute;left:50%;transform:translateX(-50%);display:flex;height:56px}
+.mockup-ka .desk .tabs span{width:112px;display:grid;place-items:center;border-bottom:3px solid transparent}
+.mockup-ka .desk .tabs span svg{width:26px;height:26px;fill:var(--sub)}
+.mockup-ka .desk .tabs span.on{border-color:var(--blue)}
+.mockup-ka .desk .tabs span.on svg{fill:var(--blue)}
+.mockup-ka .desk .rt{margin-left:auto;display:flex;gap:8px;align-items:center}
+.mockup-ka .desk .cols{display:grid;grid-template-columns:280px 1fr 280px;gap:16px;padding:16px 16px 40px}
+.mockup-ka .nav{display:flex;flex-direction:column;gap:4px;font-size:15px;font-weight:500}
+.mockup-ka .nav div{display:flex;align-items:center;gap:12px;padding:8px}
+.mockup-ka .nav i{width:36px;height:36px;border-radius:50%;flex:none;display:block}
+.mockup-ka .nav hr{border:0;border-top:1px solid var(--line);margin:8px}
+.mockup-ka .nav .h2{margin:4px 8px;color:var(--sub);font-size:17px;font-weight:600}
+.mockup-ka .desk .center{display:flex;justify-content:center}
+.mockup-ka .desk .post{width:600px;border-radius:8px}
+.mockup-ka .desk .post .vid{height:560px;display:flex;justify-content:center}
+.mockup-ka .desk .post .vid video{height:100%;width:auto;aspect-ratio:3/4}
+.mockup-ka .rc .h2{margin:0 0 12px;color:var(--sub);font-size:17px;font-weight:600}
+.mockup-ka .rc .req{display:flex;gap:12px}
+.mockup-ka .rc .req .ph{width:60px;height:60px;border-radius:50%;background:#bfb5a8}
+.mockup-ka .rc .bt{display:flex;gap:8px;margin-top:8px}
+.mockup-ka .rc .bt span{flex:1;text-align:center;border-radius:6px;padding:8px;font-weight:600;font-size:15px;background:var(--btn)}
+.mockup-ka .rc .bt span.p{background:#1464D2;color:#fff}
+.mockup-ka .rc hr{border:0;border-top:1px solid var(--line);margin:16px 0}
+.mockup-ka .rc p{margin:0;font-size:15px}
+.mockup-ka .post{background:var(--card);width:100%}
+.mockup-ka .hd{display:flex;align-items:center;gap:8px;padding:12px 16px 8px}
+.mockup-ka .av{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#F4EFE6 url(../mockups/logo.png) center/cover;flex:none}
+.mockup-ka .nm{flex:1;line-height:1.3}
+.mockup-ka .nm b{font-size:15px;display:block;font-weight:600}
+.mockup-ka .nm small{font-size:13px;color:var(--sub)}
+.mockup-ka .hd .ic{display:flex;gap:18px;align-items:center}
+.mockup-ka .hd .ic svg{width:20px;height:20px;fill:var(--sub)}
+.mockup-ka .txt{padding:0 16px 12px;font-size:15px;line-height:1.35}
+.mockup-ka .txt p{margin:0 0 8px}
+.mockup-ka .vid{position:relative;background:var(--media)}
+.mockup-ka .vid video{display:block;cursor:pointer}
+.mockup-ka .sound{position:absolute;right:10px;bottom:10px;background:rgba(0,0,0,.55);color:#fff;border:0;border-radius:16px;padding:6px 10px;font:600 12px system-ui;cursor:pointer}
+.mockup-ka .cta{display:flex;align-items:center;gap:12px;background:var(--bg);padding:10px 16px}
+.mockup-ka .cta div{flex:1;line-height:1.3;min-width:0}
+.mockup-ka .cta small{color:var(--sub);font-size:12px;display:block}
+.mockup-ka .cta b{font-size:15px;font-weight:600}
+.mockup-ka .cta a{background:var(--btn);color:var(--txt);text-decoration:none;font-weight:600;font-size:15px;border-radius:6px;padding:8px 14px;white-space:nowrap}
+.mockup-ka .bar{display:flex;align-items:center;padding:10px 16px;color:var(--sub);font-size:14px}
+.mockup-ka .bar .a{display:flex;gap:22px}
+.mockup-ka .bar .a span{display:flex;align-items:center;gap:6px}
+.mockup-ka .bar svg{width:20px;height:20px;fill:none;stroke:var(--sub);stroke-width:1.8}
+.mockup-ka .bar .r{margin-left:auto;display:flex}
+.mockup-ka .bar .r i{width:18px;height:18px;border-radius:50%;border:2px solid #fff;display:grid;place-items:center;font-style:normal;font-size:10px;color:#fff}
+.mockup-ka .more{padding:0 16px 12px;color:var(--sub);font-size:15px;font-weight:600}
+.mockup-ka .mock{font-size:12px;color:var(--sub);margin-top:12px}
+.mockup-ka .car{position:relative;background:var(--media);user-select:none}
+.mockup-ka .track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;cursor:grab}
+.mockup-ka .track::-webkit-scrollbar{display:none}
+.mockup-ka .track.drag{cursor:grabbing;scroll-snap-type:none}
+.mockup-ka .track img{flex:0 0 100%;width:100%;aspect-ratio:4/5;object-fit:cover;scroll-snap-align:start;display:block;-webkit-user-drag:none;pointer-events:none}
+.mockup-ka .cnt{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.6);color:#fff;font:600 12px system-ui;border-radius:12px;padding:4px 9px}
+.mockup-ka .arr{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.92);box-shadow:0 1px 4px rgba(0,0,0,.3);cursor:pointer;display:grid;place-items:center}
+.mockup-ka .arr svg{width:18px;height:18px;fill:var(--txt)}
+.mockup-ka .arr.l{left:10px}
+.mockup-ka .arr.r{right:10px}
+.mockup-ka .arr:disabled{display:none}
+.mockup-ka .dots{display:flex;justify-content:center;gap:5px;padding:10px 0 2px}
+.mockup-ka .dots i{width:6px;height:6px;border-radius:50%;background:var(--line)}
+.mockup-ka .dots i.on{background:var(--blue)}
+.mockup-ka .txt a{color:#385898;text-decoration:none;font-weight:600}
+.mockup-ka .txt a:hover{text-decoration:underline}
+.mockup-ka .txt .tags a{font-weight:400}
+.mockup-ka .txt .src{font-size:14px}
+.mockup-ka .txt .src li{margin-bottom:6px}
+.mockup-ka .txt ul{margin:0 0 8px;padding-left:18px}
+.mockup-ka .seemore{background:none;border:0;padding:0;font:inherit;font-weight:600;color:var(--sub);cursor:pointer}
+.mockup-ka .ai{color:var(--sub);font-size:13px}
+.mockup-ka .phone .post .arr{display:none}
+.mockup-ka [hidden]{display:none!important}
+@media (max-width:700px){
+.mockup-ka .phone{border-width:6px;border-radius:28px}
+}
+.mockup-ka{font-family:"Segoe UI Historic","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;background:transparent;color:var(--txt)}
+.mockup-ka .desk .cols{grid-template-columns:220px minmax(0,1fr)}
+.mockup-ka .desk .rc{display:none}
+.mockup-ka .desk .post{max-width:100%}
+@media (max-width:1200px){.mockup-ka .desk .cols{grid-template-columns:minmax(0,1fr)}.mockup-ka .desk .nav,.mockup-ka .desk .rc{display:none}}
+
+/* ---------- YouTube_mockup ---------- */
+.mockup-yt *{box-sizing:border-box}
+.mockup-yt{margin:0;background:#0f0f0f;color:#f1f1f1;font-family:Roboto,"Segoe UI",Arial,sans-serif}
+.mockup-yt svg{display:block}
+.mockup-yt a{color:#3ea6ff;text-decoration:none}
+.mockup-yt .switch{position:fixed;right:16px;bottom:16px;z-index:50;display:flex;gap:6px;background:rgba(40,40,40,.92);padding:6px;border-radius:10px}
+.mockup-yt .switch button{font:600 14px Roboto,Arial,sans-serif;border:0;border-radius:6px;padding:8px 14px;background:#3a3a3a;color:#fff;cursor:pointer}
+.mockup-yt .switch button[aria-pressed=true]{background:#f1f1f1;color:#0f0f0f}
+.mockup-yt .mk{color:#a0a0a0;font-size:12px;padding:0 24px 24px}
+.mockup-yt [hidden]{display:none!important}
+.mockup-yt .yt{display:flex;align-items:center;gap:4px}
+.mockup-yt .yt .p{width:40px;height:28px;background:#ff0033;border-radius:7px;position:relative;flex:none}
+.mockup-yt .yt .p:after{content:"";position:absolute;left:15px;top:7px;border-left:12px solid #fff;border-top:7px solid transparent;border-bottom:7px solid transparent}
+.mockup-yt .yt b{font-size:21px;letter-spacing:-1px;font-weight:700}
+.mockup-yt .yt sup{font-size:10px;color:#aaa;margin-left:2px;align-self:flex-start;margin-top:4px}
+.mockup-yt #yt-desktop .top{height:64px;display:flex;align-items:center;padding:0 20px;gap:18px;position:relative}
+.mockup-yt .burger{width:24px;display:flex;flex-direction:column;gap:5px}
+.mockup-yt .burger i{height:2px;background:#fff;display:block}
+.mockup-yt #yt-desktop .search{position:absolute;left:50%;transform:translateX(-50%);display:flex;align-items:center}
+.mockup-yt #yt-desktop .search .in{width:min(560px,40vw);height:40px;border:1px solid #303030;border-radius:20px 0 0 20px;background:#121212;padding:0 16px;display:flex;align-items:center;color:#888;font-size:16px}
+.mockup-yt #yt-desktop .search .bt{width:64px;height:40px;border:1px solid #303030;border-left:0;border-radius:0 20px 20px 0;background:#222;display:grid;place-items:center}
+.mockup-yt .mic{width:40px;height:40px;border-radius:50%;background:#222;margin-left:12px;display:grid;place-items:center}
+.mockup-yt #yt-desktop .right{margin-left:auto;display:flex;align-items:center;gap:20px}
+.mockup-yt .opret{background:#272727;border-radius:20px;padding:9px 16px;font-weight:600;font-size:15px}
+.mockup-yt .me{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#9b8b6f,#3e3a2f);flex:none}
+.mockup-yt .theater{background:#000;display:flex;justify-content:center;position:relative}
+.mockup-yt .theater:before, .mockup-yt .theater:after{content:"";position:absolute;top:0;bottom:0;width:20%;background:linear-gradient(90deg,#0a0d14,#000)}
+.mockup-yt .theater:before{left:0}
+.mockup-yt .theater:after{right:0;transform:scaleX(-1)}
+.mockup-yt .theater video{position:relative;z-index:1;display:block;height:min(56.25vw,calc(100vh - 170px));aspect-ratio:16/9;max-width:100%;background:#000}
+.mockup-yt .main{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:24px;padding:20px 24px 24px}
+.mockup-yt .h1{font-size:20px;margin:0 0 12px;font-weight:700;line-height:1.3}
+.mockup-yt .ch{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.mockup-yt .av{width:40px;height:40px;border-radius:50%;background:#F4EFE6 url(../mockups/logo.png) center/cover;flex:none}
+.mockup-yt .cn b{font-size:16px;display:block}
+.mockup-yt .cn small{color:#aaa;font-size:12px}
+.mockup-yt .sub{background:#f1f1f1;color:#0f0f0f;border-radius:18px;padding:9px 16px;font-weight:600;font-size:14px;margin-left:12px;cursor:pointer;border:0}
+.mockup-yt .sub.on{background:#272727;color:#f1f1f1}
+.mockup-yt .acts{margin-left:auto;display:flex;gap:8px}
+.mockup-yt .pill{background:#272727;border-radius:18px;height:36px;padding:0 14px;display:flex;align-items:center;gap:8px;font-weight:600;font-size:14px;white-space:nowrap}
+.mockup-yt .pill svg{width:20px;height:20px;fill:#f1f1f1}
+.mockup-yt .pill .sep{width:1px;height:22px;background:#555}
+.mockup-yt .pill.c{width:36px;padding:0;justify-content:center}
+.mockup-yt .desc{background:#272727;border-radius:12px;padding:12px 14px;margin-top:14px;font-size:14px;line-height:1.55}
+.mockup-yt .desc .m{font-weight:600}
+.mockup-yt .desc .ai{color:#aaa}
+.mockup-yt .chips{display:flex;gap:10px;margin-bottom:12px}
+.mockup-yt .chips span{background:#272727;border-radius:8px;padding:7px 12px;font-weight:600;font-size:14px}
+.mockup-yt .chips span.on{background:#f1f1f1;color:#0f0f0f}
+.mockup-yt .rec{display:flex;gap:8px;margin-bottom:10px}
+.mockup-yt .th{border-radius:8px;background-size:cover;background-position:center;position:relative;flex:none}
+.mockup-yt .rec .th{width:168px;height:94px}
+.mockup-yt .th span{position:absolute;right:4px;bottom:4px;background:rgba(0,0,0,.8);font-size:12px;font-weight:600;padding:1px 4px;border-radius:4px}
+.mockup-yt .rec b{font-size:14px;line-height:1.3;display:block;margin-bottom:4px}
+.mockup-yt .rec small{color:#aaa;font-size:12px;line-height:1.5}
+.mockup-yt .cm{margin-top:22px}
+.mockup-yt .cm .h2{font-size:18px;margin:0 0 16px}
+.mockup-yt .c1{display:flex;gap:12px;margin-bottom:16px;font-size:14px;line-height:1.45}
+.mockup-yt .c1 .u{width:40px;height:40px;border-radius:50%;flex:none}
+.mockup-yt .c1 small{color:#aaa}
+.mockup-yt #yt-mobil{padding:24px 16px 80px;display:flex;justify-content:center;background:#1b1b1b;min-height:100vh}
+.mockup-yt .phone{width:390px;max-width:100%;background:#0f0f0f;border-radius:40px;overflow:hidden;border:10px solid #2c2c2e;box-shadow:0 20px 50px rgba(0,0,0,.5);align-self:flex-start}
+.mockup-yt .phone .status{display:flex;justify-content:space-between;padding:10px 24px 6px;font-weight:600;font-size:14px}
+.mockup-yt .phone video{display:block;width:100%;aspect-ratio:16/9;background:#000}
+.mockup-yt .mb{padding:12px}
+.mockup-yt .mb .h2{font-size:18px;line-height:1.3;margin:0 0 6px;font-weight:700}
+.mockup-yt .mb .meta{color:#aaa;font-size:12px;margin-bottom:12px}
+.mockup-yt .mb .meta b{color:#f1f1f1;font-weight:600}
+.mockup-yt .mb .ch{flex-wrap:nowrap}
+.mockup-yt .mb .ch .sub{margin-left:auto}
+.mockup-yt .mb .cn{display:flex;align-items:baseline;gap:6px}
+.mockup-yt .mb .cn b{font-size:15px;display:inline}
+.mockup-yt .scroller{display:flex;gap:8px;overflow-x:auto;margin:12px -12px 0;padding:0 12px 4px;scrollbar-width:none}
+.mockup-yt .scroller::-webkit-scrollbar{display:none}
+.mockup-yt .mb .cmt{background:#272727;border-radius:12px;padding:10px 12px;margin-top:12px;font-size:13px}
+.mockup-yt .mb .cmt b{font-size:14px}
+.mockup-yt .mb .cmt p{margin:6px 0 0;display:flex;gap:8px;align-items:center}
+.mockup-yt .mb .cmt i{width:24px;height:24px;border-radius:50%;flex:none;background:#8a7b6a}
+.mockup-yt .mrec{margin-top:16px}
+.mockup-yt .mrec .th{width:100%;aspect-ratio:16/9;border-radius:0}
+.mockup-yt .mrec .r{display:flex;gap:10px;padding:10px 12px 18px}
+.mockup-yt .mrec .r .av{width:36px;height:36px}
+.mockup-yt .mrec b{font-size:14px;display:block;line-height:1.3}
+.mockup-yt .mrec small{color:#aaa;font-size:12px}
+.mockup-yt .mnav{display:flex;justify-content:space-around;border-top:1px solid #272727;padding:8px 0 14px;font-size:10px;color:#f1f1f1;text-align:center}
+.mockup-yt .mnav div{display:flex;flex-direction:column;align-items:center;gap:3px}
+.mockup-yt .mnav svg{width:22px;height:22px;fill:#f1f1f1}
+@media (max-width:1100px){
+.mockup-yt .main{grid-template-columns:1fr}
+.mockup-yt .acts{margin-left:0}
+}
+.mockup-yt .switch{position:static;width:max-content;margin:0 0 12px}
+.mockup-yt{border-radius:8px;overflow:hidden}
+#yt-mobil{min-height:0}
+.mockup-yt .theater video{height:auto;width:100%;max-width:960px}
+
+/* ---------- Fælles: så sidens egne regler ikke ændrer mockupperne ---------- */
+/* Siden har større skrift og linjeafstand end Facebook og YouTube */
+.mockup-yt, .mockup-fb, .mockup-ka { font-size: 16px; line-height: normal; }
+/* .top bruges også i sidens eget design (med en streg under) */
+.mockup-yt .top, .mockup-fb .top, .mockup-ka .top { border-bottom: 0; }
+/* Telefonen må ikke blive bredere end skærmen på en mobil */
+.mockup-fb .stage > section, .mockup-ka .stage > section { min-width: 0; max-width: 100%; }
+.mockup-yt .phone { max-width: 100%; }
+
+/* ---------- Rammen OMKRING mockupperne følger designguiden ----------
+   Knapperne, etiketterne og forklaringen er en del af vores side – ikke af
+   Facebook eller YouTube – så de står i Lato og sidens farver (som filteret
+   på AI log-siden). Selve Facebook- og YouTube-fladerne beholder deres eget udseende. */
+.mockup-yt .switch, .mockup-fb .switch, .mockup-ka .switch {
+  position: static; display: flex; flex-wrap: wrap; gap: 0.5rem;
+  width: auto; margin: 0 0 1.25rem; padding: 0; background: none; border-radius: 0;
+}
+.mockup-yt .switch button, .mockup-fb .switch button, .mockup-ka .switch button {
+  min-height: 48px; padding: 0.5rem 1rem;
+  border: 2px solid #2B2A29; border-radius: 6px;
+  background: transparent; color: #2B2A29;
+  font-family: "Lato", sans-serif; font-size: 1rem; font-weight: 700;
+  cursor: pointer;
+}
+.mockup-yt .switch button:hover, .mockup-fb .switch button:hover, .mockup-ka .switch button:hover { background: #E7D8BE; }
+.mockup-yt .switch button:focus-visible, .mockup-fb .switch button:focus-visible, .mockup-ka .switch button:focus-visible { outline: 3px solid #A6192E; outline-offset: 3px; }
+.mockup-yt .switch button[aria-pressed=true], .mockup-fb .switch button[aria-pressed=true], .mockup-ka .switch button[aria-pressed=true] { background: #2B2A29; color: #FFFFFF; }
+
+/* »MOBIL« / »DESKTOP« over hver visning: etiket som i resten af sitet */
+.mockup-fb .label, .mockup-ka .label {
+  margin: 0 0 0.75rem;
+  font-family: "Lato", sans-serif; font-size: 1rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase; color: #5B4632;
+}
+
+/* Forklaringen under mockuppen */
+.mockup-fb .mock, .mockup-ka .mock, .mockup-yt .mk {
+  margin-top: 1rem; padding: 0;
+  font-family: "Lato", sans-serif; font-size: 1rem; color: #4F4E4D;
+}
+
+/* YouTube: den mørke flade er kun selve YouTube-siden – knapperne står på sidens baggrund */
+.mockup-yt { background: transparent; color: #2B2A29; border-radius: 0; overflow: visible; font-family: "Lato", sans-serif; }
+#yt-desktop { background: #0f0f0f; color: #f1f1f1; border-radius: 8px; overflow: hidden; font-family: Roboto, "Segoe UI", Arial, sans-serif; }
+#yt-mobil { background: transparent; padding: 0; justify-content: flex-start; font-family: Roboto, "Segoe UI", Arial, sans-serif; color: #f1f1f1; }
+
+/* Facebook-desktop viser reelen i 3:4 (den lange film er kun til YouTube) */
+.mockup-fb .desk .post .vid { height: 560px; display: flex; justify-content: center; }
+.mockup-fb .desk .post .vid video { height: 100%; width: auto; aspect-ratio: 3/4; }
+
+/* Statuslinjen i telefonerne: signal, wifi og batteri som ikoner */
+.status__ikoner { display: flex; align-items: center; gap: 5px; }
+.status__ikoner svg { height: 12px; width: auto; fill: currentColor; }
+
+/* ---------- YouTube på mobil: lyst tema med appens top og logo ---------- */
+#yt-mobil .phone { background: #fff; color: #0f0f0f; border-color: #1c1c1e; box-shadow: 0 20px 50px rgba(0,0,0,.18); }
+#yt-mobil .status { color: #0f0f0f; }
+.yt-topbar { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px 10px; }
+.mockup-yt .yt-topbar .yt b { color: #0f0f0f; font-size: 20px; }
+.yt-topbar__ikoner { display: flex; gap: 20px; }
+.yt-topbar__ikoner svg { width: 24px; height: 24px; fill: #0f0f0f; }
+#yt-mobil .mb .meta, #yt-mobil .cn small, #yt-mobil .mrec small { color: #606060; }
+#yt-mobil .mb .meta b { color: #0f0f0f; }
+#yt-mobil .pill, #yt-mobil .mb .cmt { background: #f2f2f2; color: #0f0f0f; }
+#yt-mobil .pill svg { fill: #0f0f0f; }
+#yt-mobil .pill .sep { background: #ccc; }
+#yt-mobil .sub { background: #0f0f0f; color: #fff; }
+#yt-mobil .sub.on { background: #f2f2f2; color: #0f0f0f; }
+#yt-mobil .th span { color: #fff; }
+#yt-mobil .mnav { border-top-color: #e5e5e5; color: #0f0f0f; }
+#yt-mobil .mnav svg { fill: #0f0f0f; }
+
+/* Mellemrum før de fire mikroopslag */
+.produktion__fuld .mikro__titel { margin-top: 2.5rem; }

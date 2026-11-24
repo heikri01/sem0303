@@ -246,6 +246,27 @@ Siderne henter `css/playbook.css` (sidehoved, forsidebånd, kort, note, tabel, s
 
 > **Bemærk:** `css/praesentation.css` er lavet af Claude uden Live Sass. Gem `scss/praesentation.scss` én gang med Watch Sass slået til, så laver Live Sass den på ny.
 
+## Content kit og mockupperne – 24/11
+
+**Alt skal ligge inde i `web`.** Live Server viser kun filer i `web`-mappen, så links med `../` virker ikke. Derfor er det, content kit-siden bruger, kopieret herind:
+
+| Mappe | Indhold |
+|---|---|
+| `mockups/` | Film (`film.mp4`), reel (`reel.mp4`), plakater, karrusel-slides (`slide1–6.jpg`), YouTube-miniaturer og logo |
+| `img/content-kit/` | Karrusellens forside B, de fire mikroopslag og nyhedsbrevet – gemt som jpg, så de fylder mindre |
+| `docs/` | Annonce- og opslagstekster (kopier fra mappen `content kit`) |
+| `pdf/designguide.pdf` | Kopi af `RD_Designguide.pdf` |
+
+Retter I en fil i `content kit` eller `Interaktive_SoMe_mockups`, så kopiér den herind igen.
+
+**Marcus' mockups** (YouTube, Facebook-video og karrusel) er bygget ind i `content-kit.html` – ikke vist i en ramme. Markup'en står direkte på siden, designet i `css/mockups.css` (almindelig CSS, ikke Sass) og knapperne, videoerne og karrusellen i `js/mockups.js`. Hver mockup har sin egen klasse (`.mockup-yt`, `.mockup-fb`, `.mockup-ka`), så reglerne ikke rammer resten af siden. Facebook-mockupperne åbner i mobilvisning, YouTube i desktopvisning.
+
+| Jeg vil … | Gå ind i |
+|---|---|
+| Rette opslagsteksten i en Facebook-mockup | `content-kit.html` – `<template id="fb-post">` eller `<template id="ka-post">` |
+| Rette YouTube-titel, beskrivelse eller kommentarer | `content-kit.html` – inde i `<div class="mockup-yt">` |
+| Skifte en video eller et billede | Læg filen i `mockups/` med samme navn |
+
 ## Prototype – det mangler før lancering
 
 - **Tilmeldingen sender ikke noget.** Den skal forbindes til Ringsted Duns nyhedsbrevssystem, Klaviyo (formularen på ringsted-dun.dk hedder `klaviyo-form-Upnt9s`), som også sender søvnguiden ud. Se funktionen `tilmeld()` i `quiz.js`.

@@ -10,7 +10,9 @@
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
   <!-- Samme design som playbooken (playbook.css) + det nye til præsentationen (praesentation.css) -->
   <link rel="stylesheet" href="css/playbook.css">
-  <link rel="stylesheet" href="css/praesentation.css">
+  <link rel="stylesheet" href="css/praesentation.css?v=4">
+  <!-- Marcus' mockups (YouTube, Facebook-video og karrusel) -->
+  <link rel="stylesheet" href="css/mockups.css?v=4">
 </head>
 <body>
 
@@ -36,19 +38,18 @@
         <div>
           <p class="forside__etiket">Del 4 af 6 · Søvnguiden – dengang og i dag</p>
           <h1 class="forside__titel" id="titel">Content kit</h1>
-          <p class="forside__tekst">Seks produktioner og fire mikroopslag – alle klippet ud af søvnguiden. Klik dig ind og se dem, som målgruppen ville møde dem.</p>
+          <p class="forside__tekst">Seks produktioner – alle klippet ud af søvnguiden. Klik dig ind og se dem, som målgruppen ville møde dem.</p>
         </div>
       </div>
     </section>
 
     <!--
       STIER TIL FILERNE
-      Siden ligger i web/. Filerne i content kit ligger én mappe oppe (../).
-      Mellemrum og æ/ø/å er skrevet som %20, %C3%A6 osv., så linkene virker i alle browsere:
-        content%20kit            = content kit
-        prim%C3%A6re%20afledte   = primære afledte
-        sekund%C3%A6re%20afledte = sekundære afledte
-        %C2%B7                   = ·
+      Alle filer, siden bruger, ligger INDE i web/ – ellers kan Live Server ikke finde dem:
+        mockups/          film, reel, plakater, karrusel-slides og logo til mockupperne
+        img/content-kit/  karrusellens forside B, mikroopslag og nyhedsbrev (gemt som jpg, så de er mindre)
+        docs/             annonce- og opslagstekster (kopier fra mappen content kit)
+      Retter I en fil i content kit-mappen, så kopiér den herind igen.
     -->
 
     <nav class="sidenav" aria-label="Produktioner på siden">
@@ -57,7 +58,7 @@
           <li><a href="#soevnguiden">Søvnguiden</a></li>
           <li><a href="#video">Lang video</a></li>
           <li><a href="#quiz">Quiz</a></li>
-          <li><a href="#annonce">Videoannonce</a></li>
+          <li><a href="#kort-video">Kort video</a></li>
           <li><a href="#karrusel">Karrusel</a></li>
           <li><a href="#nyhedsbrev">Nyhedsbrev</a></li>
           <li><a href="#mikro">Mikroindhold</a></li>
@@ -71,8 +72,8 @@
       <ol class="kaede" aria-label="Sådan hænger indholdet sammen">
         <li><p class="kaede__niveau">Big rock</p><p>Søvnguiden</p></li>
         <li><p class="kaede__niveau">Primære afledte</p><p>Lang video · quiz</p></li>
-        <li><p class="kaede__niveau">Sekundære afledte</p><p>Videoannonce og reel · karrusel · nyhedsbrev</p></li>
-        <li><p class="kaede__niveau">Mikroindhold</p><p>Grethe-citater · nostalgiopslag</p></li>
+        <li><p class="kaede__niveau">Sekundære afledte</p><p>Kort video · karrusel · nyhedsbrev</p></li>
+        <li><p class="kaede__niveau">Mikroindhold</p><p>Videoannonce · Grethe-citater · nostalgiopslag</p></li>
       </ol>
 
       <!-- ========== 1 · SØVNGUIDEN (big rock) ========== -->
@@ -104,21 +105,118 @@
           <p>Grethe følger døgnet fra morgenlys til nattens stille timer – fem stationer fra guiden. Videoen er hjemmet på YouTube og klippes ned til annoncer.</p>
           <dl class="fakta-linje">
             <dt>Rolle</dt><dd>Awareness og opvarmning (marts)</dd>
-            <dt>Format</dt><dd>16:9 på YouTube · Facebook-version · med og uden undertekster</dd>
+            <dt>Format</dt><dd>16:9 på YouTube · med og uden undertekster</dd>
             <dt>AI</dt><dd>Billeder og stemme er skabt med AI og mærket</dd>
           </dl>
           <div class="knap-raekke">
-            <a class="knap knap--primaer" href="../Interaktive_SoMe_mockups/YouTube_mockup/index.html" target="_blank" rel="noopener">Se på YouTube-mockup <span class="sr-only">(åbner i ny fane)</span></a>
-            <a class="knap knap--sekundaer" href="../content%20kit/prim%C3%A6re%20afledte/Video_lang/RingstedDun_Soevnguiden_Grethe_16x9_med_undertekster.mp4">Videofilen</a>
+            <a class="knap knap--sekundaer" href="mockups/film.mp4">Videofilen (mp4)</a>
           </div>
         </div>
         <figure class="produktion__medie">
           <!-- preload="none": den store fil (150 MB) hentes først, når man trykker afspil -->
-          <video controls preload="none" poster="../Interaktive_SoMe_mockups/YouTube_mockup/poster.jpg">
-            <source src="../content%20kit/prim%C3%A6re%20afledte/Video_lang/RingstedDun_Soevnguiden_Grethe_16x9_med_undertekster.mp4" type="video/mp4">
-          </video>
-          <figcaption>Med undertekster. Mormor Grethe er en fiktiv person.</figcaption>
+          <img src="mockups/poster-yt.jpg" alt="Mormor Grethe i køkkenet – billede fra filmen (AI-genereret)">
+          <figcaption>Se filmen i YouTube-mockuppen nedenfor. Mormor Grethe er en fiktiv person.</figcaption>
         </figure>
+        <!-- Marcus' mockup (fra Interaktive_SoMe_mockups) bygget ind i siden. Design: css/mockups.css, knapper og video: js/mockups.js -->
+        <div class="produktion__fuld">
+          <p class="produktion__del">Mockup · sådan ser filmen ud på YouTube</p>
+          <div class="mockup-yt">
+          <div class="switch" role="group" aria-label="Visning">
+            <button data-v="desktop" aria-pressed="true">Desktop</button>
+            <button data-v="mobile" aria-pressed="false">Mobil</button>
+          </div>
+
+          <!-- ================= DESKTOP ================= -->
+          <section id="yt-desktop" aria-label="Desktopvisning">
+            <div class="top">
+              <div class="burger"><i></i><i></i><i></i></div>
+              <div class="yt"><div class="p"></div><b>YouTube</b><sup>DK</sup></div>
+              <div class="search"><div class="in">Søg</div><div class="bt"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M10 3a7 7 0 015.6 11.2l4.6 4.6-1.4 1.4-4.6-4.6A7 7 0 1110 3zm0 2a5 5 0 100 10 5 5 0 000-10z"/></svg></div>
+                <div class="mic"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 15a3 3 0 003-3V6a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.9V22h2v-3.1A7 7 0 0019 12z"/></svg></div></div>
+              <div class="right"><div class="opret">＋ Opret</div><svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M12 22a2.5 2.5 0 002.5-2.5h-5A2.5 2.5 0 0012 22zm7-6V11a7 7 0 00-5.5-6.8V3.5a1.5 1.5 0 00-3 0v.7A7 7 0 005 11v5l-2 2v1h18v-1z"/></svg><div class="me"></div></div>
+            </div>
+            <div class="theater"><video id="yt-vd" aria-label="Filmen Søvnguiden, dengang og i dag. Med undertekster." src="mockups/film.mp4" poster="mockups/poster-yt.jpg" controls playsinline preload="metadata"></video></div>
+            <div class="main">
+              <div>
+                <p class="h1">Søvnguiden – dengang og i dag | Mormor Grethe fortæller</p>
+                <div class="ch">
+                  <div class="av"></div><div class="cn"><b>Ringsted Dun</b><small>2.140 abonnenter</small></div>
+                  <button class="sub" type="button">Abonner</button>
+                  <div class="acts">
+                    <div class="pill"><svg viewBox="0 0 24 24"><path d="M7 10v11H3V10zm2 11h8.5a2 2 0 002-1.6l1.4-7A2 2 0 0019 10h-5l.8-4a2 2 0 00-3.4-1.8L9 7.5z"/></svg>312<span class="sep"></span><svg viewBox="0 0 24 24"><path d="M17 14V3h4v11zm-2-11H6.5a2 2 0 00-2 1.6l-1.4 7A2 2 0 005 14h5l-.8 4a2 2 0 003.4 1.8l2.4-3.3z"/></svg></div>
+                    <div class="pill"><svg viewBox="0 0 24 24"><path d="M14 5l7 7-7 7v-4c-5 0-8 1.5-10 5 .5-5 3-9.5 10-10.5z"/></svg>Del</div>
+                    <div class="pill"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></svg>Gem</div>
+                    <div class="pill"><svg viewBox="0 0 24 24"><path d="M11 3h2v10l4-4 1.4 1.4L12 16.8 5.6 10.4 7 9l4 4zM4 19h16v2H4z"/></svg>Download</div>
+                    <div class="pill c">•••</div>
+                  </div>
+                </div>
+                <div class="desc">
+                  <div class="m">4.218 visninger &nbsp; for 2 dage siden &nbsp; <a>#søvn</a> <a>#søvnguiden</a> <a>#RingstedDun</a></div>
+                  Min mormor siger, at de aldrig talte om søvn. Følg Grethe gennem døgnet – fra morgenlys til nattens stille timer – og hør, hvad man vidste dengang, og hvad man ved i dag.<br><br>
+                  Hent Søvnguiden gratis, når du tilmelder dig nyhedsbrevet: <a>ringsteddun.dk/soevnguide</a><br>
+                  Myte eller sandhed? Tag quizzen: <a>ringsteddun.dk/quiz</a><br><br>
+                  <a data-t="0">0:00</a> Grethe<br><a data-t="16">0:16</a> 07.00 Morgen<br><a data-t="32">0:32</a> 14.00 Eftermiddag<br><a data-t="48">0:48</a> 20.00 Aften<br><a data-t="64">1:04</a> 22.30 Sengetid<br><a data-t="80">1:20</a> 04.30 Natten<br><br>
+                  <span class="ai">Mormor Grethe er en fiktiv person. Billeder og stemme er skabt med AI.</span>
+                </div>
+                <div class="cm"><p class="h2 cmh">23 kommentarer</p>
+                  <div class="c1"><div class="u" style="background:#7d6b5a"></div><div><b>@lisbeth.h</b> <small>for 1 dag siden</small><br>Min mor sagde præcis det samme om det kolde soveværelse 😄</div></div>
+                  <div class="c1"><div class="u" style="background:#5a6b7d"></div><div><b>@mette_52</b> <small>for 2 dage siden</small><br>Sendt videre til min mor. Hun vågner også kl. halv fem!</div></div>
+                </div>
+              </div>
+              <div>
+                <div class="chips"><span class="on">Alle</span><span>Fra Ringsted Dun</span><span>Til dig</span></div>
+                <div class="rec"><div class="th" style="background-image:url(mockups/th_reel.jpg)"><span>0:22</span></div><div><b>Det koldeste rum i huset · Mormor Grethe</b><small>Ringsted Dun<br>1.106 visninger · for 1 dag siden</small></div></div>
+                <div class="rec"><div class="th" style="background-image:url(mockups/th_22.jpg)"><span>0:25</span></div><div><b>Lys ind, så vågner man · 07.00</b><small>Ringsted Dun<br>Kommer snart</small></div></div>
+                <div class="rec"><div class="th" style="background-image:url(mockups/th_54.jpg)"><span>0:20</span></div><div><b>Radio ved lampens skær · 20.00</b><small>Ringsted Dun<br>Kommer snart</small></div></div>
+                <div class="rec"><div class="th" style="background-image:url(mockups/th_92.jpg)"><span>0:18</span></div><div><b>Når huset sover · 04.30</b><small>Ringsted Dun<br>Kommer snart</small></div></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ================= MOBILE ================= -->
+          <section id="yt-mobil" hidden aria-label="Mobilvisning">
+            <div class="phone">
+              <div class="status"><span>01.50</span><span class="status__ikoner" aria-hidden="true"><svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 12l2.4-3.2a4 4 0 00-4.8 0zM8 4.6a7.6 7.6 0 014.6 1.5l1.6-2.1A10.3 10.3 0 008 2a10.3 10.3 0 00-6.2 2l1.6 2.1A7.6 7.6 0 018 4.6z"/></svg><svg width="26" height="12" viewBox="0 0 26 12"><rect x="0.5" y="0.5" width="22" height="11" rx="3" fill="none" stroke="currentColor"/><rect x="2.5" y="2.5" width="15" height="7" rx="1.5"/><rect x="23.5" y="4" width="2" height="4" rx="1"/></svg></span></div>
+              <!-- YouTube-appens top med logo (lyst tema, som på telefonen) -->
+              <div class="yt-topbar">
+                <div class="yt"><div class="p"></div><b>YouTube</b></div>
+                <span class="yt-topbar__ikoner" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24"><path d="M4 4h12a2 2 0 012 2v7a2 2 0 01-2 2H9l-4 3v-3H4a2 2 0 01-2-2V6a2 2 0 012-2zm0 2v7h3v1.5L9 13h7V6zm16 3h1a1 1 0 011 1v8a1 1 0 01-1 1h-1v2.5L17 18h-6v-2h7V9z"/></svg>
+                  <svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 22a2.5 2.5 0 002.5-2.5h-5A2.5 2.5 0 0012 22zm7-6V11a7 7 0 00-5.5-6.8V3.5a1.5 1.5 0 00-3 0v.7A7 7 0 005 11v5l-2 2v1h18v-1zm-2 1H7v-6a5 5 0 0110 0z"/></svg>
+                  <svg width="24" height="24" viewBox="0 0 24 24"><path d="M10 3a7 7 0 015.6 11.2l4.6 4.6-1.4 1.4-4.6-4.6A7 7 0 1110 3zm0 2a5 5 0 100 10 5 5 0 000-10z"/></svg>
+                </span>
+              </div>
+              <video id="yt-vm" aria-label="Filmen Søvnguiden, dengang og i dag. Med undertekster." src="mockups/film.mp4" poster="mockups/poster-yt.jpg" controls playsinline preload="metadata"></video>
+              <div class="mb">
+                <p class="h2">Søvnguiden – dengang og i dag | Mormor Grethe fortæller</p>
+                <div class="meta">4.218 visninger · for 2 dage siden <b>...mere</b></div>
+                <div class="ch"><div class="av" style="width:34px;height:34px"></div><div class="cn"><b>Ringsted Dun</b><small>2.140</small></div><button class="sub" type="button">Abonner</button></div>
+                <div class="scroller">
+                  <div class="pill"><svg viewBox="0 0 24 24"><path d="M7 10v11H3V10zm2 11h8.5a2 2 0 002-1.6l1.4-7A2 2 0 0019 10h-5l.8-4a2 2 0 00-3.4-1.8L9 7.5z"/></svg>312<span class="sep"></span><svg viewBox="0 0 24 24"><path d="M17 14V3h4v11zm-2-11H6.5a2 2 0 00-2 1.6l-1.4 7A2 2 0 005 14h5l-.8 4a2 2 0 003.4 1.8l2.4-3.3z"/></svg></div>
+                  <div class="pill"><svg viewBox="0 0 24 24"><path d="M14 5l7 7-7 7v-4c-5 0-8 1.5-10 5 .5-5 3-9.5 10-10.5z"/></svg>Del</div>
+                  <div class="pill"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></svg>Gem</div>
+                  <div class="pill"><svg viewBox="0 0 24 24"><path d="M11 3h2v10l4-4 1.4 1.4L12 16.8 5.6 10.4 7 9l4 4zM4 19h16v2H4z"/></svg>Download</div>
+                </div>
+                <div class="cmt"><b>Kommentarer</b> &nbsp;<span style="color:#aaa">23</span><p><i></i>Min mor sagde præcis det samme om det kolde soveværelse 😄</p></div>
+              </div>
+              <div class="mrec">
+                <div class="th" style="background-image:url(mockups/th_reel.jpg)"><span>0:22</span></div>
+                <div class="r"><div class="av"></div><div><b>Det koldeste rum i huset · Mormor Grethe</b><small>Ringsted Dun · 1.106 visninger · for 1 dag siden</small></div></div>
+                <div class="th" style="background-image:url(mockups/th_22.jpg)"><span>0:25</span></div>
+                <div class="r"><div class="av"></div><div><b>Lys ind, så vågner man · 07.00</b><small>Ringsted Dun · Kommer snart</small></div></div>
+              </div>
+              <div class="mnav">
+                <div><svg viewBox="0 0 24 24"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3z"/></svg>Start</div>
+                <div><svg viewBox="0 0 24 24"><path d="M14 3l-8 9h5l-2 9 8-10h-5z"/></svg>Shorts</div>
+                <div><svg viewBox="0 0 24 24"><path d="M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6z"/></svg></div>
+                <div><svg viewBox="0 0 24 24"><path d="M4 5h16v12H4zm2 2v8h12V7zm-2 12h16v2H4z"/></svg>Abonnementer</div>
+                <div><span class="me" style="width:22px;height:22px;display:block"></span>Dig</div>
+              </div>
+            </div>
+          </section>
+          <p class="mk">Mockup til fremlæggelse · ikke en rigtig side · tal og kommentarer er eksempler</p>
+          </div>
+        </div>
       </article>
 
       <!-- ========== 3 · QUIZ ========== -->
@@ -141,27 +239,23 @@
         </figure>
       </article>
 
-      <!-- ========== 4 · VIDEOANNONCE OG REEL ========== -->
-      <article class="produktion" id="annonce">
+      <!-- ========== 4 · DEN KORTE VIDEO ========== -->
+      <article class="produktion" id="kort-video">
         <div>
           <p class="produktion__niveau">4 · Sekundær afledt</p>
-          <h3>Videoannonce og reel: »Det koldeste rum i huset«</h3>
-          <p>Klippet ud af den lange video. Starter uden lyd og med indbrændte undertekster, så den virker i feedet.</p>
+          <h3>Den korte video: »Det koldeste rum i huset«</h3>
+          <p>Reelen »Det koldeste rum i huset« er klippet ud af den lange video. Facebook anbefaler, at videoannoncer kan forstås uden lyd, så underteksterne er brændt ind. Når den bruges som annonce i feedet, er den mikroindhold – se annoncen under <a href="#mikro">Mikroindhold</a>.</p>
           <dl class="fakta-linje">
-            <dt>Rolle</dt><dd>Awareness og retargeting</dd>
-            <dt>Format</dt><dd>16:9 i desktop-feed · reel 3:4 på mobil</dd>
-            <dt>Kanal</dt><dd>Facebook og Instagram (sponsoreret)</dd>
+            <dt>Rolle</dt><dd>Klippes til annoncer og opslag (awareness og retargeting)</dd>
+            <dt>Format</dt><dd>Reel i 3:4 · med og uden undertekster</dd>
+            <dt>Kanal</dt><dd>Facebook og Instagram</dd>
           </dl>
-          <div class="knap-raekke">
-            <a class="knap knap--primaer" href="../Interaktive_SoMe_mockups/Facebook_Annonce_video_mockup/index.html" target="_blank" rel="noopener">Se på Facebook-mockup <span class="sr-only">(åbner i ny fane)</span></a>
-            <a class="knap knap--sekundaer" href="../content%20kit/mikroindhold/annoncetekst_fb.txt">Annoncetekster</a>
-          </div>
         </div>
         <figure class="produktion__medie">
-          <video controls preload="metadata" poster="../Interaktive_SoMe_mockups/Facebook_Annonce_video_mockup/poster.jpg">
-            <source src="../content%20kit/sekund%C3%A6re%20afledte/Video_kort/RingstedDun_Soevnguiden_Grethe_reel_med_undertekster.mp4" type="video/mp4">
+          <video controls preload="none" poster="mockups/poster-reel.jpg">
+            <source src="mockups/reel.mp4" type="video/mp4">
           </video>
-          <figcaption>Reel med undertekster.</figcaption>
+          <figcaption>Den korte video (reel) med undertekster.</figcaption>
         </figure>
       </article>
 
@@ -177,20 +271,132 @@
             <dt>Kanal</dt><dd>Facebook og Instagram (sponsoreret)</dd>
           </dl>
           <div class="knap-raekke">
-            <a class="knap knap--primaer" href="../Interaktive_SoMe_mockups/Facebook_Karrusel_mockup/index.html" target="_blank" rel="noopener">Se på Facebook-mockup <span class="sr-only">(åbner i ny fane)</span></a>
-            <a class="knap knap--sekundaer" href="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/annoncetekst_karrusel.txt">Opslagstekst</a>
+            <a class="knap knap--sekundaer" href="docs/annoncetekst_karrusel.txt">Opslagstekst</a>
           </div>
         </div>
         <!-- Klik på et billede åbner det i fuld størrelse -->
         <ul class="galleri" aria-label="Karrusellens slides">
-          <li><a href="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide1_forside.png"><img src="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide1_forside.png" alt="Slide 1, forside A"></a></li>
-          <li><a href="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide1B_forside-myte.png"><img src="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide1B_forside-myte.png" alt="Slide 1, forside B: myte"></a></li>
-          <li><a href="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide2_dengang.png"><img src="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide2_dengang.png" alt="Slide 2: dengang"></a></li>
-          <li><a href="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide3_i-dag.png"><img src="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide3_i-dag.png" alt="Slide 3: i dag"></a></li>
-          <li><a href="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide4_temperaturen.png"><img src="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide4_temperaturen.png" alt="Slide 4: temperaturen"></a></li>
-          <li><a href="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide5_dynen-og-telefonen.png"><img src="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide5_dynen-og-telefonen.png" alt="Slide 5: dynen og telefonen"></a></li>
-          <li><a href="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide6_myte-eller-sandhed.png"><img src="../content%20kit/sekund%C3%A6re%20afledte/Karrusel/RingstedDun_karrusel_2230_slide6_myte-eller-sandhed.png" alt="Slide 6: myte eller sandhed"></a></li>
+          <li><a href="mockups/slide1.jpg"><img src="mockups/slide1.jpg" alt="Slide 1, forside A"></a></li>
+          <li><a href="img/content-kit/karrusel-forside-b.jpg"><img src="img/content-kit/karrusel-forside-b.jpg" alt="Slide 1, forside B: myte"></a></li>
+          <li><a href="mockups/slide2.jpg"><img src="mockups/slide2.jpg" alt="Slide 2: dengang"></a></li>
+          <li><a href="mockups/slide3.jpg"><img src="mockups/slide3.jpg" alt="Slide 3: i dag"></a></li>
+          <li><a href="mockups/slide4.jpg"><img src="mockups/slide4.jpg" alt="Slide 4: temperaturen"></a></li>
+          <li><a href="mockups/slide5.jpg"><img src="mockups/slide5.jpg" alt="Slide 5: dynen og telefonen"></a></li>
+          <li><a href="mockups/slide6.jpg"><img src="mockups/slide6.jpg" alt="Slide 6: myte eller sandhed"></a></li>
         </ul>
+        <!-- Marcus' mockup (fra Interaktive_SoMe_mockups) bygget ind i siden. Design: css/mockups.css, knapper og video: js/mockups.js -->
+        <div class="produktion__fuld">
+          <p class="produktion__del">Mockup · karrusellen i Facebook-feedet</p>
+          <div class="mockup-ka">
+          <div class="switch" role="group" aria-label="Visning">
+              <button data-v="both" aria-pressed="false">Begge</button>
+              <button data-v="mobile" aria-pressed="true">Mobil</button>
+              <button data-v="desktop" aria-pressed="false">Desktop</button>
+            </div>
+            <div class="stage">
+              <section id="ka-mobil" aria-label="Mobilvisning">
+                <p class="label">Mobil</p>
+                <div class="phone">
+                  <div class="status"><span>01.21</span><span class="status__ikoner" aria-hidden="true"><svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 12l2.4-3.2a4 4 0 00-4.8 0zM8 4.6a7.6 7.6 0 014.6 1.5l1.6-2.1A10.3 10.3 0 008 2a10.3 10.3 0 00-6.2 2l1.6 2.1A7.6 7.6 0 018 4.6z"/></svg><svg width="26" height="12" viewBox="0 0 26 12"><rect x="0.5" y="0.5" width="22" height="11" rx="3" fill="none" stroke="currentColor"/><rect x="2.5" y="2.5" width="15" height="7" rx="1.5"/><rect x="23.5" y="4" width="2" height="4" rx="1"/></svg></span></div>
+                  <div class="topbar">
+                    <div class="logo"></div>
+                    <div class="circ"><svg viewBox="0 0 24 24"><path d="M10 3a7 7 0 015.6 11.2l4.6 4.6-1.4 1.4-4.6-4.6A7 7 0 1110 3zm0 2a5 5 0 100 10 5 5 0 000-10z"/></svg></div>
+                    <div class="sp"></div>
+                    <div class="circ"><svg viewBox="0 0 24 24"><path d="M4 4h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 10h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 16h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4z"/></svg></div>
+                    <div class="circ"><svg viewBox="0 0 24 24"><path d="M12 2C6.4 2 2 6.1 2 11.4c0 2.8 1.2 5.2 3.2 6.9V22l3-1.7c1.2.3 2.5.5 3.8.5 5.6 0 10-4.1 10-9.4S17.6 2 12 2zm1 12.4l-2.5-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7z"/></svg></div>
+                    <div class="circ"><svg viewBox="0 0 24 24"><path d="M12 22a2.5 2.5 0 002.5-2.5h-5A2.5 2.5 0 0012 22zm7-6V11a7 7 0 00-5.5-6.8V3.5a1.5 1.5 0 00-3 0v.7A7 7 0 005 11v5l-2 2v1h18v-1z"/></svg><span class="badge">20+</span></div>
+                    <div class="me"></div>
+                  </div>
+                  <div class="feed"><!--POST--></div>
+                </div>
+              </section>
+              <section id="ka-desktop" hidden aria-label="Desktopvisning">
+                <p class="label">Desktop</p>
+                <div class="desk">
+                  <div class="top">
+                    <div class="logo"></div>
+                    <div class="search"><svg viewBox="0 0 24 24"><path d="M10 3a7 7 0 015.6 11.2l4.6 4.6-1.4 1.4-4.6-4.6A7 7 0 1110 3zm0 2a5 5 0 100 10 5 5 0 000-10z"/></svg>Søg</div>
+                    <div class="tabs">
+                      <span class="on"><svg viewBox="0 0 24 24"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3z"/></svg></span>
+                      <span><svg viewBox="0 0 24 24"><path d="M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1zm1 2v10h14V7zm5 2l5 3-5 3z"/></svg></span>
+                      <span><svg viewBox="0 0 24 24"><path d="M4 4h16l1 5a3 3 0 01-2 2.8V20H5v-8.2A3 3 0 013 9zm4 9v5h3v-5zm5 0v3h4v-3z"/></svg></span>
+                      <span><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 110 20 10 10 0 010-20zm0 2a8 8 0 00-5.3 14A6 6 0 0112 15a6 6 0 015.3 3A8 8 0 0012 4zm0 3a3.5 3.5 0 110 7 3.5 3.5 0 010-7z"/></svg></span>
+                      <span><svg viewBox="0 0 24 24"><path d="M7 6h10a5 5 0 015 5v2a5 5 0 01-9 3h-2a5 5 0 01-9-3v-2a5 5 0 015-5zm0 3v2H5v2h2v2h2v-2h2v-2H9V9zm9 1a1 1 0 100 2 1 1 0 000-2zm2 2a1 1 0 100 2 1 1 0 000-2z"/></svg></span>
+                    </div>
+                    <div class="rt">
+                      <div class="circ"><svg viewBox="0 0 24 24"><path d="M4 4h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 10h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 16h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4z"/></svg></div>
+                      <div class="circ"><svg viewBox="0 0 24 24"><path d="M12 2C6.4 2 2 6.1 2 11.4c0 2.8 1.2 5.2 3.2 6.9V22l3-1.7c1.2.3 2.5.5 3.8.5 5.6 0 10-4.1 10-9.4S17.6 2 12 2zm1 12.4l-2.5-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7z"/></svg></div>
+                      <div class="circ"><svg viewBox="0 0 24 24"><path d="M12 22a2.5 2.5 0 002.5-2.5h-5A2.5 2.5 0 0012 22zm7-6V11a7 7 0 00-5.5-6.8V3.5a1.5 1.5 0 00-3 0v.7A7 7 0 005 11v5l-2 2v1h18v-1z"/></svg><span class="badge">20+</span></div>
+                      <div class="me"></div>
+                    </div>
+                  </div>
+                  <div class="cols">
+                    <nav class="nav">
+                      <div><i style="background:linear-gradient(135deg,#d9c4b0,#a98d78)"></i>Bruger</div>
+                      <div><i style="background:#1877F2"></i>Venner</div>
+                      <div><i style="background:#2D88FF"></i>Minder</div>
+                      <div><i style="background:#A033FF"></i>Gemt</div>
+                      <div><i style="background:#1A9BE8"></i>Grupper</div>
+                      <div><i style="background:#F3425F"></i>Reels</div>
+                      <div><i style="background:#0A7CFF"></i>Markedsplads</div>
+                      <div><i style="background:#45BD62"></i>Feeds</div>
+                      <div><i style="background:var(--btn)"></i>Se mere</div>
+                      <hr><p class="h2">Dine genveje</p>
+                      <div><i style="background:#cdbfa8;border-radius:8px"></i>Kreativ madlavning</div>
+                    </nav>
+                    <div class="center"><!--POST--></div>
+                    <aside class="rc">
+                      <p class="h2">Venneanmodninger</p>
+                      <div class="req"><div class="ph"></div><div style="flex:1"><b style="font-size:15px">Sofie</b><div style="color:var(--sub);font-size:13px">8 fælles venner</div>
+                        <div class="bt"><span class="p">Bekræft</span><span>Fjern</span></div></div></div>
+                      <hr>
+                      <p class="h2">Fødselsdage</p>
+                      <p>🎁 <b>Amalie</b> og <b>Siw</b> har fødselsdag i dag.</p>
+                    </aside>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <p class="mock">Swipe på mobil. På desktop: pilene, træk med musen eller piletasterne. Tryk »Se mere« for hele teksten med kilder.</p>
+
+          <template id="ka-post">
+            <article class="post">
+              <div class="hd"><div class="av" role="img" aria-label="Ringsted Dun logo"></div>
+                <div class="nm"><b>Ringsted Dun</b><small>Sponsoreret · ◎</small></div>
+                <div class="ic"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg><svg viewBox="0 0 24 24"><path d="M6.4 5L12 10.6 17.6 5 19 6.4 13.4 12 19 17.6 17.6 19 12 13.4 6.4 19 5 17.6 10.6 12 5 6.4z"/></svg></div></div>
+              <div class="txt">
+                <p>Kan du huske de kolde soveværelser? 🌙 Mormor Grethe kan. Swipe og se, hvad vi ved om god søvn i dag 👉 <button class="seemore" type="button">… Se mere</button></p>
+                <div class="full" hidden>
+                  <p>Rådene i karrusellen bygger på:</p>
+                  <ul class="src">
+                    <li>Sundhedsstyrelsen (2024): <a href="https://www.sst.dk/-/media/Udgivelser/2024/Soevn/Anbefalinger-for-soevnlaengde.ashx" target="_blank" rel="noopener">Anbefalinger for søvnlængde – alle aldersgrupper</a>, afsnit 3.1, s. 14–15. Om 18–21 grader, mørke, støj og skærmlys.</li>
+                    <li>Patienthåndbogen på sundhed.dk (2025): <a href="https://www.sundhed.dk/borger/patienthaandbogen/hjerne-og-nerver/sygdomme/soevnforstyrrelser/gode-raad-til-en-bedre-soevn/" target="_blank" rel="noopener">Gode råd til en bedre søvn</a>. Om et køligt soveværelse og ingen mobil, inden du sover.</li>
+                  </ul>
+                  <p>Hent Søvnguiden gratis på <a href="#" onclick="return false">ringsteddun.dk/soevnguide</a></p>
+                  <p class="tags"><a href="#" onclick="return false">#søvn</a> <a href="#" onclick="return false">#søvnguiden</a> <a href="#" onclick="return false">#RingstedDun</a></p>
+                  <p class="ai">Mormor Grethe er en fiktiv person. Billeder er skabt med AI.</p>
+                </div>
+              </div>
+              <div class="car">
+                <div class="track" tabindex="0" aria-label="Karrusel, 6 slides"><img src="mockups/slide1.jpg" alt="Slide 1 af 6"><img src="mockups/slide2.jpg" alt="Slide 2 af 6"><img src="mockups/slide3.jpg" alt="Slide 3 af 6"><img src="mockups/slide4.jpg" alt="Slide 4 af 6"><img src="mockups/slide5.jpg" alt="Slide 5 af 6"><img src="mockups/slide6.jpg" alt="Slide 6 af 6"></div>
+                <span class="cnt">1/6</span>
+                <button class="arr l" type="button" aria-label="Forrige" disabled><svg viewBox="0 0 24 24"><path d="M15.4 5.4L14 4l-8 8 8 8 1.4-1.4L8.8 12z"/></svg></button>
+                <button class="arr r" type="button" aria-label="Næste"><svg viewBox="0 0 24 24"><path d="M8.6 5.4L10 4l8 8-8 8-1.4-1.4 6.6-6.6z"/></svg></button>
+              </div>
+              <div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="bar">
+                <div class="a">
+                  <span><svg viewBox="0 0 24 24"><path d="M7 10v11H3V10zm2 11h8.5a2 2 0 002-1.6l1.4-7A2 2 0 0019 10h-5l.8-4a2 2 0 00-3.4-1.8L9 7.5z"/></svg>86</span>
+                  <span><svg viewBox="0 0 24 24"><path d="M12 3c5 0 9 3.6 9 8s-4 8-9 8c-1.2 0-2.3-.2-3.3-.5L4 20l1.2-3.6A7.6 7.6 0 013 11c0-4.4 4-8 9-8z"/></svg>11</span>
+                  <span><svg viewBox="0 0 24 24"><path d="M14 5l7 7-7 7v-4c-5 0-8 1.5-10 5 .5-5 3-9.5 10-10.5z"/></svg>17</span>
+                </div>
+                <div class="r"><i style="background:#1877F2">👍</i><i style="background:#F33E58;margin-left:-4px">❤</i></div>
+              </div>
+              <div class="more">Se flere kommentarer</div>
+            </article>
+          </template>
+          </div>
+        </div>
       </article>
 
       <!-- ========== 6 · NYHEDSBREV ========== -->
@@ -198,7 +404,7 @@
         <div>
           <p class="produktion__niveau">6 · Sekundær afledt</p>
           <h3>Nyhedsbrevet: velkomstmailen</h3>
-          <p>Den første mail efter tilmeldingen. Her får læseren søvnguiden som gave og et løfte om, hvad der kommer: fem ugentlige mails, derefter én pr. årstid.</p>
+          <p>Den første mail efter tilmeldingen. Her får læseren søvnguiden som gave. Velkomstserien består af 3–4 mails i maj, og velkomstmailen lover, at der ikke kommer tilbud hver uge.</p>
           <dl class="fakta-linje">
             <dt>Rolle</dt><dd>Nurture – kampagnens KPI måles her</dd>
             <dt>Format</dt><dd>Mail i 600 px bredde</dd>
@@ -206,33 +412,136 @@
           </dl>
         </div>
         <ul class="galleri galleri--hoej" aria-label="Nyhedsbrevet">
-          <li><a href="../content%20kit/sekund%C3%A6re%20afledte/nyhedsbrev/Velkomstmail%201%20%C2%B7%20600%20px.png"><img src="../content%20kit/sekund%C3%A6re%20afledte/nyhedsbrev/Velkomstmail%201%20%C2%B7%20600%20px.png" alt="Velkomstmailen med søvnguiden som gave"></a></li>
-          <li><a href="../content%20kit/sekund%C3%A6re%20afledte/nyhedsbrev/Indbakke%20%C2%B7%20emnelinje%20og%20afsender.png"><img src="../content%20kit/sekund%C3%A6re%20afledte/nyhedsbrev/Indbakke%20%C2%B7%20emnelinje%20og%20afsender.png" alt="Mailen i indbakken: emnelinje og afsender"></a></li>
+          <li><a href="img/content-kit/nyhedsbrev-velkomstmail.jpg"><img src="img/content-kit/nyhedsbrev-velkomstmail.jpg" alt="Velkomstmailen med søvnguiden som gave"></a></li>
+          <li><a href="img/content-kit/nyhedsbrev-indbakke.jpg"><img src="img/content-kit/nyhedsbrev-indbakke.jpg" alt="Mailen i indbakken: emnelinje og afsender"></a></li>
         </ul>
       </article>
 
-      <!-- ========== 7 · MIKROINDHOLD ========== -->
+      <!-- ========== MIKROINDHOLD: annoncer og små opslag (index linker hertil med #mikro) ========== -->
       <article class="produktion" id="mikro">
         <div>
           <p class="produktion__niveau">Mikroindhold</p>
-          <h3>Fire små opslag til feedet</h3>
-          <p>Grethe-citater ordret fra guiden og nostalgispørgsmål, der inviterer til kommentarer. De ligger i kampagnens første tre uger.</p>
+          <h3>Annoncer og små opslag til feedet</h3>
+          <p>Det mindste indhold i kampagnen: den korte video som annonce og fire små opslag med Grethe-citater og nostalgispørgsmål. Det skal stoppe scrollet og skabe dialog – og leder videre til quizzen og søvnguiden.</p>
           <dl class="fakta-linje">
-            <dt>Rolle</dt><dd>Dialog og organisk rækkevidde</dd>
-            <dt>Format</dt><dd>1:1 (1080 × 1080)</dd>
-            <dt>Kanal</dt><dd>Facebook og Instagram</dd>
+            <dt>Rolle</dt><dd>Awareness, dialog og retargeting</dd>
+            <dt>Format</dt><dd>Videoannonce i 3:4 · opslag i 1:1</dd>
+            <dt>Kanal</dt><dd>Facebook og Instagram – annoncer og opslag</dd>
           </dl>
-          <div class="knap-raekke">
-            <a class="knap knap--sekundaer" href="../content%20kit/mikroindhold/mikroindhold_opslagstekster.txt">Opslagstekster</a>
-          </div>
         </div>
-        <ul class="galleri" aria-label="Mikroopslagene">
-          <li><a href="../content%20kit/mikroindhold/1_nostalgiopslag_0700_gardinerne_uge1-ons.png"><img src="../content%20kit/mikroindhold/1_nostalgiopslag_0700_gardinerne_uge1-ons.png" alt="Nostalgiopslag: Hvem trak gardinerne fra hjemme hos dig?"></a></li>
-          <li><a href="../content%20kit/mikroindhold/2_grethe-citat_0700_B-menneske_uge1-loer.png"><img src="../content%20kit/mikroindhold/2_grethe-citat_0700_B-menneske_uge1-loer.png" alt="Grethe-citat om Morfar, der kalder sig B-menneske"></a></li>
-          <li><a href="../content%20kit/mikroindhold/3_nostalgiopslag_2230_koldeste-rum_uge2-loer.png"><img src="../content%20kit/mikroindhold/3_nostalgiopslag_2230_koldeste-rum_uge2-loer.png" alt="Nostalgiopslag: Hvad var det koldeste rum i dit barndomshjem?"></a></li>
-          <li><a href="../content%20kit/mikroindhold/4_grethe-citat_0430_huset-sover_uge3-loer.png"><img src="../content%20kit/mikroindhold/4_grethe-citat_0430_huset-sover_uge3-loer.png" alt="Grethe-citat om natten, når huset sover"></a></li>
-        </ul>
+        <figure class="produktion__medie">
+          <img src="img/content-kit/mikro-2-b-menneske.jpg" alt="Grethe-citat om Morfar, der kalder sig B-menneske">
+        </figure>
+        <div class="produktion__fuld">
+          <p class="produktion__del">Mikroindhold · Facebook og Instagram</p>
+          <h4>Den korte video som annonce i feedet</h4>
+          <p>Marcus' mockup viser annoncen, som Grethe og Mette ville møde den – på mobil og desktop.</p>
+          <div class="mockup-fb">
+          <div class="switch" role="group" aria-label="Visning">
+              <button data-v="both" aria-pressed="false">Begge</button>
+              <button data-v="mobile" aria-pressed="true">Mobil</button>
+              <button data-v="desktop" aria-pressed="false">Desktop</button>
+            </div>
+            <div class="stage">
+              <section id="fb-mobil" aria-label="Mobilvisning">
+                <p class="label">Mobil</p>
+                <div class="phone">
+                  <div class="status"><span>01.21</span><span class="status__ikoner" aria-hidden="true"><svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 12l2.4-3.2a4 4 0 00-4.8 0zM8 4.6a7.6 7.6 0 014.6 1.5l1.6-2.1A10.3 10.3 0 008 2a10.3 10.3 0 00-6.2 2l1.6 2.1A7.6 7.6 0 018 4.6z"/></svg><svg width="26" height="12" viewBox="0 0 26 12"><rect x="0.5" y="0.5" width="22" height="11" rx="3" fill="none" stroke="currentColor"/><rect x="2.5" y="2.5" width="15" height="7" rx="1.5"/><rect x="23.5" y="4" width="2" height="4" rx="1"/></svg></span></div>
+                  <div class="topbar">
+                    <div class="logo"></div>
+                    <div class="circ"><svg viewBox="0 0 24 24"><path d="M10 3a7 7 0 015.6 11.2l4.6 4.6-1.4 1.4-4.6-4.6A7 7 0 1110 3zm0 2a5 5 0 100 10 5 5 0 000-10z"/></svg></div>
+                    <div class="sp"></div>
+                    <div class="circ"><svg viewBox="0 0 24 24"><path d="M4 4h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 10h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 16h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4z"/></svg></div>
+                    <div class="circ"><svg viewBox="0 0 24 24"><path d="M12 2C6.4 2 2 6.1 2 11.4c0 2.8 1.2 5.2 3.2 6.9V22l3-1.7c1.2.3 2.5.5 3.8.5 5.6 0 10-4.1 10-9.4S17.6 2 12 2zm1 12.4l-2.5-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7z"/></svg></div>
+                    <div class="circ"><svg viewBox="0 0 24 24"><path d="M12 22a2.5 2.5 0 002.5-2.5h-5A2.5 2.5 0 0012 22zm7-6V11a7 7 0 00-5.5-6.8V3.5a1.5 1.5 0 00-3 0v.7A7 7 0 005 11v5l-2 2v1h18v-1z"/></svg><span class="badge">20+</span></div>
+                    <div class="me"></div>
+                  </div>
+                  <div class="feed"><!--POST--></div>
+                </div>
+              </section>
+              <section id="fb-desktop" hidden aria-label="Desktopvisning">
+                <p class="label">Desktop</p>
+                <div class="desk">
+                  <div class="top">
+                    <div class="logo"></div>
+                    <div class="search"><svg viewBox="0 0 24 24"><path d="M10 3a7 7 0 015.6 11.2l4.6 4.6-1.4 1.4-4.6-4.6A7 7 0 1110 3zm0 2a5 5 0 100 10 5 5 0 000-10z"/></svg>Søg</div>
+                    <div class="tabs">
+                      <span class="on"><svg viewBox="0 0 24 24"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3z"/></svg></span>
+                      <span><svg viewBox="0 0 24 24"><path d="M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1zm1 2v10h14V7zm5 2l5 3-5 3z"/></svg></span>
+                      <span><svg viewBox="0 0 24 24"><path d="M4 4h16l1 5a3 3 0 01-2 2.8V20H5v-8.2A3 3 0 013 9zm4 9v5h3v-5zm5 0v3h4v-3z"/></svg></span>
+                      <span><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 110 20 10 10 0 010-20zm0 2a8 8 0 00-5.3 14A6 6 0 0112 15a6 6 0 015.3 3A8 8 0 0012 4zm0 3a3.5 3.5 0 110 7 3.5 3.5 0 010-7z"/></svg></span>
+                      <span><svg viewBox="0 0 24 24"><path d="M7 6h10a5 5 0 015 5v2a5 5 0 01-9 3h-2a5 5 0 01-9-3v-2a5 5 0 015-5zm0 3v2H5v2h2v2h2v-2h2v-2H9V9zm9 1a1 1 0 100 2 1 1 0 000-2zm2 2a1 1 0 100 2 1 1 0 000-2z"/></svg></span>
+                    </div>
+                    <div class="rt">
+                      <div class="circ"><svg viewBox="0 0 24 24"><path d="M4 4h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 10h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 16h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4z"/></svg></div>
+                      <div class="circ"><svg viewBox="0 0 24 24"><path d="M12 2C6.4 2 2 6.1 2 11.4c0 2.8 1.2 5.2 3.2 6.9V22l3-1.7c1.2.3 2.5.5 3.8.5 5.6 0 10-4.1 10-9.4S17.6 2 12 2zm1 12.4l-2.5-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7z"/></svg></div>
+                      <div class="circ"><svg viewBox="0 0 24 24"><path d="M12 22a2.5 2.5 0 002.5-2.5h-5A2.5 2.5 0 0012 22zm7-6V11a7 7 0 00-5.5-6.8V3.5a1.5 1.5 0 00-3 0v.7A7 7 0 005 11v5l-2 2v1h18v-1z"/></svg><span class="badge">20+</span></div>
+                      <div class="me"></div>
+                    </div>
+                  </div>
+                  <div class="cols">
+                    <nav class="nav">
+                      <div><i style="background:linear-gradient(135deg,#d9c4b0,#a98d78)"></i>Bruger</div>
+                      <div><i style="background:#1877F2"></i>Venner</div>
+                      <div><i style="background:#2D88FF"></i>Minder</div>
+                      <div><i style="background:#A033FF"></i>Gemt</div>
+                      <div><i style="background:#1A9BE8"></i>Grupper</div>
+                      <div><i style="background:#F3425F"></i>Reels</div>
+                      <div><i style="background:#0A7CFF"></i>Markedsplads</div>
+                      <div><i style="background:#45BD62"></i>Feeds</div>
+                      <div><i style="background:var(--btn)"></i>Se mere</div>
+                      <hr><p class="h2">Dine genveje</p>
+                      <div><i style="background:#cdbfa8;border-radius:8px"></i>Kreativ madlavning</div>
+                    </nav>
+                    <div class="center"><!--POST--></div>
+                    <aside class="rc">
+                      <p class="h2">Venneanmodninger</p>
+                      <div class="req"><div class="ph"></div><div style="flex:1"><b style="font-size:15px">Sofie</b><div style="color:var(--sub);font-size:13px">8 fælles venner</div>
+                        <div class="bt"><span class="p">Bekræft</span><span>Fjern</span></div></div></div>
+                      <hr>
+                      <p class="h2">Fødselsdage</p>
+                      <p>🎁 <b>Amalie</b> og <b>Siw</b> har fødselsdag i dag.</p>
+                    </aside>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <p class="mock">Videoen starter uden lyd, som i feedet. Tryk på »Lyd til« for at høre den. Tryk på videoen for pause.</p>
+
+          <template id="fb-post">
+            <article class="post">
+              <div class="hd"><div class="av" role="img" aria-label="Ringsted Dun logo"></div>
+                <div class="nm"><b>Ringsted Dun</b><small>Sponsoreret · ◎</small></div>
+                <div class="ic"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg><svg viewBox="0 0 24 24"><path d="M6.4 5L12 10.6 17.6 5 19 6.4 13.4 12 19 17.6 17.6 19 12 13.4 6.4 19 5 17.6 10.6 12 5 6.4z"/></svg></div></div>
+              <div class="txt"><p>Dengang var soveværelset det koldeste rum i huset. Hvor koldt er dit?</p><p>Mormor Grethe fortæller, og Søvnguiden giver dig rådene. Hent den gratis.</p></div>
+              <div class="vid">
+                <video aria-label="Reel: Det koldeste rum i huset, Mormor Grethe. Med indbrændte undertekster." src="mockups/reel.mp4" poster="mockups/poster-reel.jpg" muted loop playsinline preload="metadata"></video>
+                <button class="sound" type="button">🔇 Lyd til</button>
+              </div>
+              <div class="cta"><div><small>RINGSTEDDUN.DK</small><b>Bliv klogere på din søvn</b></div><a href="#" onclick="return false">Læs mere</a></div>
+              <div class="bar">
+                <div class="a">
+                  <span><svg viewBox="0 0 24 24"><path d="M7 10v11H3V10zm2 11h8.5a2 2 0 002-1.6l1.4-7A2 2 0 0019 10h-5l.8-4a2 2 0 00-3.4-1.8L9 7.5z"/></svg>128</span>
+                  <span><svg viewBox="0 0 24 24"><path d="M12 3c5 0 9 3.6 9 8s-4 8-9 8c-1.2 0-2.3-.2-3.3-.5L4 20l1.2-3.6A7.6 7.6 0 013 11c0-4.4 4-8 9-8z"/></svg>14</span>
+                  <span><svg viewBox="0 0 24 24"><path d="M14 5l7 7-7 7v-4c-5 0-8 1.5-10 5 .5-5 3-9.5 10-10.5z"/></svg>9</span>
+                </div>
+                <div class="r"><i style="background:#1877F2">👍</i><i style="background:#F33E58;margin-left:-4px">❤</i></div>
+              </div>
+              <div class="more">Se flere kommentarer</div>
+            </article>
+          </template>
+          </div>
+          <h4 class="mikro__titel">Fire små opslag til feedet</h4>
+          <p>Grethe-citater ordret fra guiden og nostalgispørgsmål, der inviterer til kommentarer. De ligger i kampagnens første tre uger, i 1:1 (1080 × 1080). <a href="docs/mikroindhold_opslagstekster.txt">Se opslagsteksterne</a>.</p>
+          <ul class="galleri" aria-label="Mikroopslagene">
+            <li><a href="img/content-kit/mikro-1-gardinerne.jpg"><img src="img/content-kit/mikro-1-gardinerne.jpg" alt="Nostalgiopslag: Hvem trak gardinerne fra hjemme hos dig?"></a></li>
+            <li><a href="img/content-kit/mikro-2-b-menneske.jpg"><img src="img/content-kit/mikro-2-b-menneske.jpg" alt="Grethe-citat om Morfar, der kalder sig B-menneske"></a></li>
+            <li><a href="img/content-kit/mikro-3-koldeste-rum.jpg"><img src="img/content-kit/mikro-3-koldeste-rum.jpg" alt="Nostalgiopslag: Hvad var det koldeste rum i dit barndomshjem?"></a></li>
+            <li><a href="img/content-kit/mikro-4-huset-sover.jpg"><img src="img/content-kit/mikro-4-huset-sover.jpg" alt="Grethe-citat om natten, når huset sover"></a></li>
+          </ul>
+        </div>
       </article>
+
 
       <div class="note">
         <h3>Værktøjer til at lave mere</h3>
@@ -254,5 +563,6 @@
     </div>
   </footer>
 
+  <script src="js/mockups.js?v=4"></script>
 </body>
 </html>
